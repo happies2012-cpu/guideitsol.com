@@ -17,6 +17,8 @@ import Footer from "./components/Footer";
 import Chatbot from "./components/Chatbot";
 import BackToTopButton from "./components/BackToTopButton";
 import RobotCursor from "./components/RobotCursor";
+import DiwaliCelebrationEffect from "./components/DiwaliCelebrationEffect";
+import HappyDiwaliText from "./components/HappyDiwaliText";
 
 // Lazy load pages for better performance
 const Home = lazy(() => import("./pages/Home"));
@@ -124,10 +126,35 @@ const AppContent = () => {
   // Add resource hints for better performance
   useResourceHints();
   
+  // Check if Diwali effect should be shown
+  const showDiwaliEffect = () => {
+    // Check localStorage for manual override
+    if (localStorage.getItem('diwaliEffect') === 'true') {
+      return true;
+    }
+    
+    // Check URL parameter for manual override
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('diwali') === 'true') {
+      return true;
+    }
+    
+    // Check seasonal dates (October 20 - November 5)
+    const today = new Date();
+    const month = today.getMonth() + 1; // Month is 0-indexed
+    const day = today.getDate();
+    
+    return (month === 10 && day >= 20) || (month === 11 && day <= 5);
+  };
+  
+  const isDiwaliActive = showDiwaliEffect();
+  
   return (
     <>
       <Toaster />
       <Sonner />
+      {isDiwaliActive && <DiwaliCelebrationEffect />}
+      {isDiwaliActive && <HappyDiwaliText />}
       <BrowserRouter>
         <RobotCursor />
         <div className="min-h-screen flex flex-col">
