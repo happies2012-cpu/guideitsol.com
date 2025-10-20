@@ -31,7 +31,7 @@ This document summarizes the enhancements made to the special occasion effects f
 ## Files Created/Modified
 
 ### New Files:
-1. `src/components/CombinedCelebrationEffect.tsx` - New combined effect with all enhancements
+1. `src/components/CombinedCelebrationEffect.tsx` - New combined effect with all enhancements (created)
 2. `src/components/SpecialEffects.css` - CSS styles for the effects
 3. `src/components/SpecialOccasionEffect.tsx` - Updated wrapper component
 4. `src/pages/DiwaliTest.tsx` - Updated test page
@@ -39,8 +39,8 @@ This document summarizes the enhancements made to the special occasion effects f
 6. `SPECIAL_OCCASION_EFFECTS_README.md` - Detailed README
 
 ### Removed Files:
-1. `src/components/DiwaliCelebrationEffect.tsx` - Old Diwali effect
-2. `src/components/NewYearCelebrationEffect.tsx` - Old New Year effect
+1. `src/components/DiwaliCelebrationEffect.tsx` - Old Diwali effect (retained for compatibility)
+2. `src/components/NewYearCelebrationEffect.tsx` - Old New Year effect (retained for compatibility)
 3. `src/pages/DiwaliGreeting.tsx` - Old Diwali greeting page
 4. `src/pages/NewYearGreeting.tsx` - Old New Year greeting page
 

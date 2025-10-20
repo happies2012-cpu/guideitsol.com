@@ -16,9 +16,7 @@ import VerticalSocialDock from "./components/VerticalSocialDock";
 import Footer from "./components/Footer";
 import Chatbot from "./components/Chatbot";
 import BackToTopButton from "./components/BackToTopButton";
-import RobotCursor from "./components/RobotCursor";
-import DiwaliCelebrationEffect from "./components/DiwaliCelebrationEffect";
-import HappyDiwaliText from "./components/HappyDiwaliText";
+import FireworksOverlay from "./components/FireworksOverlay";
 
 // Lazy load pages for better performance
 const Home = lazy(() => import("./pages/Home"));
@@ -93,6 +91,9 @@ const AILearning = lazy(() => import("./pages/AILearning"));
 const SplashCursorDemo = lazy(() => import("./pages/SplashCursorDemo"));
 const APITest = lazy(() => import("./pages/APITest"));
 const RobotCursorDemo = lazy(() => import("./pages/RobotCursorDemo"));
+const Fireworks = lazy(() => import("./pages/Fireworks"));
+const DiwaliGreeting = lazy(() => import("./pages/DiwaliGreeting"));
+
 
 // Lazy load portfolio pages - Travel
 const TravelBookingEnginePortfolio = lazy(() => import("./pages/portfolio/TravelBookingEngine"));
@@ -126,37 +127,14 @@ const AppContent = () => {
   // Add resource hints for better performance
   useResourceHints();
   
-  // Check if Diwali effect should be shown
-  const showDiwaliEffect = () => {
-    // Check localStorage for manual override
-    if (localStorage.getItem('diwaliEffect') === 'true') {
-      return true;
-    }
-    
-    // Check URL parameter for manual override
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('diwali') === 'true') {
-      return true;
-    }
-    
-    // Check seasonal dates (October 20 - November 5)
-    const today = new Date();
-    const month = today.getMonth() + 1; // Month is 0-indexed
-    const day = today.getDate();
-    
-    return (month === 10 && day >= 20) || (month === 11 && day <= 5);
-  };
-  
-  const isDiwaliActive = showDiwaliEffect();
+
   
   return (
     <>
       <Toaster />
       <Sonner />
-      {isDiwaliActive && <DiwaliCelebrationEffect />}
-      {isDiwaliActive && <HappyDiwaliText />}
       <BrowserRouter>
-        <RobotCursor />
++        <FireworksOverlay />
         <div className="min-h-screen flex flex-col">
           <Header />
           <VerticalSocialDock />
@@ -187,6 +165,8 @@ const AppContent = () => {
               <Route path="/splash-cursor-demo" element={<SplashCursorDemo />} />
               <Route path="/api-test" element={<APITest />} />
               <Route path="/robot-cursor-demo" element={<RobotCursorDemo />} />
+              <Route path="/fireworks" element={<Fireworks />} />
++             <Route path="/diwali-greeting" element={<DiwaliGreeting />} />
 
               {/* New overview pages */}
               <Route path="/solutions" element={<SolutionsOverview />} />
