@@ -1,63 +1,74 @@
 # GitHub Push Instructions
 
 ## Current Status
-The Diwali effect build has been completed and committed locally, but pushing to GitHub is failing due to authentication issues.
+Your local repository has 10 commits that need to be pushed to GitHub, but authentication is failing.
 
-## Local Commits
-- Commit: 2ed5896 - "added diwali"
-- Commit: fa85c80 - "Add Diwali effect build summary documentation"
-
-## Backup Files
-1. `guidesoft-website-diwali-build.tar.gz` - Complete project archive (located in `/Users/mac/Downloads/`)
-2. `DIWALI_EFFECT_BUILD_SUMMARY.md` - Build documentation
-
-## Steps to Push to GitHub
+## Solution Options
 
 ### Option 1: Using Personal Access Token (Recommended)
 1. Generate a Personal Access Token (PAT) on GitHub:
-   - Go to GitHub Settings > Developer settings > Personal access tokens > Tokens (classic)
+   - Go to https://github.com/settings/tokens
    - Click "Generate new token" > "Generate new token (classic)"
-   - Select scopes: `repo` (full control of private repositories)
-   - Copy the generated token
+   - Give it a name like "Guidesoft Push"
+   - Select the `repo` scope (full control of private repositories)
+   - Click "Generate token"
+   - COPY the token immediately (you won't see it again)
 
 2. Push using the token:
    ```bash
    cd "/Users/mac/Downloads/GuidesoftWebsiteFInal "
-   git push https://<username>:<token>@github.com/happies2012-cpu/GuidesoftWebsiteFInal.git main
+   git push https://<USERNAME>:<TOKEN>@github.com/happies2012-cpu/GuidesoftWebsiteFInal.git main
    ```
+   Replace `<USERNAME>` with your GitHub username and `<TOKEN>` with the token you just generated.
 
 ### Option 2: SSH Key Authentication
-1. Generate SSH key:
+1. If you know the passphrase for your existing SSH key:
    ```bash
-   ssh-keygen -t ed25519 -C "your_email@example.com"
-   ```
-
-2. Add SSH key to ssh-agent:
-   ```bash
+   cd "/Users/mac/Downloads/GuidesoftWebsiteFInal "
    eval "$(ssh-agent -s)"
    ssh-add ~/.ssh/id_ed25519
+   # Enter your passphrase when prompted
+   git push
    ```
 
-3. Add SSH key to GitHub:
-   - Copy the SSH public key: `cat ~/.ssh/id_ed25519.pub`
-   - Go to GitHub Settings > SSH and GPG keys > New SSH key
-   - Paste the key and save
+2. If you don't remember the passphrase, generate a new SSH key:
+   ```bash
+   ssh-keygen -t ed25519 -C "guidesoft@example.com" -f ~/.ssh/id_ed25519_guidesoft
+   # Press Enter for no passphrase when prompted
+   eval "$(ssh-agent -s)"
+   ssh-add ~/.ssh/id_ed25519_guidesoft
+   ```
 
-4. Change remote URL to SSH:
+3. Add the new SSH key to GitHub:
+   - Copy the public key: `cat ~/.ssh/id_ed25519_guidesoft.pub`
+   - Go to https://github.com/settings/keys
+   - Click "New SSH key"
+   - Title: "Guidesoft Website"
+   - Key: Paste the content of your public key
+   - Click "Add SSH key"
+
+4. Change the remote URL to SSH:
    ```bash
    cd "/Users/mac/Downloads/GuidesoftWebsiteFInal "
    git remote set-url origin git@github.com:happies2012-cpu/GuidesoftWebsiteFInal.git
-   git push origin main
+   git push
    ```
 
-### Option 3: Use GitHub CLI
-1. Install GitHub CLI if not already installed
+### Option 3: GitHub CLI
+1. Install GitHub CLI: https://cli.github.com/
 2. Authenticate: `gh auth login`
 3. Push: `git push`
 
-## Fallback Deployment
-If GitHub push continues to fail:
-1. Use the `guidesoft-website-diwali-build.tar.gz` archive
-2. Extract on the deployment server
-3. Run `npm install` to install dependencies
-4. Run `npm run start:all` to start the application
+## Verification
+After successful push, verify with:
+```bash
+git log --oneline -5
+```
+
+The top commit should match what you see on GitHub.
+
+## Troubleshooting
+If you continue to have issues:
+1. Check that you have write access to the repository
+2. Verify the repository name is correct
+3. Ensure you're on the correct branch (main)
