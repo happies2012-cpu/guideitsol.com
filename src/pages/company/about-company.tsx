@@ -1,5 +1,4 @@
-igitaion not visitible 
-av"use client";
+"use client";
 
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -16,10 +15,8 @@ const AboutCompany = () => {
   };
 
   const cardVariants = {
-  const cardVariants = {
     hidden: { opacity: 0, scale: 0.95 },
     visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: "easeOut" as Easing } },
-  };
     hover: { y: -10, boxShadow: "0 10px 20px rgba(0,0,0,0.15)" },
   };
 
