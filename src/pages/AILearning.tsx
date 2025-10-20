@@ -13,6 +13,7 @@ import { toast } from 'sonner';
 import { parseAIToolsCSV, AIToolData } from '@/lib/csvParser';
 import AIChatbot from '@/components/AIChatbot';
 import EnrollForm from '@/components/EnrollForm';
+import AIToolDetailLightbox from '@/components/AIToolDetailLightbox';
 import { SplashCursor } from '@/components/ui/splash-cursor';
 
 // Import CSV data
@@ -49,6 +50,10 @@ const AILearning = () => {
   const [loading, setLoading] = useState(true);
   const [showFeatured, setShowFeatured] = useState(false);
   const [pricingFilter, setPricingFilter] = useState<'all' | 'free' | 'paid'>('all');
+  
+  // Lightbox state
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [selectedToolForLightbox, setSelectedToolForLightbox] = useState<AITool | null>(null);
   
   // Enrollment state
   const [isEnrollOpen, setIsEnrollOpen] = useState(false);
@@ -126,6 +131,12 @@ const AILearning = () => {
     } catch (error) {
       console.error('Failed to load categories');
     }
+  };
+
+  // Handle lightbox
+  const handleViewDetails = (tool: AITool) => {
+    setSelectedToolForLightbox(tool);
+    setIsLightboxOpen(true);
   };
 
   // Handle enrollment
@@ -349,19 +360,12 @@ const AILearning = () => {
                       </Button>
                       {tool.detailUrl && (
                         <Button
-                          asChild
+                          onClick={() => handleViewDetails(tool)}
                           size="sm"
                           variant="outline"
                         >
-                          <a
-                            href={tool.detailUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2"
-                          >
-                            <Info className="w-3 h-3" />
-                            Details
-                          </a>
+                          <Info className="w-3 h-3 mr-2" />
+                          Details
                         </Button>
                       )}
                     </div>
@@ -414,6 +418,16 @@ const AILearning = () => {
           isOpen={isEnrollOpen}
           onClose={() => setIsEnrollOpen(false)}
           onEnrollSuccess={handleEnrollSuccess}
+        />
+      )}
+      
+      {/* AI Tool Detail Lightbox */}
+      {selectedToolForLightbox && (
+        <AIToolDetailLightbox
+          tool={selectedToolForLightbox}
+          isOpen={isLightboxOpen}
+          onClose={() => setIsLightboxOpen(false)}
+          onEnroll={handleEnrollClick}
         />
       )}
       

@@ -21,6 +21,8 @@ import StatsAndCEOSection from "@/components/StatsAndCEOSection";
 import ScrollingCardsCarousel from "@/components/ScrollingCardsCarousel";
 import PricingSection from "@/components/PricingSection";
 import InvestorSection from "@/components/InvestorSection";
+import LearningPathsSection from "@/components/LearningPathsSection";
+import ReviewsSection from "@/components/ReviewsSection";
 import { getHeroImage } from "@/lib/image-utils";
 import Hero from "@/components/Hero";
 
@@ -71,6 +73,8 @@ const Home = () => {
       
       {/* Existing Components */}
       <StatsAndCEOSection />
+      <LearningPathsSection />
+      <ReviewsSection />
       <Services />
       <StatsSection />
       <CEOSection />

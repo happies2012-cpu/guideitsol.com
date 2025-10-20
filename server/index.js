@@ -11,9 +11,16 @@ import authRoutes from './routes/auth.js';
 import pagesRoutes from './routes/pages.js';
 import navigationRoutes from './routes/navigation.js';
 import aiToolsRoutes from './routes/ai-tools.js';
+import aiToolsAdvancedRoutes from './routes/ai-tools-advanced.js';
 import aiEnrollmentsRoutes from './routes/ai-enrollments.js';
 import settingsRoutes from './routes/settings.js';
 import formsRoutes from './routes/forms.js';
+import reviewsRoutes from './routes/reviews.js';
+import learningPathsRoutes from './routes/learning-paths.js';
+import adminRoutes from './routes/admin.js';
+import coursesRoutes from './routes/courses.js';
+import aiIntegrationsRoutes from './routes/ai-integrations.js';
+import userDashboardRoutes from './routes/user-dashboard.js';
 
 dotenv.config();
 
@@ -80,9 +87,16 @@ app.use('/api/auth', authRoutes);
 app.use('/api/pages', pagesRoutes);
 app.use('/api/navigation', navigationRoutes);
 app.use('/api/ai-tools', aiToolsRoutes);
+app.use('/api/ai-tools-advanced', aiToolsAdvancedRoutes);
 app.use('/api/ai-enrollments', aiEnrollmentsRoutes);
 app.use('/api/settings', settingsRoutes);
 app.use('/api/forms', formsRoutes);
+app.use('/api/reviews', reviewsRoutes);
+app.use('/api/learning-paths', learningPathsRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/courses', coursesRoutes);
+app.use('/api/ai', aiIntegrationsRoutes);
+app.use('/api/dashboard', userDashboardRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
