@@ -92,6 +92,7 @@ const SplashCursorDemo = lazy(() => import("./pages/SplashCursorDemo"));
 const APITest = lazy(() => import("./pages/APITest"));
 const RobotCursorDemo = lazy(() => import("./pages/RobotCursorDemo"));
 const Fireworks = lazy(() => import("./pages/Fireworks"));
+const BentoDemoPage = lazy(() => import("./pages/BentoDemoPage"));
 // Removed DiwaliGreeting import
 
 // Lazy load portfolio pages - Travel
@@ -165,6 +166,7 @@ const AppContent = () => {
               <Route path="/api-test" element={<APITest />} />
               <Route path="/robot-cursor-demo" element={<RobotCursorDemo />} />
               <Route path="/fireworks" element={<Fireworks />} />
+              <Route path="/bento-demo" element={<BentoDemoPage />} />
               {/* Removed DiwaliGreeting route */}
 
               {/* New overview pages */}
