@@ -278,6 +278,7 @@ const EnrollForm: React.FC<EnrollFormProps> = ({ toolId, toolName, isOpen, onClo
       <PaymentComponent
         toolName={toolName}
         amount={499}
+        enrollmentId={enrollmentId}
         isOpen={showPayment}
         onClose={() => setShowPayment(false)}
         onPaymentSuccess={handlePaymentSuccess}

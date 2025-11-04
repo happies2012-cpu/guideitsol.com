@@ -69,6 +69,10 @@ app.use(helmet({
 }));
 app.use(limiter);
 app.use(cors(corsOptions));
+
+// Special route for Razorpay webhook (needs raw body)
+app.use('/api/ai-enrollments/razorpay-webhook', express.raw({type: 'application/json'}));
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 

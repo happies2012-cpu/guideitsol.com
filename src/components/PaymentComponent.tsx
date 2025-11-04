@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { AlertCircle, CheckCircle, QrCode, Copy, ExternalLink } from 'lucide-react';
+import { AlertCircle, CheckCircle, CreditCard } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface PaymentComponentProps {
   toolName: string;
   amount: number;
+  enrollmentId?: string;
   isOpen: boolean;
   onClose: () => void;
   onPaymentSuccess: (transactionId?: string) => void;
@@ -18,60 +17,84 @@ interface PaymentComponentProps {
 const PaymentComponent: React.FC<PaymentComponentProps> = ({ 
   toolName, 
   amount, 
+  enrollmentId,
   isOpen, 
   onClose, 
   onPaymentSuccess 
 }) => {
-  const [upiId] = useState('8884162999@ybl');
-  const [paymentMethod, setPaymentMethod] = useState<'upi' | 'qr'>('upi');
-  const [isCopied, setIsCopied] = useState(false);
   const [paymentVerified, setPaymentVerified] = useState(false);
-  const [verificationCode, setVerificationCode] = useState('');
 
-  // Generate UPI payment link
-  const upiLink = `upi://pay?pa=${upiId}&pn=Guidesoft&am=${amount}&cu=INR&tn=Enrollment for ${encodeURIComponent(toolName)}`;
-
-  const handleCopyUPI = async () => {
-    try {
-      await navigator.clipboard.writeText(upiId);
-      setIsCopied(true);
-      toast.success('UPI ID copied to clipboard!');
-      setTimeout(() => setIsCopied(false), 2000);
-    } catch (err) {
-      toast.error('Failed to copy UPI ID');
-    }
+  const loadRazorpay = (): Promise<any> => {
+    return new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.onload = () => {
+        resolve((window as any).Razorpay);
+      };
+      script.onerror = () => {
+        toast.error('Failed to load payment gateway. Please try again.');
+      };
+      document.body.appendChild(script);
+    });
   };
 
-  const handleVerifyPayment = () => {
-    // In a real implementation, this would connect to a payment verification API
-    // For demo purposes, we'll just simulate a successful verification
-    if (verificationCode.trim() !== '') {
-      setPaymentVerified(true);
-      toast.success('Payment verified successfully!');
-      // Pass the verification code as transaction ID
-      setTimeout(() => {
-        onPaymentSuccess(verificationCode);
-        onClose();
-      }, 1500);
-    } else {
-      toast.error('Please enter a verification code');
+  const handleRazorpayPayment = async () => {
+    try {
+      // Load Razorpay script if not already loaded
+      const Razorpay = (window as any).Razorpay || await loadRazorpay();
+      
+      if (!Razorpay) {
+        toast.error('Payment gateway is not available. Please try again.');
+        return;
+      }
+
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_1234567890', // Test key
+        amount: amount * 100, // Amount in paise
+        currency: "INR",
+        name: "Guidesoft",
+        description: `Enrollment for ${toolName}`,
+        image: "/guidesoft-favicon.png",
+        handler: function (response: any) {
+          // Payment successful
+          setPaymentVerified(true);
+          toast.success('Payment successful!');
+          setTimeout(() => {
+            onPaymentSuccess(response.razorpay_payment_id);
+            onClose();
+          }, 1500);
+        },
+        prefill: {
+          name: "",
+          email: "",
+          contact: ""
+        },
+        notes: {
+          toolName: toolName,
+          amount: amount,
+          enrollmentId: enrollmentId
+        },
+        theme: {
+          color: "#3B82F6"
+        }
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+    } catch (error) {
+      console.error('Payment error:', error);
+      toast.error('Failed to initiate payment. Please try again.');
     }
   };
 
   const resetPayment = () => {
-    setPaymentMethod('upi');
-    setIsCopied(false);
     setPaymentVerified(false);
-    setVerificationCode('');
   };
 
   const handleClose = () => {
     resetPayment();
     onClose();
   };
-
-  // Generate QR code using a third-party service
-  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiLink)}`;
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
@@ -96,99 +119,16 @@ const PaymentComponent: React.FC<PaymentComponentProps> = ({
             </div>
             
             <div className="space-y-4">
-              <div className="flex space-x-2">
-                <Button
-                  variant={paymentMethod === 'upi' ? 'default' : 'outline'}
-                  onClick={() => setPaymentMethod('upi')}
-                  className="flex-1"
-                >
-                  UPI Payment
-                </Button>
-                <Button
-                  variant={paymentMethod === 'qr' ? 'default' : 'outline'}
-                  onClick={() => setPaymentMethod('qr')}
-                  className="flex-1"
-                >
-                  QR Code
-                </Button>
-              </div>
+              <Button onClick={handleRazorpayPayment} className="w-full">
+                <CreditCard className="h-4 w-4 mr-2" />
+                Pay with Razorpay
+              </Button>
               
-              {paymentMethod === 'upi' ? (
-                <div className="space-y-4">
-                  <div className="bg-background border rounded-lg p-4">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h4 className="font-medium">Pay via UPI</h4>
-                        <p className="text-sm text-muted-foreground mt-1">
-                          Use any UPI app (PhonePe, Google Pay, Paytm, etc.)
-                        </p>
-                      </div>
-                      <QrCode className="h-8 w-8 text-primary" />
-                    </div>
-                    
-                    <div className="mt-4 space-y-2">
-                      <div className="flex items-center justify-between p-2 bg-muted rounded">
-                        <span className="text-sm font-mono">{upiId}</span>
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          onClick={handleCopyUPI}
-                          className="ml-2"
-                        >
-                          {isCopied ? 'Copied!' : <Copy className="h-4 w-4" />}
-                        </Button>
-                      </div>
-                      
-                      <a
-                        href={upiLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block w-full"
-                      >
-                        <Button className="w-full">
-                          <ExternalLink className="h-4 w-4 mr-2" />
-                          Open UPI App
-                        </Button>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  <div className="bg-background border rounded-lg p-4 text-center">
-                    <h4 className="font-medium mb-2">Scan QR Code</h4>
-                    <p className="text-sm text-muted-foreground mb-4">
-                      Scan this QR code with any UPI app to make payment
-                    </p>
-                    <div className="flex justify-center">
-                      <img 
-                        src={qrCodeUrl} 
-                        alt="UPI Payment QR Code" 
-                        className="w-48 h-48"
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
+              <div className="text-center text-sm text-muted-foreground">
+                <p>Secure payment powered by Razorpay</p>
+                <p className="mt-1">All major cards, UPI, and wallets accepted</p>
+              </div>
             </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="verificationCode">Verification Code</Label>
-              <Input
-                id="verificationCode"
-                value={verificationCode}
-                onChange={(e) => setVerificationCode(e.target.value)}
-                placeholder="Enter transaction ID or verification code"
-              />
-              <p className="text-xs text-muted-foreground">
-                After completing payment, enter the transaction ID or verification code
-              </p>
-            </div>
-            
-            <Button onClick={handleVerifyPayment} className="w-full">
-              <CheckCircle className="h-4 w-4 mr-2" />
-              Verify Payment
-            </Button>
           </div>
         ) : (
           <div className="text-center py-8">
