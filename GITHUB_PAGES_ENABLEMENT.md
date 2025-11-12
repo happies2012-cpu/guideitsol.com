@@ -57,3 +57,24 @@ If you still encounter issues after enabling GitHub Pages:
 ## Common Mistake
 
 The most common cause of the "Failed to create deployment (status: 404)" error is simply that GitHub Pages hasn't been enabled in the repository settings. This is a separate step from configuring the workflow.
+
+## Git Synchronization Issues
+
+If you encounter issues pushing changes due to divergent branches:
+
+1. Configure git to merge (instead of rebase):
+   ```bash
+   git config pull.rebase false
+   ```
+
+2. Pull remote changes:
+   ```bash
+   git pull origin main
+   ```
+
+3. If prompted for a merge commit message, save and exit the editor
+
+4. Push your changes:
+   ```bash
+   git push origin main
+   ```
