@@ -168,3 +168,6 @@ This project is proprietary software developed for Guidesoft. All rights reserve
 ## Support
 
 For issues or questions, please contact the development team.
+## Deployment Status
+
+Website successfully deployed on Wed Nov 12 18:21:14 IST 2025
