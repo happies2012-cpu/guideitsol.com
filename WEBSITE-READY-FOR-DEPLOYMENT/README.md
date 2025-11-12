@@ -1,52 +1,38 @@
-# DEPLOY THIS FOLDER
+# Guidesoft Website - Ready for Deployment
 
-## Your Website Files Are Ready for Deployment
+This directory contains the built and optimized version of the Guidesoft website, ready for deployment to production servers.
 
-The contents of this folder are your complete website. All files have been built and are ready to be uploaded to your cPanel account.
+## Recent Accessibility Fixes
+
+The website has been updated to resolve issues with ad blockers and browser compatibility:
+
+1. **Simplified robots.txt** - Changed to a universally accepted format
+2. **Updated Content Security Policy** - Balanced security with functionality
+3. **Cleaned HTML meta tags** - Removed potentially problematic identifiers
 
 ## Deployment Instructions
 
-### Using FileZilla (Recommended)
+1. Copy all files in this directory to your web server's public directory
+2. Ensure proper file permissions (755 for directories, 644 for files)
+3. Configure your web server to serve index.html for all routes (SPA routing)
 
-1. Open FileZilla
-2. Go to File → Site Manager
-3. Create a new site with these settings:
-   - Protocol: FTP - File Transfer Protocol
-   - Host: guideitsol.com
-   - Port: 2080
-   - User: praveenkumar.kanneganti@gmail.com
-   - Password: KPKkpk@143
-   - Logon Type: Normal
-4. Click 'Connect'
-5. Navigate to REMOTE directory:
-   - /public_html (or your domain's root directory)
-6. Upload ALL files from this folder to the remote directory
+## Server Configuration
 
-### Using cPanel File Manager
+If using the backend server:
+1. Ensure the server is running on the correct port
+2. Configure SSL certificates for HTTPS in production
+3. Set appropriate CORS headers for cross-origin requests
 
-1. Log in to your cPanel
-2. Go to File Manager
-3. Navigate to /public_html or your domain's root directory
-4. Upload all files from this folder
+## Testing
 
-## After Deployment
+After deployment, verify:
+- Site loads correctly in all major browsers
+- No content is blocked by ad blockers
+- All interactive elements work properly
+- Mobile responsiveness is maintained
 
-Visit https://guideitsol.com to see your live website.
+## Support
 
-## Files in This Folder
-
-- index.html (main page)
-- favicon.ico
-- guidesoft-favicon.png
-- robots.txt
-- placeholder.svg
-- assets/ (folder containing all CSS, JS, and images)
-
-## Need Help?
-
-If you need assistance with deployment, refer to:
-- FINAL_DEPLOYMENT_README.md
-- COMPLETE_DEPLOYMENT_GUIDE.md
-- WEBSITE_DEPLOYMENT_CLARIFICATION.md
-
-These files contain detailed step-by-step instructions.
+For deployment issues or questions, please refer to:
+- [SITE_ACCESSIBILITY_FIXES.md](file:///Users/mac/Desktop/guideitsol.com/SITE_ACCESSIBILITY_FIXES.md) for detailed fix information
+- [WEBSITE_ACCESSIBILITY_README.md](file:///Users/mac/Desktop/guideitsol.com/WEBSITE_ACCESSIBILITY_README.md) for comprehensive documentation

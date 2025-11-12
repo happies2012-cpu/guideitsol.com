@@ -61,8 +61,9 @@ app.use(helmet({
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       imgSrc: ["'self'", "data:", "https:", "blob:"],
-      scriptSrc: ["'self'"],
-      connectSrc: ["'self'", "https://api.guidesoft.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      connectSrc: ["'self'", "https://api.guidesoft.com", "https://*.google-analytics.com", "https://*.googletagmanager.com"],
+      frameSrc: ["'self'", "https://*.google.com", "https://*.googleapis.com"],
     },
   },
   crossOriginEmbedderPolicy: false
