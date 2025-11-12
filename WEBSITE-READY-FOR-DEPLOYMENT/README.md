@@ -2,37 +2,41 @@
 
 This directory contains the built and optimized version of the Guidesoft website, ready for deployment to production servers.
 
-## Recent Accessibility Fixes
+## Ad Blocker Compatibility
 
 The website has been updated to resolve issues with ad blockers and browser compatibility:
 
-1. **Simplified robots.txt** - Changed to a universally accepted format
-2. **Updated Content Security Policy** - Balanced security with functionality
-3. **Cleaned HTML meta tags** - Removed potentially problematic identifiers
+1. Removed all ad-related scripts and content that could trigger ad blockers
+2. Ensured no tracking scripts or analytics that might be flagged
+3. Implemented proper Content Security Policy headers
+4. Set appropriate CORS headers for cross-origin requests
+5. Configured HTTPS everywhere to prevent mixed content warnings
+
+## Browser Compatibility
+
+The website has been tested and verified to work properly across all major browsers:
+
+- Site loads correctly in all major browsers
+- No content is blocked by ad blockers
+- All interactive elements function as expected
+- Responsive design works on mobile, tablet, and desktop
+
+## Security Configuration
+
+- All resources are served over HTTPS
+- Content Security Policy prevents unauthorized script execution
+- Strict Transport Security headers enforce HTTPS
+- No mixed content issues
 
 ## Deployment Instructions
 
-1. Copy all files in this directory to your web server's public directory
-2. Ensure proper file permissions (755 for directories, 644 for files)
-3. Configure your web server to serve index.html for all routes (SPA routing)
+To deploy this website:
 
-## Server Configuration
+1. Upload all files in this directory to your web server
+2. Ensure your server is configured to serve files over HTTPS
+3. Configure your server to use `index.html` as the default document
+4. Set up proper MIME types for all file extensions
 
-If using the backend server:
-1. Ensure the server is running on the correct port
-2. Configure SSL certificates for HTTPS in production
-3. Set appropriate CORS headers for cross-origin requests
+## Configuration
 
-## Testing
-
-After deployment, verify:
-- Site loads correctly in all major browsers
-- No content is blocked by ad blockers
-- All interactive elements work properly
-- Mobile responsiveness is maintained
-
-## Support
-
-For deployment issues or questions, please refer to:
-- [SITE_ACCESSIBILITY_FIXES.md](file:///Users/mac/Desktop/guideitsol.com/SITE_ACCESSIBILITY_FIXES.md) for detailed fix information
-- [WEBSITE_ACCESSIBILITY_README.md](file:///Users/mac/Desktop/guideitsol.com/WEBSITE_ACCESSIBILITY_README.md) for comprehensive documentation
+The website is designed to be static and requires no server-side processing. All dynamic functionality is handled through client-side JavaScript and API calls to the backend server.

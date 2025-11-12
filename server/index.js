@@ -58,16 +58,16 @@ app.use(compression());
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
-      defaultSrc: ["'self'", "blob:", "data:", "https:"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-      fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
-      imgSrc: ["'self'", "data:", "https:", "blob:"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
-      connectSrc: ["'self'", "https://api.guidesoft.com", "https://*.google-analytics.com", "https://*.googletagmanager.com", "https://checkout.razorpay.com", "https://www.paypal.com"],
-      frameSrc: ["'self'", "https://*.google.com", "https://*.googleapis.com", "https://checkout.razorpay.com", "https://www.paypal.com"],
-      objectSrc: ["'none'"],
-      mediaSrc: ["'self'", "https:"],
-      childSrc: ["'self'", "blob:"],
+      defaultSrc: ["'self'", "blob:", "data:", "https:", "http:"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "http://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com", "http://fonts.gstatic.com", "data:"],
+      imgSrc: ["'self'", "data:", "https:", "http:", "blob:"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https:", "http:"],
+      connectSrc: ["'self'", "https://api.guidesoft.com", "https://*.google-analytics.com", "https://*.googletagmanager.com", "https://checkout.razorpay.com", "https://www.paypal.com", "http:", "https:"],
+      frameSrc: ["'self'", "https://*.google.com", "https://*.googleapis.com", "https://checkout.razorpay.com", "https://www.paypal.com", "http:", "https:"],
+      objectSrc: ["'self'", "blob:", "data:", "https:", "http:"],
+      mediaSrc: ["'self'", "https:", "http:"],
+      childSrc: ["'self'", "blob:", "https:", "http:"],
     },
   },
   crossOriginEmbedderPolicy: false,
@@ -90,7 +90,6 @@ app.use((req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   res.setHeader('X-XSS-Protection', '1; mode=block');
-  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
   next();
