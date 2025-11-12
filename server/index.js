@@ -21,6 +21,7 @@ import adminRoutes from './routes/admin.js';
 import coursesRoutes from './routes/courses.js';
 import aiIntegrationsRoutes from './routes/ai-integrations.js';
 import userDashboardRoutes from './routes/user-dashboard.js';
+import paypalRoutes from './routes/paypal.js';
 
 dotenv.config();
 
@@ -37,7 +38,7 @@ const limiter = rateLimit({
   legacyHeaders: false,
 });
 
-// CORS Configuration
+// CORS Configuration - Allow all origins for development, specific for production
 const corsOptions = {
   origin: isProduction ? [
     'https://guidesoft.com',
@@ -57,22 +58,29 @@ app.use(compression());
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
-      defaultSrc: ["'self'"],
+      defaultSrc: ["'self'", "blob:", "data:", "https:"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
       imgSrc: ["'self'", "data:", "https:", "blob:"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
-      connectSrc: ["'self'", "https://api.guidesoft.com", "https://*.google-analytics.com", "https://*.googletagmanager.com"],
-      frameSrc: ["'self'", "https://*.google.com", "https://*.googleapis.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+      connectSrc: ["'self'", "https://api.guidesoft.com", "https://*.google-analytics.com", "https://*.googletagmanager.com", "https://checkout.razorpay.com", "https://www.paypal.com"],
+      frameSrc: ["'self'", "https://*.google.com", "https://*.googleapis.com", "https://checkout.razorpay.com", "https://www.paypal.com"],
+      objectSrc: ["'none'"],
+      mediaSrc: ["'self'", "https:"],
+      childSrc: ["'self'", "blob:"],
     },
   },
-  crossOriginEmbedderPolicy: false
+  crossOriginEmbedderPolicy: false,
+  crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
 app.use(limiter);
 app.use(cors(corsOptions));
 
 // Special route for Razorpay webhook (needs raw body)
 app.use('/api/ai-enrollments/razorpay-webhook', express.raw({type: 'application/json'}));
+
+// Special route for PayPal webhook (needs raw body)
+app.use('/api/paypal/webhook', express.raw({type: 'application/json'}));
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
@@ -82,8 +90,9 @@ app.use((req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   res.setHeader('X-XSS-Protection', '1; mode=block');
-  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
   next();
 });
 
@@ -102,6 +111,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/courses', coursesRoutes);
 app.use('/api/ai', aiIntegrationsRoutes);
 app.use('/api/dashboard', userDashboardRoutes);
+app.use('/api/paypal', paypalRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
