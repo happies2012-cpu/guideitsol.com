@@ -1,0 +1,16 @@
+{
+  "name": "Guidesoft Website",
+  "description": "Guidesoft IT Solutions Website",
+  "deploy": {
+    "type": "dockerfile",
+    "dockerfilePath": "./Dockerfile",
+    "port": 80
+  },
+  "healthcheck": {
+    "path": "/",
+    "port": 80
+  },
+  "env": {
+    "NODE_ENV": "production"
+  }
+}

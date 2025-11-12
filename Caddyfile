@@ -1,0 +1,16 @@
+# Caddyfile for Guidesoft website
+:80 {
+    root * /usr/share/caddy
+    file_server
+    encode gzip
+    
+    # SPA fallback for client-side routing
+    try_files {path} /index.html
+    
+    # Security headers
+    header {
+        X-Content-Type-Options nosniff
+        X-Frame-Options SAMEORIGIN
+        Referrer-Policy strict-origin-when-cross-origin
+    }
+}
