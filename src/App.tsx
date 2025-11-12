@@ -16,7 +16,7 @@ import VerticalSocialDock from "./components/VerticalSocialDock";
 import Footer from "./components/Footer";
 import Chatbot from "./components/Chatbot";
 import BackToTopButton from "./components/BackToTopButton";
-import FireworksOverlay from "./components/FireworksOverlay";
+// Removed FireworksOverlay import
 
 // Lazy load pages for better performance
 const Home = lazy(() => import("./pages/Home"));
@@ -92,8 +92,8 @@ const SplashCursorDemo = lazy(() => import("./pages/SplashCursorDemo"));
 const APITest = lazy(() => import("./pages/APITest"));
 const RobotCursorDemo = lazy(() => import("./pages/RobotCursorDemo"));
 const Fireworks = lazy(() => import("./pages/Fireworks"));
-const DiwaliGreeting = lazy(() => import("./pages/DiwaliGreeting"));
-
+const BentoDemoPage = lazy(() => import("./pages/BentoDemoPage"));
+// Removed DiwaliGreeting import
 
 // Lazy load portfolio pages - Travel
 const TravelBookingEnginePortfolio = lazy(() => import("./pages/portfolio/TravelBookingEngine"));
@@ -134,7 +134,7 @@ const AppContent = () => {
       <Toaster />
       <Sonner />
       <BrowserRouter>
-+        <FireworksOverlay />
+        {/* Removed FireworksOverlay */}
         <div className="min-h-screen flex flex-col">
           <Header />
           <VerticalSocialDock />
@@ -166,7 +166,8 @@ const AppContent = () => {
               <Route path="/api-test" element={<APITest />} />
               <Route path="/robot-cursor-demo" element={<RobotCursorDemo />} />
               <Route path="/fireworks" element={<Fireworks />} />
-+             <Route path="/diwali-greeting" element={<DiwaliGreeting />} />
+              <Route path="/bento-demo" element={<BentoDemoPage />} />
+              {/* Removed DiwaliGreeting route */}
 
               {/* New overview pages */}
               <Route path="/solutions" element={<SolutionsOverview />} />

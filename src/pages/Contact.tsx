@@ -56,20 +56,14 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: MapPin,
-      title: "Global Headquarters",
-      details: ["Innovation District, Tech Park", "San Francisco, CA 94103", "United States"],
+      title: "Our Office",
+      details: ["29-2-172,2/3, Brodipet,", "Beside Apex, Brodipet,", "Guntur Medical College S.o,", "Guntur, Andhra Pradesh, 522004"],
       gradient: "from-blue-500 to-cyan-500"
-    },
-    {
-      icon: Phone,
-      title: "Direct Contact",
-      details: ["+1 (555) 123-4567", "Mon-Fri 9:00 AM - 6:00 PM PST"],
-      gradient: "from-purple-500 to-pink-500"
     },
     {
       icon: Mail,
       title: "Email Communication",
-      details: ["hello@yourcompany.com", "support@yourcompany.com", "careers@yourcompany.com"],
+      details: ["info@guideitsol.com", "hr@guideitsol.com"],
       gradient: "from-emerald-500 to-teal-500"
     },
     {

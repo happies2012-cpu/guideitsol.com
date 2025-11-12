@@ -1,22 +1,18 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-import { componentTagger } from "lovable-tagger";
 
-// https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
+// Static config for preview and production build; HTTPS disabled for local preview
+export default defineConfig({
+  base: "/",
   server: {
     host: "::",
     port: 8080,
-    https: mode === "production" ? {
-      key: './certs/server.key',
-      cert: './certs/server.crt'
-    } : false,
     proxy: {
       '/api': {
-        target: mode === "production" ? 'https://localhost:3001' : 'http://localhost:3001',
+        target: 'http://localhost:3000',
         changeOrigin: true,
-        secure: mode === "production",
+        secure: false,
         ws: true,
         configure: (proxy, _options) => {
           proxy.on('error', (err, _req, _res) => {
@@ -36,7 +32,12 @@ export default defineConfig(({ mode }) => ({
     open: false,
     allowedHosts: ['localhost', '127.0.0.1', '192.168.1.102'],
   },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  preview: {
+    host: '::',
+    port: 8080,
+    open: false,
+  },
+  plugins: [react()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -54,13 +55,14 @@ export default defineConfig(({ mode }) => ({
       '@radix-ui/react-navigation-menu',
       '@tanstack/react-query'
     ],
-    exclude: ['@vite/client', '@vite/env']
+    exclude: ['@vite/client', '@vite/env', 'electron']
   },
   build: {
     target: 'esnext',
     minify: 'esbuild',
-    sourcemap: mode === "development",
+    sourcemap: false,
     rollupOptions: {
+      external: ['electron'],
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
@@ -76,6 +78,6 @@ export default defineConfig(({ mode }) => ({
     assetsInlineLimit: 4096
   },
   esbuild: {
-    drop: mode === "production" ? ['console', 'debugger'] : []
+    drop: []
   }
-}));
+});

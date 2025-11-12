@@ -252,7 +252,6 @@ const EnrollForm: React.FC<EnrollFormProps> = ({ toolId, toolName, isOpen, onClo
                 <h3 className="font-semibold mb-2">Payment Details</h3>
                 <p className="text-sm">Course: {toolName}</p>
                 <p className="text-lg font-bold">Amount: ₹499/-</p>
-                <p className="text-sm text-muted-foreground">Payment via UPI: 8884162999@ybl</p>
               </div>
               
               <div className="flex flex-col gap-3">
@@ -278,6 +277,7 @@ const EnrollForm: React.FC<EnrollFormProps> = ({ toolId, toolName, isOpen, onClo
       <PaymentComponent
         toolName={toolName}
         amount={499}
+        enrollmentId={enrollmentId}
         isOpen={showPayment}
         onClose={() => setShowPayment(false)}
         onPaymentSuccess={handlePaymentSuccess}

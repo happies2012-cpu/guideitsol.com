@@ -1,6 +1,7 @@
 import express from 'express';
 import prisma from '../db/prisma.js';
 import { authenticate } from '../middleware/auth.js';
+import crypto from 'crypto';
 
 const router = express.Router();
 
@@ -108,6 +109,42 @@ router.post('/:id/payment', async (req, res) => {
   } catch (error) {
     console.error('Error updating payment status:', error);
     res.status(500).json({ error: 'Failed to update payment status' });
+  }
+});
+
+// Razorpay webhook endpoint
+router.post('/razorpay-webhook', express.raw({type: 'application/json'}), async (req, res) => {
+  try {
+    const secret = process.env.RAZORPAY_WEBHOOK_SECRET;
+    const shasum = crypto.createHmac('sha256', secret);
+    shasum.update(JSON.stringify(req.body));
+    const digest = shasum.digest('hex');
+
+    if (digest === req.headers['x-razorpay-signature']) {
+      // Verify the payment
+      const paymentId = req.body.payload.payment.entity.id;
+      const enrollmentId = req.body.payload.payment.entity.notes.enrollmentId;
+      
+      if (req.body.event === 'payment.captured') {
+        // Update enrollment as paid
+        const enrollment = await prisma.aIEnrollments.update({
+          where: { id: enrollmentId },
+          data: { 
+            isPaid: true,
+            transactionId: paymentId
+          }
+        });
+        
+        console.log('Payment verified and enrollment updated:', enrollment.id);
+      }
+      
+      res.status(200).json({ status: 'ok' });
+    } else {
+      res.status(400).json({ status: 'error', message: 'Invalid signature' });
+    }
+  } catch (error) {
+    console.error('Error processing Razorpay webhook:', error);
+    res.status(500).json({ error: 'Failed to process webhook' });
   }
 });
 
