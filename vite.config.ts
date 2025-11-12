@@ -8,15 +8,15 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
-    https: mode === "production" ? {
+    https: {
       key: './certs/server.key',
       cert: './certs/server.crt'
-    } : false,
+    },
     proxy: {
       '/api': {
-        target: mode === "production" ? 'https://localhost:3001' : 'http://localhost:3001',
+        target: 'https://localhost:3001',
         changeOrigin: true,
-        secure: mode === "production",
+        secure: false,
         ws: true,
         configure: (proxy, _options) => {
           proxy.on('error', (err, _req, _res) => {

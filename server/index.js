@@ -115,7 +115,9 @@ app.use((err, req, res, next) => {
 });
 
 // Start server with HTTPS in production
-if (isProduction) {
+// Also enable HTTPS when explicitly requested via environment variable
+const forceHttps = process.env.FORCE_HTTPS === 'true';
+if (isProduction || forceHttps) {
   try {
     const options = {
       key: fs.readFileSync(path.join(process.cwd(), 'certs', 'server.key')),
