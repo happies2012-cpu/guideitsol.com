@@ -1,9 +1,10 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
-const path = require('path');
-const { spawn } = require('child_process');
+import { app, BrowserWindow, ipcMain, dialog, shell } from 'electron';
+import path from 'path';
+import { spawn } from 'child_process';
+import electronSquirrelStartup from 'electron-squirrel-startup';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) {
+if (electronSquirrelStartup) {
   app.quit();
 }
 
@@ -13,6 +14,7 @@ const port = process.env.PORT || 3000;
 
 let mainWindow;
 let serverProcess;
+let backendServer;
 
 const createWindow = () => {
   // Create the browser window.
@@ -26,6 +28,7 @@ const createWindow = () => {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
       contextIsolation: true,
+      webSecurity: false, // Allow insecure content
     },
   });
 
@@ -38,8 +41,18 @@ const createWindow = () => {
     // Open the DevTools.
     mainWindow.webContents.openDevTools();
   } else {
+    // For production, serve the built app with embedded backend
     mainWindow.loadFile(path.join(__dirname, '../dist/index.html'));
   }
+
+  // Handle external links
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    if (url.startsWith('http')) {
+      shell.openExternal(url);
+      return { action: 'deny' };
+    }
+    return { action: 'allow' };
+  });
 
   // Handle window close
   mainWindow.on('closed', () => {
@@ -68,10 +81,17 @@ const startViteServer = () => {
   });
 };
 
+// Start the backend server for production
+const startBackendServer = async () => {
+  // In production, we'll start the backend server as a separate process
+  console.log('Starting backend server...');
+  // This would be implemented based on your specific needs
+};
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', async () => {
+app.whenReady().then(async () => {
   if (isDev) {
     try {
       await startViteServer();
@@ -81,9 +101,31 @@ app.on('ready', async () => {
       app.quit();
       return;
     }
+  } else {
+    // In production, start the backend server
+    try {
+      await startBackendServer();
+    } catch (error) {
+      console.error('Error starting backend server:', error);
+      // Don't quit the app, just show a warning
+      dialog.showMessageBox({
+        type: 'warning',
+        title: 'Warning',
+        message: 'Failed to start backend server. Some features may not work properly.',
+        buttons: ['OK']
+      });
+    }
   }
   
   createWindow();
+  
+  app.on('activate', () => {
+    // On OS X it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
+    }
+  });
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -97,14 +139,6 @@ app.on('window-all-closed', () => {
   // Kill the server process if it's running
   if (serverProcess) {
     serverProcess.kill();
-  }
-});
-
-app.on('activate', () => {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
   }
 });
 

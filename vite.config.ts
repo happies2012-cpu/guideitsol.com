@@ -54,13 +54,14 @@ export default defineConfig(({ mode }) => ({
       '@radix-ui/react-navigation-menu',
       '@tanstack/react-query'
     ],
-    exclude: ['@vite/client', '@vite/env']
+    exclude: ['@vite/client', '@vite/env', 'electron']
   },
   build: {
     target: 'esnext',
     minify: 'esbuild',
     sourcemap: mode === "development",
     rollupOptions: {
+      external: ['electron'],
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],

@@ -3,10 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "electron/main.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
+    "build:prod": "node scripts/build-production.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "server": "node server/index.js",
@@ -18,7 +20,10 @@
     "start:prod": "concurrently \"npm run build && npm run preview\" \"npm run server\"",
     "generate-ssl": "node scripts/generate-ssl-certs.js",
     "test:performance": "node scripts/performance-test.js",
-    "postinstall": "prisma generate || true"
+    "postinstall": "prisma generate || true",
+    "electron:dev": "electron .",
+    "electron:build": "npm run build:prod && electron-builder",
+    "electron:dist": "electron-builder --dir"
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
@@ -109,6 +114,8 @@
     "@vitejs/plugin-react-swc": "^3.11.0",
     "autoprefixer": "^10.4.21",
     "concurrently": "^9.2.1",
+    "electron": "^39.1.2",
+    "electron-builder": "^26.0.12",
     "eslint": "^9.32.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
