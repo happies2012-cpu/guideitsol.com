@@ -17,17 +17,13 @@ To fix the 404 status and enable GitHub Pages for your site, follow these steps:
 
 ## Verifying GitHub Actions Workflow
 
-Your repository already has a workflow file at [.github/workflows/pages.yml](file:///Users/mac/Desktop/guideitsol.com/.github/workflows/pages.yml) that should deploy to GitHub Pages.
+Your repository now uses the built-in `GITHUB_TOKEN` for authentication, which is more reliable than custom Personal Access Tokens. This eliminates SSH authentication errors.
 
 ## Troubleshooting Deployment Issues
 
 If the deployment is still failing, check:
 
-1. **Personal Access Token Permissions**:
-   - Ensure your GH_PAT token has the `pages:write` and `pages:read` scopes
-   - Verify the token is added as a repository secret named `GH_PAT`
-
-2. **Workflow Permissions**:
+1. **Workflow Permissions**:
    - Check that your workflow has the correct permissions:
    ```yaml
    permissions:
@@ -36,7 +32,7 @@ If the deployment is still failing, check:
      id-token: write
    ```
 
-3. **Repository Settings**:
+2. **Repository Settings**:
    - Ensure GitHub Pages is set to deploy from GitHub Actions
    - Verify the repository is public (required for GitHub Pages)
 
@@ -58,5 +54,6 @@ After deployment:
 ## Common Issues and Solutions
 
 1. **404 Error**: Usually means GitHub Pages isn't enabled or properly configured
-2. **Permission Errors**: Ensure your PAT has the correct scopes
+2. **Permission Errors**: The workflow now uses the built-in GITHUB_TOKEN which should have proper permissions
 3. **Build Failures**: Check the workflow logs for specific error messages
+4. **SSH Authentication Errors**: Resolved by using GITHUB_TOKEN instead of SSH keys
