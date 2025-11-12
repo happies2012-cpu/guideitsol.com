@@ -282,6 +282,7 @@ async function migrateAll() {
   // Check if Supabase is available
   if (!await isSupabaseAvailable()) {
     console.error('Supabase is not available. Please check your connection and credentials.')
+    console.log('\n⚠️  Please check:\n1. Have you created a Supabase project at https://app.supabase.com/?\n2. Have you updated the SUPABASE_URL and SUPABASE_ANON_KEY in your .env file?\n3. Have you run the schema.sql script in your Supabase SQL editor?\n4. Is your internet connection working?')
     process.exit(1)
   }
   

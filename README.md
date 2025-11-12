@@ -100,7 +100,10 @@ The application supports two database backends:
 To use Supabase:
 1. Create a Supabase project at https://app.supabase.com/
 2. Update the environment variables in `.env`
-3. Run the migration script: `npm run migrate:supabase`
+3. Set up the database schema by running the SQL in `supabase/schema.sql` in your Supabase SQL editor
+4. Run the migration script: `npm run migrate:supabase`
+
+For detailed setup instructions, see `SUPABASE_SETUP_INSTRUCTIONS.md`
 
 ## Payment Integration
 
