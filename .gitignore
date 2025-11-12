@@ -38,4 +38,4 @@ yarn.lock
 
 # Large archives (prevent accidental commits)
 *.tar.gz
-guidesoft-website-final-source.tar.gz
+guidesoft-website-final-source.tar.gzdev.db
