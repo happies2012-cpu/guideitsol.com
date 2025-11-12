@@ -147,6 +147,12 @@ Key environment variables:
 - `npm run electron:build`: Build Electron desktop app
 - `npm run migrate:supabase`: Migrate data to Supabase
 
+## Additional Documentation
+
+- `NO_CODE_SOLUTIONS_PLAN.md`: Comprehensive plan for addressing application gaps using no-code/low-code approaches
+- `GITHUB_ACTIONS_SETUP.md`: Step-by-step guide for setting up GitHub Actions with Personal Access Token
+- `COMPLETION_SUMMARY.md`: Summary of completed tasks and next steps
+
 ## Contributing
 
 1. Fork the repository
