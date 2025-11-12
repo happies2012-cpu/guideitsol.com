@@ -1,21 +1,16 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-import { componentTagger } from "lovable-tagger";
 
-// https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  base: "/guideitsol.com/",
+// Static config for preview and production build; HTTPS disabled for local preview
+export default defineConfig({
+  base: "/",
   server: {
     host: "::",
     port: 8080,
-    https: {
-      key: './certs/server.key',
-      cert: './certs/server.crt'
-    },
     proxy: {
       '/api': {
-        target: 'https://localhost:3000',
+        target: 'http://localhost:3000',
         changeOrigin: true,
         secure: false,
         ws: true,
@@ -42,7 +37,7 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
     open: false,
   },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  plugins: [react()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -65,7 +60,7 @@ export default defineConfig(({ mode }) => ({
   build: {
     target: 'esnext',
     minify: 'esbuild',
-    sourcemap: mode === "development",
+    sourcemap: false,
     rollupOptions: {
       external: ['electron'],
       output: {
@@ -83,6 +78,6 @@ export default defineConfig(({ mode }) => ({
     assetsInlineLimit: 4096
   },
   esbuild: {
-    drop: mode === "production" ? ['console', 'debugger'] : []
+    drop: []
   }
-}));
+});
