@@ -24,6 +24,10 @@ cp -r dist/* WEBSITE-READY-FOR-DEPLOYMENT/
 echo "Updating robots.txt..."
 cp public/robots.txt WEBSITE-READY-FOR-DEPLOYMENT/
 
+# Copy favicon.png to ensure it's included
+echo "Copying favicon.png..."
+cp public/favicon.png WEBSITE-READY-FOR-DEPLOYMENT/
+
 # Ensure proper permissions
 echo "Setting proper permissions..."
 chmod -R 755 WEBSITE-READY-FOR-DEPLOYMENT/
