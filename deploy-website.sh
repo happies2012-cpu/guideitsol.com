@@ -5,7 +5,7 @@ echo "Starting Guidesoft website deployment..."
 
 # Build the frontend
 echo "Building frontend..."
-npm run build:prod
+npm run build
 
 # Check if build was successful
 if [ $? -ne 0 ]; then

@@ -53,7 +53,15 @@ try {
     copyDirRecursive(publicDir, distPublicDir);
   }
 
-  // 6. Copy prisma directory
+  // 6. Copy key assets to dist root for direct access
+  const faviconSrc = join(rootDir, 'public', 'favicon.ico');
+  const faviconDest = join(distDir, 'favicon.ico');
+  if (existsSync(faviconSrc)) {
+    console.log('Copying favicon to dist root...');
+    copyFileSync(faviconSrc, faviconDest);
+  }
+
+  // 7. Copy prisma directory
   const prismaDir = join(rootDir, 'prisma');
   const distPrismaDir = join(distDir, 'prisma');
   if (existsSync(prismaDir)) {
