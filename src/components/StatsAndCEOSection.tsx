@@ -191,44 +191,52 @@ const StatsAndCEOSection = () => {
                   </motion.div>
                 ))}
               </div>
-              
-              {/* Our Core Competencies Section */}
-              <div className="mt-16 w-full max-w-2xl">
-                <div className="text-center mb-12">
-                  <h3 className="text-3xl font-bold text-foreground mb-3">Our Core Competencies</h3>
-                  <p className="text-muted-foreground max-w-lg mx-auto">
-                    Specialized expertise driving digital innovation and transformation
-                  </p>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {coreCompetencies.map((competency, index) => (
-                    <motion.div
-                      key={index}
-                      variants={cardVariants}
-                      whileHover="hover"
-                      transition={{ delay: index * 0.1 }}
-                      className="group relative"
-                    >
-                      <Card className="bg-background/40 backdrop-blur-xl border border-primary/20 hover:border-primary/50 transition-all h-full overflow-hidden">
-                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        <CardContent className="p-6">
-                          <div className="flex items-start gap-4">
-                            <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end flex items-center justify-center text-white shadow-lg group-hover:shadow-xl transition-all duration-300">
-                              <competency.icon className="h-6 w-6" />
-                            </div>
-                            <div className="flex-1">
-                              <h4 className="font-bold text-foreground text-lg mb-2">{competency.title}</h4>
-                              <p className="text-muted-foreground text-sm">{competency.description}</p>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
             </motion.div>
+          </div>
+        </div>
+      </motion.section>
+      
+      {/* Our Core Competencies - Separated as a distinct section */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={containerVariants}
+        className="py-20 bg-muted/30"
+      >
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
+              Our Core Competencies
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              Specialized expertise driving digital innovation and transformation
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {coreCompetencies.map((competency, index) => (
+              <motion.div
+                key={index}
+                variants={cardVariants}
+                whileHover="hover"
+                transition={{ delay: index * 0.1 }}
+                className="group relative"
+              >
+                <Card className="bg-background/40 backdrop-blur-xl border border-primary/20 hover:border-primary/50 transition-all h-full overflow-hidden">
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <CardContent className="p-8">
+                    <div className="flex flex-col items-center text-center">
+                      <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end flex items-center justify-center text-white shadow-lg group-hover:shadow-xl transition-all duration-300 mb-6">
+                        <competency.icon className="h-8 w-8" />
+                      </div>
+                      <h3 className="font-bold text-foreground text-xl mb-4">{competency.title}</h3>
+                      <p className="text-muted-foreground">{competency.description}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </div>
         </div>
       </motion.section>
