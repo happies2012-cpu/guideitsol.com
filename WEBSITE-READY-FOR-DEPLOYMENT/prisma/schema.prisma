@@ -1,0 +1,700 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  String              @id @default(uuid())
+  email               String              @unique
+  password            String
+  name                String
+  role                Role                @default(USER)
+  avatar              String?
+  bio                 String?
+  location            String?
+  website             String?
+  linkedin            String?
+  twitter             String?
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+  pages               Page[]
+  aiTools             AITool[]
+  courses             Courses[]
+  enrollments         Enrollments[]
+  aiEnrollments       AIEnrollments[]
+  reviews             Review[]
+  learningPathEnrollments LearningPathEnrollment[]
+  userProgress        UserProgress[]
+  userStats           UserStats?
+  affiliate           Affiliate?
+  blogPosts           BlogPost[]
+  userNotes           UserNote[]
+  userBookmarks       UserBookmark[]
+  referralsAsReferrer Referral[]          @relation("referrer_relation")
+  referralsAsReferred Referral[]          @relation("referred_relation")
+  affiliateReferrals  AffiliateReferral[]  @relation("user_referrals_relation")
+  referredByAffiliate AffiliateReferral[]  @relation("referred_user_relation")
+  projects            Project[]
+  marketplaceListings MarketplaceListing[]
+  creativeAssets      CreativeAsset[]
+  userVerification    UserVerification?
+  componentListings   ComponentListing[]
+  userReputation      UserReputation?
+  codeReviews         CodeReview[]
+  domains             Domains[]
+  security            Security?
+  codes               Code[]
+
+  @@map("users")
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  USER
+}
+
+model Page {
+  id        String   @id @default(uuid())
+  title     String
+  slug      String   @unique
+  content   String
+  metaTitle String?
+  metaDesc  String?
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+}
+
+model Navigation {
+  id        String      @id @default(uuid())
+  title     String
+  href      String?
+  order     Int         @default(0)
+  parentId  String?
+  parent    Navigation? @relation("NavigationHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  children  Navigation[] @relation("NavigationHierarchy")
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model AITool {
+  id             String        @id @default(uuid())
+  name           String
+  description    String
+  category       String
+  icon           String?
+  url            String?
+  tags           String
+  featured       Boolean       @default(false)
+  usageCount     Int           @default(0)
+  rating         Float         @default(0)
+  reviewCount    Int           @default(0)
+  lastUpdated    DateTime      @default(now())
+  pricingModel   String?       // free, freemium, paid
+  monthlyPrice   Float?
+  annualPrice    Float?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  authorId       String
+  author         User          @relation(fields: [authorId], references: [id])
+  enrollments    AIEnrollments[]
+  reviews        Review[]
+
+  @@index([name])
+  @@index([category])
+  @@index([tags])
+  @@index([featured])
+  @@index([rating])
+  @@index([usageCount])
+}
+
+model FormSubmission {
+  id        String   @id @default(uuid())
+  formType  String
+  data      String
+  createdAt DateTime @default(now())
+}
+
+model Settings {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CourseCategories {
+  id        String   @id @default(uuid())
+  name      String
+  icon      String
+  color     String
+  createdAt DateTime @default(now())
+  courses   Courses[]
+}
+
+model Courses {
+  id             String        @id @default(uuid())
+  title          String
+  description    String
+  instructor     String
+  duration       String
+  level          String
+  categoryId     String
+  category       CourseCategories @relation(fields: [categoryId], references: [id])
+  thumbnailUrl   String?
+  videoUrl       String?
+  price          Float         @default(0)
+  rating         Float         @default(0)
+  studentsCount  Int           @default(0)
+  isPublished    Boolean       @default(false)
+  createdBy      String
+  creator        User          @relation(fields: [createdBy], references: [id])
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  lessons        CourseLessons[]
+  enrollments    Enrollments[]
+  reviews        Review[]
+  courseLessons  Lesson[]
+  userProgress   UserProgress[]
+
+  @@index([categoryId])
+  @@index([isPublished])
+  @@index([level])
+}
+
+model CourseLessons {
+  id          String   @id @default(uuid())
+  courseId    String
+  course      Courses  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title       String
+  description String
+  videoUrl    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([courseId])
+}
+
+model Enrollments {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  courseId   String
+  course     Courses  @relation(fields: [courseId], references: [id])
+  progress   Int      @default(0)
+  completed  Boolean  @default(false)
+  enrolledAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([courseId])
+  @@unique([userId, courseId])
+}
+
+// New model for AI tool enrollments
+model AIEnrollments {
+  id                  String   @id @default(uuid())
+  userId              String?
+  toolId              String
+  tool                AITool   @relation(fields: [toolId], references: [id])
+  name                String
+  email               String
+  phone               String
+  linkedin            String?
+  aadhar              String
+  pan                 String
+  message             String?
+  isVerified          Boolean  @default(false)
+  isPaid              Boolean  @default(false)
+  transactionId       String?
+  progress            Int      @default(0)
+  lastAccessed        DateTime @default(now())
+  certificateIssued   Boolean  @default(false)
+  certificateUrl      String?
+  enrolledAt          DateTime @default(now())
+  user                User?    @relation(fields: [userId], references: [id])
+
+  @@index([toolId])
+  @@index([email])
+  @@index([phone])
+  @@index([isVerified])
+  @@index([isPaid])
+  @@index([lastAccessed])
+}
+
+model Review {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  toolId      String?
+  tool        AITool?  @relation(fields: [toolId], references: [id])
+  courseId    String?
+  course      Courses? @relation(fields: [courseId], references: [id])
+  rating      Int      // 1-5 stars
+  title       String
+  content     String
+  helpfulCount Int     @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
+  @@index([toolId])
+  @@index([courseId])
+  @@index([rating])
+}
+
+model LearningPath {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  category    String
+  difficulty  String   // beginner, intermediate, advanced
+  duration    String   // estimated time to complete
+  thumbnail   String?
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  steps       LearningPathStep[]
+  enrollments LearningPathEnrollment[]
+
+  @@index([category])
+  @@index([difficulty])
+  @@index([isPublished])
+}
+
+model LearningPathStep {
+  id             String   @id @default(uuid())
+  pathId         String
+  path           LearningPath @relation(fields: [pathId], references: [id])
+  title          String
+  description    String
+  order          Int
+  contentType    String   // video, article, quiz, project
+  contentUrl     String?
+  duration       Int      // minutes
+  isMandatory    Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([pathId])
+  @@index([order])
+}
+
+model LearningPathEnrollment {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  pathId     String
+  path       LearningPath @relation(fields: [pathId], references: [id])
+  progress   Int      @default(0)
+  completed  Boolean  @default(false)
+  enrolledAt DateTime @default(now())
+  completedAt DateTime?
+
+  @@unique([userId, pathId])
+  @@index([userId])
+  @@index([pathId])
+  @@index([completed])
+}
+
+model Skill {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  category    String?
+  difficulty  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Lesson {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  content     String?
+  order       Int
+  duration    Int?
+  videoUrl    String?
+  courseId    String?
+  course      Courses? @relation(fields: [courseId], references: [id])
+  userProgress UserProgress[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([courseId])
+}
+
+model UserProgress {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  lessonId   String?
+  lesson     Lesson?  @relation(fields: [lessonId], references: [id])
+  courseId   String?
+  course     Courses? @relation(fields: [courseId], references: [id])
+  progress   Int      @default(0)
+  completed  Boolean  @default(false)
+  completedAt DateTime?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([userId])
+  @@index([lessonId])
+  @@index([courseId])
+}
+
+model Achievement {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  icon        String?
+  criteria    String?
+  createdAt   DateTime @default(now())
+}
+
+model UserStats {
+  id                   String   @id @default(uuid())
+  userId               String
+  user                 User     @relation(fields: [userId], references: [id])
+  totalCoursesCompleted Int     @default(0)
+  totalLessonsCompleted Int     @default(0)
+  totalHoursLearned    Int     @default(0)
+  currentStreak        Int     @default(0)
+  longestStreak        Int     @default(0)
+  lastActiveDate       DateTime?
+  achievements         String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  @@unique([userId])
+}
+
+model Affiliate {
+  id              String   @id @default(uuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+  affiliateCode   String   @unique
+  commissionRate  Float    @default(0.1)
+  totalEarnings   Float    @default(0)
+  totalReferrals  Int      @default(0)
+  isActive        Boolean  @default(true)
+  joinedAt        DateTime @default(now())
+  lastPaymentDate DateTime?
+  referrals       AffiliateReferral[]
+  payouts         AffiliatePayout[]
+
+  @@unique([userId])
+}
+
+model AffiliateReferral {
+  id              String   @id @default(uuid())
+  affiliateId     String
+  affiliate       Affiliate @relation(fields: [affiliateId], references: [id])
+  referredUserId  String?
+  referredUser    User?     @relation(fields: [referredUserId], references: [id], name: "referred_user_relation")
+  referredEmail   String?
+  commissionEarned Float   @default(0)
+  commissionPaid  Boolean  @default(false)
+  referralDate    DateTime @default(now())
+  conversionDate  DateTime?
+  userReferrals   User[]    @relation("user_referrals_relation")
+}
+
+model AffiliatePayout {
+  id            String   @id @default(uuid())
+  affiliateId   String
+  affiliate     Affiliate @relation(fields: [affiliateId], references: [id])
+  amount        Float
+  paymentMethod String?
+  paymentDetails String?
+  status        String   @default("pending")
+  payoutDate    DateTime?
+  createdAt     DateTime @default(now())
+}
+
+model BlogPost {
+  id        String   @id @default(uuid())
+  title     String
+  slug      String   @unique
+  content   String?
+  excerpt   String?
+  featuredImage String?
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  published Boolean  @default(false)
+  publishedAt DateTime?
+  tags      String?
+  views     Int      @default(0)
+  likes     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model EmailTemplate {
+  id        String   @id @default(uuid())
+  name      String
+  subject   String
+  body      String
+  type      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Lead {
+  id        String   @id @default(uuid())
+  email     String
+  name      String?
+  source    String?
+  status    String   @default("new")
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model EmailSequenceSubscriber {
+  id            String   @id @default(uuid())
+  email         String
+  sequenceId    String
+  status        String   @default("active")
+  subscribedAt  DateTime @default(now())
+  unsubscribedAt DateTime?
+}
+
+model UserNote {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  title     String
+  content   String?
+  isPrivate Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model UserBookmark {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  title     String
+  url       String
+  description String?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Referral {
+  id            String   @id @default(uuid())
+  referrerId    String
+  referrer      User     @relation(fields: [referrerId], references: [id], name: "referrer_relation")
+  referredId    String?
+  referred      User?    @relation(fields: [referredId], references: [id], name: "referred_relation")
+  referredEmail String?
+  rewardPoints  Int      @default(0)
+  claimed       Boolean  @default(false)
+  createdAt     DateTime @default(now())
+}
+
+model Project {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  status      String   @default("draft")
+  startDate   DateTime?
+  endDate     DateTime?
+  budget      Float?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  files       ProjectFile[]
+  codeReviews CodeReview[]
+}
+
+model ProjectFile {
+  id        String   @id @default(uuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id])
+  name      String
+  url       String
+  type      String?
+  size      Int?
+  uploadedAt DateTime @default(now())
+}
+
+model MarketplaceListing {
+  id         String   @id @default(uuid())
+  title      String
+  description String?
+  price      Float
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  categoryId String?
+  status     String   @default("active")
+  views      Int      @default(0)
+  likes      Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model CreativeAsset {
+  id        String   @id @default(uuid())
+  name      String
+  description String?
+  url       String
+  type      String
+  tags      String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  downloads Int      @default(0)
+  likes     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserVerification {
+  id            String   @id @default(uuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  documentType  String
+  documentUrl   String
+  status        String   @default("pending")
+  verifiedAt    DateTime?
+  rejectedReason String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([userId])
+}
+
+model BusinessPartner {
+  id             String   @id @default(uuid())
+  name           String
+  email          String
+  company        String?
+  website        String?
+  phone          String?
+  address        String?
+  partnershipType String?
+  startDate      DateTime @default(now())
+  endDate        DateTime?
+  isActive       Boolean  @default(true)
+  notes          String?
+}
+
+model AIAgent {
+  id           String   @id @default(uuid())
+  name         String
+  description  String?
+  capabilities String?
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model ComponentListing {
+  id        String   @id @default(uuid())
+  name      String
+  description String?
+  code      String?
+  previewUrl String?
+  categoryId String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  downloads Int      @default(0)
+  likes     Int      @default(0)
+  isPublic  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserReputation {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  points    Int      @default(0)
+  level     String   @default("beginner")
+  badges    String?
+  lastUpdated DateTime @default(now())
+
+  @@unique([userId])
+}
+
+model CodeReview {
+  id         String   @id @default(uuid())
+  projectId  String
+  project    Project  @relation(fields: [projectId], references: [id])
+  reviewerId String
+  reviewer   User     @relation(fields: [reviewerId], references: [id])
+  codeUrl    String
+  comments   String?
+  rating     Int?
+  status     String   @default("pending")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Analytics {
+  id            String   @id @default(uuid())
+  entityType    String
+  entityId      String
+  views         Int      @default(0)
+  uniqueViews   Int      @default(0)
+  conversionRate Float?
+  lastViewedAt  DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Domains {
+  id        String   @id @default(uuid())
+  name      String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  status    String   @default("active")
+  expiresAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Security {
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+  twoFactorEnabled Boolean @default(false)
+  backupCodes    String?
+  lastLoginAt    DateTime?
+  loginAttempts  Int      @default(0)
+  lockedUntil    DateTime?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([userId])
+}
+
+model Code {
+  id        String   @id @default(uuid())
+  title     String
+  description String?
+  content   String
+  language  String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  isPublic  Boolean  @default(false)
+  views     Int      @default(0)
+  likes     Int      @default(0)
+  forks     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
