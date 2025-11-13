@@ -3,7 +3,7 @@
 }
 
 guideitsol.com, www.guideitsol.com {
-  root * /usr/share/caddy
+  root * /app/dist
   file_server
   encode gzip
   

@@ -5,7 +5,7 @@ echo "Starting Guidesoft website deployment..."
 
 # Build the frontend
 echo "Building frontend..."
-npm run build
+npm run build:prod
 
 # Check if build was successful
 if [ $? -ne 0 ]; then
@@ -17,6 +17,7 @@ echo "Frontend build completed successfully!"
 
 # Copy built files to deployment directory
 echo "Copying files to deployment directory..."
+rm -rf WEBSITE-READY-FOR-DEPLOYMENT/*
 cp -r dist/* WEBSITE-READY-FOR-DEPLOYMENT/
 
 # Copy updated robots.txt
