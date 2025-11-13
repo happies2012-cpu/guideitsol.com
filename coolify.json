@@ -12,5 +12,17 @@
   },
   "env": {
     "NODE_ENV": "production"
-  }
+  },
+  "domains": [
+    {
+      "host": "guideitsol.com",
+      "port": 80,
+      "https": true
+    },
+    {
+      "host": "www.guideitsol.com",
+      "port": 80,
+      "https": true
+    }
+  ]
 }
