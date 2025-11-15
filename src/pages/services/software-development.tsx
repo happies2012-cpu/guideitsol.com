@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,8 +8,12 @@ import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { motion, Easing } from "framer-motion";
 import { Code, Smartphone, Search, Zap, CheckCircle, Users, Award, Calendar, ArrowRight, Lightbulb, Shield, TrendingUp, Target, Layout, Code2, TestTube2, UploadCloud, Server, Database, GitBranch, Cloud } from "lucide-react";
+import PageHero from "@/components/ui/PageHero";
+import LightboxForm from "@/components/ui/LightboxForm";
 
 const SoftwareDevelopment = () => {
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as Easing } },
@@ -82,40 +86,13 @@ const SoftwareDevelopment = () => {
         }}
       />
 
-      {/* 1. Hero Section */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={containerVariants}
-        className="relative py-32 overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-gradient-primary-start/10 via-gradient-primary-end/10 to-transparent" />
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 backdrop-blur-sm border border-primary/20 mb-8">
-            <Server className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Custom Software Solutions</span>
-          </div>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-            Software Development
-          </h1>
-          <p className="text-xl text-foreground max-w-3xl mx-auto mb-8">
-            Craft innovative, scalable, and robust software solutions tailored to your unique business challenges and goals.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact">
-              <Button size="lg" className="px-8 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity shadow-lg">
-                Get a Consultation
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-
-            </Link>
-            <Button variant="outline" size="lg" className="px-8 border-primary/30 hover:bg-primary/10 backdrop-blur-sm">
-              View Our Portfolio
-            </Button>
-          </div>
-        </div>
-      </motion.section>
+      {/* Hero Section with unique background */}
+      <PageHero
+        title="Software Development"
+        subtitle="Craft innovative, scalable, and robust software solutions tailored to your unique business challenges and goals."
+        ctaText="Get a Consultation"
+        pageType="software-development"
+      />
 
       {/* 2. Overview Section */}
       <motion.section
@@ -198,9 +175,9 @@ const SoftwareDevelopment = () => {
               { icon: Code, title: "Custom Application Development", desc: "Building bespoke software from the ground up to perfectly match your business processes and requirements." },
               { icon: Layout, title: "Enterprise Software Solutions", desc: "Developing robust and scalable enterprise-grade applications like ERP, CRM, and SCM systems." },
               { icon: Smartphone, title: "Mobile App Development", desc: "Creating native and cross-platform mobile applications for iOS and Android with exceptional user experiences." },
-              { icon: Cloud, title: "Cloud-Native Development", desc: "Designing and deploying applications optimized for cloud environments, leveraging services like AWS, Azure, and GCP." },
-              { icon: Database, title: "Database Design & Management", desc: "Expertise in designing efficient database architectures and managing complex data systems for optimal performance." },
-              { icon: GitBranch, title: "API Development & Integration", desc: "Building secure and scalable APIs and integrating third-party services to enhance your software ecosystem." }
+              { icon: Cloud, title: "Cloud-Native Development", desc: "Building applications designed for cloud environments with microservices, containers, and serverless architectures." },
+              { icon: Database, title: "Database Design & Management", desc: "Designing efficient database schemas and implementing robust data management solutions." },
+              { icon: GitBranch, title: "DevOps & CI/CD", desc: "Implementing continuous integration and deployment pipelines for faster, more reliable software delivery." }
             ].map((feature, index) => (
               <motion.div key={index} variants={cardVariants} whileHover="hover" transition={{ delay: index * 0.1 }}>
                 <Card className="bg-background/40 backdrop-blur-xl border-primary/20 hover:border-primary/50 transition-all h-full group">
@@ -229,19 +206,20 @@ const SoftwareDevelopment = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-              Our Software Development Process
+              Our Development Process
             </h2>
             <p className="text-xl text-foreground max-w-2xl mx-auto">
-              A proven methodology for delivering high-quality, impactful software solutions
+              A structured approach ensuring quality, efficiency, and client satisfaction at every step
             </p>
           </div>
           <div className="max-w-5xl mx-auto space-y-12">
             {[
-              { icon: Lightbulb, title: "Discovery & Planning", desc: "In-depth analysis of your requirements, defining scope, and creating a detailed project roadmap.", step: 1 },
-              { icon: Code2, title: "Design & Architecture", desc: "Crafting intuitive UI/UX designs and robust software architecture for optimal performance and scalability.", step: 2 },
-              { icon: TestTube2, title: "Development Sprints", desc: "Agile development cycles with continuous integration, regular updates, and client feedback incorporation.", step: 3 },
-              { icon: UploadCloud, title: "Quality Assurance & Testing", desc: "Rigorous testing phases including unit, integration, system, and user acceptance testing to ensure flawless operation.", step: 4 },
-              { icon: TrendingUp, title: "Deployment & Support", desc: "Seamless deployment to production environments, comprehensive training, and ongoing maintenance and support.", step: 5 }
+              { icon: Lightbulb, title: "Discovery & Planning", desc: "We collaborate closely to understand your business goals, challenges, and requirements to define a clear project scope and roadmap.", step: 1 },
+              { icon: Code2, title: "Design & Architecture", desc: "Our architects create detailed system designs, data models, and technology stack decisions to ensure scalability and maintainability.", step: 2 },
+              { icon: TestTube2, title: "Development", desc: "Agile development with clean code practices, version control, and regular progress updates to ensure alignment.", step: 3 },
+              { icon: UploadCloud, title: "Testing & QA", desc: "Comprehensive testing including unit, integration, performance, and security testing to deliver flawless results.", step: 4 },
+              { icon: TrendingUp, title: "Deployment & Launch", desc: "Smooth deployment to production environments with monitoring, training, and post-launch support for seamless go-live.", step: 5 },
+              { icon: Shield, title: "Maintenance & Support", desc: "Ongoing maintenance, updates, performance optimization, and feature enhancements based on user feedback.", step: 6 }
             ].map((step, index) => (
               <motion.div key={index} variants={cardVariants} whileHover="hover" className="flex items-center gap-8">
                 <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end rounded-full flex items-center justify-center text-white font-bold">
@@ -274,7 +252,7 @@ const SoftwareDevelopment = () => {
               Our Software Development Portfolio
             </h2>
             <p className="text-xl text-foreground max-w-2xl mx-auto">
-              Showcasing successful software projects that drive real business impact
+              Real results from real projects – see how we've helped businesses thrive with custom software solutions
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -283,7 +261,7 @@ const SoftwareDevelopment = () => {
                 <Card className="bg-background/40 backdrop-blur-xl border-primary/20 hover:border-primary/50 transition-all h-full group">
                   <CardContent className="p-6">
                     <div className="space-y-4">
-                      <h3 className="text-xl font-semibold mb-2 text-foreground group-hover:text-primary">{project.title}</h3>
+                      <h3 className="text-xl font-semibold text-foreground group-hover:text-primary">{project.title}</h3>
                       <p className="text-foreground/90">{project.description}</p>
                       <div className="flex flex-wrap gap-2">
                         {project.tech.map((tag) => (
@@ -323,14 +301,14 @@ const SoftwareDevelopment = () => {
               Software Development Insights
             </h2>
             <p className="text-xl text-foreground max-w-2xl mx-auto">
-              Stay informed with our latest articles on software trends and best practices
+              Stay ahead with our latest articles and trends in software technology
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { title: "The Rise of Low-Code/No-Code Platforms in Enterprise", excerpt: "Explore how these platforms are democratizing software creation and accelerating digital transformation.", date: "April 1, 2024" },
-              { title: "Microservices vs. Monolith: Choosing the Right Architecture", excerpt: "A deep dive into architectural patterns and their impact on scalability, maintainability, and development speed.", date: "March 28, 2024" },
-              { title: "Securing Your Software: Best Practices for Modern Applications", excerpt: "Essential security measures and strategies to protect your applications from evolving cyber threats.", date: "March 25, 2024" }
+              { title: "Top 10 Software Development Trends for 2024", excerpt: "Explore emerging technologies like AI integration, microservices, and low-code platforms shaping the future.", date: "March 15, 2024" },
+              { title: "Choosing the Right Technology Stack", excerpt: "A comprehensive guide to selecting frameworks, languages, and tools that align with your business goals.", date: "March 12, 2024" },
+              { title: "Best Practices for Software Security", excerpt: "Essential security measures every development team should implement to protect applications and data.", date: "March 10, 2024" }
             ].map((blog, index) => (
               <motion.div key={index} variants={cardVariants} whileHover="hover">
                 <Card className="bg-background/40 backdrop-blur-xl border-primary/20 hover:border-primary/50 transition-all h-full group cursor-pointer">
@@ -396,9 +374,9 @@ const SoftwareDevelopment = () => {
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
-                  { icon: Code, number: "200+", label: "Ready Workflow with AI" },
-                  { icon: Users, number: "100+", label: "Satisfied Clients" },
-                  { icon: Award, number: "98%", label: "Client Satisfaction" }
+                  { icon: Code, number: "100+", label: "Ready Workflow with AI" },
+                  { icon: Users, number: "50+", label: "Satisfied Clients" },
+                  { icon: Award, number: "95%", label: "Client Retention" }
                 ].map((stat, index) => (
                   <motion.div key={index} variants={cardVariants} className="text-center p-6 bg-background/40 rounded-lg border border-primary/20">
                     <stat.icon className="h-8 w-8 text-primary mx-auto mb-2" />
@@ -440,16 +418,26 @@ const SoftwareDevelopment = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-br from-gradient-primary-start/20 via-gradient-primary-end/20 to-cyan-500/20" />
         <div className="container mx-auto px-4 text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Build Your Next Software?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">Let's collaborate to create powerful, custom software that drives your business forward.</p>
-          <Link to="/contact">
-            <Button size="lg" className="px-8 bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-lg">
-              Start Your Project
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Transform Your Business with Custom Software?</h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto">Let's create a powerful software solution that drives efficiency and innovation for your organization.</p>
+          <Button 
+            size="lg" 
+            className="px-8 bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-lg"
+            onClick={() => setIsLightboxOpen(true)}
+          >
+            Start Your Project
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
         </div>
       </motion.section>
+      
+      {/* Lightbox Form */}
+      <LightboxForm
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        title="Software Development Inquiry"
+        serviceType="Software Development"
+      />
     </div>
   );
 };

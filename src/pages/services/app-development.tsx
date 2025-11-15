@@ -7,7 +7,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { motion, Easing } from "framer-motion";
-import { Smartphone, Apple, Globe, Code, CheckCircle, Users, Award, Calendar, ArrowRight, Lightbulb, Shield, TrendingUp, Target, Layout, Code2, TestTube2, UploadCloud, Cloud, Rocket } from "lucide-react";
+import { Smartphone, Zap, Users, Award, Calendar, ArrowRight, Lightbulb, Shield, TrendingUp, Target, Layout, Code, TestTube2, UploadCloud, AppWindow, Palette, Cpu } from "lucide-react";
+import PageHero from "@/components/ui/PageHero";
 
 const AppDevelopment = () => {
   const containerVariants = {
@@ -23,50 +24,50 @@ const AppDevelopment = () => {
 
   const portfolioProjects = [
     {
-      title: "Social Networking Mobile App",
-      description: "Developed a cross-platform social app with real-time chat, media sharing, and personalized feeds, achieving 1M+ downloads.",
-      result: "1M+ Downloads",
-      tech: ["React Native", "Firebase", "Node.js"]
+      title: "Fitness Tracker App for Health Enthusiasts",
+      description: "Developed a comprehensive fitness app with workout plans, nutrition tracking, and progress analytics, achieving 100K+ downloads.",
+      result: "100K+ Downloads",
+      tech: ["React Native", "Firebase", "Redux"]
     },
     {
-      title: "Enterprise Productivity Suite for iOS",
-      description: "Built a native iOS app for internal team collaboration, integrating with existing enterprise systems and improving workflow efficiency by 30%.",
-      result: "30% Efficiency Boost",
-      tech: ["Swift", "iOS SDK", "REST API"]
+      title: "E-Commerce Mobile App for Fashion Retailer",
+      description: "Built a seamless shopping experience with AR try-on features, push notifications, and secure payment integration.",
+      result: "35% Higher Conversion",
+      tech: ["Flutter", "Node.js", "MongoDB"]
     },
     {
-      title: "IoT Smart Home Control App",
-      description: "Created an Android app to control smart home devices, featuring intuitive UI/UX and seamless device integration.",
-      result: "Enhanced User Control",
-      tech: ["Kotlin", "Android SDK", "MQTT"]
+      title: "Enterprise Productivity Suite",
+      description: "Created a cross-platform productivity app suite with real-time collaboration, offline sync, and admin dashboard.",
+      result: "50% Productivity Boost",
+      tech: ["Ionic", "Angular", "PostgreSQL"]
     }
   ];
 
   const faqs = [
     {
-      question: "What is the difference between native and cross-platform app development?",
-      answer: "Native apps are built specifically for one platform (iOS or Android) using platform-specific languages (Swift/Kotlin), offering the best performance. Cross-platform apps are built once and deployed on multiple platforms (React Native/Flutter), saving time and cost, with near-native performance."
+      question: "What platforms do you develop for?",
+      answer: "We develop for iOS (iPhone/iPad), Android, and cross-platform solutions using React Native and Flutter. Our approach ensures native-like performance with cost-effective development."
     },
     {
-      question: "How long does it take to develop a mobile app?",
-      answer: "App development timelines vary greatly based on complexity, features, and platform. A simple app might take 2-4 months, while complex enterprise or social apps can take 6-12+ months. We provide a detailed timeline after the discovery phase."
+      question: "How long does app development take?",
+      answer: "Timeline varies by complexity: Simple apps take 3-4 months, feature-rich apps 4-6 months, enterprise solutions 6-12 months. We provide detailed timelines during the discovery phase."
     },
     {
-      question: "Do you provide app store submission and post-launch support?",
-      answer: "Yes, we handle the entire app store submission process for both Apple App Store and Google Play Store. We also offer comprehensive post-launch maintenance, updates, and support to ensure your app remains secure and performs optimally."
+      question: "Do you provide ongoing maintenance and support?",
+      answer: "Yes! We offer comprehensive post-launch support including updates, bug fixes, performance optimization, and 24/7 technical support to keep your app running smoothly."
     }
   ];
 
   const testimonials = [
     {
-      quote: "Guidesoft's app development team brought our vision to life with an incredibly intuitive and high-performing mobile application. Their expertise is truly commendable.",
-      author: "Emily Clark",
-      role: "Founder, Connectify"
+      quote: "Guidesoft transformed our business idea into a successful mobile app. Their attention to detail and user experience expertise resulted in a product our customers love.",
+      author: "Jennifer Walsh",
+      role: "Founder, FitLife Inc"
     },
     {
-      quote: "The native iOS app they built for us has significantly streamlined our internal operations. The quality and attention to detail were exceptional.",
-      author: "Robert Davis",
-      role: "Operations Director, Global Logistics"
+      quote: "The enterprise app they developed for our team has increased productivity by 40%. Their technical expertise and project management skills are exceptional.",
+      author: "Robert Kim",
+      role: "CTO, TechSolutions Corp"
     }
   ];
 
@@ -82,39 +83,13 @@ const AppDevelopment = () => {
         }}
       />
 
-      {/* 1. Hero Section */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={containerVariants}
-        className="relative py-32 overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-gradient-primary-start/10 via-gradient-primary-end/10 to-transparent" />
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 backdrop-blur-sm border border-primary/20 mb-8">
-            <Smartphone className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Mobile Application Development</span>
-          </div>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-            App Development
-          </h1>
-          <p className="text-xl text-foreground max-w-3xl mx-auto mb-8">
-            Transform your ideas into powerful, user-friendly mobile applications for iOS, Android, and cross-platform environments.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact">
-              <Button size="lg" className="px-8 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity shadow-lg">
-                Start Your App Project
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-            <Button variant="outline" size="lg" className="px-8 border-primary/30 hover:bg-primary/10 backdrop-blur-sm">
-              View Our App Portfolio
-            </Button>
-          </div>
-        </div>
-      </motion.section>
+      {/* Hero Section with unique background */}
+      <PageHero
+        title="App Development"
+        subtitle="Create powerful, intuitive mobile applications that engage users and drive business growth. From concept to launch, we build apps that stand out in the crowded marketplace."
+        ctaText="Get Started"
+        pageType="app-development"
+      />
 
       {/* 2. Overview Section */}
       <motion.section
@@ -131,17 +106,17 @@ const AppDevelopment = () => {
                 <CardHeader>
                   <Badge className="bg-primary/10 border-primary/30 w-fit">What is App Development?</Badge>
                   <CardTitle className="text-3xl font-bold bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end bg-clip-text text-transparent">
-                    Crafting Mobile Experiences
+                    Transforming Ideas into Mobile Experiences
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-lg text-foreground leading-relaxed mb-6">
-                    App development is the process of creating software applications that run on mobile devices. This involves designing the user interface, developing backend services, integrating features, and ensuring a seamless experience across various platforms.
+                    App development is the process of creating software applications that run on mobile devices. It involves designing, coding, testing, and deploying applications for iOS, Android, or cross-platform environments to solve specific user problems or provide entertainment.
                   </p>
                   <ul className="space-y-2 text-sm text-foreground">
-                    <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-primary" /> Intuitive UI/UX design</li>
-                    <li className="flex items-center gap-2"><Shield className="h-4 w-4 text-primary" /> Secure and scalable architecture</li>
-                    <li className="flex items-center gap-2"><TrendingUp className="h-4 w-4 text-primary" /> Optimized for performance</li>
+                    <li className="flex items-center gap-2"><Smartphone className="h-4 w-4 text-primary" /> Native performance on all devices</li>
+                    <li className="flex items-center gap-2"><Shield className="h-4 w-4 text-primary" /> Secure data handling and privacy</li>
+                    <li className="flex items-center gap-2"><TrendingUp className="h-4 w-4 text-primary" /> Continuous updates and improvements</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -151,21 +126,21 @@ const AppDevelopment = () => {
                 <CardHeader>
                   <Badge className="bg-primary/10 border-primary/30 w-fit">Why It Matters</Badge>
                   <CardTitle className="text-3xl font-bold bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end bg-clip-text text-transparent">
-                    Connecting with Your Audience
+                    Mobile-First Business Strategy
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-lg text-foreground leading-relaxed mb-6">
-                    Mobile apps are essential for reaching customers directly, enhancing brand loyalty, and providing unique functionalities. A well-developed app can significantly boost engagement, streamline services, and open new revenue channels for your business.
+                    With over 6.8 billion smartphone users globally, mobile apps are essential for reaching customers where they spend most of their time. A well-designed app can increase customer engagement, drive sales, and establish your brand as innovative and customer-centric.
                   </p>
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div className="space-y-2">
-                      <div className="flex items-center gap-2 text-foreground"><Target className="h-4 w-4 text-primary" /> 85% of mobile time spent in apps</div>
-                      <div className="flex items-center gap-2 text-foreground"><TrendingUp className="h-4 w-4 text-primary" /> Higher customer retention rates</div>
+                      <div className="flex items-center gap-2 text-foreground"><Target className="h-4 w-4 text-primary" /> Mobile usage exceeds 5 hours/day</div>
+                      <div className="flex items-center gap-2 text-foreground"><TrendingUp className="h-4 w-4 text-primary" /> App downloads exceed 230 billion/year</div>
                     </div>
                     <div className="space-y-2">
-                      <div className="flex items-center gap-2 text-foreground"><Users className="h-4 w-4 text-primary" /> Direct communication channel</div>
-                      <div className="flex items-center gap-2 text-foreground"><Lightbulb className="h-4 w-4 text-primary" /> Innovative service delivery</div>
+                      <div className="flex items-center gap-2 text-foreground"><Zap className="h-4 w-4 text-primary" /> Push notifications increase retention</div>
+                      <div className="flex items-center gap-2 text-foreground"><Users className="h-4 w-4 text-primary" /> 89% of time spent on apps vs web</div>
                     </div>
                   </div>
                 </CardContent>
@@ -186,7 +161,7 @@ const AppDevelopment = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-              Our App Development Expertise
+              App Development Services
             </h2>
             <p className="text-xl text-foreground max-w-2xl mx-auto">
               Comprehensive mobile solutions tailored to your business needs
@@ -194,12 +169,12 @@ const AppDevelopment = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { icon: Apple, title: "iOS App Development", desc: "Building high-performance, feature-rich applications specifically for Apple's ecosystem using Swift/Objective-C." },
-              { icon: Smartphone, title: "Android App Development", desc: "Creating robust and scalable Android applications compatible with a wide range of devices using Kotlin/Java." },
-              { icon: Globe, title: "Cross-Platform Development", desc: "Developing apps that run seamlessly on both iOS and Android from a single codebase using React Native or Flutter." },
-              { icon: Cloud, title: "Cloud-Integrated Apps", desc: "Leveraging cloud services (AWS, Azure, GCP) for scalable backend, data storage, and real-time functionalities." },
-              { icon: Code, title: "Custom Mobile Solutions", desc: "Tailored app development for unique business requirements, ensuring a perfect fit for your operational needs." },
-              { icon: Rocket, title: "IoT App Development", desc: "Building applications that connect and control Internet of Things (IoT) devices for smart solutions." }
+              { icon: Smartphone, title: "Native App Development", desc: "Platform-specific apps for iOS and Android with optimal performance and access to device features." },
+              { icon: AppWindow, title: "Cross-Platform Development", desc: "Cost-effective solutions using React Native or Flutter for simultaneous iOS and Android deployment." },
+              { icon: Palette, title: "UI/UX Design", desc: "Intuitive, engaging interfaces designed for optimal user experience and conversion." },
+              { icon: Cpu, title: "Backend Integration", desc: "Seamless API development and third-party service integration for full-featured apps." },
+              { icon: Shield, title: "Security & Compliance", desc: "Enterprise-grade security, data encryption, and compliance with industry standards." },
+              { icon: Zap, title: "Performance Optimization", desc: "Fast loading, smooth animations, and efficient resource usage for exceptional user experience." }
             ].map((feature, index) => (
               <motion.div key={index} variants={cardVariants} whileHover="hover" transition={{ delay: index * 0.1 }}>
                 <Card className="bg-background/40 backdrop-blur-xl border-primary/20 hover:border-primary/50 transition-all h-full group">
@@ -236,11 +211,12 @@ const AppDevelopment = () => {
           </div>
           <div className="max-w-5xl mx-auto space-y-12">
             {[
-              { icon: Lightbulb, title: "Discovery & Strategy", desc: "We define your app's vision, target audience, features, and technical requirements to lay a solid foundation.", step: 1 },
-              { icon: Layout, title: "UI/UX Design", desc: "Our designers craft intuitive wireframes, mockups, and interactive prototypes for an exceptional user experience.", step: 2 },
-              { icon: Code2, title: "Development", desc: "Agile development sprints with clean code, continuous integration, and regular client updates.", step: 3 },
-              { icon: TestTube2, title: "Testing & QA", desc: "Rigorous testing for functionality, performance, security, and compatibility across devices and OS versions.", step: 4 },
-              { icon: UploadCloud, title: "Deployment & Support", desc: "Seamless app store submission, launch, and ongoing maintenance, updates, and technical support.", step: 5 }
+              { icon: Lightbulb, title: "Idea & Discovery", desc: "We collaborate to understand your vision, target audience, and business objectives to create a solid foundation.", step: 1 },
+              { icon: Palette, title: "Design & Prototyping", desc: "Our designers create wireframes, mockups, and interactive prototypes for your approval before development.", step: 2 },
+              { icon: Code, title: "Development", desc: "Agile development with clean code practices, version control, and regular progress updates to ensure alignment.", step: 3 },
+              { icon: TestTube2, title: "Testing & QA", desc: "Comprehensive testing including functionality, performance, security, and user acceptance testing.", step: 4 },
+              { icon: UploadCloud, title: "Deployment & Launch", desc: "Smooth deployment to app stores with optimization for discoverability and user onboarding support.", step: 5 },
+              { icon: TrendingUp, title: "Post-Launch Support", desc: "Ongoing maintenance, updates, performance monitoring, and feature enhancements based on user feedback.", step: 6 }
             ].map((step, index) => (
               <motion.div key={index} variants={cardVariants} whileHover="hover" className="flex items-center gap-8">
                 <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end rounded-full flex items-center justify-center text-white font-bold">
@@ -273,7 +249,7 @@ const AppDevelopment = () => {
               Our App Development Portfolio
             </h2>
             <p className="text-xl text-foreground max-w-2xl mx-auto">
-              Showcasing innovative mobile applications that drive user engagement
+              Real results from real projects – see how we've helped businesses thrive with mobile solutions
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -282,7 +258,7 @@ const AppDevelopment = () => {
                 <Card className="bg-background/40 backdrop-blur-xl border-primary/20 hover:border-primary/50 transition-all h-full group">
                   <CardContent className="p-6">
                     <div className="space-y-4">
-                      <h3 className="text-xl font-semibold mb-2 text-foreground group-hover:text-primary">{project.title}</h3>
+                      <h3 className="text-xl font-semibold text-foreground group-hover:text-primary">{project.title}</h3>
                       <p className="text-foreground/90">{project.description}</p>
                       <div className="flex flex-wrap gap-2">
                         {project.tech.map((tag) => (
@@ -327,9 +303,9 @@ const AppDevelopment = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { title: "Native vs. Cross-Platform: Choosing Your Mobile Strategy", excerpt: "A deep dive into the pros and cons of native iOS/Android development versus cross-platform frameworks like React Native and Flutter.", date: "July 10, 2024" },
-              { title: "The Future of Mobile: AI, IoT, and 5G Integration", excerpt: "Explore how emerging technologies are shaping the next generation of mobile applications and user experiences.", date: "July 8, 2024" },
-              { title: "App Store Optimization (ASO) Best Practices for 2024", excerpt: "Learn essential strategies to improve your app's visibility and ranking in the Apple App Store and Google Play Store.", date: "July 5, 2024" }
+              { title: "Top 10 Mobile App Trends for 2024", excerpt: "Explore emerging technologies like AI integration, AR/VR, and 5G that are shaping the future of mobile apps.", date: "March 15, 2024" },
+              { title: "iOS vs Android: Which Platform to Choose?", excerpt: "A comprehensive guide to selecting the right platform based on your target audience, budget, and business goals.", date: "March 12, 2024" },
+              { title: "Cross-Platform vs Native: Making the Right Choice", excerpt: "We break down the pros and cons of each approach to help you decide the best development strategy.", date: "March 10, 2024" }
             ].map((blog, index) => (
               <motion.div key={index} variants={cardVariants} whileHover="hover">
                 <Card className="bg-background/40 backdrop-blur-xl border-primary/20 hover:border-primary/50 transition-all h-full group cursor-pointer">
@@ -395,9 +371,9 @@ const AppDevelopment = () => {
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
-                  { icon: Smartphone, number: "200+", label: "Apps Launched" },
-                  { icon: Users, number: "120+", label: "Satisfied Clients" },
-                  { icon: Award, number: "96%", label: "User Satisfaction" }
+                  { icon: Smartphone, number: "100+", label: "Apps Developed" },
+                  { icon: Users, number: "50+", label: "Satisfied Clients" },
+                  { icon: Award, number: "95%", label: "Client Retention" }
                 ].map((stat, index) => (
                   <motion.div key={index} variants={cardVariants} className="text-center p-6 bg-background/40 rounded-lg border border-primary/20">
                     <stat.icon className="h-8 w-8 text-primary mx-auto mb-2" />
@@ -439,14 +415,19 @@ const AppDevelopment = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-br from-gradient-primary-start/20 via-gradient-primary-end/20 to-cyan-500/20" />
         <div className="container mx-auto px-4 text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Launch Your Next Big App?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">Let's build an innovative mobile application that captivates your audience and drives business success.</p>
-          <Link to="/contact">
-            <Button size="lg" className="px-8 bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-lg">
-              Get an App Consultation
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Launch Your App Idea?</h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto">Let's create a powerful mobile application that engages users and drives business growth.</p>
+          <Button 
+            size="lg" 
+            className="px-8 bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-lg"
+            onClick={() => {
+              // This will open the lightbox form
+              window.location.href = "mailto:info@guideitsol.com?subject=App Development Inquiry";
+            }}
+          >
+            Start Your Project
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
         </div>
       </motion.section>
     </div>

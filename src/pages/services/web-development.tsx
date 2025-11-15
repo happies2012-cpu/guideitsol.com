@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,8 +8,12 @@ import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { motion, Easing } from "framer-motion";
 import { Code, Smartphone, Search, Zap, CheckCircle, Users, Award, Calendar, ArrowRight, Lightbulb, Shield, TrendingUp, Target, Layout, Code2, TestTube2, UploadCloud } from "lucide-react";
+import PageHero from "@/components/ui/PageHero";
+import LightboxForm from "@/components/ui/LightboxForm";
 
 const WebDevelopment = () => {
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as Easing } },
@@ -82,39 +86,13 @@ const WebDevelopment = () => {
         }}
       />
 
-      {/* 1. Hero Section */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={containerVariants}
-        className="relative py-32 overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-gradient-primary-start/10 via-gradient-primary-end/10 to-transparent" />
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 backdrop-blur-sm border border-primary/20 mb-8">
-            <Code className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Web Development Services</span>
-          </div>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-            Web Development
-          </h1>
-          <p className="text-xl text-foreground max-w-3xl mx-auto mb-8">
-            Build responsive, secure, and high-performing websites for your business. From custom solutions to enterprise platforms, we craft digital experiences that drive growth.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact">
-              <Button size="lg" className="px-8 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity shadow-lg">
-                Get Started
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-            <Button variant="outline" size="lg" className="px-8 border-primary/30 hover:bg-primary/10 backdrop-blur-sm">
-              View Portfolio
-            </Button>
-          </div>
-        </div>
-      </motion.section>
+      {/* Hero Section with unique background */}
+      <PageHero
+        title="Web Development"
+        subtitle="Build responsive, secure, and high-performing websites for your business. From custom solutions to enterprise platforms, we craft digital experiences that drive growth."
+        ctaText="Get Started"
+        pageType="web-development"
+      />
 
       {/* 2. Overview Section */}
       <motion.section
@@ -441,14 +419,24 @@ const WebDevelopment = () => {
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Build Your Digital Presence?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">Let's create a stunning, high-performing website that drives business growth.</p>
-          <Link to="/contact">
-            <Button size="lg" className="px-8 bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-lg">
-              Start Your Project
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
+          <Button 
+            size="lg" 
+            className="px-8 bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-lg"
+            onClick={() => setIsLightboxOpen(true)}
+          >
+            Start Your Project
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
         </div>
       </motion.section>
+      
+      {/* Lightbox Form */}
+      <LightboxForm
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        title="Web Development Inquiry"
+        serviceType="Web Development"
+      />
     </div>
   );
 };

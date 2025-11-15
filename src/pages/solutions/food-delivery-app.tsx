@@ -1,13 +1,16 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, Easing } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Truck, Code, CreditCard, Shield, Zap, Target } from 'lucide-react';
+import { Truck, Code, CreditCard, Shield, Zap, Target, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { getHeroImage } from "@/lib/image-utils";
+import PageHero from '@/components/ui/PageHero';
+import LightboxForm from '@/components/ui/LightboxForm';
 
 const FoodDeliveryApp = () => {
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as Easing } },
@@ -60,36 +63,13 @@ const FoodDeliveryApp = () => {
       variants={containerVariants}
       className="min-h-screen bg-background"
     >
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-primary/10 to-secondary/10">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div variants={containerVariants} className="space-y-6">
-              <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Food Delivery App Solution
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-lg">
-                Guidesoft builds comprehensive food delivery applications that connect restaurants with customers, featuring seamless ordering, real-time tracking, and efficient delivery management.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="px-8 bg-gradient-to-r from-primary to-secondary">
-                  Get a Quote
-                </Button>
-                <Button size="lg" variant="outline">
-                  View Portfolio
-                </Button>
-              </div>
-            </motion.div>
-            <motion.div variants={containerVariants} className="relative">
-              <img
-                src={getHeroImage('food-delivery-app')} // Replace with actual food delivery app mockup image
-                alt="Food Delivery App Solution"
-                className="w-full h-96 object-cover rounded-2xl shadow-2xl"
-              />
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      {/* Hero Section with unique background */}
+      <PageHero
+        title="Food Delivery App Solution"
+        subtitle="Guidesoft builds comprehensive food delivery applications that connect restaurants with customers, featuring seamless ordering, real-time tracking, and efficient delivery management."
+        ctaText="Get a Quote"
+        pageType="food-delivery-app"
+      />
 
       {/* Features Section */}
       <section className="py-20 bg-background">
@@ -145,11 +125,24 @@ const FoodDeliveryApp = () => {
           <p className="text-xl mb-8 max-w-2xl mx-auto">
             Build your food delivery platform with Guidesoft's expertise. From concept to launch, we handle it all.
           </p>
-          <Button size="lg" className="px-8 text-lg">
+          <Button 
+            size="lg" 
+            className="px-8 text-lg bg-white text-primary hover:bg-gray-100"
+            onClick={() => setIsLightboxOpen(true)}
+          >
             Start Your Project
+            <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </div>
       </section>
+      
+      {/* Lightbox Form */}
+      <LightboxForm
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        title="Food Delivery App Solution Inquiry"
+        serviceType="Food Delivery App Solution"
+      />
     </motion.div>
   );
 };

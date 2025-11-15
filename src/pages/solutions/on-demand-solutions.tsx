@@ -1,15 +1,19 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { motion, Easing } from "framer-motion";
-import { Truck, Smartphone, Clock, Users, Award, Calendar, ArrowRight, Lightbulb, Shield, TrendingUp, Target, Code2, TestTube2, UploadCloud, Package, MessageSquare, Video, Coffee, Plane, Building, CalendarCheck, CheckCircle } from "lucide-react";
+import { Truck, Zap, Users, Award, Calendar, ArrowRight, Lightbulb, Shield, TrendingUp, Target, Layout, Code, TestTube2, UploadCloud, Smartphone, Globe, CheckCircle } from "lucide-react";
+import PageHero from "@/components/ui/PageHero";
+import LightboxForm from "@/components/ui/LightboxForm";
 
 const OnDemandSolutions = () => {
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as Easing } },
@@ -23,50 +27,50 @@ const OnDemandSolutions = () => {
 
   const portfolioProjects = [
     {
-      title: "Food Delivery App (On-Demand)",
-      description: "Developed a comprehensive food delivery platform with real-time tracking, secure payments, and restaurant management features.",
-      result: "200% User Growth",
-      tech: ["React Native", "Node.js", "MongoDB", "Stripe"]
+      title: "Ride-Sharing Platform for Urban Mobility",
+      description: "Developed a comprehensive ride-sharing solution with real-time tracking, dynamic pricing, and multi-language support, serving 500K+ users.",
+      result: "500K+ Users",
+      tech: ["React Native", "Node.js", "MongoDB", "Google Maps API"]
     },
     {
-      title: "Ride-Sharing Application",
-      description: "Built a scalable ride-sharing solution with GPS integration, dynamic pricing, and driver/passenger apps.",
-      result: "10K+ Daily Rides",
-      tech: ["Flutter", "Firebase", "Google Maps API"]
+      title: "Food Delivery App for Restaurant Chain",
+      description: "Created a white-label food delivery platform with restaurant management dashboard, real-time order tracking, and integrated payments.",
+      result: "40% Higher Orders",
+      tech: ["Flutter", "Firebase", "Stripe API", "Redis"]
     },
     {
-      title: "On-Demand Home Services Platform",
-      description: "Created a platform connecting users with local service providers for cleaning, repairs, and maintenance, with instant booking.",
-      result: "Streamlined Service Booking",
-      tech: ["Angular", "Laravel", "PostgreSQL"]
+      title: "Home Services Booking Platform",
+      description: "Built a multi-service booking platform for home maintenance, cleaning, and repair services with service provider management.",
+      result: "35% Service Growth",
+      tech: ["Vue.js", "Express", "PostgreSQL", "Twilio"]
     }
   ];
 
   const faqs = [
     {
-      question: "What are On-Demand Solutions?",
-      answer: "On-Demand Solutions are applications or platforms that provide immediate access to services or products, typically through a mobile app. Examples include food delivery, ride-sharing, and instant booking services."
+      question: "What types of on-demand solutions do you develop?",
+      answer: "We develop a wide range of on-demand solutions including ride-sharing, food delivery, home services, healthcare, e-commerce, and specialized industry applications. Our platforms include mobile apps, web dashboards, and backend systems."
     },
     {
-      question: "What technologies do you use for On-Demand apps?",
-      answer: "We leverage modern mobile and web technologies like React Native, Flutter, Node.js, Python, and cloud platforms (AWS, Azure, GCP) to build robust and scalable on-demand solutions."
+      question: "How long does it take to develop an on-demand solution?",
+      answer: "Timeline varies by complexity: MVP takes 3-4 months, feature-rich platforms 6-8 months, enterprise solutions 8-12 months. We provide detailed timelines during the discovery phase."
     },
     {
-      question: "How do you ensure scalability for peak demand?",
-      answer: "We design our on-demand solutions with cloud-native architectures, auto-scaling capabilities, and efficient database management to handle sudden spikes in user traffic and service requests without performance degradation."
+      question: "Do you provide ongoing maintenance and support?",
+      answer: "Yes! We offer comprehensive post-launch support including updates, bug fixes, performance optimization, and 24/7 technical support to keep your platform running smoothly."
     }
   ];
 
   const testimonials = [
     {
-      quote: "Guidesoft's on-demand food delivery app was a game-changer for our business. The seamless user experience and robust backend handled our rapid growth effortlessly.",
-      author: "Chef Antoine",
-      role: "Founder, Gourmet Eats"
+      quote: "Guidesoft transformed our business idea into a successful on-demand platform. Their technical expertise and understanding of market needs resulted in a product our customers love.",
+      author: "Michael Rodriguez",
+      role: "Founder, UrbanRide"
     },
     {
-      quote: "The ride-sharing platform they developed is incredibly reliable and user-friendly. It has allowed us to quickly establish a strong presence in a competitive market.",
-      author: "Maria Rodriguez",
-      role: "CEO, CityRide"
+      quote: "The food delivery platform they developed for our restaurant chain increased our online orders by 60%. Their attention to detail and user experience is exceptional.",
+      author: "Sarah Johnson",
+      role: "Operations Director, GourmetExpress"
     }
   ];
 
@@ -82,39 +86,13 @@ const OnDemandSolutions = () => {
         }}
       />
 
-      {/* 1. Hero Section */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={containerVariants}
-        className="relative py-32 overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-gradient-primary-start/10 via-gradient-primary-end/10 to-transparent" />
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 backdrop-blur-sm border border-primary/20 mb-8">
-            <Truck className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Instant Services, Anytime, Anywhere</span>
-          </div>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-            On-Demand Solutions
-          </h1>
-          <p className="text-xl text-foreground max-w-3xl mx-auto mb-8">
-            Revolutionize your business with cutting-edge on-demand applications that connect users with services instantly.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact">
-              <Button size="lg" className="px-8 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity shadow-lg">
-                Get a Free Consultation
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-            <Button variant="outline" size="lg" className="px-8 border-primary/30 hover:bg-primary/10 backdrop-blur-sm">
-              View Our Case Studies
-            </Button>
-          </div>
-        </div>
-      </motion.section>
+      {/* Hero Section with unique background */}
+      <PageHero
+        title="On-Demand Solutions"
+        subtitle="Create powerful, scalable on-demand platforms that connect service providers with customers in real-time. From concept to launch, we build solutions that drive growth and engagement."
+        ctaText="Get Started"
+        pageType="on-demand-solutions"
+      />
 
       {/* 2. Overview Section */}
       <motion.section
@@ -131,17 +109,17 @@ const OnDemandSolutions = () => {
                 <CardHeader>
                   <Badge className="bg-primary/10 border-primary/30 w-fit">What are On-Demand Solutions?</Badge>
                   <CardTitle className="text-3xl font-bold bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end bg-clip-text text-transparent">
-                    Instant Access to Services
+                    Connecting Services with Instant Access
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-lg text-foreground leading-relaxed mb-6">
-                    On-demand solutions are digital platforms designed to provide immediate access to services or products, typically facilitated through mobile applications. They cater to the modern consumer's need for speed and convenience, connecting users with providers in real-time.
+                    On-demand solutions are digital platforms that instantly connect service providers with customers who need those services. These platforms leverage real-time data, location services, and mobile technology to deliver immediate value and convenience.
                   </p>
                   <ul className="space-y-2 text-sm text-foreground">
-                    <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-primary" /> Real-time service delivery</li>
-                    <li className="flex items-center gap-2"><Smartphone className="h-4 w-4 text-primary" /> Mobile-first user experience</li>
-                    <li className="flex items-center gap-2"><Clock className="h-4 w-4 text-primary" /> 24/7 availability and booking</li>
+                    <li className="flex items-center gap-2"><Truck className="h-4 w-4 text-primary" /> Real-time service matching</li>
+                    <li className="flex items-center gap-2"><Shield className="h-4 w-4 text-primary" /> Secure payment processing</li>
+                    <li className="flex items-center gap-2"><TrendingUp className="h-4 w-4 text-primary" /> Scalable infrastructure</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -149,23 +127,23 @@ const OnDemandSolutions = () => {
             <motion.div variants={cardVariants}>
               <Card className="bg-background/40 backdrop-blur-xl border-primary/20 p-8">
                 <CardHeader>
-                  <Badge className="bg-primary/10 border-primary/30 w-fit">Why They Matter</Badge>
+                  <Badge className="bg-primary/10 border-primary/30 w-fit">Why It Matters</Badge>
                   <CardTitle className="text-3xl font-bold bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end bg-clip-text text-transparent">
-                    Meeting Modern Consumer Needs
+                    The On-Demand Economy Revolution
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-lg text-foreground leading-relaxed mb-6">
-                    The on-demand economy is booming, driven by consumer expectations for instant gratification. Businesses that adopt on-demand models can tap into new markets, increase customer loyalty, and achieve significant operational efficiencies.
+                    The on-demand economy is transforming how we access services, creating new business opportunities and consumer expectations. Companies with on-demand platforms are growing 12x faster than traditional businesses and capturing significant market share.
                   </p>
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div className="space-y-2">
-                      <div className="flex items-center gap-2 text-foreground"><Target className="h-4 w-4 text-primary" /> Access to a wider customer base</div>
-                      <div className="flex items-center gap-2 text-foreground"><TrendingUp className="h-4 w-4 text-primary" /> Increased revenue streams</div>
+                      <div className="flex items-center gap-2 text-foreground"><Target className="h-4 w-4 text-primary" /> On-demand market valued at $168B</div>
+                      <div className="flex items-center gap-2 text-foreground"><TrendingUp className="h-4 w-4 text-primary" /> Growing at 18% CAGR</div>
                     </div>
                     <div className="space-y-2">
-                      <div className="flex items-center gap-2 text-foreground"><Users className="h-4 w-4 text-primary" /> Enhanced customer satisfaction</div>
-                      <div className="flex items-center gap-2 text-foreground"><Shield className="h-4 w-4 text-primary" /> Optimized resource utilization</div>
+                      <div className="flex items-center gap-2 text-foreground"><Zap className="h-4 w-4 text-primary" /> 75% prefer on-demand services</div>
+                      <div className="flex items-center gap-2 text-foreground"><Users className="h-4 w-4 text-primary" /> 60% use multiple platforms</div>
                     </div>
                   </div>
                 </CardContent>
@@ -186,20 +164,20 @@ const OnDemandSolutions = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-              Our On-Demand Solution Expertise
+              On-Demand Platform Features
             </h2>
             <p className="text-xl text-foreground max-w-2xl mx-auto">
-              Building diverse on-demand platforms for various industries
+              Comprehensive solutions tailored to your business needs
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { icon: Coffee, title: "Food & Grocery Delivery", desc: "Developing robust platforms for restaurants and grocery stores to offer seamless on-demand delivery services." },
-              { icon: Plane, title: "Ride-Sharing & Logistics", desc: "Creating efficient ride-sharing apps and logistics solutions with real-time tracking and optimized routing." },
-              { icon: MessageSquare, title: "Chatbot & AI Assistants", desc: "Integrating intelligent chatbots and AI assistants for instant customer support and personalized interactions." },
-              { icon: Video, title: "Video Streaming & Content", desc: "Building on-demand video streaming platforms with secure content delivery and personalized recommendations." },
-              { icon: CalendarCheck, title: "Booking & Scheduling Apps", desc: "Developing intuitive apps for instant booking of appointments, services, and events across various sectors." },
-              { icon: Building, title: "Home Services & Maintenance", desc: "Creating platforms to connect users with on-demand home services like cleaning, repairs, and handyman tasks." }
+              { icon: Smartphone, title: "Mobile Applications", desc: "Native iOS and Android apps with intuitive interfaces for customers and service providers." },
+              { icon: Globe, title: "Web Dashboards", desc: "Admin panels and provider dashboards for real-time management and analytics." },
+              { icon: Layout, title: "User Management", desc: "Secure authentication, profile management, and role-based access control." },
+              { icon: Truck, title: "Real-Time Tracking", desc: "Live location tracking, ETA calculations, and route optimization." },
+              { icon: Zap, title: "Payment Integration", desc: "Secure payment processing with multiple gateway options and wallet features." },
+              { icon: Shield, title: "Security & Compliance", desc: "Enterprise-grade security, data encryption, and regulatory compliance." }
             ].map((feature, index) => (
               <motion.div key={index} variants={cardVariants} whileHover="hover" transition={{ delay: index * 0.1 }}>
                 <Card className="bg-background/40 backdrop-blur-xl border-primary/20 hover:border-primary/50 transition-all h-full group">
@@ -231,16 +209,17 @@ const OnDemandSolutions = () => {
               Our On-Demand Development Process
             </h2>
             <p className="text-xl text-foreground max-w-2xl mx-auto">
-              A streamlined approach to delivering high-performance on-demand applications
+              A structured approach ensuring quality, efficiency, and client satisfaction at every step
             </p>
           </div>
           <div className="max-w-5xl mx-auto space-y-12">
             {[
-              { icon: Lightbulb, title: "Concept & Strategy", desc: "Defining your on-demand service model, target audience, and key features for a successful launch.", step: 1 },
-              { icon: Code2, title: "UI/UX Design", desc: "Crafting intuitive and engaging user interfaces for both service providers and end-users.", step: 2 },
-              { icon: TestTube2, title: "Backend & API Development", desc: "Building robust server-side logic, real-time communication, and secure APIs for seamless operations.", step: 3 },
-              { icon: UploadCloud, title: "Mobile App Development", desc: "Developing high-performance native or cross-platform mobile applications for iOS and Android.", step: 4 },
-              { icon: TrendingUp, title: "Testing & Deployment", desc: "Rigorous testing, secure deployment to app stores, and continuous monitoring for optimal performance.", step: 5 }
+              { icon: Lightbulb, title: "Market Research & Discovery", desc: "We analyze market trends, competitor platforms, and user needs to define your unique value proposition.", step: 1 },
+              { icon: Layout, title: "Platform Architecture", desc: "Design scalable system architecture with microservices, real-time communication, and cloud infrastructure.", step: 2 },
+              { icon: Code, title: "Development", desc: "Agile development with clean code practices, version control, and regular progress updates to ensure alignment.", step: 3 },
+              { icon: TestTube2, title: "Testing & QA", desc: "Comprehensive testing including functionality, performance, security, and user acceptance testing.", step: 4 },
+              { icon: UploadCloud, title: "Deployment & Launch", desc: "Smooth deployment to app stores with optimization for discoverability and user onboarding support.", step: 5 },
+              { icon: TrendingUp, title: "Post-Launch Support", desc: "Ongoing maintenance, updates, performance monitoring, and feature enhancements based on user feedback.", step: 6 }
             ].map((step, index) => (
               <motion.div key={index} variants={cardVariants} whileHover="hover" className="flex items-center gap-8">
                 <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end rounded-full flex items-center justify-center text-white font-bold">
@@ -273,7 +252,7 @@ const OnDemandSolutions = () => {
               Our On-Demand Solutions Portfolio
             </h2>
             <p className="text-xl text-foreground max-w-2xl mx-auto">
-              Showcasing successful on-demand applications that redefine convenience
+              Real results from real projects – see how we've helped businesses thrive with on-demand platforms
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -282,7 +261,7 @@ const OnDemandSolutions = () => {
                 <Card className="bg-background/40 backdrop-blur-xl border-primary/20 hover:border-primary/50 transition-all h-full group">
                   <CardContent className="p-6">
                     <div className="space-y-4">
-                      <h3 className="text-xl font-semibold mb-2 text-foreground group-hover:text-primary">{project.title}</h3>
+                      <h3 className="text-xl font-semibold text-foreground group-hover:text-primary">{project.title}</h3>
                       <p className="text-foreground/90">{project.description}</p>
                       <div className="flex flex-wrap gap-2">
                         {project.tech.map((tag) => (
@@ -319,17 +298,17 @@ const OnDemandSolutions = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-              On-Demand Insights
+              On-Demand Solutions Insights
             </h2>
             <p className="text-xl text-foreground max-w-2xl mx-auto">
-              Stay ahead with our latest articles on the on-demand economy and technology trends
+              Stay ahead with our latest articles and trends in on-demand technology
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { title: "The Rise of Hyperlocal On-Demand Services", excerpt: "Explore how businesses are leveraging location-based services to deliver instant solutions to local customers.", date: "July 1, 2024" },
-              { title: "Building a Scalable Backend for Your On-Demand App", excerpt: "Key architectural considerations and technologies for creating a robust and performant backend for on-demand platforms.", date: "June 28, 2024" },
-              { title: "AI in On-Demand: Personalization and Predictive Analytics", excerpt: "How artificial intelligence is enhancing user experiences and operational efficiency in the on-demand sector.", date: "June 25, 2024" }
+              { title: "Top 10 On-Demand Trends for 2024", excerpt: "Explore emerging technologies like AI integration, IoT, and hyperlocal services shaping the future.", date: "March 15, 2024" },
+              { title: "Building Scalable On-Demand Platforms", excerpt: "A comprehensive guide to architecting systems that can handle millions of concurrent users.", date: "March 12, 2024" },
+              { title: "Monetization Strategies for On-Demand Apps", excerpt: "We break down the most effective revenue models for different types of on-demand services.", date: "March 10, 2024" }
             ].map((blog, index) => (
               <motion.div key={index} variants={cardVariants} whileHover="hover">
                 <Card className="bg-background/40 backdrop-blur-xl border-primary/20 hover:border-primary/50 transition-all h-full group cursor-pointer">
@@ -391,13 +370,13 @@ const OnDemandSolutions = () => {
             {/* Stats */}
             <div className="space-y-8">
               <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end bg-clip-text text-transparent">
-                Our On-Demand Success Stats
+                Our On-Demand Solutions Stats
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
-                  { icon: Package, number: "80+", label: "Solutions Delivered" },
+                  { icon: Truck, number: "100+", label: "Platforms Developed" },
                   { icon: Users, number: "50+", label: "Satisfied Clients" },
-                  { icon: Award, number: "95%", label: "User Retention" }
+                  { icon: Award, number: "95%", label: "Client Retention" }
                 ].map((stat, index) => (
                   <motion.div key={index} variants={cardVariants} className="text-center p-6 bg-background/40 rounded-lg border border-primary/20">
                     <stat.icon className="h-8 w-8 text-primary mx-auto mb-2" />
@@ -439,16 +418,26 @@ const OnDemandSolutions = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-br from-gradient-primary-start/20 via-gradient-primary-end/20 to-cyan-500/20" />
         <div className="container mx-auto px-4 text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Launch Your On-Demand Business?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">Let's build an innovative platform that delivers instant value to your customers.</p>
-          <Link to="/contact">
-            <Button size="lg" className="px-8 bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-lg">
-              Start Your On-Demand Project
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Launch Your On-Demand Platform?</h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto">Let's create a powerful on-demand solution that connects service providers with customers in real-time.</p>
+          <Button 
+            size="lg" 
+            className="px-8 bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-lg"
+            onClick={() => setIsLightboxOpen(true)}
+          >
+            Start Your Project
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
         </div>
       </motion.section>
+      
+      {/* Lightbox Form */}
+      <LightboxForm
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        title="On-Demand Solutions Inquiry"
+        serviceType="On-Demand Solutions"
+      />
     </div>
   );
 };

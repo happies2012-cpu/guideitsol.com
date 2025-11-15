@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,8 +8,11 @@ import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { motion, Easing } from "framer-motion";
 import { Users, Lightbulb, Target, TrendingUp, Calendar, ArrowRight, Shield, Zap, CheckCircle, Code, Cpu, Network } from "lucide-react";
+import LightboxForm from "@/components/ui/LightboxForm";
 
 const ITConsultingServices = () => {
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as Easing } },
@@ -103,12 +106,14 @@ const ITConsultingServices = () => {
             Strategic technology advisory and implementation services to optimize your IT infrastructure, drive innovation, and achieve business objectives.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact">
-              <Button size="lg" className="px-8 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity shadow-lg">
-                Get Started
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
+            <Button 
+              size="lg" 
+              className="px-8 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity shadow-lg"
+              onClick={() => setIsLightboxOpen(true)}
+            >
+              Get Started
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
             <Button variant="outline" size="lg" className="px-8 border-primary/30 hover:bg-primary/10 backdrop-blur-sm">
               View Case Studies
             </Button>
@@ -441,14 +446,24 @@ const ITConsultingServices = () => {
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Transform Your Technology Strategy?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">Let's create a technology roadmap that drives business growth and innovation.</p>
-          <Link to="/contact">
-            <Button size="lg" className="px-8 bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-lg">
-              Start Your Consultation
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
+          <Button 
+            size="lg" 
+            className="px-8 bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-lg"
+            onClick={() => setIsLightboxOpen(true)}
+          >
+            Start Your Consultation
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
         </div>
       </motion.section>
+      
+      {/* Lightbox Form */}
+      <LightboxForm 
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        title="IT Consulting Services Inquiry"
+        serviceType="IT Consulting Services"
+      />
     </div>
   );
 };

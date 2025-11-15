@@ -1,13 +1,16 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, Easing } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Code, Smartphone, Download, Shield, Zap, Target } from 'lucide-react';
+import { Code, Smartphone, Download, Shield, Zap, Target, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { getHeroImage } from "@/lib/image-utils";
+import PageHero from '@/components/ui/PageHero';
+import LightboxForm from '@/components/ui/LightboxForm';
 
 const FlutterAppDevelopment = () => {
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as Easing } },
@@ -60,36 +63,13 @@ const FlutterAppDevelopment = () => {
       variants={containerVariants}
       className="min-h-screen bg-background"
     >
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-primary/10 to-secondary/10">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div variants={containerVariants} className="space-y-6">
-              <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Flutter App Development
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-lg">
-                Guidesoft harnesses the power of Flutter to build beautiful, fast, and natively compiled applications for mobile, web, and desktop from a single codebase. Accelerate your time-to-market with our Flutter expertise.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="px-8 bg-gradient-to-r from-primary to-secondary">
-                  Get a Quote
-                </Button>
-                <Button size="lg" variant="outline">
-                  View Portfolio
-                </Button>
-              </div>
-            </motion.div>
-            <motion.div variants={containerVariants} className="relative">
-              <img
-                src={getHeroImage('flutter-app')} // Replace with actual Flutter app mockup image
-                alt="Flutter App Development"
-                className="w-full h-96 object-cover rounded-2xl shadow-2xl"
-              />
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      {/* Hero Section with unique background */}
+      <PageHero
+        title="Flutter App Development"
+        subtitle="Guidesoft harnesses the power of Flutter to build beautiful, fast, and natively compiled applications for mobile, web, and desktop from a single codebase. Accelerate your time-to-market with our Flutter expertise."
+        ctaText="Get a Quote"
+        pageType="flutter-app"
+      />
 
       {/* Features Section */}
       <section className="py-20 bg-background">
@@ -145,11 +125,24 @@ const FlutterAppDevelopment = () => {
           <p className="text-xl mb-8 max-w-2xl mx-auto">
             Partner with Guidesoft to leverage Flutter's efficiency for your multi-platform app needs. Let's build something amazing together.
           </p>
-          <Button size="lg" className="px-8 text-lg">
+          <Button 
+            size="lg" 
+            className="px-8 text-lg bg-white text-primary hover:bg-gray-100"
+            onClick={() => setIsLightboxOpen(true)}
+          >
             Start Your Project
+            <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </div>
       </section>
+      
+      {/* Lightbox Form */}
+      <LightboxForm
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        title="Flutter App Development Inquiry"
+        serviceType="Flutter App Development"
+      />
     </motion.div>
   );
 };

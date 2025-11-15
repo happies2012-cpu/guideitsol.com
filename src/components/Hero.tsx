@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 import TypewriterEffect from "./TypewriterEffect";
+import { useState } from "react";
+import LightboxForm from "@/components/ui/LightboxForm";
 // Studio image imports
 import studio10 from "@/assets/Studio/10.png";
 import studio11 from "@/assets/Studio/11.png";
@@ -36,6 +38,7 @@ const transitionVariants = {
 }
 
 const Hero = () => {
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const dynamicWords = ["Business Success", "Digital Growth", "AI Innovation", "Future Solutions"];
 
   return (
@@ -66,33 +69,15 @@ const Hero = () => {
               Professional consulting services to help your business grow and succeed in today's competitive market
             </p>
 
-            <form
-              action=""
-              className="mt-12 mx-auto max-w-sm">
-              <div className="bg-background has-[input:focus]:ring-muted relative grid grid-cols-[1fr_auto] pr-1.5 items-center rounded-[1rem] border shadow shadow-zinc-950/5 has-[input:focus]:ring-2 lg:pr-0">
-                <div className="pointer-events-none absolute inset-y-0 left-4 my-auto size-5 text-muted-foreground flex items-center">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </div>
-
-                <input
-                  placeholder="Your mail address"
-                  className="h-12 w-full bg-transparent pl-12 focus:outline-none"
-                  type="email"
-                />
-
-                <div className="md:pr-1.5 lg:pr-0">
-                  <Button
-                    aria-label="submit"
-                    size="sm"
-                    className="rounded-[0.5rem]">
-                    <span className="hidden md:block">Get Started</span>
-                    <span className="md:hidden">→</span>
-                  </Button>
-                </div>
-              </div>
-            </form>
+            <div className="mt-12">
+              <Button 
+                size="lg" 
+                className="px-8 py-6 text-lg"
+                onClick={() => setIsLightboxOpen(true)}
+              >
+                Get Started
+              </Button>
+            </div>
 
             <div
               aria-hidden
@@ -114,6 +99,14 @@ const Hero = () => {
         </div>
       </section>
       <LogoCloud />
+      
+      {/* Lightbox Form */}
+      <LightboxForm
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        title="Get Started"
+        serviceType="General Inquiry"
+      />
     </>
   );
 };

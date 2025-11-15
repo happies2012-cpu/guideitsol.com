@@ -1,13 +1,6 @@
-"use client";
-
-import React from 'react';
-import { motion, Easing } from 'framer-motion';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { BookOpen, Users, Play, FileText, Award, Calendar, BarChart, MessageCircle, Settings, Zap, Globe, Lock } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { getHeroImage } from "@/lib/image-utils";
-
 const EducationApp = () => {
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as Easing } },
@@ -102,36 +95,13 @@ const EducationApp = () => {
       variants={containerVariants}
       className="min-h-screen bg-background"
     >
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-primary/10 to-secondary/10">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div variants={containerVariants} className="space-y-6">
-              <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Education App Solutions
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-lg">
-                Transform learning experiences with our comprehensive education technology solutions. Create engaging, accessible, and effective digital learning platforms for institutions and learners.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="px-8 bg-gradient-to-r from-primary to-secondary">
-                  Build Your Education Platform
-                </Button>
-                <Button size="lg" variant="outline">
-                  View Case Studies
-                </Button>
-              </div>
-            </motion.div>
-            <motion.div variants={containerVariants} className="relative">
-              <img
-                src={getHeroImage('education-app')}
-                alt="Education App Solution"
-                className="w-full h-96 object-cover rounded-2xl shadow-2xl"
-              />
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      {/* Hero Section with unique background */}
+      <PageHero
+        title="Education App Solutions"
+        subtitle="Transform learning experiences with our comprehensive education technology solutions. Create engaging, accessible, and effective digital learning platforms for institutions and learners."
+        ctaText="Build Your Education Platform"
+        pageType="education-app"
+      />
 
       {/* Features Section */}
       <section className="py-20 bg-background">
@@ -267,11 +237,23 @@ const EducationApp = () => {
           <p className="text-xl mb-8 max-w-2xl mx-auto">
             Create a cutting-edge education platform that engages learners and delivers exceptional results.
           </p>
-          <Button size="lg" className="px-8 text-lg bg-white text-primary hover:bg-gray-100">
+          <Button 
+            size="lg" 
+            className="px-8 text-lg bg-white text-primary hover:bg-gray-100"
+            onClick={() => setIsLightboxOpen(true)}
+          >
             Start Your Education Project
           </Button>
         </div>
       </section>
+      
+      {/* Lightbox Form */}
+      <LightboxForm
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        title="Education App Solutions Inquiry"
+        serviceType="Education App Solutions"
+      />
     </motion.div>
   );
 };

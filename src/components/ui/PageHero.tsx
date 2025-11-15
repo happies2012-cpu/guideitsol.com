@@ -1,12 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion, Easing } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, Zap, Shield, Code, CheckCircle, Brain, TrendingUp, Target, Lightbulb } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
+import { getHeroImage } from "@/lib/image-utils";
+import LightboxForm from "./LightboxForm";
 
 interface Card {
   title: string;
@@ -23,6 +24,7 @@ interface PageHeroProps {
   relatedTitle?: string;
   relatedItems?: { title: string; href: string }[];
   backgroundImage?: string; // New prop for background image
+  pageType?: string; // New prop for page type to determine background image
 }
 
 const PageHero: React.FC<PageHeroProps> = ({
@@ -34,7 +36,10 @@ const PageHero: React.FC<PageHeroProps> = ({
   relatedTitle = "Related Solutions",
   relatedItems = [],
   backgroundImage, // Destructure the new prop
+  pageType = "default", // Default page type
 }) => {
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  
   // Features for the enhanced section
   const features = [
     {
@@ -78,12 +83,21 @@ const PageHero: React.FC<PageHeroProps> = ({
     hover: { y: -5, boxShadow: "0 10px 20px rgba(0,0,0,0.15)" },
   };
 
-  // Function to get a relevant background image based on the page title
+  // Function to get a relevant background image based on the page title or type
   const getBackgroundImage = () => {
     if (backgroundImage) return backgroundImage;
     
-    // Use local hero background image instead of pexels
-    return heroBg;
+    // Use the pageType to get the appropriate hero image
+    const image = getHeroImage(pageType);
+    return image;
+  };
+
+  const handleCtaClick = (e: React.MouseEvent) => {
+    // If it's a contact link, open the lightbox instead
+    if (ctaHref === "/contact" || ctaHref?.startsWith("mailto:")) {
+      e.preventDefault();
+      setIsLightboxOpen(true);
+    }
   };
 
   return (
@@ -124,10 +138,17 @@ const PageHero: React.FC<PageHeroProps> = ({
           )}
           
           <motion.div variants={containerVariants}>
-            <Button asChild size="lg" className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white px-8 py-3 rounded-full text-lg font-semibold transition duration-300 shadow-lg">
-              <Link to={ctaHref}>
-                {ctaText}
-              </Link>
+            <Button 
+              asChild 
+              size="lg" 
+              className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white px-8 py-3 rounded-full text-lg font-semibold transition duration-300 shadow-lg"
+              onClick={handleCtaClick}
+            >
+              {ctaHref?.startsWith("mailto:") ? (
+                <a href={ctaHref}>{ctaText}</a>
+              ) : (
+                <Link to={ctaHref}>{ctaText}</Link>
+              )}
             </Button>
           </motion.div>
         </motion.div>
@@ -237,6 +258,14 @@ const PageHero: React.FC<PageHeroProps> = ({
           </motion.div>
         )}
       </div>
+      
+      {/* Lightbox Form */}
+      <LightboxForm 
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        title={title}
+        serviceType={pageType}
+      />
     </div>
   );
 };

@@ -1,15 +1,19 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { motion, Easing } from "framer-motion";
-import { Palette, Layout, Users, Award, Calendar, ArrowRight, Lightbulb, Smartphone, Search, Zap, CheckCircle, Shield, TrendingUp, Target, Code2, TestTube2, UploadCloud, Monitor, PenTool, Layers, Figma } from "lucide-react";
+import { Palette, Zap, Users, Award, Calendar, ArrowRight, Lightbulb, Shield, TrendingUp, Target, Layout, Code, TestTube2, UploadCloud, Eye, MousePointerClick, Smartphone, Monitor } from "lucide-react";
+import PageHero from "@/components/ui/PageHero";
+import LightboxForm from "@/components/ui/LightboxForm";
 
-const UiUxDesignDevelopment = () => {
+const UIUXDesignDevelopment = () => {
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as Easing } },
@@ -23,50 +27,50 @@ const UiUxDesignDevelopment = () => {
 
   const portfolioProjects = [
     {
-      title: "Intuitive Mobile Banking App",
-      description: "Redesigned a banking app focusing on user-centric flows and modern aesthetics, leading to a 30% increase in user engagement.",
-      result: "30% User Engagement Boost",
-      tech: ["Figma", "Sketch", "User Testing"]
+      title: "Banking App Redesign for Financial Institution",
+      description: "Complete UI/UX overhaul of mobile banking app resulting in 45% increase in user engagement and 30% reduction in support tickets.",
+      result: "45% Higher Engagement",
+      tech: ["Figma", "User Research", "Prototyping"]
     },
     {
-      title: "E-commerce Website UX Overhaul",
-      description: "Optimized the user journey and visual design for an e-commerce platform, resulting in a 20% uplift in conversion rates.",
-      result: "20% Conversion Rate Increase",
-      tech: ["Adobe XD", "Heatmaps", "A/B Testing"]
+      title: "E-Commerce Dashboard for SaaS Platform",
+      description: "Designed intuitive admin dashboard with data visualization, improving task completion time by 50% for enterprise clients.",
+      result: "50% Faster Task Completion",
+      tech: ["Adobe XD", "User Testing", "Information Architecture"]
     },
     {
-      title: "Enterprise Dashboard Design System",
-      description: "Developed a comprehensive design system for an enterprise analytics dashboard, improving consistency and reducing development time by 40%.",
-      result: "40% Dev Time Reduction",
-      tech: ["Figma", "Storybook", "Accessibility"]
+      title: "Healthcare Portal for Medical Provider",
+      description: "Created accessible patient portal with telehealth features, achieving 98% user satisfaction rating in usability testing.",
+      result: "98% User Satisfaction",
+      tech: ["Sketch", "Accessibility Testing", "User Journeys"]
     }
   ];
 
   const faqs = [
     {
-      question: "What is the difference between UI and UX design?",
-      answer: "UX (User Experience) design focuses on the overall feel of the experience, ensuring it's logical and easy to use. UI (User Interface) design focuses on the visual and interactive elements, making sure the interface is aesthetically pleasing and intuitive."
+      question: "What's the difference between UI and UX design?",
+      answer: "UI (User Interface) focuses on the visual elements like buttons, colors, and layouts. UX (User Experience) focuses on the overall feel and usability of the product. Both work together to create exceptional digital experiences."
     },
     {
-      question: "What tools do you use for UI/UX design?",
-      answer: "We primarily use industry-standard tools such as Figma, Sketch, Adobe XD for design, and integrate with prototyping tools like InVision or Marvel. For development, we use modern frontend frameworks."
+      question: "How long does the UI/UX design process take?",
+      answer: "Timeline varies by project scope: Simple websites take 2-3 weeks, complex web apps 4-6 weeks, enterprise solutions 6-12 weeks. We provide detailed timelines during the discovery phase."
     },
     {
-      question: "How do you ensure a good user experience?",
-      answer: "Our process involves extensive user research, persona creation, user journey mapping, wireframing, prototyping, and iterative user testing. We prioritize feedback and data to continuously refine the experience."
+      question: "Do you provide design system and documentation?",
+      answer: "Yes! We deliver comprehensive design systems with style guides, component libraries, and detailed documentation to ensure consistency and ease of implementation."
     }
   ];
 
   const testimonials = [
     {
-      quote: "Guidesoft's UI/UX team transformed our product. The new interface is not only beautiful but incredibly intuitive, leading to fantastic user feedback.",
-      author: "Olivia Wilson",
-      role: "Product Manager, InnovateCo"
+      quote: "Guidesoft's UI/UX team transformed our digital presence. Their user-centered approach and attention to detail resulted in a 60% increase in conversions.",
+      author: "Amanda Rodriguez",
+      role: "Product Manager, FinTech Solutions"
     },
     {
-      quote: "Their design process was thorough and collaborative. They truly understood our users' needs and delivered a solution that exceeded our expectations.",
-      author: "Daniel Brown",
-      role: "Head of Digital, Global Brands"
+      quote: "The design system they created has become the foundation for all our digital products. Their work has standardized our brand experience across all touchpoints.",
+      author: "David Thompson",
+      role: "Design Director, TechCorp"
     }
   ];
 
@@ -82,39 +86,13 @@ const UiUxDesignDevelopment = () => {
         }}
       />
 
-      {/* 1. Hero Section */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={containerVariants}
-        className="relative py-32 overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-gradient-primary-start/10 via-gradient-primary-end/10 to-transparent" />
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 backdrop-blur-sm border border-primary/20 mb-8">
-            <Palette className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium text-primary">User Interface & Experience</span>
-          </div>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-            UI/UX Design & Development
-          </h1>
-          <p className="text-xl text-foreground max-w-3xl mx-auto mb-8">
-            Craft intuitive, engaging, and beautiful digital experiences that captivate users and drive business results.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact">
-              <Button size="lg" className="px-8 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity shadow-lg">
-                Start Your Project
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-            <Button variant="outline" size="lg" className="px-8 border-primary/30 hover:bg-primary/10 backdrop-blur-sm">
-              View Our Portfolio
-            </Button>
-          </div>
-        </div>
-      </motion.section>
+      {/* Hero Section with unique background */}
+      <PageHero
+        title="UI/UX Design & Development"
+        subtitle="Create beautiful, intuitive digital experiences that delight users and drive business results. Our human-centered design approach ensures your products are both visually stunning and highly functional."
+        ctaText="Get Started"
+        pageType="ui-ux-design-development"
+      />
 
       {/* 2. Overview Section */}
       <motion.section
@@ -131,17 +109,17 @@ const UiUxDesignDevelopment = () => {
                 <CardHeader>
                   <Badge className="bg-primary/10 border-primary/30 w-fit">What is UI/UX Design?</Badge>
                   <CardTitle className="text-3xl font-bold bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end bg-clip-text text-transparent">
-                    Designing User-Centric Experiences
+                    Designing Experiences, Not Just Interfaces
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-lg text-foreground leading-relaxed mb-6">
-                    UI/UX design is about creating digital products that are not only visually appealing but also incredibly easy and enjoyable to use. It's a blend of aesthetics, psychology, and technology to ensure users have a seamless and positive interaction.
+                    UI/UX design is the process of enhancing user satisfaction by improving the usability, accessibility, and pleasure provided in the interaction between the user and the product. It combines visual design with user research, information architecture, and interaction design.
                   </p>
                   <ul className="space-y-2 text-sm text-foreground">
-                    <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-primary" /> Intuitive navigation and flow</li>
-                    <li className="flex items-center gap-2"><Lightbulb className="h-4 w-4 text-primary" /> Visually appealing interfaces</li>
-                    <li className="flex items-center gap-2"><Users className="h-4 w-4 text-primary" /> User research-driven insights</li>
+                    <li className="flex items-center gap-2"><Eye className="h-4 w-4 text-primary" /> Visual appeal that reflects your brand</li>
+                    <li className="flex items-center gap-2"><MousePointerClick className="h-4 w-4 text-primary" /> Intuitive interactions and navigation</li>
+                    <li className="flex items-center gap-2"><TrendingUp className="h-4 w-4 text-primary" /> Data-driven design decisions</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -151,21 +129,21 @@ const UiUxDesignDevelopment = () => {
                 <CardHeader>
                   <Badge className="bg-primary/10 border-primary/30 w-fit">Why It Matters</Badge>
                   <CardTitle className="text-3xl font-bold bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end bg-clip-text text-transparent">
-                    Driving Engagement & Conversions
+                    The Business Impact of Great Design
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-lg text-foreground leading-relaxed mb-6">
-                    Exceptional UI/UX design is critical for retaining users, building brand loyalty, and increasing conversions. A poorly designed interface can lead to frustration and abandonment, while a great one creates memorable interactions and drives business success.
+                    Great design isn't just about aesthetics—it's a powerful business tool. Well-designed products increase user engagement, reduce support costs, and drive conversions. Companies that invest in design outperform their competitors by 228%.
                   </p>
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div className="space-y-2">
-                      <div className="flex items-center gap-2 text-foreground"><Target className="h-4 w-4 text-primary" /> 88% of online consumers won't return after a bad experience</div>
-                      <div className="flex items-center gap-2 text-foreground"><TrendingUp className="h-4 w-4 text-primary" /> Good UX can increase conversion rates by up to 400%</div>
+                      <div className="flex items-center gap-2 text-foreground"><Target className="h-4 w-4 text-primary" /> Good design increases conversion by 200%</div>
+                      <div className="flex items-center gap-2 text-foreground"><TrendingUp className="h-4 w-4 text-primary" /> Every $1 invested in UX returns $100</div>
                     </div>
                     <div className="space-y-2">
-                      <div className="flex items-center gap-2 text-foreground"><Search className="h-4 w-4 text-primary" /> Improves customer satisfaction and loyalty</div>
-                      <div className="flex items-center gap-2 text-foreground"><Zap className="h-4 w-4 text-primary" /> Reduces development costs by preventing reworks</div>
+                      <div className="flex items-center gap-2 text-foreground"><Zap className="h-4 w-4 text-primary" /> 88% of users won't return after bad experience</div>
+                      <div className="flex items-center gap-2 text-foreground"><Users className="h-4 w-4 text-primary" /> 75% of judgments based on website design</div>
                     </div>
                   </div>
                 </CardContent>
@@ -186,20 +164,20 @@ const UiUxDesignDevelopment = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-              Our UI/UX Design & Development Expertise
+              UI/UX Design Services
             </h2>
             <p className="text-xl text-foreground max-w-2xl mx-auto">
-              Comprehensive services to create stunning and functional digital products
+              Comprehensive design solutions tailored to your business needs
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { icon: PenTool, title: "User Interface (UI) Design", desc: "Crafting visually stunning and intuitive interfaces that enhance user interaction and brand identity." },
-              { icon: Layers, title: "User Experience (UX) Design", desc: "Designing seamless and enjoyable user journeys through research, wireframing, and prototyping." },
-              { icon: Monitor, title: "Responsive Web Design", desc: "Ensuring your digital product looks and functions flawlessly across all devices and screen sizes." },
-              { icon: Smartphone, title: "Mobile App UI/UX", desc: "Specialized design for iOS and Android applications, focusing on platform-specific guidelines and user behavior." },
-              { icon: Figma, title: "Prototyping & Wireframing", desc: "Creating interactive prototypes and detailed wireframes to visualize and test user flows before development." },
-              { icon: Layout, title: "Design System Development", desc: "Building scalable design systems for consistency, efficiency, and faster development across your product suite." }
+              { icon: Palette, title: "Visual Design", desc: "Beautiful, on-brand interfaces with carefully crafted color palettes, typography, and visual elements." },
+              { icon: Layout, title: "Information Architecture", desc: "Organized content structures and navigation systems that make information easy to find." },
+              { icon: Smartphone, title: "Responsive Design", desc: "Seamless experiences across all devices from mobile phones to desktop computers." },
+              { icon: Monitor, title: "User Research", desc: "In-depth user studies, personas, and journey mapping to inform design decisions." },
+              { icon: TestTube2, title: "Prototyping & Testing", desc: "Interactive prototypes and usability testing to validate design concepts before development." },
+              { icon: Shield, title: "Accessibility", desc: "Inclusive designs that meet WCAG standards and are usable by people with disabilities." }
             ].map((feature, index) => (
               <motion.div key={index} variants={cardVariants} whileHover="hover" transition={{ delay: index * 0.1 }}>
                 <Card className="bg-background/40 backdrop-blur-xl border-primary/20 hover:border-primary/50 transition-all h-full group">
@@ -231,16 +209,17 @@ const UiUxDesignDevelopment = () => {
               Our UI/UX Design Process
             </h2>
             <p className="text-xl text-foreground max-w-2xl mx-auto">
-              A structured approach to creating impactful and user-friendly designs
+              A human-centered approach ensuring delightful experiences at every touchpoint
             </p>
           </div>
           <div className="max-w-5xl mx-auto space-y-12">
             {[
-              { icon: Lightbulb, title: "Discovery & Research", desc: "Understanding your users, business goals, and competitive landscape through in-depth research and analysis.", step: 1 },
-              { icon: Code2, title: "Wireframing & Prototyping", desc: "Creating low-fidelity wireframes and interactive prototypes to map out user flows and test concepts.", step: 2 },
-              { icon: TestTube2, title: "Visual Design & UI", desc: "Developing high-fidelity mockups, design systems, and visual elements that align with your brand.", step: 3 },
-              { icon: UploadCloud, title: "User Testing & Iteration", desc: "Conducting usability testing with real users to gather feedback and iteratively refine the design.", step: 4 },
-              { icon: TrendingUp, title: "Implementation & Handoff", desc: "Collaborating with developers for seamless implementation and providing detailed design specifications.", step: 5 }
+              { icon: Lightbulb, title: "Research & Discovery", desc: "We dive deep into your business, users, and competitors to understand requirements and opportunities.", step: 1 },
+              { icon: Users, title: "User Personas & Journeys", desc: "Create detailed user profiles and journey maps to guide design decisions with real user needs.", step: 2 },
+              { icon: Palette, title: "Wireframing & Prototyping", desc: "Low-fidelity wireframes evolve into interactive prototypes for early testing and validation.", step: 3 },
+              { icon: Eye, title: "Visual Design", desc: "High-fidelity designs with branding, color, typography, and imagery that reflect your unique identity.", step: 4 },
+              { icon: TestTube2, title: "Usability Testing", desc: "Conduct testing sessions to gather feedback and refine designs for optimal user experience.", step: 5 },
+              { icon: UploadCloud, title: "Design Delivery", desc: "Comprehensive design systems with assets, documentation, and developer handoff for seamless implementation.", step: 6 }
             ].map((step, index) => (
               <motion.div key={index} variants={cardVariants} whileHover="hover" className="flex items-center gap-8">
                 <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end rounded-full flex items-center justify-center text-white font-bold">
@@ -273,7 +252,7 @@ const UiUxDesignDevelopment = () => {
               Our UI/UX Design Portfolio
             </h2>
             <p className="text-xl text-foreground max-w-2xl mx-auto">
-              Showcasing our award-winning designs and user-centric solutions
+              Real results from real projects – see how we've helped businesses create exceptional user experiences
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -282,7 +261,7 @@ const UiUxDesignDevelopment = () => {
                 <Card className="bg-background/40 backdrop-blur-xl border-primary/20 hover:border-primary/50 transition-all h-full group">
                   <CardContent className="p-6">
                     <div className="space-y-4">
-                      <h3 className="text-xl font-semibold mb-2 text-foreground group-hover:text-primary">{project.title}</h3>
+                      <h3 className="text-xl font-semibold text-foreground group-hover:text-primary">{project.title}</h3>
                       <p className="text-foreground/90">{project.description}</p>
                       <div className="flex flex-wrap gap-2">
                         {project.tech.map((tag) => (
@@ -322,14 +301,14 @@ const UiUxDesignDevelopment = () => {
               UI/UX Design Insights
             </h2>
             <p className="text-xl text-foreground max-w-2xl mx-auto">
-              Stay updated with the latest trends and best practices in design
+              Stay ahead with our latest articles and trends in user experience design
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { title: "The Power of Microinteractions in UI Design", excerpt: "Learn how small animations and feedback can significantly enhance user experience and delight.", date: "April 10, 2024" },
-              { title: "Designing for Accessibility: A Comprehensive Guide", excerpt: "Ensuring your digital products are usable by everyone, regardless of ability, is crucial for inclusive design.", date: "April 8, 2024" },
-              { title: "Future of UX: AI-Powered Personalization", excerpt: "How artificial intelligence is revolutionizing user experiences by delivering highly personalized content and interfaces.", date: "April 5, 2024" }
+              { title: "Top 10 UI/UX Design Trends for 2024", excerpt: "Explore emerging design trends like 3D elements, micro-interactions, and voice interfaces shaping the future.", date: "March 15, 2024" },
+              { title: "The Psychology Behind Great UX Design", excerpt: "Understanding cognitive principles that make interfaces intuitive and delightful for users.", date: "March 12, 2024" },
+              { title: "Mobile-First vs Desktop-First: Which Approach?", excerpt: "We break down the pros and cons of each design approach to help you make the right decision.", date: "March 10, 2024" }
             ].map((blog, index) => (
               <motion.div key={index} variants={cardVariants} whileHover="hover">
                 <Card className="bg-background/40 backdrop-blur-xl border-primary/20 hover:border-primary/50 transition-all h-full group cursor-pointer">
@@ -395,9 +374,9 @@ const UiUxDesignDevelopment = () => {
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
-                  { icon: Palette, number: "120+", label: "Designs Delivered" },
-                  { icon: Users, number: "75+", label: "Happy Clients" },
-                  { icon: Award, number: "97%", label: "User Satisfaction" }
+                  { icon: Palette, number: "100+", label: "Design Projects" },
+                  { icon: Users, number: "50+", label: "Satisfied Clients" },
+                  { icon: Award, number: "95%", label: "Client Retention" }
                 ].map((stat, index) => (
                   <motion.div key={index} variants={cardVariants} className="text-center p-6 bg-background/40 rounded-lg border border-primary/20">
                     <stat.icon className="h-8 w-8 text-primary mx-auto mb-2" />
@@ -439,19 +418,28 @@ const UiUxDesignDevelopment = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-br from-gradient-primary-start/20 via-gradient-primary-end/20 to-cyan-500/20" />
         <div className="container mx-auto px-4 text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready for an Exceptional User Experience?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">Let's design and develop a digital product that your users will love.</p>
-          <Link to="/contact">
-            <Button size="lg" className="px-8 bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-lg">
-              Get a Design Consultation
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-
-          </Link>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Transform Your User Experience?</h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto">Let's create beautiful, intuitive designs that delight your users and drive business results.</p>
+          <Button 
+            size="lg" 
+            className="px-8 bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-lg"
+            onClick={() => setIsLightboxOpen(true)}
+          >
+            Start Your Project
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
         </div>
       </motion.section>
+      
+      {/* Lightbox Form */}
+      <LightboxForm
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        title="UI/UX Design Inquiry"
+        serviceType="UI/UX Design"
+      />
     </div>
   );
 };
 
-export default UiUxDesignDevelopment;
+export default UIUXDesignDevelopment;

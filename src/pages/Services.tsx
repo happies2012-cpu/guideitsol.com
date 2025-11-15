@@ -6,8 +6,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { motion, Easing } from "framer-motion";
 import { Link } from "react-router-dom";
 import { getHeroImage } from "@/lib/image-utils";
+import PageHero from "@/components/ui/PageHero";
+import { useState } from "react";
+import LightboxForm from "@/components/ui/LightboxForm";
 
 const Services = () => {
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+
   const services = [
     {
       icon: Code,
@@ -120,35 +125,13 @@ const Services = () => {
       <div className="fixed inset-0 bg-gradient-to-br from-gradient-primary-start/5 via-gradient-primary-end/5 to-cyan-500/5 pointer-events-none" />
       <div className="fixed inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iaHNsKHZhcigtLWdyYWRpZW50LXByaW1hcnktc3RhcnQpLzAuMSkiIC8+PC9nPjwvc3ZnPg==')] opacity-20" />
 
-      {/* Hero Section */}
-      <motion.section
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="relative py-32 overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-gradient-primary-start/10 via-gradient-primary-end/10 to-transparent" />
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 backdrop-blur-sm border border-primary/20 mb-8 animate-fade-in">
-            <Sparkles className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Comprehensive Technology Solutions</span>
-          </div>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent animate-fade-in">
-            Our Services
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in">
-            End-to-end technology solutions designed to accelerate your business growth and drive digital transformation
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-            <Button size="lg" className="px-8 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity shadow-lg">
-              Start a Project
-            </Button>
-            <Button size="lg" variant="outline" className="px-8 border-primary/30 hover:bg-primary/10 backdrop-blur-sm">
-              View Case Studies
-            </Button>
-          </div>
-        </div>
-      </motion.section>
+      {/* Hero Section with unique background */}
+      <PageHero
+        title="Our Services"
+        subtitle="End-to-end technology solutions designed to accelerate your business growth and drive digital transformation"
+        ctaText="Start a Project"
+        pageType="services"
+      />
 
       {/* Services Grid */}
       <motion.section
@@ -334,20 +317,36 @@ const Services = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
               Ready to Transform Your Business?
             </h2>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-xl text-gray-200 mb-8">
               Join thousands of businesses leveraging our technology solutions to drive growth and innovation
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="px-8 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity shadow-lg">
+              <Button 
+                size="lg" 
+                className="px-8 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity shadow-lg"
+                onClick={() => setIsLightboxOpen(true)}
+              >
                 Start Consultation
               </Button>
-              <Button size="lg" variant="outline" className="px-8 border-primary/30 hover:bg-primary/10 backdrop-blur-sm">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="px-8 border-primary/30 hover:bg-primary/10 backdrop-blur-sm text-white border-white"
+              >
                 View Our Portfolio
               </Button>
             </div>
           </div>
         </div>
       </motion.section>
+      
+      {/* Lightbox Form */}
+      <LightboxForm 
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        title="Services Inquiry"
+        serviceType="services"
+      />
     </div>
   );
 };

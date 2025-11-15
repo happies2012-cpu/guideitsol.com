@@ -6,11 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Phone, Mail, Clock, Send, Sparkles, MessageSquare, Zap, Brain, Users, Target, Calendar } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Send, Sparkles, MessageSquare, Zap, Brain, Users, Target, Calendar, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { motion, Easing } from "framer-motion";
 import { Link } from "react-router-dom";
 import { getHeroImage } from "@/lib/image-utils";
+import LightboxForm from "@/components/ui/LightboxForm";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -21,6 +22,8 @@ const Contact = () => {
     service: "",
     message: ""
   });
+
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -89,15 +92,21 @@ const Contact = () => {
     <div className="relative min-h-screen">
       {/* Animated Background */}
       <div className="fixed inset-0 bg-gradient-to-br from-gradient-primary-start/5 via-gradient-primary-end/5 to-cyan-500/5 pointer-events-none" />
-
-      {/* Hero Section */}
+      
+      {/* Hero Section with unique background */}
       <motion.section
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         className="relative py-32 overflow-hidden"
+        style={{ 
+          backgroundImage: `url(${getHeroImage('contact')})`,
+          backgroundAttachment: 'fixed',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-gradient-primary-start/10 via-gradient-primary-end/10 to-transparent" />
+        <div className="absolute inset-0 bg-black bg-opacity-60"></div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 backdrop-blur-sm border border-primary/20 mb-8 animate-fade-in">
             <MessageSquare className="h-4 w-4 text-primary" />
@@ -106,14 +115,22 @@ const Contact = () => {
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent animate-fade-in">
             Let's Connect
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in">
+          <p className="text-xl text-gray-200 max-w-3xl mx-auto animate-fade-in">
             Ready to transform your business with cutting-edge technology solutions? We're here to help you succeed.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-            <Button size="lg" className="px-8 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity shadow-lg">
+            <Button 
+              size="lg" 
+              className="px-8 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity shadow-lg"
+              onClick={() => setIsLightboxOpen(true)}
+            >
               Schedule a Call
             </Button>
-            <Button size="lg" variant="outline" className="px-8 border-primary/30 hover:bg-primary/10 backdrop-blur-sm">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="px-8 border-primary/30 hover:bg-primary/10 backdrop-blur-sm text-white border-white"
+            >
               View Our Services
             </Button>
           </div>
@@ -351,20 +368,36 @@ const Contact = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
               Ready to Start Your Project?
             </h2>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-xl text-gray-200 mb-8">
               Let's discuss how our technology solutions can help you achieve your business objectives
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="px-8 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity shadow-lg">
+              <Button 
+                size="lg" 
+                className="px-8 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity shadow-lg"
+                onClick={() => setIsLightboxOpen(true)}
+              >
                 Schedule a Consultation
               </Button>
-              <Button size="lg" variant="outline" className="px-8 border-primary/30 hover:bg-primary/10 backdrop-blur-sm">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="px-8 border-primary/30 hover:bg-primary/10 backdrop-blur-sm text-white border-white"
+              >
                 View Our Portfolio
               </Button>
             </div>
           </div>
         </div>
       </motion.section>
+      
+      {/* Lightbox Form */}
+      <LightboxForm 
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        title="Contact Us"
+        serviceType="contact"
+      />
     </div>
   );
 };

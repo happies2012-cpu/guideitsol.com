@@ -1,14 +1,18 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion, Easing } from "framer-motion";
 import { Sparkles, Truck, Lightbulb, Code, Globe, MessageSquare, Video, Coffee, Plane, Building, CalendarCheck, CheckCircle, Layers, TrendingUp, Target, Layout, Settings, Users, ArrowRight } from "lucide-react"; // Added Users and ArrowRight
 import { mainNavigation, NavItem } from "@/lib/navigation-data";
+import PageHero from "@/components/ui/PageHero";
+import LightboxForm from "@/components/ui/LightboxForm";
 
 const SolutionsOverview = () => {
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as Easing } },
@@ -60,28 +64,13 @@ const SolutionsOverview = () => {
         }}
       />
 
-      {/* Hero Section */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={containerVariants}
-        className="relative py-32 overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-gradient-primary-start/10 via-gradient-primary-end/10 to-transparent" />
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 backdrop-blur-sm border border-primary/20 mb-8 animate-fade-in">
-            <Sparkles className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Innovative Business Solutions</span>
-          </div>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent animate-fade-in">
-            Our Solutions
-          </h1>
-          <p className="text-xl text-foreground max-w-3xl mx-auto animate-fade-in">
-            Empowering businesses with cutting-edge technology and strategic insights to thrive in the digital era.
-          </p>
-        </div>
-      </motion.section>
+      {/* Hero Section with unique background */}
+      <PageHero
+        title="Our Solutions"
+        subtitle="Empowering businesses with cutting-edge technology and strategic insights to thrive in the digital era."
+        ctaText="Get a Free Consultation"
+        pageType="solutions"
+      />
 
       {/* Solutions Grid */}
       <motion.section
@@ -145,17 +134,19 @@ const SolutionsOverview = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
               Ready to Innovate Your Business?
             </h2>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-xl text-gray-200 mb-8">
               Explore our tailored solutions and transform your challenges into opportunities.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact">
-                <Button size="lg" className="px-8 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity shadow-lg">
-                  Get a Free Consultation
-                </Button>
-              </Link>
+              <Button 
+                size="lg" 
+                className="px-8 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity shadow-lg"
+                onClick={() => setIsLightboxOpen(true)}
+              >
+                Get a Free Consultation
+              </Button>
               <Link to="/portfolio">
-                <Button size="lg" variant="outline" className="px-8 border-primary/30 hover:bg-primary/10 backdrop-blur-sm">
+                <Button size="lg" variant="outline" className="px-8 border-primary/30 hover:bg-primary/10 backdrop-blur-sm text-white border-white">
                   View Our Portfolio
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -164,6 +155,14 @@ const SolutionsOverview = () => {
           </div>
         </div>
       </motion.section>
+      
+      {/* Lightbox Form */}
+      <LightboxForm 
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        title="Solutions Inquiry"
+        serviceType="solutions"
+      />
     </div>
   );
 };
