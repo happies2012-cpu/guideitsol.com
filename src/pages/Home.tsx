@@ -2,6 +2,7 @@
 
 import { motion, Easing } from "framer-motion";
 import Hero from "@/components/Hero";
+import AIEmployeesSection from "@/components/AIEmployeesSection";
 import Services from "@/components/Services";
 import StatsSection from "@/components/StatsSection";
 import CEOSection from "@/components/CEOSection";
@@ -26,6 +27,7 @@ const Home = () => {
   return (
     <div>
       <Hero />
+      <AIEmployeesSection />
       
       {/* Existing Components */}
       <StatsAndCEOSection />
