@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, Easing } from "framer-motion";
-import { HeroSection as Hero } from "@/components/HeroSection";
+import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import StatsSection from "@/components/StatsSection";
 import CEOSection from "@/components/CEOSection";
