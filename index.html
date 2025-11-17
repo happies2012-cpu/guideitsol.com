@@ -11,9 +11,108 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Security Measures to Prevent Right-Click, Copy, and Inspect -->
+    <style>
+      body {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      
+      body * {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+    </style>
   </head>
-  <body class="min-h-screen bg-background font-sans antialiased">
+  <body class="min-h-screen bg-background font-sans antialiased" oncontextmenu="return false;" oncopy="return false;" oncut="return false;" onpaste="return false;" onselect="return false;" onselectstart="return false;">
     <div id="root"></div>
+    
+    <!-- Additional Security Measures -->
+    <script>
+      // Disable common keyboard shortcuts for developer tools
+      document.addEventListener('keydown', function(e) {
+        // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+        if (
+          e.keyCode === 123 || // F12
+          (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || // Ctrl+Shift+I or Ctrl+Shift+J
+          (e.ctrlKey && e.keyCode === 85) // Ctrl+U
+        ) {
+          e.preventDefault();
+          return false;
+        }
+        
+        // Disable Ctrl+A (select all)
+        if (e.ctrlKey && e.keyCode === 65) {
+          e.preventDefault();
+          return false;
+        }
+        
+        // Disable Ctrl+C (copy)
+        if (e.ctrlKey && e.keyCode === 67) {
+          e.preventDefault();
+          return false;
+        }
+        
+        // Disable Ctrl+X (cut)
+        if (e.ctrlKey && e.keyCode === 88) {
+          e.preventDefault();
+          return false;
+        }
+        
+        // Disable Ctrl+V (paste)
+        if (e.ctrlKey && e.keyCode === 86) {
+          e.preventDefault();
+          return false;
+        }
+      });
+      
+      // Disable text selection
+      document.addEventListener('selectstart', function(e) {
+        e.preventDefault();
+        return false;
+      });
+      
+      // Disable dragging of images and other elements
+      document.addEventListener('dragstart', function(e) {
+        e.preventDefault();
+        return false;
+      });
+      
+      // Disable right-click context menu
+      document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
+      });
+      
+      // Disable developer tools detection
+      let devtools = {
+        open: false,
+        orientation: null
+      };
+      
+      const threshold = 160;
+      
+      setInterval(() => {
+        if (window.outerHeight - window.innerHeight > threshold || 
+            window.outerWidth - window.innerWidth > threshold) {
+          if (!devtools.open) {
+            devtools.open = true;
+            // Optionally redirect or take other action
+            // window.location.href = 'about:blank';
+          }
+        } else {
+          devtools.open = false;
+        }
+      }, 500);
+    </script>
+    
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

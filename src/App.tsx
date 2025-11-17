@@ -11,6 +11,7 @@ import { ModalProvider } from "@/components/modals/ModalProvider";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { useModalEvents } from "@/hooks/use-modal-events";
 import { useResourceHints } from "@/hooks/use-performance";
+import { useSecurity } from "@/hooks/useSecurity";
 import Header from "./components/Header";
 import VerticalSocialDock from "./components/VerticalSocialDock";
 import Footer from "./components/Footer";
@@ -127,6 +128,8 @@ const AppContent = () => {
   // Add resource hints for better performance
   useResourceHints();
   
+  // Initialize security measures
+  useSecurity();
 
   
   return (

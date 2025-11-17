@@ -1,5 +1,18 @@
 # Security Policy
 
+## Website Content Protection
+
+This website implements comprehensive security measures to prevent unauthorized access to content:
+
+- Right-click blocking to prevent context menu access
+- Text selection prevention to disable copying
+- Keyboard shortcut blocking for developer tools (F12, Ctrl+Shift+I, etc.)
+- Image drag protection to prevent saving images
+- Developer tools detection
+- Clipboard operation blocking (copy, cut, paste)
+
+For detailed information about the implementation, see [SECURITY_IMPLEMENTATION.md](SECURITY_IMPLEMENTATION.md).
+
 ## Supported Versions
 
 Use this section to tell people about which versions of your project are
