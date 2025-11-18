@@ -6,6 +6,7 @@ import { AlertCircle, CheckCircle, CreditCard, QrCode, Wallet } from 'lucide-rea
 import { toast } from 'sonner';
 import { maskUpiId, generateUpiLink, copyToClipboard } from '@/lib/upi-utils';
 import UpiQrCode from '@/components/UpiQrCode';
+import * as payuUtils from '@/lib/payu-utils';
 
 interface PaymentComponentProps {
   toolName: string;
@@ -25,7 +26,7 @@ const PaymentComponent: React.FC<PaymentComponentProps> = ({
   onPaymentSuccess 
 }) => {
   const [paymentVerified, setPaymentVerified] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<'razorpay' | 'upi' | 'paypal'>('razorpay');
+  const [paymentMethod, setPaymentMethod] = useState<'razorpay' | 'upi' | 'paypal' | 'payu'>('razorpay');
   const [upiId] = useState(import.meta.env.VITE_UPI_ID || '8884162999@ybl'); // Get from env or use default
   const [maskedUpiId, setMaskedUpiId] = useState('');
 
@@ -114,6 +115,50 @@ const PaymentComponent: React.FC<PaymentComponentProps> = ({
     setPaymentVerified(false);
   };
 
+  const handlePayUPayment = async () => {
+    try {
+      // Create PayU order
+      const orderData = await payuUtils.createPayUOrder(
+        amount,
+        toolName,
+        'Customer',
+        'customer@example.com',
+        '9999999999'
+      );
+
+      // Generate hash for security
+      const hashData = {
+        txnid: orderData.orderId,
+        amount: orderData.amount,
+        productinfo: orderData.productInfo,
+        firstname: orderData.firstName,
+        email: orderData.email
+      };
+
+      const hashResponse = await payuUtils.generatePayUHash(hashData);
+
+      // Prepare payment data
+      const paymentData = {
+        key: hashResponse.key,
+        txnid: orderData.orderId,
+        amount: orderData.amount,
+        productinfo: orderData.productInfo,
+        firstname: orderData.firstName,
+        email: orderData.email,
+        phone: orderData.phone,
+        surl: `${window.location.origin}/api/payu/success`,
+        furl: `${window.location.origin}/api/payu/failure`,
+        hash: hashResponse.hash
+      };
+
+      // Submit payment
+      payuUtils.submitPayUPayment(paymentData);
+    } catch (error) {
+      console.error('PayU Payment error:', error);
+      toast.error('Failed to initiate PayU payment. Please try again.');
+    }
+  };
+
   const handleClose = () => {
     resetPayment();
     onClose();
@@ -166,6 +211,14 @@ const PaymentComponent: React.FC<PaymentComponentProps> = ({
               >
                 <Wallet className="h-4 w-4 mr-2" />
                 PayPal
+              </Button>
+              <Button 
+                variant={paymentMethod === 'payu' ? 'default' : 'outline'} 
+                onClick={() => setPaymentMethod('payu')}
+                className="flex-1"
+              >
+                <Wallet className="h-4 w-4 mr-2" />
+                PayU
               </Button>
             </div>
             
@@ -262,6 +315,59 @@ const PaymentComponent: React.FC<PaymentComponentProps> = ({
                 
                 <div className="text-center text-sm text-muted-foreground">
                   <p>Secure payment powered by PayPal</p>
+                </div>
+              </div>
+            )}
+            {/* PayPal Payment */}
+            {paymentMethod === 'paypal' && (
+              <div className="space-y-4">
+                <div className="bg-muted p-4 rounded-lg">
+                  <h3 className="font-semibold mb-2">Pay with PayPal</h3>
+                  <p className="text-sm mb-4">Complete your payment of ₹{amount} using your PayPal account</p>
+                  
+                  <div className="flex justify-center">
+                    <div>
+                      <style>{`.pp-JRBG2VWXUBBVL{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}`}</style>
+                      <form action="https://www.sandbox.paypal.com/ncp/payment/JRBG2VWXUBBVL" method="post" target="_blank" style={{display:'inline-grid',justifyItems:'center',alignContent:'start',gap:'0.5rem'}}>
+                        <input className="pp-JRBG2VWXUBBVL" type="submit" value="Buy Now" />
+                        <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
+                        <section style={{fontSize: '0.75rem'}}> Powered by <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style={{height:'0.875rem',verticalAlign:'middle'}}/></section>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="text-center text-sm text-muted-foreground">
+                  <p>Secure payment powered by PayPal</p>
+                </div>
+              </div>
+            )}
+            
+            {/* PayU Payment */}
+            {paymentMethod === 'payu' && (
+              <div className="space-y-4">
+                <div className="bg-muted p-4 rounded-lg">
+                  <h3 className="font-semibold mb-2">Pay with PayU</h3>
+                  <p className="text-sm mb-4">Complete your payment of ₹{amount} using PayU</p>
+                  
+                  <div className="flex justify-center my-4">
+                    <div className="bg-white p-2 rounded">
+                      <img src="https://payu.in/assets/images/payu-logo.svg" alt="PayU" className="h-8" />
+                    </div>
+                  </div>
+                  
+                  <p className="text-xs text-center text-muted-foreground mb-4">
+                    India's leading payment gateway provider
+                  </p>
+                </div>
+                
+                <Button onClick={handlePayUPayment} className="w-full">
+                  <Wallet className="h-4 w-4 mr-2" />
+                  Pay with PayU
+                </Button>
+                
+                <div className="text-center text-sm text-muted-foreground">
+                  <p>Secure payment powered by PayU</p>
                 </div>
               </div>
             )}
