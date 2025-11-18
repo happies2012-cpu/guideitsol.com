@@ -14,7 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { X, Mail, Phone, Calendar, CreditCard, Check, Star } from "lucide-react";
+import { X, Mail, Phone, Calendar, CreditCard, Check, Star, Wallet } from "lucide-react";
 import { motion } from "framer-motion";
 
 type ModalType = 
@@ -333,19 +333,9 @@ const QuoteForm: React.FC<{ onSubmit: (data: any) => void; service?: string }> =
 };
 
 const PaymentForm: React.FC<{ onSubmit: (data: any) => void; amount?: number; plan?: string }> = ({ onSubmit, amount, plan }) => {
-  const [formData, setFormData] = useState({
-    cardNumber: '',
-    expiryDate: '',
-    cvv: '',
-    name: '',
-    email: ''
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSubmit(formData);
-  };
-
+  // For simplicity, we'll just show a message directing users to PayU
+  // In a real implementation, you might want to embed the PayU component directly
+  
   return (
     <div className="mt-4">
       <Card className="mb-4">
@@ -367,68 +357,37 @@ const PaymentForm: React.FC<{ onSubmit: (data: any) => void; amount?: number; pl
         </CardContent>
       </Card>
       
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <Label htmlFor="cardNumber">Card Number *</Label>
-          <Input
-            id="cardNumber"
-            required
-            value={formData.cardNumber}
-            onChange={(e) => setFormData({...formData, cardNumber: e.target.value})}
-            placeholder="1234 5678 9012 3456"
-          />
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <Label htmlFor="expiryDate">Expiry Date *</Label>
-            <Input
-              id="expiryDate"
-              required
-              value={formData.expiryDate}
-              onChange={(e) => setFormData({...formData, expiryDate: e.target.value})}
-              placeholder="MM/YY"
-            />
+      <div className="space-y-4">
+        <div className="bg-muted p-4 rounded-lg">
+          <h3 className="font-semibold mb-2">Pay with PayU</h3>
+          <p className="text-sm mb-4">Complete your payment using India's leading payment gateway.</p>
+          
+          <div className="flex justify-center my-4">
+            <div className="bg-white p-2 rounded">
+              <img src="https://payu.in/assets/images/payu-logo.svg" alt="PayU" className="h-8" />
+            </div>
           </div>
-          <div>
-            <Label htmlFor="cvv">CVV *</Label>
-            <Input
-              id="cvv"
-              required
-              value={formData.cvv}
-              onChange={(e) => setFormData({...formData, cvv: e.target.value})}
-              placeholder="123"
-            />
-          </div>
+          
+          <p className="text-xs text-center text-muted-foreground mb-4">
+            India's leading payment gateway provider
+          </p>
         </div>
-        <div>
-          <Label htmlFor="name">Cardholder Name *</Label>
-          <Input
-            id="name"
-            required
-            value={formData.name}
-            onChange={(e) => setFormData({...formData, name: e.target.value})}
-            placeholder="John Doe"
-          />
-        </div>
-        <div>
-          <Label htmlFor="email">Email *</Label>
-          <Input
-            id="email"
-            type="email"
-            required
-            value={formData.email}
-            onChange={(e) => setFormData({...formData, email: e.target.value})}
-            placeholder="john@example.com"
-          />
-        </div>
-        <Button type="submit" className="w-full bg-gradient-to-r from-green-500 to-green-600">
-          <CreditCard className="w-4 h-4 mr-2" />
-          Pay ${amount || 99}
+        
+        <Button 
+          onClick={() => {
+            // Redirect to PayU payment page
+            window.location.href = '/pricing'; // For now, redirect to pricing page where PayU is integrated
+          }}
+          className="w-full bg-gradient-to-r from-primary to-primary/80"
+        >
+          <Wallet className="w-4 h-4 mr-2" />
+          Proceed to PayU Payment
         </Button>
+        
         <p className="text-xs text-muted-foreground text-center">
-          Secure payment powered by Stripe. Your information is encrypted and safe.
+          Secure payment powered by PayU. Your information is encrypted and safe.
         </p>
-      </form>
+      </div>
     </div>
   );
 };

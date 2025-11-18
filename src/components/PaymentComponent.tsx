@@ -26,7 +26,7 @@ const PaymentComponent: React.FC<PaymentComponentProps> = ({
   onPaymentSuccess 
 }) => {
   const [paymentVerified, setPaymentVerified] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<'razorpay' | 'upi' | 'paypal' | 'payu'>('razorpay');
+  const [paymentMethod, setPaymentMethod] = useState<'razorpay' | 'upi' | 'paypal' | 'payu'>('payu');
   const [upiId] = useState(import.meta.env.VITE_UPI_ID || '8884162999@ybl'); // Get from env or use default
   const [maskedUpiId, setMaskedUpiId] = useState('');
 
@@ -148,7 +148,9 @@ const PaymentComponent: React.FC<PaymentComponentProps> = ({
         phone: orderData.phone,
         surl: `${window.location.origin}/api/payu/success`,
         furl: `${window.location.origin}/api/payu/failure`,
-        hash: hashResponse.hash
+        hash: hashResponse.hash,
+        // Add enrollment ID as UDF field for tracking
+        udf1: enrollmentId || ''
       };
 
       // Submit payment

@@ -2,6 +2,7 @@ import express from 'express';
 const router = express.Router();
 import crypto from 'crypto';
 import path from 'path';
+import prisma from '../db/prisma.js';
 
 // Generate PayU hash endpoint
 router.post('/generate-hash', async (req, res) => {
@@ -42,11 +43,26 @@ router.post('/success', (req, res) => {
       // Payment verified successfully
       console.log('PayU Payment Successful:', { txnid, amount, productinfo, firstname, email, status });
       
-      // Update enrollment status in database
+      // Update enrollment status in database if enrollment ID is provided
+      if (udf1) {
+        prisma.aIEnrollments.update({
+          where: { id: udf1 },
+          data: { 
+            isPaid: true,
+            transactionId: txnid
+          }
+        }).then(() => {
+          console.log('Enrollment updated successfully:', udf1);
+        }).catch((dbError) => {
+          console.error('Error updating enrollment:', dbError);
+        });
+      }
+      
       // Send confirmation email
       // Perform any other post-payment actions
       
-      res.sendFile(path.join(process.cwd(), 'server/views/payment-success.html'));
+      // Redirect to dashboard after successful payment
+      res.redirect('/dashboard');
     } else {
       // Hash verification failed
       console.log('PayU Payment Verification Failed:', { txnid, amount, productinfo });

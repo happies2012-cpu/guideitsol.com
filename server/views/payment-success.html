@@ -92,7 +92,13 @@
         
         <p>Thank you for your purchase. You can now access your product.</p>
         
-        <a href="/" class="button">Continue to Website</a>
+        <a href="/dashboard" class="button">Go to Dashboard</a>
+        <script>
+            // Redirect to dashboard after 3 seconds
+            setTimeout(function() {
+                window.location.href = '/dashboard';
+            }, 3000);
+        </script>
     </div>
 </body>
 </html>
