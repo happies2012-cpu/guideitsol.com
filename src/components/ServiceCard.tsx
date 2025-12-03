@@ -16,22 +16,12 @@ interface ServiceCardProps {
 }
 
 const ServiceCard = ({ icon: Icon, image, title, description, href, isHighlighted = false }: ServiceCardProps) => {
-  const cardVariants = {
-    initial: { y: 0, boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)" },
-    hover: {
-      y: -10,
-      boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
-      transition: { duration: 0.3 }
-    },
-  };
-
   return (
-    <motion.div
-      variants={cardVariants}
-      whileHover="hover"
-      className={`group cursor-pointer transition-all duration-300 h-full ${isHighlighted ? 'bg-primary text-primary-foreground' : 'bg-service-bg hover:bg-primary hover:text-primary-foreground'} rounded-lg overflow-hidden`}
-    >
-      <Card className={`relative overflow-hidden backdrop-blur-xl ${isHighlighted ? 'bg-primary text-primary-foreground border-primary' : 'bg-background/40 border-primary/20'} hover:border-primary/50 transition-all duration-500 hover:shadow-[0_0_30px_-5px_hsl(var(--gradient-primary-start)/0.5)] h-full`}>
+    <div className={`group cursor-pointer transition-all duration-300 h-full ${isHighlighted ? 'bg-primary text-primary-foreground' : 'bg-service-bg hover:bg-primary hover:text-primary-foreground'} rounded-lg overflow-hidden`}>
+      <Card 
+        hoverEffect 
+        className={`relative overflow-hidden backdrop-blur-xl ${isHighlighted ? 'bg-primary text-primary-foreground border-primary' : 'bg-background/40 border-primary/20'} hover:border-primary/50 transition-all duration-500 hover:shadow-[0_0_30px_-5px_hsl(var(--gradient-primary-start)/0.5)] h-full`}
+      >
         <div className={`absolute inset-0 bg-gradient-to-br from-gradient-primary-start/5 via-gradient-primary-end/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${isHighlighted ? 'from-gradient-primary-start/20 to-gradient-primary-end/20' : ''}`} />
         <CardContent className="p-8 text-center relative z-10 flex flex-col h-full">
           {image ? (
@@ -63,7 +53,7 @@ const ServiceCard = ({ icon: Icon, image, title, description, href, isHighlighte
           </Link>
         </CardContent>
       </Card>
-    </motion.div>
+    </div>
   );
 };
 

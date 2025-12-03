@@ -6,6 +6,8 @@ import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 import TypewriterEffect from "./TypewriterEffect";
 import { useState } from "react";
 import LightboxForm from "@/components/ui/LightboxForm";
+import { Particles } from "@/components/ui/particles";
+import Parallax from "@/components/ui/parallax";
 // Studio image imports
 import studio10 from "@/assets/Studio/10.png";
 import studio11 from "@/assets/Studio/11.png";
@@ -44,6 +46,19 @@ const Hero = () => {
   return (
     <>
       <section className="relative mx-auto max-w-6xl px-6 pt-32 lg:pb-16 lg:pt-48">
+        {/* Particle background */}
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          <Particles
+            className="absolute inset-0"
+            quantity={100}
+            ease={50}
+            size={0.5}
+            color="#4F46E5"
+            vx={0.1}
+            vy={0.1}
+          />
+        </div>
+        
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <AnimatedGroup
             variants={{
@@ -66,7 +81,7 @@ const Hero = () => {
             </h1>
 
             <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg">
-              Professional consulting services to help your business grow and succeed in today's competitive market
+              Professional IT consulting services to help your business grow and succeed in today's competitive market
             </p>
 
             <div className="mt-12">
@@ -79,22 +94,23 @@ const Hero = () => {
               </Button>
             </div>
 
-            <div
-              aria-hidden
-              className="bg-radial from-primary/50 dark:from-primary/25 relative mx-auto mt-32 max-w-2xl to-transparent to-55% text-left"
-            >
-              <div className="bg-background border-border/50 absolute inset-0 mx-auto w-80 -translate-x-3 -translate-y-12 rounded-[2rem] border p-2 [mask-image:linear-gradient(to_bottom,#000_50%,transparent_90%)] sm:-translate-x-6">
-                <div className="relative h-96 overflow-hidden rounded-[1.5rem] border p-2 pb-12 before:absolute before:inset-0 before:bg-[repeating-linear-gradient(-45deg,var(--border),var(--border)_1px,transparent_1px,transparent_6px)] before:opacity-50"></div>
+            <Parallax speed={0.2} className="relative mx-auto mt-32 max-w-2xl">
+              <div
+                aria-hidden
+                className="bg-radial from-primary/50 dark:from-primary/25 relative mx-auto max-w-2xl to-transparent to-55% text-left"
+              >
+                <Parallax speed={-0.1} className="bg-background border-border/50 absolute inset-0 mx-auto w-80 -translate-x-3 -translate-y-12 rounded-[2rem] border p-2 [mask-image:linear-gradient(to_bottom,#000_50%,transparent_90%)] sm:-translate-x-6">
+                  <div className="relative h-96 overflow-hidden rounded-[1.5rem] border p-2 pb-12 before:absolute before:inset-0 before:bg-[repeating-linear-gradient(-45deg,var(--border),var(--border)_1px,transparent_1px,transparent_6px)] before:opacity-50"></div>
+                </Parallax>
+                <Parallax speed={0.1} className="bg-muted dark:bg-background/50 border-border/50 mx-auto w-80 translate-x-4 rounded-[2rem] border p-2 backdrop-blur-3xl [mask-image:linear-gradient(to_bottom,#000_50%,transparent_90%)] sm:translate-x-8">
+                  <div className="bg-background space-y-2 overflow-hidden rounded-[1.5rem] border p-2 shadow-xl dark:bg-white/5 dark:shadow-black dark:backdrop-blur-3xl">
+                    <AppComponent />
+                    <div className="bg-muted rounded-[1rem] p-4 pb-16 dark:bg-white/5"></div>
+                  </div>
+                </Parallax>
+                <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] mix-blend-overlay [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] dark:opacity-5" />
               </div>
-              <div className="bg-muted dark:bg-background/50 border-border/50 mx-auto w-80 translate-x-4 rounded-[2rem] border p-2 backdrop-blur-3xl [mask-image:linear-gradient(to_bottom,#000_50%,transparent_90%)] sm:translate-x-8">
-                <div className="bg-background space-y-2 overflow-hidden rounded-[1.5rem] border p-2 shadow-xl dark:bg-white/5 dark:shadow-black dark:backdrop-blur-3xl">
-                  <AppComponent />
-
-                  <div className="bg-muted rounded-[1rem] p-4 pb-16 dark:bg-white/5"></div>
-                </div>
-              </div>
-              <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] mix-blend-overlay [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] dark:opacity-5" />
-            </div>
+            </Parallax>
           </AnimatedGroup>
         </div>
       </section>

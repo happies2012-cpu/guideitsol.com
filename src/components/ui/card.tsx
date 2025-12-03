@@ -1,10 +1,42 @@
 import * as React from "react";
+import { motion, HTMLMotionProps } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 
-const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("rounded-lg border bg-card text-card-foreground shadow-sm", className)} {...props} />
-));
+const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & { hoverEffect?: boolean }>(({ className, hoverEffect = false, ...props }, ref) => {
+  if (hoverEffect) {
+    // Separate motion props from HTML props
+    const { 
+      whileHover, 
+      transition, 
+      ...htmlProps 
+    } = props as any;
+    
+    const motionProps = {
+      whileHover: {
+        y: -10,
+        rotateX: 5,
+        rotateY: 5,
+        scale: 1.02,
+        boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+      },
+      transition: { type: "spring", stiffness: 300, damping: 20 }
+    };
+    
+    return (
+      <motion.div
+        ref={ref}
+        className={cn("rounded-lg border bg-card text-card-foreground shadow-sm", className)}
+        {...motionProps}
+        {...htmlProps}
+      />
+    );
+  }
+  
+  return (
+    <div ref={ref} className={cn("rounded-lg border bg-card text-card-foreground shadow-sm", className)} {...props} />
+  );
+});
 Card.displayName = "Card";
 
 const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(

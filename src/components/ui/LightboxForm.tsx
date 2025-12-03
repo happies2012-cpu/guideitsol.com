@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { FloatingLabelInput } from "@/components/ui/floating-label-input";
+import { FloatingLabelTextarea } from "@/components/ui/floating-label-textarea";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Send } from "lucide-react";
@@ -22,13 +22,49 @@ const LightboxForm: React.FC<LightboxFormProps> = ({ isOpen, onClose, title, ser
     message: ""
   });
 
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+    
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    }
+    
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+    
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required";
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
     
     // In a real implementation, you would send this data to your backend
     // For now, we'll just show a success message
@@ -56,92 +92,69 @@ const LightboxForm: React.FC<LightboxFormProps> = ({ isOpen, onClose, title, ser
           <DialogTitle className="text-xl font-bold">{title}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1">
-              Full Name *
-            </label>
-            <Input
-              id="name"
-              name="name"
-              type="text"
-              required
-              value={formData.name}
-              onChange={handleInputChange}
-              placeholder="John Doe"
-            />
-          </div>
+          <FloatingLabelInput
+            id="name"
+            name="name"
+            label="Full Name *"
+            type="text"
+            required
+            value={formData.name}
+            onChange={handleInputChange}
+            error={errors.name}
+          />
           
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">
-              Email Address *
-            </label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              required
-              value={formData.email}
-              onChange={handleInputChange}
-              placeholder="john@company.com"
-            />
-          </div>
+          <FloatingLabelInput
+            id="email"
+            name="email"
+            label="Email Address *"
+            type="email"
+            required
+            value={formData.email}
+            onChange={handleInputChange}
+            error={errors.email}
+          />
           
-          <div>
-            <label htmlFor="company" className="block text-sm font-medium text-foreground mb-1">
-              Company Name
-            </label>
-            <Input
-              id="company"
-              name="company"
-              type="text"
-              value={formData.company}
-              onChange={handleInputChange}
-              placeholder="Your Company"
-            />
-          </div>
+          <FloatingLabelInput
+            id="company"
+            name="company"
+            label="Company Name"
+            type="text"
+            value={formData.company}
+            onChange={handleInputChange}
+          />
           
-          <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-1">
-              Phone Number
-            </label>
-            <Input
-              id="phone"
-              name="phone"
-              type="tel"
-              value={formData.phone}
-              onChange={handleInputChange}
-              placeholder="Enter your phone number"
-            />
-          </div>
+          <FloatingLabelInput
+            id="phone"
+            name="phone"
+            label="Phone Number"
+            type="tel"
+            value={formData.phone}
+            onChange={handleInputChange}
+          />
           
           <div>
             <label htmlFor="service" className="block text-sm font-medium text-foreground mb-1">
               Service Interest
             </label>
-            <Input
+            <input
               id="service"
               name="service"
               type="text"
               value={serviceType}
               readOnly
-              className="bg-muted"
+              className="flex h-10 w-full rounded-md border border-input bg-muted px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
             />
           </div>
           
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1">
-              Message *
-            </label>
-            <Textarea
-              id="message"
-              name="message"
-              required
-              value={formData.message}
-              onChange={handleInputChange}
-              placeholder="Tell us about your project requirements and goals..."
-              rows={4}
-            />
-          </div>
+          <FloatingLabelTextarea
+            id="message"
+            name="message"
+            label="Message *"
+            required
+            value={formData.message}
+            onChange={handleInputChange}
+            error={errors.message}
+          />
           
           <Button type="submit" className="w-full bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90">
             Send Message

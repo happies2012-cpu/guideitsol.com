@@ -1,8 +1,22 @@
 import { Calculator, TrendingUp, Target, PieChart, BarChart3, Users, Code, Globe, Lightbulb, CheckCircle, Layers, Cloud, Shield, Truck, Coffee, ShoppingCart, Video, MessageSquare, Plane, Hotel, Car, Ship, LucideIcon } from "lucide-react";
 import ServiceCard from "./ServiceCard";
 import { mainNavigation, NavItem } from "@/lib/navigation-data"; // Import mainNavigation and NavItem
+import ScrollAnimation from "@/components/ui/scroll-animation";
+import Skeleton from "@/components/ui/skeleton";
+import { useState, useEffect } from "react";
 
 const Services = () => {
+  const [loading, setLoading] = useState(true);
+  
+  // Simulate loading data
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
   // Helper to get a Lucide icon based on a title keyword
   const getIconForTitle = (title: string): LucideIcon | undefined => {
     const lowerTitle = title.toLowerCase();
@@ -62,29 +76,72 @@ const Services = () => {
     isHighlighted: index === 1 // Highlight the second card as an example
   }));
 
+  if (loading) {
+    return (
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <ScrollAnimation className="text-center mb-16">
+            <Skeleton variant="text" width="300px" height="40px" className="mx-auto mb-4" />
+            <Skeleton variant="text" width="400px" height="20px" className="mx-auto" />
+          </ScrollAnimation>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[...Array(6)].map((_, index) => (
+              <ScrollAnimation 
+                key={index} 
+                className="h-full"
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <div className="bg-background/40 border border-primary/20 rounded-lg overflow-hidden h-full">
+                  <div className="p-8">
+                    <div className="flex justify-center mb-6">
+                      <Skeleton variant="circular" width="80px" height="80px" />
+                    </div>
+                    <Skeleton variant="text" width="150px" height="24px" className="mx-auto mb-4" />
+                    <Skeleton variant="text" width="100%" height="16px" className="mb-2" />
+                    <Skeleton variant="text" width="90%" height="16px" className="mb-2" />
+                    <Skeleton variant="text" width="80%" height="16px" className="mb-6" />
+                    <div className="flex justify-center">
+                      <Skeleton variant="rectangular" width="120px" height="36px" borderRadius="6px" />
+                    </div>
+                  </div>
+                </div>
+              </ScrollAnimation>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <ScrollAnimation className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-            Our Professional Services
+            Guidesoft Professional Services
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            We provide comprehensive business consulting services to help your company achieve sustainable growth and success
+            We provide comprehensive IT consulting services to help your company achieve sustainable growth and success
           </p>
-        </div>
+        </ScrollAnimation>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {servicesToDisplay.map((service, index) => (
-            <ServiceCard
-              key={index}
-              icon={service.icon}
-              // image={service.image} // No longer passing a generic image
-              title={service.title}
-              description={service.description}
-              href={service.href}
-              isHighlighted={service.isHighlighted}
-            />
+            <ScrollAnimation 
+              key={index} 
+              className="h-full"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <ServiceCard
+                icon={service.icon}
+                // image={service.image} // No longer passing a generic image
+                title={service.title}
+                description={service.description}
+                href={service.href}
+                isHighlighted={service.isHighlighted}
+              />
+            </ScrollAnimation>
           ))}
         </div>
       </div>

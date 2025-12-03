@@ -1,8 +1,46 @@
 version: '3.8'
 
 services:
-  web:
-    build: .
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "80:80"
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=file:./data/database.db
+      - JWT_SECRET=${JWT_SECRET}
+      - PAYU_MERCHANT_KEY=${PAYU_MERCHANT_KEY}
+      - PAYU_MERCHANT_SALT=${PAYU_MERCHANT_SALT}
+      - PAYU_BASE_URL=${PAYU_BASE_URL}
+    volumes:
+      - ./data:/app/data
+      - ./certs:/app/certs:ro
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3001/api/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    depends_on:
+      - db-init
+
+  db-init:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+      sh -c "
+        npm run prisma:generate &&
+        npm run prisma:migrate &&
+        node scripts/create-super-admin.js
+      "
+    environment:
+      - DATABASE_URL=file:./data/database.db
+      - JWT_SECRET=${JWT_SECRET}
+    volumes:
+      - ./data:/app/data
+    profiles:
+      - init

@@ -1,0 +1,59 @@
+{
+  "name": "guideitsol-website",
+  "description": "Full-stack application with Vite React frontend, Express backend, and SQLite database",
+  "services": [
+    {
+      "name": "app",
+      "type": "docker-compose",
+      "dockerComposePath": "./docker-compose.yml",
+      "envPath": "./.env.production",
+      "domain": "guideitsol.com",
+      "port": 3001,
+      "healthcheck": {
+        "path": "/api/health",
+        "interval": 30,
+        "timeout": 10,
+        "retries": 3
+      },
+      "build": {
+        "context": ".",
+        "dockerfile": "Dockerfile"
+      },
+      "environment": {
+        "NODE_ENV": "production",
+        "DATABASE_URL": "file:./data/database.db",
+        "JWT_SECRET": "${JWT_SECRET}",
+        "PAYU_MERCHANT_KEY": "${PAYU_MERCHANT_KEY}",
+        "PAYU_MERCHANT_SALT": "${PAYU_MERCHANT_SALT}",
+        "PAYU_BASE_URL": "${PAYU_BASE_URL}"
+      },
+      "volumes": [
+        "./data:/app/data",
+        "./certs:/app/certs:ro"
+      ]
+    }
+  ],
+  "databases": [
+    {
+      "name": "sqlite-db",
+      "type": "sqlite",
+      "path": "./data/database.db"
+    }
+  ],
+  "backups": {
+    "enabled": true,
+    "schedule": "0 2 * * *",
+    "retention": 7,
+    "paths": [
+      "./data"
+    ]
+  },
+  "monitoring": {
+    "enabled": true,
+    "alerts": {
+      "cpu": 80,
+      "memory": 80,
+      "disk": 80
+    }
+  }
+}

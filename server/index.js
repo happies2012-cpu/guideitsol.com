@@ -23,6 +23,7 @@ import aiIntegrationsRoutes from './routes/ai-integrations.js';
 import userDashboardRoutes from './routes/user-dashboard.js';
 import paypalRoutes from './routes/paypal.js';
 import payuRoutes from './routes/payu.js';
+import payuV2Routes from './routes/payu-v2.js';
 
 dotenv.config();
 
@@ -115,6 +116,7 @@ app.use('/api/ai', aiIntegrationsRoutes);
 app.use('/api/dashboard', userDashboardRoutes);
 app.use('/api/paypal', paypalRoutes);
 app.use('/api/payu', payuRoutes);
+app.use('/api/payu-v2', payuV2Routes);
 
 // Health check
 app.get('/api/health', (req, res) => {

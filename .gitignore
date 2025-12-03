@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Environment files
+.env
+.env.local
+.env.production
+.env.development
+
 # Lock files - keep only package-lock.json for npm
 pnpm-lock.yaml
 bun.lockb

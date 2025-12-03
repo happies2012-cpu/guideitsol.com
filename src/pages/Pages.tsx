@@ -179,10 +179,10 @@ const Pages = () => {
             <span className="text-sm font-medium text-primary">Driving Innovation Forward</span>
           </div>
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent animate-fade-in">
-            About Our Company
+            About Guidesoft
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in">
-            Leading the technology revolution with cutting-edge solutions that transform businesses and drive sustainable growth
+            Leading the technology revolution with cutting-edge IT solutions that transform businesses and drive sustainable growth
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
             <Button size="lg" className="px-8 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity shadow-lg">
@@ -219,10 +219,10 @@ const Pages = () => {
                 Our Mission & Vision
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                We believe technology should amplify human potential. Our mission is to democratize access to cutting-edge technology solutions, making them accessible to businesses of all sizes to drive innovation and growth.
+                At Guidesoft, our mission is to empower businesses with innovative IT solutions that drive digital transformation and sustainable growth. We democratize access to cutting-edge technology, making it accessible to businesses of all sizes.
               </p>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                We envision a future where intelligent systems augment human decision-making, automate repetitive tasks, and unlock exponential growth through data-driven insights and transformative technology.
+                We envision a future where intelligent systems augment human decision-making, automate repetitive tasks, and unlock exponential growth through data-driven insights and transformative technology for businesses worldwide.
               </p>
               
               <div className="space-y-4">
@@ -252,10 +252,10 @@ const Pages = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-              Our Core Values
+              Guidesoft Core Values
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              The principles that guide our work and shape our solutions
+              The principles that guide our work and shape our IT solutions
             </p>
           </div>
           
@@ -302,10 +302,10 @@ const Pages = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-              Our Expertise
+              Guidesoft Expertise
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive technology solutions to meet all your business needs
+              Comprehensive IT solutions to meet all your business needs
             </p>
           </div>
           
@@ -350,10 +350,10 @@ const Pages = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-              Our Journey
+              Guidesoft Journey
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Milestones in our journey from startup to technology leader
+              Milestones in our journey from startup to IT solutions leader
             </p>
           </div>
           
@@ -397,10 +397,10 @@ const Pages = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-              Leadership Team
+              Guidesoft Leadership
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              World-class experts driving innovation and excellence
+              World-class IT experts driving innovation and excellence
             </p>
           </div>
           
@@ -456,10 +456,10 @@ const Pages = () => {
           <div className="max-w-3xl mx-auto p-12 rounded-3xl bg-background/10 backdrop-blur-xl border border-primary/20 shadow-[0_0_60px_-15px_hsl(var(--gradient-primary-start)/0.5)]">
             <Sparkles className="h-12 w-12 text-primary mx-auto mb-6" />
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-              Ready to Transform Your Business?
+              Ready to Transform Your Business with Guidesoft?
             </h2>
             <p className="text-xl text-muted-foreground mb-8">
-              Partner with us to unlock the full potential of technology for your business
+              Partner with Guidesoft to unlock the full potential of IT solutions for your business
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="px-8 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity shadow-lg">

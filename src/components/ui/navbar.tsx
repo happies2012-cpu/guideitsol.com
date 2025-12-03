@@ -1,6 +1,7 @@
 "use client"
 
-import * as React from "react";
+import * as React from "react"
+import { motion } from "framer-motion"
 
 import {
   Accordion,
@@ -346,15 +347,24 @@ const renderMenuItem = (item: MenuItem) => {
           <div className="w-[800px] p-6">
             <div className="grid grid-cols-2 gap-6">
               {item.items.map((subItem) => (
-                <div key={subItem.title} className="space-y-3">
+                <motion.div 
+                  key={subItem.title} 
+                  className="space-y-3"
+                  whileHover={{ y: -5 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
                   {/* Main category link */}
                   <Link
                     to={subItem.url || "#"}
                     className="flex items-center gap-3 rounded-xl p-3 hover:bg-primary/10 group/main transition-colors"
                   >
-                    <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary group-hover/main:bg-primary group-hover/main:text-primary-foreground transition-all">
+                    <motion.div 
+                      className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary group-hover/main:bg-primary group-hover/main:text-primary-foreground transition-all"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    >
                       {subItem.icon}
-                    </div>
+                    </motion.div>
                     <div className="flex-1">
                       <div className="text-sm font-bold text-foreground group-hover/main:text-primary transition-colors">
                         {subItem.title}
@@ -371,17 +381,22 @@ const renderMenuItem = (item: MenuItem) => {
                   {subItem.items && subItem.items.length > 0 && (
                     <div className="ml-3 pl-3 border-l-2 border-primary/20 space-y-1">
                       {subItem.items.map((nestedItem) => (
-                        <Link
+                        <motion.div
                           key={nestedItem.title}
-                          to={nestedItem.url || "#"}
-                          className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
+                          whileHover={{ x: 5 }}
+                          transition={{ type: "spring", stiffness: 300, damping: 20 }}
                         >
-                          {nestedItem.title}
-                        </Link>
+                          <Link
+                            to={nestedItem.url || "#"}
+                            className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
+                          >
+                            {nestedItem.title}
+                          </Link>
+                        </motion.div>
                       ))}
                     </div>
                   )}
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -392,12 +407,18 @@ const renderMenuItem = (item: MenuItem) => {
 
   return (
     <NavigationMenuItem key={item.title}>
-      <Link
-        className="group inline-flex h-10 w-max items-center justify-center rounded-xl bg-transparent px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary"
-        to={item.url}
+      <motion.div
+        whileHover={{ y: -2 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
-        {item.title}
-      </Link>
+        <Link
+          className="group inline-flex h-10 w-max items-center justify-center rounded-xl bg-transparent px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary"
+          to={item.url}
+        >
+          {item.title}
+        </Link>
+      </motion.div>
     </NavigationMenuItem>
   );
 };
@@ -412,34 +433,54 @@ const renderMobileMenuItem = (item: MenuItem) => {
         <AccordionContent className="mt-2">
           <Accordion type="single" collapsible className="w-full space-y-2">
             {item.items.map((subItem) => (
-              <div key={subItem.title} className="space-y-2">
+              <motion.div 
+                key={subItem.title} 
+                className="space-y-2"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3 }}
+              >
                 {subItem.items && subItem.items.length > 0 ? (
                   <AccordionItem value={subItem.title} className="border-b border-primary/10">
                     <AccordionTrigger className="py-2 text-sm font-semibold hover:no-underline text-foreground hover:text-primary">
                       <div className="flex items-center gap-3">
-                        <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary">
+                        <motion.div 
+                          className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary"
+                          whileHover={{ scale: 1.1 }}
+                          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                        >
                           {subItem.icon}
-                        </div>
+                        </motion.div>
                         <span>{subItem.title}</span>
                       </div>
                     </AccordionTrigger>
                     <AccordionContent className="pl-11 space-y-1">
                       {/* Parent link */}
-                      <Link
-                        to={subItem.url || "#"}
-                        className="block px-3 py-2 text-sm text-primary hover:bg-primary/10 rounded-lg transition-colors font-medium"
+                      <motion.div
+                        whileHover={{ x: 5 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
                       >
-                        View All {subItem.title}
-                      </Link>
+                        <Link
+                          to={subItem.url || "#"}
+                          className="block px-3 py-2 text-sm text-primary hover:bg-primary/10 rounded-lg transition-colors font-medium"
+                        >
+                          View All {subItem.title}
+                        </Link>
+                      </motion.div>
                       {/* Nested links */}
                       {subItem.items.map((nestedItem) => (
-                        <Link
+                        <motion.div
                           key={nestedItem.title}
-                          to={nestedItem.url || "#"}
-                          className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
+                          whileHover={{ x: 5 }}
+                          transition={{ type: "spring", stiffness: 300, damping: 20 }}
                         >
-                          {nestedItem.title}
-                        </Link>
+                          <Link
+                            to={nestedItem.url || "#"}
+                            className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
+                          >
+                            {nestedItem.title}
+                          </Link>
+                        </motion.div>
                       ))}
                     </AccordionContent>
                   </AccordionItem>
@@ -448,9 +489,13 @@ const renderMobileMenuItem = (item: MenuItem) => {
                     to={subItem.url || "#"}
                     className="flex select-none gap-3 rounded-xl p-3 leading-none outline-none transition-colors hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary"
                   >
-                    <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary">
+                    <motion.div 
+                      className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary"
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    >
                       {subItem.icon}
-                    </div>
+                    </motion.div>
                     <div className="flex-1">
                       <div className="text-sm font-semibold text-foreground">{subItem.title}</div>
                       {subItem.description && (
@@ -461,7 +506,7 @@ const renderMobileMenuItem = (item: MenuItem) => {
                     </div>
                   </Link>
                 )}
-              </div>
+              </motion.div>
             ))}
           </Accordion>
         </AccordionContent>
@@ -470,8 +515,14 @@ const renderMobileMenuItem = (item: MenuItem) => {
   }
 
   return (
-    <Link key={item.title} to={item.url || "#"} className="font-semibold text-foreground hover:text-primary py-2 block">
-      {item.title}
-    </Link>
+    <motion.div
+      key={item.title}
+      whileHover={{ x: 5 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+    >
+      <Link to={item.url || "#"} className="font-semibold text-foreground hover:text-primary py-2 block">
+        {item.title}
+      </Link>
+    </motion.div>
   );
 };

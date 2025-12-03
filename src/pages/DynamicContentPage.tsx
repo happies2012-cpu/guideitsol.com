@@ -34,7 +34,7 @@ const DynamicContentPage = () => {
     const navItem = findNavItemByHref(currentPath, mainNavigation);
     if (navItem) {
       setPageTitle(navItem.title);
-      setPageDescription(`Discover our comprehensive ${navItem.title} solutions. We provide cutting-edge services tailored to your business needs.`);
+      setPageDescription(`Discover Guidesoft's comprehensive ${navItem.title} solutions. We provide cutting-edge IT services tailored to your business needs.`);
     } else {
       // Extract title from URL path
       const pathSegments = path?.split('/').filter(Boolean) || [];
@@ -45,7 +45,7 @@ const DynamicContentPage = () => {
         .join(' ');
       
       setPageTitle(formattedTitle || "Our Services");
-      setPageDescription(`Explore our ${formattedTitle} solutions. We deliver innovative technology services to help your business grow.`);
+      setPageDescription(`Explore Guidesoft's ${formattedTitle} solutions. We deliver innovative IT services to help your business grow.`);
     }
   }, [currentPath, path]);
 
@@ -129,27 +129,27 @@ const DynamicContentPage = () => {
     // Blog posts section content
     let blogPosts = [
       {
-        title: "The Future of Web Development",
-        excerpt: "Exploring the latest trends and technologies shaping the future of web development.",
-        date: "Oct 15, 2025",
+        title: "The Future of Web Development with Guidesoft",
+        excerpt: "Exploring the latest trends and technologies shaping the future of web development with Guidesoft's innovative solutions.",
+        date: "Nov 15, 2025",
         readTime: "5 min read"
       },
       {
         title: "Cloud Migration Best Practices",
-        excerpt: "Key strategies and considerations for successful cloud migration projects.",
-        date: "Oct 10, 2025",
+        excerpt: "Key strategies and considerations for successful cloud migration projects with Guidesoft's expertise.",
+        date: "Nov 10, 2025",
         readTime: "8 min read"
       },
       {
         title: "Building Scalable Applications",
-        excerpt: "Architectural patterns and practices for building highly scalable applications.",
-        date: "Oct 5, 2025",
+        excerpt: "Architectural patterns and practices for building highly scalable applications with Guidesoft's proven methodologies.",
+        date: "Nov 5, 2025",
         readTime: "6 min read"
       }
     ];
     
     // Category based on page type
-    let category = "Technology Solutions";
+    let category = "Guidesoft Solutions";
     
     // Customize content based on page title
     if (lowerTitle.includes('hire') || lowerTitle.includes('developer')) {
@@ -189,7 +189,7 @@ const DynamicContentPage = () => {
         }
       ];
       
-      category = "Hiring Solutions";
+      category = "Guidesoft Hiring Solutions";
     } else if (lowerTitle.includes('travel')) {
       technologies = [
         "Booking Systems",
@@ -227,7 +227,7 @@ const DynamicContentPage = () => {
         }
       ];
       
-      category = "Travel Solutions";
+      category = "Guidesoft Travel Solutions";
     } else if (lowerTitle.includes('ai') || lowerTitle.includes('machine learning')) {
       technologies = [
         "Machine Learning Models",
@@ -265,7 +265,7 @@ const DynamicContentPage = () => {
         }
       ];
       
-      category = "AI Solutions";
+      category = "Guidesoft AI Solutions";
     } else if (lowerTitle.includes('ecommerce') || lowerTitle.includes('shop')) {
       technologies = [
         "Shopping Cart Systems",
@@ -303,7 +303,7 @@ const DynamicContentPage = () => {
         }
       ];
       
-      category = "E-commerce Solutions";
+      category = "Guidesoft E-commerce Solutions";
     }
     
     return {

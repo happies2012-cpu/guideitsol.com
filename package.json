@@ -26,7 +26,10 @@
     "electron:dist": "electron-builder --dir",
     "migrate:supabase": "node scripts/migrate-to-supabase.js",
     "setup:supabase": "node scripts/setup-supabase.js",
-    "verify:supabase": "node scripts/verify-supabase-setup.js"
+    "verify:supabase": "node scripts/verify-supabase-setup.js",
+    "setup:production": "node scripts/setup-production.js",
+    "create:super-admin": "node scripts/create-super-admin.js",
+    "deploy:dokploy": "./scripts/deploy-dokploy.sh"
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
