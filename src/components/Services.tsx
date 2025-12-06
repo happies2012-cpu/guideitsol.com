@@ -119,10 +119,10 @@ const Services = () => {
       <div className="container mx-auto px-4">
         <ScrollAnimation className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-            Guidesoft Professional Services
+            Guidesoft Business Solutions & Services
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            We provide comprehensive IT consulting services to help your company achieve sustainable growth and success
+            We provide comprehensive IT consulting services and business solutions with AI employee view capabilities to help your company achieve sustainable growth and success
           </p>
         </ScrollAnimation>
         

@@ -75,13 +75,13 @@ const Hero = () => {
           >
             <h1
               className="text-balance text-4xl font-medium sm:text-5xl md:text-6xl">
-              We Help You Build
+              Guidesoft Business Solutions
               <br />
               <TypewriterEffect words={dynamicWords} />
             </h1>
 
             <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg">
-              Professional IT consulting services to help your business grow and succeed in today's competitive market
+              Professional IT consulting services with AI employee view capabilities to help your business grow and succeed with digital transformation solutions
             </p>
 
             <div className="mt-12">

@@ -23,12 +23,17 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --only=production && npm cache clean --force
 
+# Copy Prisma schema
+COPY prisma/ ./prisma/
+
+# Generate Prisma client
+RUN npx prisma generate
+
 # Copy built frontend
 COPY --from=frontend-build /app/dist ./dist
 
 # Copy backend source
 COPY server/ ./server/
-COPY prisma/ ./prisma/
 COPY scripts/ ./scripts/
 
 # Create non-root user

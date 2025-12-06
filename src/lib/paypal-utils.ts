@@ -7,9 +7,14 @@ export const initializePayPal = (amount: number, currency: string = 'INR') => {
       return;
     }
 
-    // Load PayPal SDK
+    // Load PayPal SDK based on environment
+    const isProduction = import.meta.env.PROD || process.env.NODE_ENV === 'production';
+    const clientId = isProduction 
+      ? import.meta.env.VITE_PAYPAL_CLIENT_ID_PROD || import.meta.env.VITE_PAYPAL_CLIENT_ID
+      : import.meta.env.VITE_PAYPAL_CLIENT_ID || 'YOUR_PAYPAL_SANDBOX_CLIENT_ID';
+      
     const script = document.createElement('script');
-    script.src = `https://www.paypal.com/sdk/js?client-id=${import.meta.env.VITE_PAYPAL_CLIENT_ID}&currency=${currency}`;
+    script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=${currency}`;
     script.onload = () => resolve((window as any).paypal);
     script.onerror = () => reject(new Error('Failed to load PayPal SDK'));
     document.head.appendChild(script);

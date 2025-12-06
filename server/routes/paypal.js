@@ -2,8 +2,35 @@ import express from 'express';
 const router = express.Router();
 import crypto from 'crypto';
 
+// Determine if we're in production
+const isProduction = process.env.NODE_ENV === 'production';
+
+// PayPal configuration based on environment
+const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID || 'your-paypal-client-id';
+const PAYPAL_CLIENT_SECRET = process.env.PAYPAL_CLIENT_SECRET || 'your-paypal-client-secret';
+const PAYPAL_BASE_URL = isProduction 
+  ? 'https://api.paypal.com' 
+  : 'https://api.sandbox.paypal.com';
+
+// Helper function to get PayPal access token
+async function getPayPalAccessToken() {
+  const auth = Buffer.from(`${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`).toString('base64');
+  
+  const response = await fetch(`${PAYPAL_BASE_URL}/v1/oauth2/token`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Basic ${auth}`,
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: 'grant_type=client_credentials'
+  });
+  
+  const data = await response.json();
+  return data.access_token;
+}
+
 // PayPal webhook handler
-router.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
+router.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
   const payload = req.body;
   const paypalWebhookId = process.env.PAYPAL_WEBHOOK_ID;
   
@@ -49,16 +76,44 @@ router.post('/create-order', async (req, res) => {
   try {
     const { amount, toolName } = req.body;
     
-    // In a real implementation, you would call PayPal's API to create an order
-    // For now, we'll simulate a successful response
-    const orderId = 'ORDER_' + Date.now();
+    // Get access token
+    const accessToken = await getPayPalAccessToken();
     
-    res.json({
-      id: orderId,
-      status: 'CREATED',
-      amount: amount,
-      toolName: toolName
+    // Create order with PayPal API
+    const response = await fetch(`${PAYPAL_BASE_URL}/v2/checkout/orders`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify({
+        intent: 'CAPTURE',
+        purchase_units: [{
+          amount: {
+            currency_code: 'INR',
+            value: amount.toString()
+          },
+          description: `Enrollment for ${toolName}`
+        }],
+        application_context: {
+          return_url: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/payment-success`,
+          cancel_url: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/payment-cancelled`
+        }
+      })
     });
+    
+    const orderData = await response.json();
+    
+    if (orderData.id) {
+      res.json({
+        id: orderData.id,
+        status: orderData.status,
+        amount: amount,
+        toolName: toolName
+      });
+    } else {
+      throw new Error(orderData.message || 'Failed to create PayPal order');
+    }
   } catch (error) {
     console.error('Error creating PayPal order:', error);
     res.status(500).json({ error: 'Failed to create PayPal order' });
@@ -70,15 +125,29 @@ router.post('/capture-order', async (req, res) => {
   try {
     const { orderId } = req.body;
     
-    // In a real implementation, you would call PayPal's API to capture the order
-    // For now, we'll simulate a successful response
-    res.json({
-      id: orderId,
-      status: 'COMPLETED',
-      payer: {
-        email_address: 'payer@example.com'
+    // Get access token
+    const accessToken = await getPayPalAccessToken();
+    
+    // Capture order with PayPal API
+    const response = await fetch(`${PAYPAL_BASE_URL}/v2/checkout/orders/${orderId}/capture`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
       }
     });
+    
+    const captureData = await response.json();
+    
+    if (captureData.status === 'COMPLETED') {
+      res.json({
+        id: captureData.id,
+        status: captureData.status,
+        payer: captureData.payer
+      });
+    } else {
+      throw new Error(captureData.message || 'Failed to capture PayPal order');
+    }
   } catch (error) {
     console.error('Error capturing PayPal order:', error);
     res.status(500).json({ error: 'Failed to capture PayPal order' });

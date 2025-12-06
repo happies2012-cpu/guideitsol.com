@@ -318,9 +318,21 @@ const Footer = () => {
           className="border-t border-primary/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left relative z-10"
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          <p className="text-muted-foreground text-sm mb-4 md:mb-0">
-            © 2025 Guidesoft. All rights reserved.
-          </p>
+          <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-6 mb-4 md:mb-0">
+            <p className="text-muted-foreground text-sm">
+              © 2025 Guidesoft. All rights reserved.
+            </p>
+            <div className="flex items-center justify-center md:justify-start space-x-4 text-sm text-muted-foreground">
+              <div className="flex items-center">
+                <MapPin className="h-4 w-4 mr-1 text-primary" />
+                <span>123 Tech Park, IT Hub, Hyderabad, Telangana, INDIA</span>
+              </div>
+              <div className="flex items-center">
+                <Phone className="h-4 w-4 mr-1 text-primary" />
+                <span>+91 9876543210</span>
+              </div>
+            </div>
+          </div>
           <div className="flex space-x-6">
             <Link to="#" className="text-muted-foreground hover:text-primary text-sm transition-colors">
               Privacy Policy

@@ -157,13 +157,13 @@ const StatsSection = () => {
           {/* Content */}
           <motion.div variants={contentVariants}>
             <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-              We've More Than
+              Guidesoft Business Solutions
               <br />
               <span className="text-primary">256+ AI Workflows </span>
             </h2>
             
             <p className="text-muted-foreground mb-8 text-lg leading-relaxed">
-              Our experienced team of consultants has helped businesses across the globe achieve their goals through strategic planning, financial expertise, and innovative solutions.
+              Our experienced team of consultants provides business solutions with AI employee view capabilities that have helped businesses across the globe achieve their goals through strategic planning and innovative digital transformation.
             </p>
 
             {/* Stats Grid */}
@@ -185,9 +185,9 @@ const StatsSection = () => {
 
         {/* Bento Grid Section */}
         <div className="text-center mb-12">
-          <h3 className="text-2xl md:text-3xl font-bold mb-4">Our Global Impact</h3>
+          <h3 className="text-2xl md:text-3xl font-bold mb-4">Guidesoft Global Impact</h3>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Discover how we've transformed businesses worldwide with cutting-edge AI solutions
+            Discover how Guidesoft has transformed businesses worldwide with cutting-edge AI solutions and business solutions
           </p>
         </div>
 

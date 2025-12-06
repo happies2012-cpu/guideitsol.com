@@ -33,20 +33,13 @@ fi
 # Ensure data directory exists
 mkdir -p data
 
-# Build and push to Dokploy
+# Build and start the application
 echo "🏗️  Building application..."
 docker-compose build
 
-echo "📤 Pushing to Dokploy..."
-# Note: Replace with actual Dokploy deployment command
-# dokploy deploy --config dokploy.json
+echo "🚀 Starting application..."
+docker-compose up -d
 
-echo "✅ Deployment preparation completed!"
+echo "✅ Application deployed successfully!"
 echo ""
-echo "Next steps:"
-echo "1. Update .env.production with your actual secrets"
-echo "2. Run: dokploy deploy --config dokploy.json"
-echo "3. Or push to your Git repository if using Git-based deployment"
-echo ""
-echo "For manual deployment:"
-echo "docker-compose up -d"
+echo "Access your application at: http://localhost:3001"

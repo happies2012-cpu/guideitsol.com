@@ -13,6 +13,8 @@ import { useModalEvents } from "@/hooks/use-modal-events";
 import { useResourceHints } from "@/hooks/use-performance";
 import { useSecurity } from "@/hooks/useSecurity";
 import { AnimationProvider } from "@/contexts/AnimationContext";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import VerticalSocialDock from "./components/VerticalSocialDock";
 import Footer from "./components/Footer";
@@ -127,6 +129,8 @@ const App = () => {
 };
 
 const AppContent = () => {
+  const location = useLocation();
+  
   // Hook to listen for modal events
   useModalEvents();
   
@@ -135,6 +139,14 @@ const AppContent = () => {
   
   // Initialize security measures
   useSecurity();
+  
+  // Update canonical tag based on current route
+  useEffect(() => {
+    const canonicalTag = document.querySelector('link[rel="canonical"]');
+    if (canonicalTag) {
+      canonicalTag.setAttribute('href', `https://www.guideitsol.com${location.pathname}`);
+    }
+  }, [location]);
 
   
   return (

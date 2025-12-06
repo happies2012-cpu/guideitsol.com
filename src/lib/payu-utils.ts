@@ -8,9 +8,12 @@ export const initializePayU = (amount: number, productInfo: string, firstName: s
       return;
     }
 
-    // Load PayU SDK
+    // Load PayU SDK based on environment
+    const isProduction = import.meta.env.PROD || process.env.NODE_ENV === 'production';
     const script = document.createElement('script');
-    script.src = 'https://secure.payu.in/_payment';
+    script.src = isProduction 
+      ? 'https://secure.payu.in/_payment' 
+      : 'https://test.payu.in/_payment';
     script.onload = () => resolve((window as any).payu);
     script.onerror = () => reject(new Error('Failed to load PayU SDK'));
     document.head.appendChild(script);
@@ -59,9 +62,12 @@ export const generatePayUHash = async (data: any) => {
 
 export const submitPayUPayment = (paymentData: any) => {
   // Create a form and submit to PayU
+  const isProduction = import.meta.env.PROD || process.env.NODE_ENV === 'production';
   const form = document.createElement('form');
   form.method = 'POST';
-  form.action = import.meta.env.VITE_PAYU_PAYMENT_URL || 'https://secure.payu.in/_payment';
+  form.action = isProduction 
+    ? 'https://secure.payu.in/_payment' 
+    : 'https://test.payu.in/_payment';
   
   // Add all payment data as hidden inputs
   Object.keys(paymentData).forEach(key => {

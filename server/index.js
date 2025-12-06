@@ -99,6 +99,9 @@ app.use((req, res, next) => {
   next();
 });
 
+// Serve static files from the React app
+app.use(express.static(path.join(process.cwd(), 'dist')));
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/pages', pagesRoutes);
@@ -129,29 +132,9 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Something went wrong!' });
 });
 
-// Start server with HTTPS in production
-// Also enable HTTPS when explicitly requested via environment variable
-const forceHttps = process.env.FORCE_HTTPS === 'true';
-if (isProduction || forceHttps) {
-  try {
-    const options = {
-      key: fs.readFileSync(path.join(process.cwd(), 'certs', 'server.key')),
-      cert: fs.readFileSync(path.join(process.cwd(), 'certs', 'server.crt'))
-    };
-    
-    https.createServer(options, app).listen(PORT, () => {
-      console.log(`Backend server running on https://localhost:${PORT}`);
-    });
-  } catch (error) {
-    console.log('HTTPS certificates not found, falling back to HTTP');
-    app.listen(PORT, () => {
-      console.log(`Backend server running on http://localhost:${PORT}`);
-    });
-  }
-} else {
-  app.listen(PORT, () => {
-    console.log(`Backend server running on http://localhost:${PORT}`);
-  });
-}
+// Start server with HTTP only
+app.listen(PORT, () => {
+  console.log(`Backend server running on http://localhost:${PORT}`);
+});
 
 export default app;

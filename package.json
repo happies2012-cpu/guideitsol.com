@@ -29,9 +29,12 @@
     "verify:supabase": "node scripts/verify-supabase-setup.js",
     "setup:production": "node scripts/setup-production.js",
     "create:super-admin": "node scripts/create-super-admin.js",
-    "deploy:dokploy": "./scripts/deploy-dokploy.sh"
-  },
-  "dependencies": {
+    "deploy:dokploy": "./scripts/deploy-dokploy.sh",
+    "generate:sitemap": "node scripts/auto-generate-sitemap.js",
+    "deploy:payments": "node scripts/deploy-payments.js",
+    "check:payments": "node scripts/deploy-payments.js",
+    "test:payments": "node scripts/test-payments.js"
+  },  "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
     "@fortawesome/react-fontawesome": "^3.1.0",
