@@ -9,6 +9,7 @@
     <meta name="keywords" content="Guidesoft, AI employee view, business solutions, IT solutions, digital transformation, AI tools, workflow optimization, business growth" />
     
     <!-- Canonical Tag -->
+    <link rel="canonical" href="https://www.guideitsol.com/" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -27,7 +28,9 @@
     <meta property="twitter:image" content="https://www.guideitsol.com/og-image.jpg" />
     <meta property="twitter:image:alt" content="Guidesoft - Innovative IT Solutions" />
     <meta property="twitter:site" content="@guidesoft" />
-    <link rel="canonical" href="https://www.guideitsol.com/" />
+    
+    <!-- AI Search Index -->
+    <link rel="alternate" type="application/json+ld" href="/.well-known/ai-search.jsonld" />
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
@@ -68,16 +71,113 @@
       ]
     }
     </script>
-    <script type="module" crossorigin src="/assets/index-DyIreBmp.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/vendor-DmYlUOWy.js">
-    <link rel="modulepreload" crossorigin href="/assets/ui-CcntThzW.js">
-    <link rel="modulepreload" crossorigin href="/assets/icons-vx1dUfmp.js">
-    <link rel="modulepreload" crossorigin href="/assets/query-9DeW4QQb.js">
-    <link rel="modulepreload" crossorigin href="/assets/router-B4XlTBEC.js">
-    <link rel="modulepreload" crossorigin href="/assets/motion-Jzflb_Ey.js">
-    <link rel="stylesheet" crossorigin href="/assets/index-__pwaZ_c.css">
+    
+    <!-- Security Measures to Prevent Right-Click, Copy, and Inspect -->
+    <style>
+      body {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      
+      body * {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-S2y64CCd.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-DdXWdMVC.js">
+    <link rel="modulepreload" crossorigin href="/assets/router-B1TMt82t.js">
+    <link rel="modulepreload" crossorigin href="/assets/ui-BeVSlGN6.js">
+    <link rel="modulepreload" crossorigin href="/assets/icons-BJkgwx_Z.js">
+    <link rel="modulepreload" crossorigin href="/assets/query-2C8QF9Vb.js">
+    <link rel="modulepreload" crossorigin href="/assets/motion-BvzzSLLe.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-CEMaaMCM.css">
   </head>
-  <body class="min-h-screen bg-background font-sans antialiased">
+  <body class="min-h-screen bg-background font-sans antialiased" oncontextmenu="return false;" oncopy="return false;" oncut="return false;" onpaste="return false;" onselect="return false;" onselectstart="return false;">
     <div id="root"></div>
+    
+    <!-- Additional Security Measures -->
+    <script>
+      // Disable common keyboard shortcuts for developer tools
+      document.addEventListener('keydown', function(e) {
+        // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+        if (
+          e.keyCode === 123 || // F12
+          (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || // Ctrl+Shift+I or Ctrl+Shift+J
+          (e.ctrlKey && e.keyCode === 85) // Ctrl+U
+        ) {
+          e.preventDefault();
+          return false;
+        }
+        
+        // Disable Ctrl+A (select all)
+        if (e.ctrlKey && e.keyCode === 65) {
+          e.preventDefault();
+          return false;
+        }
+        
+        // Disable Ctrl+C (copy)
+        if (e.ctrlKey && e.keyCode === 67) {
+          e.preventDefault();
+          return false;
+        }
+        
+        // Disable Ctrl+X (cut)
+        if (e.ctrlKey && e.keyCode === 88) {
+          e.preventDefault();
+          return false;
+        }
+        
+        // Disable Ctrl+V (paste)
+        if (e.ctrlKey && e.keyCode === 86) {
+          e.preventDefault();
+          return false;
+        }
+      });
+      
+      // Disable text selection
+      document.addEventListener('selectstart', function(e) {
+        e.preventDefault();
+        return false;
+      });
+      
+      // Disable dragging of images and other elements
+      document.addEventListener('dragstart', function(e) {
+        e.preventDefault();
+        return false;
+      });
+      
+      // Disable right-click context menu
+      document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
+      });
+      
+      // Disable developer tools detection
+      let devtools = {
+        open: false,
+        orientation: null
+      };
+      
+      const threshold = 160;
+      
+      setInterval(() => {
+        if (window.outerHeight - window.innerHeight > threshold || 
+            window.outerWidth - window.innerWidth > threshold) {
+          if (!devtools.open) {
+            devtools.open = true;
+            // Optionally redirect or take other action
+            // window.location.href = 'about:blank';
+          }
+        } else {
+          devtools.open = false;
+        }
+      }, 500);
+    </script>
+    
   </body>
 </html>
