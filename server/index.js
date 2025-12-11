@@ -49,18 +49,16 @@ const corsOptions = {
     'https://www.guideitsol.com',
     'http://guideitsol.com',
     'http://www.guideitsol.com'
-  ] : true,
-  credentials: true,
+  ] : true,  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
   exposedHeaders: ['Content-Range', 'X-Content-Range'],
   maxAge: 86400 // 24 hours
 };
-
 // Middleware
 app.use(compression());
 app.use(helmet({
-  contentSecurityPolicy: {
+  contentSecurityPolicy: isProduction ? {
     directives: {
       defaultSrc: ["'self'", "blob:", "data:", "https:", "http:"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "http://fonts.googleapis.com"],
@@ -73,7 +71,7 @@ app.use(helmet({
       mediaSrc: ["'self'", "https:", "http:"],
       childSrc: ["'self'", "blob:", "https:", "http:"],
     },
-  },
+  } : false, // Disable CSP in development
   crossOriginEmbedderPolicy: false,
   crossOriginResourcePolicy: { policy: "cross-origin" }
 }));

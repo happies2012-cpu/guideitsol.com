@@ -25,7 +25,7 @@ async function updateSiteContent() {
     },
     {
       key: 'contact_phone',
-      value_json: JSON.stringify('+91 9043133330')
+      value_json: JSON.stringify('+918500647979')
     },
     {
       key: 'company_address',

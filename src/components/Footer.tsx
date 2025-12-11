@@ -280,7 +280,7 @@ const Footer = () => {
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <Phone className="h-5 w-5 text-primary flex-shrink-0" />
-                <span className="text-muted-foreground text-sm">+91 9876543210</span>
+                <span className="text-muted-foreground text-sm">+918500647979</span>
               </motion.div>
               <motion.div 
                 className="flex items-center space-x-3"
@@ -329,7 +329,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center">
                 <Phone className="h-4 w-4 mr-1 text-primary" />
-                <span>+91 9876543210</span>
+                <span>+918500647979</span>
               </div>
             </div>
           </div>

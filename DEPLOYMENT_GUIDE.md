@@ -303,7 +303,7 @@ df -h
 
 For deployment issues, contact:
 - Email: support@guideitsol.com
-- Phone: +91 9043133330
+- Phone: +918500647979
 
 For PayU integration support:
 - PayU Developer Portal: https://developer.payu.in/

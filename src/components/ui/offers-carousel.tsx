@@ -32,18 +32,15 @@ export interface OffersCarouselProps {
 // Sub-component for individual item cards in the carousel
 const ItemCard = ({ item }: { item: CarouselItem }) => (
   <motion.div
-    className="group w-80 flex-shrink-0"
     whileHover={{ y: -5 }}
-    transition={{ type: "spring", stiffness: 300 }}
+    className="flex-shrink-0 w-64 sm:w-72 md:w-80"
   >
-    <div className="overflow-hidden rounded-lg border bg-card text-card-foreground shadow-sm">
-      <div className="relative">
+    <div className="rounded-xl border bg-card text-card-foreground shadow-sm overflow-hidden h-full flex flex-col">
+      <div className="relative h-40 sm:h-48">
         <img
           src={item.imageUrl}
           alt={item.title}
-          width={320}
-          height={200}
-          className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
         {item.discountPercentage && (
           <div className="absolute bottom-2 right-2 rounded-md bg-primary px-2 py-1 text-xs font-semibold text-primary-foreground">
@@ -51,15 +48,15 @@ const ItemCard = ({ item }: { item: CarouselItem }) => (
           </div>
         )}
       </div>
-      <div className="p-4">
-        <div className="flex items-start justify-between">
+      <div className="p-4 flex-grow flex flex-col">
+        <div className="flex items-start justify-between flex-grow">
           <h3 className="text-base font-semibold leading-tight">{item.title}</h3>
           <div className="ml-2 flex flex-shrink-0 items-center gap-1 rounded-full bg-blue-100 px-2 py-0.5 text-xs font-semibold text-blue-600 dark:bg-blue-900/50 dark:text-blue-400">
             <Star className="h-3 w-3" />
             <span>{item.rating.toFixed(1)}</span>
           </div>
         </div>
-        <p className="mt-1 text-sm text-muted-foreground">{item.subtitle}</p>
+        <p className="mt-1 text-sm text-muted-foreground flex-grow">{item.subtitle}</p>
         <div className="mt-3 flex items-end gap-2">
           <p className="text-lg font-bold">
             {item.price}
@@ -72,7 +69,7 @@ const ItemCard = ({ item }: { item: CarouselItem }) => (
             </p>
           )}
         </div>
-        <p className="text-xs text-muted-foreground">Achievements</p>
+        <p className="text-xs text-muted-foreground mt-2">Achievements</p>
       </div>
     </div>
   </motion.div>
@@ -145,7 +142,7 @@ export const OffersCarousel = React.forwardRef<HTMLDivElement, OffersCarouselPro
           <div className="relative lg:col-span-9">
             <div ref={carouselRef} className="overflow-x-auto scrollbar-hide">
               <motion.div
-                className="flex gap-6 px-1 py-2"
+                className="flex gap-4 sm:gap-6 px-1 py-2"
                 animate={controls}
               >
                 {items.map((item) => (
@@ -154,27 +151,27 @@ export const OffersCarousel = React.forwardRef<HTMLDivElement, OffersCarouselPro
               </motion.div>
             </div>
 
-            {/* Navigation Buttons */}
+            {/* Navigation Buttons - Visible on mobile with different styling */}
             {!isAtStart && (
               <Button
                 variant="outline"
                 size="icon"
-                className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full h-9 w-9 shadow-md z-10 hidden md:flex"
+                className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full h-8 w-8 sm:h-9 sm:w-9 shadow-md z-10 flex md:flex"
                 onClick={() => scroll("left")}
                 aria-label="Scroll left"
               >
-                <ChevronLeft className="h-5 w-5" />
+                <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
             )}
             {!isAtEnd && (
               <Button
                 variant="outline"
                 size="icon"
-                className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 rounded-full h-9 w-9 shadow-md z-10 hidden md:flex"
+                className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 rounded-full h-8 w-8 sm:h-9 sm:w-9 shadow-md z-10 flex md:flex"
                 onClick={() => scroll("right")}
                 aria-label="Scroll right"
               >
-                <ChevronRight className="h-5 w-5" />
+                <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
             )}
           </div>

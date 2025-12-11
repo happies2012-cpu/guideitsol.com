@@ -34,7 +34,10 @@
     "deploy:payments": "node scripts/deploy-payments.js",
     "check:payments": "node scripts/deploy-payments.js",
     "test:payments": "node scripts/test-payments.js",
-    "prepare:production": "node scripts/prepare-production-deployment.js"  },  "dependencies": {
+    "prepare:production": "node scripts/prepare-production-deployment.js",
+    "create:test-user": "node scripts/create-test-user.js"
+  },
+  "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
     "@fortawesome/react-fontawesome": "^3.1.0",
@@ -77,7 +80,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/qrcode.react": "^1.0.5",
     "axios": "^1.12.2",
-    "bcryptjs": "^3.0.2",
+    "bcryptjs": "^3.0.3",
     "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

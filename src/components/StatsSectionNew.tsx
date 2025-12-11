@@ -67,9 +67,17 @@ const StatsSection = () => {
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
       variants={containerVariants}
-      className="py-20 bg-muted/30"
+      className="py-16 sm:py-20 bg-muted/30"
     >
       <div className="container mx-auto px-4">
+        <div className="text-center mb-10 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
+            Our Achievements
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg">
+            Excellence in IT solutions and AI innovation
+          </p>
+        </div>
         <OffersCarousel
           offerTitle="Our Achievements"
           offerSubtitle="Excellence in IT solutions and AI innovation"

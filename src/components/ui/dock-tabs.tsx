@@ -33,7 +33,7 @@ export const VerticalSocialDock: React.FC = () => {
     { icon: Twitter, href: "#", label: "Twitter" },
     { icon: Linkedin, href: "#", label: "LinkedIn" },
     { icon: Instagram, href: "#", label: "Instagram" },
-    { icon: MessageCircle, href: "https://wa.me/8500647979?text=Hello%20GuideSoft%20IT%20Solutions!", label: "WhatsApp" }, // WhatsApp link
+    { icon: MessageCircle, href: "https://wa.me/918500647979?text=Hello%20GuideSoft%20IT%20Solutions!", label: "WhatsApp" }, // WhatsApp link
   ];
 
   return (

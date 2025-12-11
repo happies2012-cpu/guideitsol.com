@@ -140,38 +140,29 @@ const StatsAndCEOSection = () => {
         </div>
       </motion.section>
 
-      {/* Original CEO and Stats Section */}
+      {/* Original CEO and Stats Section - Improved for centering and mobile responsiveness */}
       <motion.section
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
         variants={containerVariants}
-        className="py-20 bg-background relative"
+        className="py-16 sm:py-20 bg-background relative"
       >
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Side: CEO Image - Increased size and mixed background */}
-            <motion.div variants={cardVariants} className="relative flex justify-center">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-background/40 backdrop-blur-xl border border-primary/20 w-4/5 mx-auto">
-                <SmartImage
-                  src={ceoImage}
-                  alt="CEO of Guidesoft"
-                  className="w-full h-full object-cover object-top"
-                />
-                <div className="absolute inset-0 bg-gradient-to-br from-gradient-primary-start/30 to-gradient-primary-end/30 mix-blend-overlay" />
-                <div className="absolute bottom-0 left-0 right-0 bg-background/90 backdrop-blur-sm rounded-lg p-6 m-4">
-                  <h3 className="text-2xl font-semibold text-foreground mb-1">{ceoInfo.name}</h3>
-                  <p className="text-base text-muted-foreground">{ceoInfo.title}, Guidesoft</p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Right Side: Stats Cards - Fully centered */}
+          {/* Centered layout for both mobile and desktop */}
+          <div className="flex flex-col items-center text-center mb-10 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
+              Our Achievement Stats
+            </h2>
+            <p className="text-muted-foreground max-w-2xl text-base sm:text-lg">
+              Key metrics that define our success journey
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center">
+            {/* Stats Cards - Now on top for mobile, left for desktop */}
             <motion.div variants={cardVariants} className="space-y-6 flex flex-col items-center justify-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent text-center">
-                Our Achievement Stats
-              </h2>
-              <div className="grid grid-cols-2 gap-6 w-full max-w-2xl justify-items-center">
+              <div className="grid grid-cols-2 sm:grid-cols-2 gap-4 w-full max-w-2xl justify-items-center">
                 {stats.map((stat, index) => (
                   <motion.div
                     key={index}
@@ -179,17 +170,33 @@ const StatsAndCEOSection = () => {
                     whileHover="hover"
                     className="group flex justify-center"
                   >
-                    <Card className="bg-background/40 backdrop-blur-xl border-primary/20 hover:border-primary/50 transition-all h-full group w-full max-w-[200px]">
-                      <CardContent className="p-6 text-center">
-                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 bg-primary/10 group-hover:bg-primary transition-all duration-300 mx-auto">
-                          <stat.icon className={`h-8 w-8 ${stat.color} group-hover:text-primary-foreground transition-all duration-300`} />
+                    <Card className="bg-background/40 backdrop-blur-xl border-primary/20 hover:border-primary/50 transition-all h-full group w-full max-w-[160px] sm:max-w-[200px]">
+                      <CardContent className="p-4 sm:p-6 text-center">
+                        <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full mb-3 sm:mb-4 bg-primary/10 group-hover:bg-primary transition-all duration-300 mx-auto">
+                          <stat.icon className={`h-6 w-6 sm:h-8 sm:w-8 ${stat.color} group-hover:text-primary-foreground transition-all duration-300`} />
                         </div>
-                        <div className="text-3xl font-bold text-foreground mb-1">{stat.number}</div>
-                        <p className="text-muted-foreground">{stat.label}</p>
+                        <div className="text-2xl sm:text-3xl font-bold text-foreground mb-1">{stat.number}</div>
+                        <p className="text-xs sm:text-sm text-muted-foreground">{stat.label}</p>
                       </CardContent>
                     </Card>
                   </motion.div>
                 ))}
+              </div>
+            </motion.div>
+            
+            {/* CEO Image - Now below stats for mobile, right for desktop */}
+            <motion.div variants={cardVariants} className="relative flex justify-center">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-background/40 backdrop-blur-xl border border-primary/20 w-full max-w-md mx-auto">
+                <SmartImage
+                  src={ceoImage}
+                  alt="CEO of Guidesoft"
+                  className="w-full h-80 sm:h-96 object-cover object-top"
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-gradient-primary-start/30 to-gradient-primary-end/30 mix-blend-overlay" />
+                <div className="absolute bottom-0 left-0 right-0 bg-background/90 backdrop-blur-sm rounded-lg p-4 sm:p-6 m-2 sm:m-4">
+                  <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-1">{ceoInfo.name}</h3>
+                  <p className="text-sm sm:text-base text-muted-foreground">{ceoInfo.title}, Guidesoft</p>
+                </div>
               </div>
             </motion.div>
           </div>

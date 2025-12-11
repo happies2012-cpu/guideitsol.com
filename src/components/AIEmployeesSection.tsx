@@ -353,7 +353,7 @@ const AIEmployeesSection = () => {
                         <div className="pt-4">
                           <Button 
                             className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:opacity-90 transition-opacity text-white py-6 text-lg"
-                            onClick={() => window.open('https://wa.me/919043133330', '_blank')}
+                            onClick={() => window.open('https://wa.me/918500647979', '_blank')}
                           >
                             <Phone className="w-5 h-5 mr-2" />
                             Hire Me - Connect on WhatsApp
@@ -432,7 +432,7 @@ const AIEmployeesSection = () => {
                         <div className="pt-4">
                           <Button 
                             className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:opacity-90 transition-opacity text-white py-6 text-lg"
-                            onClick={() => window.open('https://wa.me/919043133330', '_blank')}
+                            onClick={() => window.open('https://wa.me/918500647979', '_blank')}
                           >
                             <Phone className="w-5 h-5 mr-2" />
                             Hire Me - Connect on WhatsApp
