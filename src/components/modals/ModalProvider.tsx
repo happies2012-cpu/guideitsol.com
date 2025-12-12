@@ -333,8 +333,33 @@ const QuoteForm: React.FC<{ onSubmit: (data: any) => void; service?: string }> =
 };
 
 const PaymentForm: React.FC<{ onSubmit: (data: any) => void; amount?: number; plan?: string }> = ({ onSubmit, amount, plan }) => {
-  // For simplicity, we'll just show a message directing users to PayU
-  // In a real implementation, you might want to embed the PayU component directly
+  const handlePayU = async () => {
+    try {
+      const productInfo = plan || 'Subscription';
+      const firstname = 'GSSERVICES';
+      const email = 'support@guideitsol.com';
+      const phone = '8500647979';
+      const order = await (await import('@/lib/payu-utils')).createPayUOrder(
+        Number(amount || 0),
+        productInfo,
+        firstname,
+        email,
+        phone,
+        ''
+      );
+      await (await import('@/lib/payu-utils')).initiatePayUPayment(
+        order.orderId,
+        Number(amount || 0),
+        productInfo,
+        firstname,
+        email,
+        phone
+      );
+    } catch (e) {
+      console.error(e);
+      alert('Failed to initiate PayU payment. Please try again.');
+    }
+  };
   
   return (
     <div className="mt-4">
@@ -374,10 +399,7 @@ const PaymentForm: React.FC<{ onSubmit: (data: any) => void; amount?: number; pl
         </div>
         
         <Button 
-          onClick={() => {
-            // Redirect to PayU payment page
-            window.location.href = '/pricing'; // For now, redirect to pricing page where PayU is integrated
-          }}
+          onClick={handlePayU}
           className="w-full bg-gradient-to-r from-primary to-primary/80"
         >
           <Wallet className="w-4 h-4 mr-2" />
@@ -602,9 +624,36 @@ const TrialForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) =>
           onChange={(e) => setFormData({...formData, company: e.target.value})}
         />
       </div>
-      <Button type="submit" className="w-full bg-gradient-to-r from-primary to-secondary">
+      <Button type="button" className="w-full bg-gradient-to-r from-primary to-secondary" onClick={async () => {
+        try {
+          const productInfo = 'STARTER';
+          const firstname = 'GSSERVICES';
+          const email = 'support@guideitsol.com';
+          const phone = '8500647979';
+          const amount = 250;
+          const order = await (await import('@/lib/payu-utils')).createPayUOrder(
+            amount,
+            productInfo,
+            firstname,
+            email,
+            phone,
+            ''
+          );
+          await (await import('@/lib/payu-utils')).initiatePayUPayment(
+            order.orderId,
+            amount,
+            productInfo,
+            firstname,
+            email,
+            phone
+          );
+        } catch (e) {
+          console.error(e);
+          alert('Failed to initiate PayU payment. Please try again.');
+        }
+      }}>
         <Star className="w-4 h-4 mr-2" />
-        Start Trial
+        Start Basic Plan
       </Button>
       <p className="text-xs text-muted-foreground text-center">
         No credit card required. 14-day trial.

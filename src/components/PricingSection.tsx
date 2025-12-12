@@ -17,7 +17,7 @@ const demoPlans = [
       "Community support",
     ],
     description: "Perfect for individuals and small projects",
-    buttonText: "Start Free Trial",
+    buttonText: "Start Basic Plan",
     href: "/sign-up",
     isPopular: false,
   },

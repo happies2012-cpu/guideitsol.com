@@ -72,27 +72,6 @@ const CallToActionSection = () => {
             {/* PayU Quick Action Buttons */}
             <div className="flex flex-wrap gap-4 justify-center mt-4">
               <a 
-                href="https://u.payu.in/QIDbkCgRM7hp" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                style={{
-                  width: '135px',
-                  backgroundColor: '#1065B7',
-                  textAlign: 'center',
-                  fontWeight: 800,
-                  padding: '11px 0px',
-                  color: 'white',
-                  fontSize: '12px',
-                  display: 'inline-block',
-                  textDecoration: 'none',
-                  borderRadius: '3.229px'
-                }}
-                className="hover:opacity-90 transition-opacity shadow-md"
-              >
-                Donate Now
-              </a>
-              
-              <a 
                 href="https://u.payu.in/orK6schNY7Op" 
                 target="_blank" 
                 rel="noopener noreferrer"

@@ -188,36 +188,20 @@ export function Pricing({
 
               <button
                 onClick={() => {
-                  // Use button actions hook for better UX
                   const planName = plan.name;
                   const amount = isMonthly ? Number(plan.price) : Number(plan.yearlyPrice);
                   
-                  if (plan.buttonText === "Contact Sales") {
-                    // Open contact modal for enterprise/custom plans
-                    window.dispatchEvent(new CustomEvent('openModal', { 
-                      detail: { 
-                        type: 'contact', 
-                        data: { 
-                          title: 'Contact Sales', 
-                          description: `Get in touch about our ${planName} plan`,
-                          service: planName 
-                        } 
+                  window.dispatchEvent(new CustomEvent('openModal', { 
+                    detail: { 
+                      type: 'payment', 
+                      data: { 
+                        plan: planName, 
+                        amount: amount,
+                        title: `Subscribe to ${planName}`,
+                        description: `Complete your payment to start your ${planName} plan.`
                       } 
-                    }));
-                  } else {
-                    // Open payment modal for regular plans
-                    window.dispatchEvent(new CustomEvent('openModal', { 
-                      detail: { 
-                        type: 'payment', 
-                        data: { 
-                          plan: planName, 
-                          amount: amount,
-                          title: `Subscribe to ${planName}`,
-                          description: `Complete your payment to start your ${planName} plan.`
-                        } 
-                      } 
-                    }));
-                  }
+                    } 
+                  }));
                 }}
                 className={cn(
                   buttonVariants({
