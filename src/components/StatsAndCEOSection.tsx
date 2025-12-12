@@ -17,7 +17,7 @@ const StatsAndCEOSection = () => {
 
   const cardVariants = {
     hidden: { opacity: 0, x: -100, scale: 0.95 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: "easeOut" as Easing } },
+    visible: { opacity: 1, x: 0, scale: 1, transition: { duration: 0.6, ease: "easeOut" as Easing } },
     hover: { y: -5, boxShadow: "0 10px 20px rgba(0,0,0,0.15)" },
   };
 
