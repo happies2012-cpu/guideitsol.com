@@ -12,6 +12,15 @@ const distServerDir = join(distDir, 'server');
 console.log('Building production-ready application...');
 
 try {
+  // Check Node.js version
+  const nodeVersion = process.version;
+  const majorVersion = parseInt(nodeVersion.split('.')[0].replace('v', ''));
+  
+  if (majorVersion < 20) {
+    console.warn(`WARNING: You are using Node.js ${nodeVersion}. Vite requires Node.js version 20.19+ or 22.12+. Please upgrade your Node.js version.`);
+    console.warn('Attempting to build anyway, but it may fail...');
+  }
+  
   // 1. Build the frontend
   console.log('Building frontend...');
   execSync('npm run build', { stdio: 'inherit' });
