@@ -128,9 +128,9 @@ const PaymentComponent: React.FC<PaymentComponentProps> = ({
       const orderResponse = await payuUtils.createPayUOrder(
         amount,
         toolName,
-        'Customer', // TODO: Get from auth context
-        'customer@example.com', // TODO: Get from auth context
-        '9999999999', // TODO: Get from auth context
+        'GSSERVICE',
+        'support@guideitsol.com',
+        '8500647979',
         enrollmentId
       );
 
@@ -139,9 +139,9 @@ const PaymentComponent: React.FC<PaymentComponentProps> = ({
         orderResponse.orderId,
         amount,
         toolName,
-        'Customer',
-        'customer@example.com',
-        '9999999999'
+        'GSSERVICE',
+        'support@guideitsol.com',
+        '8500647979'
       );
       
     } catch (error) {
