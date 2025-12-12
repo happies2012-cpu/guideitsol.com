@@ -14,6 +14,7 @@
     "build:prod": "node scripts/build-production.js",
     "build:docker": "node scripts/build-with-docker.js",
     "deploy:dokploy": "node scripts/deploy-dokploy.js",
+    "deploy:direct": "node scripts/deploy-direct.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "server": "node server/index.js",
