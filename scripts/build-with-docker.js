@@ -17,21 +17,35 @@ try {
   }
 
   // Check if docker-compose is installed
+  let dockerComposeAvailable = false;
   try {
     execSync('docker-compose --version', { stdio: 'ignore' });
-    console.log('Docker Compose is available.');
+    console.log('Docker Compose (standalone) is available.');
+    dockerComposeAvailable = true;
   } catch (error) {
-    console.error('Docker Compose is not installed or not available in PATH.');
-    console.error('Please install Docker Compose to build the application.');
-    process.exit(1);
+    try {
+      execSync('docker compose version', { stdio: 'ignore' });
+      console.log('Docker Compose (plugin) is available.');
+      dockerComposeAvailable = true;
+    } catch (error2) {
+      console.error('Docker Compose is not installed or not available in PATH.');
+      console.error('Please install Docker Compose to build the application.');
+      process.exit(1);
+    }
   }
 
   // Build the Docker image using docker-compose
   console.log('Building Docker image...');
-  execSync('docker-compose build', { stdio: 'inherit' });
+  try {
+    execSync('docker-compose build', { stdio: 'inherit' });
+    console.log('To run the application, use: docker-compose up');
+  } catch (buildError) {
+    console.log('Trying docker compose build...');
+    execSync('docker compose build', { stdio: 'inherit' });
+    console.log('To run the application, use: docker compose up');
+  }
 
   console.log('Docker build completed successfully!');
-  console.log('To run the application, use: docker-compose up');
 
 } catch (error) {
   console.error('Docker build failed:', error.message);
