@@ -4,11 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "main": "electron/main.js",
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "build:prod": "node scripts/build-production.js",
+    "build:docker": "node scripts/build-with-docker.js",
+    "deploy:dokploy": "node scripts/deploy-dokploy.js",
+    "deploy:direct": "node scripts/deploy-direct.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "server": "node server/index.js",
