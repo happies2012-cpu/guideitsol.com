@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { X } from 'lucide-react';
+import SmartImage from '@/components/ui/SmartImage';
 
 /**
  * SphereImageGrid - Interactive 3D Image Sphere Component
@@ -530,12 +531,13 @@ const SphereImageGrid: React.FC<SphereImageGridProps> = ({
         onClick={() => setSelectedImage(image)}
       >
         <div className="relative w-full h-full rounded-full overflow-hidden shadow-lg border-2 border-white/20">
-          <img
+          <SmartImage
             src={image.src}
             alt={image.alt}
             className="w-full h-full object-cover"
             draggable={false}
             loading={index < 3 ? 'eager' : 'lazy'}
+            fallbackSrc="https://cdn-icons-png.flaticon.com/512/4712/4712109.png"
           />
         </div>
       </div>
@@ -561,10 +563,11 @@ const SphereImageGrid: React.FC<SphereImageGridProps> = ({
           }}
         >
           <div className="relative aspect-square">
-            <img
+            <SmartImage
               src={selectedImage.src}
               alt={selectedImage.alt}
               className="w-full h-full object-cover"
+              fallbackSrc="https://cdn-icons-png.flaticon.com/512/4712/4712109.png"
             />
             <button
               onClick={() => setSelectedImage(null)}
