@@ -8,85 +8,10 @@ import { motion, Easing } from "framer-motion";
 import { Link } from "react-router-dom";
 import { getHeroImage } from "@/lib/image-utils";
 
-const Blog = () => {
-  const posts = [
-    {
-      id: 1,
-      title: "The Future of AI in Business: Transforming Operations with Machine Learning",
-      excerpt: "Discover how neural networks and machine learning algorithms are revolutionizing business operations with predictive analytics and automated decision-making.",
-      author: "Dr. Sarah Chen",
-      date: "March 15, 2024",
-      readTime: "8 min read",
-      category: "AI & Automation",
-      featured: true,
-      gradient: "from-blue-500 to-cyan-500",
-      icon: Brain
-    },
-    {
-      id: 2,
-      title: "Building Scalable Cloud Infrastructure: Best Practices for Modern Enterprises",
-      excerpt: "Essential strategies for designing and implementing robust cloud architectures that support business growth and ensure security compliance.",
-      author: "Michael Zhang",
-      date: "March 12, 2024",
-      readTime: "10 min read",
-      category: "Cloud Computing",
-      gradient: "from-purple-500 to-pink-500",
-      icon: Cloud
-    },
-    {
-      id: 3,
-      title: "Mobile-First Design: Creating Engaging User Experiences for 2024",
-      excerpt: "How to design mobile applications that deliver exceptional user experiences with intuitive interfaces and seamless functionality.",
-      author: "Dr. Lisa Rodriguez",
-      date: "March 10, 2024",
-      readTime: "7 min read",
-      category: "Mobile Development",
-      gradient: "from-emerald-500 to-teal-500",
-      icon: Smartphone
-    },
-    {
-      id: 4,
-      title: "Data Engineering Fundamentals: Building Robust Data Pipelines",
-      excerpt: "Best practices for creating efficient data pipelines that transform raw data into actionable business insights for decision-making.",
-      author: "David Kumar",
-      date: "March 8, 2024",
-      readTime: "12 min read",
-      category: "Data Engineering",
-      gradient: "from-orange-500 to-red-500",
-      icon: Database
-    },
-    {
-      id: 5,
-      title: "Web Development Trends 2024: What's New in Frontend Technologies",
-      excerpt: "Exploring the latest frontend frameworks, tools, and techniques that are shaping the future of web development and user experiences.",
-      author: "Emma Watson",
-      date: "March 5, 2024",
-      readTime: "9 min read",
-      category: "Web Development",
-      gradient: "from-violet-500 to-purple-500",
-      icon: Code
-    },
-    {
-      id: 6,
-      title: "Digital Transformation: A Strategic Approach to Business Innovation",
-      excerpt: "How organizations can successfully navigate digital transformation initiatives to stay competitive and drive sustainable growth.",
-      author: "James Wilson",
-      date: "March 1, 2024",
-      readTime: "11 min read",
-      category: "Business Strategy",
-      gradient: "from-cyan-500 to-blue-500",
-      icon: TrendingUp
-    }
-  ];
+import { blogPosts, categories } from "@/data/blog-posts";
 
-  const categories = [
-    { name: "AI & Automation", count: 12, icon: Brain },
-    { name: "Web Development", count: 18, icon: Code },
-    { name: "Mobile Development", count: 15, icon: Smartphone },
-    { name: "Cloud Computing", count: 9, icon: Cloud },
-    { name: "Data Engineering", count: 11, icon: Database },
-    { name: "Business Strategy", count: 8, icon: TrendingUp }
-  ];
+const Blog = () => {
+  const posts = blogPosts;
 
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },

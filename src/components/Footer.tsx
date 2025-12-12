@@ -117,7 +117,9 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4 mt-6">
               <motion.a 
-                href="#" 
+                href="https://www.facebook.com/p/GuidesoftI-100089990527060/" 
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover="hover" 
                 variants={socialIconVariants} 
                 className="text-muted-foreground hover:text-primary transition-colors p-2 rounded-full hover:bg-primary/10"
@@ -126,7 +128,9 @@ const Footer = () => {
                 <Facebook className="h-6 w-6" />
               </motion.a>
               <motion.a 
-                href="#" 
+                href="https://x.com/GuidesoftIt" 
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover="hover" 
                 variants={socialIconVariants} 
                 className="text-muted-foreground hover:text-primary transition-colors p-2 rounded-full hover:bg-primary/10"
@@ -135,7 +139,9 @@ const Footer = () => {
                 <Twitter className="h-6 w-6" />
               </motion.a>
               <motion.a 
-                href="#" 
+                href="https://in.linkedin.com/company/guideitsol-it-solutions-trainings" 
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover="hover" 
                 variants={socialIconVariants} 
                 className="text-muted-foreground hover:text-primary transition-colors p-2 rounded-full hover:bg-primary/10"
@@ -144,7 +150,9 @@ const Footer = () => {
                 <Linkedin className="h-6 w-6" />
               </motion.a>
               <motion.a 
-                href="#" 
+                href="https://www.instagram.com/gs_business_groups/" 
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover="hover" 
                 variants={socialIconVariants} 
                 className="text-muted-foreground hover:text-primary transition-colors p-2 rounded-full hover:bg-primary/10"

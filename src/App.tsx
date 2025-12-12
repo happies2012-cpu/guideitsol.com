@@ -22,6 +22,7 @@ import Chatbot from "./components/Chatbot";
 import BackToTopButton from "./components/BackToTopButton";
 import AnimatedRoutes from "./components/AnimatedRoutes";
 import LoadingScreen from "@/components/ui/loading-screen";
+import { LeadMagnetPopup } from "@/components/LeadMagnetPopup";
 // Removed FireworksOverlay import
 
 // Lazy load pages for better performance
@@ -32,6 +33,7 @@ const HomeInvestment = lazy(() => import("./pages/HomeInvestment"));
 const Services = lazy(() => import("./pages/Services"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
 const Blog = lazy(() => import("./pages/Blog"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
 const Pages = lazy(() => import("./pages/Pages"));
 const Contact = lazy(() => import("./pages/Contact"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -53,6 +55,30 @@ const HireAngularDevelopers = lazy(() => import("./pages/services/hire-angular-d
 const HireMagentoDevelopers = lazy(() => import("./pages/services/hire-magento-developers"));
 const HireGatsbyJsDevelopers = lazy(() => import("./pages/services/hire-gatsbyjs-developers"));
 const HireExtJsDevelopers = lazy(() => import("./pages/services/hire-extjs-developers"));
+const ProgressiveWebApps = lazy(() => import("./pages/services/progressive-web-apps"));
+const NativeAppDevelopment = lazy(() => import("./pages/services/native-app-development"));
+const ITConsultingServices = lazy(() => import("./pages/services/it-consulting-services"));
+const IoTAppDevelopment = lazy(() => import("./pages/services/iot-app-development"));
+const IOSAppDevelopment = lazy(() => import("./pages/services/ios-app-development"));
+const FlutterAppDevelopment = lazy(() => import("./pages/services/flutter-app-development"));
+const EnterpriseAppDevelopment = lazy(() => import("./pages/services/enterprise-app-development"));
+const EcommerceAppDevelopment = lazy(() => import("./pages/services/ecommerce-app-development"));
+const AndroidAppDevelopment = lazy(() => import("./pages/services/android-app-development"));
+
+// Lazy load company pages
+const AboutCompany = lazy(() => import("./pages/company/about-company"));
+const Careers = lazy(() => import("./pages/company/careers"));
+const PrivacyPolicy = lazy(() => import("./pages/company/privacy-policy"));
+const TermsConditions = lazy(() => import("./pages/company/terms-conditions"));
+const RefundCancellationPolicy = lazy(() => import("./pages/company/refund-and-cancellation-policy"));
+const HrConsultancy = lazy(() => import("./pages/company/hr-consultancy"));
+const CaseStudies = lazy(() => import("./pages/company/case-studies"));
+const CenterOfExcellence = lazy(() => import("./pages/company/center-of-excellence"));
+const Glossary = lazy(() => import("./pages/company/glossary"));
+const Insight = lazy(() => import("./pages/company/insight"));
+const Videos = lazy(() => import("./pages/company/videos"));
+const BannedRestrictedBusinesses = lazy(() => import("./pages/company/banned-restricted-businesses"));
+const PayuMobileSdk = lazy(() => import("./pages/company/payu-mobile-sdk"));
 
 // Lazy load solution pages
 const OnDemandSolutions = lazy(() => import("./pages/solutions/on-demand-solutions"));
@@ -71,6 +97,26 @@ const ITOutsourcingServices = lazy(() => import("./pages/solutions/it-outsourcin
 const OffshoreDevelopment = lazy(() => import("./pages/solutions/offshore-development"));
 const EmergingTechSolutions = lazy(() => import("./pages/solutions/emerging-tech-solutions"));
 const TrendingTechnology = lazy(() => import("./pages/solutions/trending-technology"));
+const TravelApp = lazy(() => import("./pages/solutions/travel-app"));
+const SocialMediaApp = lazy(() => import("./pages/solutions/social-media-app"));
+const HealthApp = lazy(() => import("./pages/solutions/health-app"));
+const GamingApp = lazy(() => import("./pages/solutions/gaming-app"));
+const FoodDeliveryApp = lazy(() => import("./pages/solutions/food-delivery-app"));
+const FitnessApp = lazy(() => import("./pages/solutions/fitness-app"));
+const FinanceApp = lazy(() => import("./pages/solutions/finance-app"));
+const EducationApp = lazy(() => import("./pages/solutions/education-app"));
+const ChatbotApp = lazy(() => import("./pages/solutions/chatbot-app"));
+const BookingApp = lazy(() => import("./pages/solutions/booking-app"));
+const WeatherApp = lazy(() => import("./pages/solutions/weather-app"));
+const VideoStreamingApp = lazy(() => import("./pages/solutions/video-streaming-app"));
+const UtilityApp = lazy(() => import("./pages/solutions/utility-app"));
+const ShoppingApp = lazy(() => import("./pages/solutions/shopping-app"));
+const RealEstateApp = lazy(() => import("./pages/solutions/real-estate-app"));
+const QuestionAnswerApp = lazy(() => import("./pages/solutions/question-answer-app"));
+const ProductivityApp = lazy(() => import("./pages/solutions/productivity-app"));
+const NewsApp = lazy(() => import("./pages/solutions/news-app"));
+const MusicApp = lazy(() => import("./pages/solutions/music-app"));
+const DatingApp = lazy(() => import("./pages/solutions/dating-app"));
 const SolutionsOverview = lazy(() => import("./pages/solutions/index"));
 
 // Lazy load other pages
@@ -155,6 +201,7 @@ const AppContent = () => {
     <>
       <Toaster />
       <Sonner />
+      <LeadMagnetPopup />
         {/* Removed FireworksOverlay */}
         <div className="min-h-screen flex flex-col">
           <Header />
@@ -170,6 +217,7 @@ const AppContent = () => {
                 <Route path="/services" element={<Services />} />
                 <Route path="/portfolio" element={<Portfolio />} />
                 <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:id" element={<BlogPost />} />
                 <Route path="/pages" element={<Pages />} />
                 <Route path="/contact" element={<Contact />} />
 
@@ -210,6 +258,15 @@ const AppContent = () => {
                 <Route path="/services/hire-magento-developers" element={<HireMagentoDevelopers />} />
                 <Route path="/services/hire-gatsbyjs-developers" element={<HireGatsbyJsDevelopers />} />
                 <Route path="/services/hire-extjs-developers" element={<HireExtJsDevelopers />} />
+                <Route path="/services/progressive-web-apps" element={<ProgressiveWebApps />} />
+                <Route path="/services/native-app-development" element={<NativeAppDevelopment />} />
+                <Route path="/services/it-consulting-services" element={<ITConsultingServices />} />
+                <Route path="/services/iot-app-development" element={<IoTAppDevelopment />} />
+                <Route path="/services/ios-app-development" element={<IOSAppDevelopment />} />
+                <Route path="/services/flutter-app-development" element={<FlutterAppDevelopment />} />
+                <Route path="/services/enterprise-app-development" element={<EnterpriseAppDevelopment />} />
+                <Route path="/services/ecommerce-app-development" element={<EcommerceAppDevelopment />} />
+                <Route path="/services/android-app-development" element={<AndroidAppDevelopment />} />
 
                 {/* Specific routes for solutions (overrides dynamic) */}
                 <Route path="/solutions/on-demand-solutions" element={<OnDemandSolutions />} />
@@ -228,6 +285,26 @@ const AppContent = () => {
                 <Route path="/solutions/offshore-development" element={<OffshoreDevelopment />} />
                 <Route path="/solutions/emerging-tech-solutions" element={<EmergingTechSolutions />} />
                 <Route path="/solutions/trending-technology" element={<TrendingTechnology />} />
+                <Route path="/solutions/travel-app" element={<TravelApp />} />
+                <Route path="/solutions/social-media-app" element={<SocialMediaApp />} />
+                <Route path="/solutions/health-app" element={<HealthApp />} />
+                <Route path="/solutions/gaming-app" element={<GamingApp />} />
+                <Route path="/solutions/food-delivery-app" element={<FoodDeliveryApp />} />
+                <Route path="/solutions/fitness-app" element={<FitnessApp />} />
+                <Route path="/solutions/finance-app" element={<FinanceApp />} />
+                <Route path="/solutions/education-app" element={<EducationApp />} />
+                <Route path="/solutions/chatbot-app" element={<ChatbotApp />} />
+                <Route path="/solutions/booking-app" element={<BookingApp />} />
+                <Route path="/solutions/weather-app" element={<WeatherApp />} />
+                <Route path="/solutions/video-streaming-app" element={<VideoStreamingApp />} />
+                <Route path="/solutions/utility-app" element={<UtilityApp />} />
+                <Route path="/solutions/shopping-app" element={<ShoppingApp />} />
+                <Route path="/solutions/real-estate-app" element={<RealEstateApp />} />
+                <Route path="/solutions/question-answer-app" element={<QuestionAnswerApp />} />
+                <Route path="/solutions/productivity-app" element={<ProductivityApp />} />
+                <Route path="/solutions/news-app" element={<NewsApp />} />
+                <Route path="/solutions/music-app" element={<MusicApp />} />
+                <Route path="/solutions/dating-app" element={<DatingApp />} />
 
                 {/* Specific routes for hire-us (overrides dynamic) */}
                 <Route path="/hire-us/hire-android-app-developer" element={<HireAndroidAppDeveloper />} />
@@ -250,6 +327,21 @@ const AppContent = () => {
                 <Route path="/portfolio/flight-booking-engine" element={<FlightBookingEnginePortfolio />} />
                 <Route path="/portfolio/b2b-travel-portal" element={<B2BTravelPortalPortfolio />} />
                 <Route path="/portfolio/b2c-travel-portal" element={<B2CTravelPortalPortfolio />} />
+
+                {/* Company Routes */}
+                <Route path="/company/about-company" element={<AboutCompany />} />
+                <Route path="/company/careers" element={<Careers />} />
+                <Route path="/company/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/company/terms-conditions" element={<TermsConditions />} />
+                <Route path="/company/refund-and-cancellation-policy" element={<RefundCancellationPolicy />} />
+                <Route path="/company/hr-consultancy" element={<HrConsultancy />} />
+                <Route path="/company/case-studies" element={<CaseStudies />} />
+                <Route path="/company/center-of-excellence" element={<CenterOfExcellence />} />
+                <Route path="/company/glossary" element={<Glossary />} />
+                <Route path="/company/insight" element={<Insight />} />
+                <Route path="/company/videos" element={<Videos />} />
+                <Route path="/company/banned-restricted-businesses" element={<BannedRestrictedBusinesses />} />
+                <Route path="/company/payu-mobile-sdk" element={<PayuMobileSdk />} />
 
                 {/* Dynamic routes for all sub-pages (after specific routes) */}
                 <Route path="/services/*" element={<DynamicContentPage />} />

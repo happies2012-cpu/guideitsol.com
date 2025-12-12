@@ -129,7 +129,7 @@ export default function Navbar({
 
   auth = {
     login: { text: "Sign in", url: "/login" },
-    signup: { text: "Get Started", url: "/contact" },
+    signup: { text: "Get Started", url: "/register" },
   },
 }: NavbarProps) {
   const [openSearch, setOpenSearch] = React.useState(false);
