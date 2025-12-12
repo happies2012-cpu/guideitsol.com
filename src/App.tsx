@@ -118,7 +118,9 @@ const App = () => {
           <TooltipProvider>
             <AuthProvider>
               <ModalProvider>
-                <AppContent />
+                <BrowserRouter>
+                  <AppContent />
+                </BrowserRouter>
               </ModalProvider>
             </AuthProvider>
           </TooltipProvider>
@@ -153,7 +155,6 @@ const AppContent = () => {
     <>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
         {/* Removed FireworksOverlay */}
         <div className="min-h-screen flex flex-col">
           <Header />
@@ -267,7 +268,6 @@ const AppContent = () => {
           <BackToTopButton />
           <Chatbot />
         </div>
-      </BrowserRouter>
     </>
   );
 };

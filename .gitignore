@@ -47,3 +47,4 @@ yarn.lock
 guidesoft-website-final-source.tar.gzdev.db
 .env.production.secure
 .claude/
+.trae/
