@@ -1,0 +1,12 @@
+# Nixpacks configuration to specify Node.js version and build process
+[phases.setup]
+nixPkgs = ['nodejs_20', 'npm']
+
+[phases.install]
+cmds = ['npm ci']
+
+[phases.build]
+cmds = ['npm run build:prod']
+
+[start]
+cmd = 'npm run server'
