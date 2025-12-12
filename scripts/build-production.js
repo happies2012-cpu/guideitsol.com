@@ -59,6 +59,8 @@ try {
   if (existsSync(faviconSrc)) {
     console.log('Copying favicon to dist root...');
     copyFileSync(faviconSrc, faviconDest);
+  } else {
+    console.log('favicon.ico not found, skipping...');
   }
 
   // 7. Copy prisma directory
