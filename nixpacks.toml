@@ -1,12 +1,21 @@
-# Nixpacks configuration to specify Node.js version and build process
+# Nixpacks configuration for Guidesoft Website
 [phases.setup]
-nixPkgs = ['nodejs_20', 'npm']
+nixPkgs = ['nodejs_20', 'npm', 'docker', 'docker_compose']
 
 [phases.install]
 cmds = ['npm ci']
 
 [phases.build]
-cmds = ['npm run build:prod']
+cmds = [
+  'echo "Attempting Docker-based build..."',
+  'if command -v docker &> /dev/null && command -v docker-compose &> /dev/null; then',
+  '  echo "Docker and Docker Compose found, using Docker build"',
+  '  npm run build:docker',
+  'else',
+  '  echo "Docker not available, falling back to standard build"',
+  '  npm run build:prod',
+  'fi'
+]
 
 [start]
 cmd = 'npm run server'
