@@ -115,7 +115,7 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
       case 'payment': return 'Complete Payment';
       case 'consultation': return 'Book Consultation';
       case 'demo': return 'Schedule a Demo';
-      case 'trial': return 'Start Trial';
+      case 'trial': return 'Start Basic Plan';
       case 'newsletter': return 'Subscribe to Newsletter';
       case 'services': return 'Explore Our Services';
       default: return 'Contact Us';
@@ -131,7 +131,7 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
       case 'payment': return 'Secure payment processing for your selected plan.';
       case 'consultation': return 'Schedule a 30-minute consultation with our experts.';
       case 'demo': return 'See our solutions in action with a personalized demo.';
-      case 'trial': return 'Start your trial and experience our platform.';
+      case 'trial': return 'Activate the basic plan and start immediately.';
       case 'newsletter': return 'Stay updated with the latest in AI and technology.';
       case 'services': return 'Discover how our services can transform your business.';
       default: return 'We are here to help you succeed.';

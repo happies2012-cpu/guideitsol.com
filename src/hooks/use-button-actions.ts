@@ -42,10 +42,12 @@ export const useButtonActions = () => {
     }),
     
     // Trial actions
-    openTrial: () => openModal('trial'),
-    openFreeTrial: (planName?: string) => openModal('trial', {
-      title: `Start Free Trial${planName ? ` - ${planName}` : ''}`,
-      description: 'Get instant access to all features. No credit card required.'
+    openTrial: () => openModal('payment', { plan: 'STARTER', amount: 250, title: 'Start Basic Plan', description: 'Activate the STARTER plan and begin immediately.' }),
+    openFreeTrial: (planName?: string) => openModal('payment', {
+      plan: planName || 'STARTER',
+      amount: 250,
+      title: `Start Basic Plan${planName ? ` - ${planName}` : ''}`,
+      description: 'Complete payment to start your basic plan.'
     }),
     
     // Newsletter actions
@@ -79,9 +81,11 @@ export const useButtonActions = () => {
       }
     },
 
-    handleContactSales: () => openModal('contact', {
-      title: 'Contact Sales',
-      description: 'Speak with our sales team about your enterprise requirements.'
+    handleContactSales: () => openModal('payment', {
+      plan: 'ENTERPRISE',
+      amount: 1000,
+      title: 'Subscribe to ENTERPRISE',
+      description: 'Complete your payment to start the enterprise plan.'
     }),
 
     handleBookDemo: (product?: string) => openModal('demo', {

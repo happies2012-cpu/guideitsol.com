@@ -29,10 +29,10 @@ const SocialIcon: React.FC<SocialIconProps> = ({ icon: Icon, href, label }) => {
 
 export const VerticalSocialDock: React.FC = () => {
   const socialLinks = [
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Facebook, href: "https://www.facebook.com/p/GuidesoftI-100089990527060/", label: "Facebook" },
+    { icon: Twitter, href: "https://x.com/GuidesoftIt", label: "Twitter" },
+    { icon: Linkedin, href: "https://in.linkedin.com/company/guideitsol-it-solutions-trainings", label: "LinkedIn" },
+    { icon: Instagram, href: "https://www.instagram.com/gs_business_groups/", label: "Instagram" },
     { icon: MessageCircle, href: "https://wa.me/918500647979?text=Hello%20GuideSoft%20IT%20Solutions!", label: "WhatsApp" }, // WhatsApp link
   ];
 
