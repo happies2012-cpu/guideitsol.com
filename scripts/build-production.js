@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { execSync } from 'child_process';
-import { existsSync, mkdirSync, copyFileSync, readdirSync, statSync } from 'fs';
+import { existsSync, mkdirSync, copyFileSync, readdirSync, statSync, rmSync, renameSync } from 'fs';
 import { join, resolve } from 'path';
 
 const rootDir = resolve(process.cwd());
@@ -24,6 +24,30 @@ try {
   // 1. Build the frontend
   console.log('Building frontend...');
   execSync('npm run build', { stdio: 'inherit' });
+
+  // Move build output to public subdirectory to separate from server code
+  console.log('Organizing build output...');
+  // distPublicDir is already defined in the scope if I remove the declaration here
+  const distPublicDir = join(distDir, 'public');
+  
+  // Create a temporary directory for the build output
+  const tempDir = join(rootDir, 'temp_build');
+  if (existsSync(tempDir)) {
+    rmSync(tempDir, { recursive: true, force: true });
+  }
+  
+  // Move dist content to temp
+  renameSync(distDir, tempDir);
+  
+  // Create new dist structure
+  mkdirSync(distDir);
+  mkdirSync(distPublicDir);
+  
+  // Move content from temp to dist/public
+  copyDirRecursive(tempDir, distPublicDir);
+  
+  // Clean up temp
+  rmSync(tempDir, { recursive: true, force: true });
 
   // 2. Copy server files to dist
   console.log('Copying server files...');
@@ -56,7 +80,7 @@ try {
 
   // 5. Copy public directory
   const publicDir = join(rootDir, 'public');
-  const distPublicDir = join(distDir, 'public');
+  // distPublicDir already defined above
   if (existsSync(publicDir)) {
     console.log('Copying public directory...');
     copyDirRecursive(publicDir, distPublicDir);

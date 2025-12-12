@@ -3,7 +3,10 @@
 }
 
 guideitsol.com, www.guideitsol.com {
-  root * /app/dist
+  # Proxy API requests to backend
+  reverse_proxy /api/* localhost:3001
+
+  root * /app/dist/public
   file_server
   encode gzip
   

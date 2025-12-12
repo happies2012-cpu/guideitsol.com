@@ -7,7 +7,12 @@ import rateLimit from 'express-rate-limit';
 import https from 'https';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import authRoutes from './routes/auth.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 import pagesRoutes from './routes/pages.js';
 import navigationRoutes from './routes/navigation.js';
 import aiToolsRoutes from './routes/ai-tools.js';
@@ -98,7 +103,20 @@ app.use((req, res, next) => {
 });
 
 // Serve static files from the React app
-app.use(express.static(path.join(process.cwd(), 'dist')));
+let staticPath = path.join(process.cwd(), 'dist', 'public');
+if (!fs.existsSync(staticPath)) {
+  // Check if we are in deployment (dist root)
+  const potentialPublic = path.join(process.cwd(), 'public');
+  if (fs.existsSync(potentialPublic) && fs.existsSync(path.join(potentialPublic, 'index.html'))) {
+    staticPath = potentialPublic;
+  } else {
+    // Fallback to standard dist (dev or legacy)
+    staticPath = path.join(process.cwd(), 'dist');
+  }
+}
+
+console.log(`Serving static files from: ${staticPath}`);
+app.use(express.static(staticPath));
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -122,6 +140,21 @@ app.use('/api/payu-v2', payuV2Routes);
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Backend server is running' });
+});
+
+// SPA Fallback - Serve index.html for any unknown routes
+app.get(/(.*)/, (req, res, next) => {
+  // Skip API routes
+  if (req.path.startsWith('/api')) {
+    return next();
+  }
+  
+  const indexPath = path.join(staticPath, 'index.html');
+  if (fs.existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    next();
+  }
 });
 
 // Error handling middleware

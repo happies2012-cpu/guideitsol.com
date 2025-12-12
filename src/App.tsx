@@ -161,7 +161,7 @@ const AppContent = () => {
           <main className="flex-1">
             <Suspense fallback={<LoadingScreen message="Loading content..." />}>
               <AnimatedRoutes>
-                <Routes>
+                <Routes location={location}>
                 <Route path="/" element={<Home />} />
                 <Route path="/home-insurance" element={<HomeInsurance />} />
                 <Route path="/home-business" element={<HomeBusiness />} />

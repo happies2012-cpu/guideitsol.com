@@ -16,9 +16,6 @@ import EnrollForm from '@/components/EnrollForm';
 import AIToolDetailLightbox from '@/components/AIToolDetailLightbox';
 import { SplashCursor } from '@/components/ui/splash-cursor';
 
-// Import CSV data
-import aiToolsCSV from '@/assets/Ai_Tools_Data.csv?raw';
-
 // Import unique hero image for AI Learning page
 import heroImage from '@/assets/12.png';
 
@@ -83,12 +80,18 @@ const AILearning = () => {
   useEffect(() => {
     fetchTools(currentPage);
     fetchCategories();
-    loadCSVData();
   }, [currentPage]);
 
-  const loadCSVData = () => {
+  useEffect(() => {
+    loadCSVData();
+  }, []);
+
+  const loadCSVData = async () => {
     try {
-      const parsedTools = parseAIToolsCSV(aiToolsCSV);
+      const response = await fetch('/data/Ai_Tools_Data.csv');
+      if (!response.ok) throw new Error('Failed to fetch CSV data');
+      const text = await response.text();
+      const parsedTools = parseAIToolsCSV(text);
       setCsvTools(parsedTools);
     } catch (error) {
       console.error('Failed to parse CSV data:', error);
