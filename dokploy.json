@@ -6,7 +6,7 @@
       "name": "app",
       "type": "docker-compose",
       "dockerComposePath": "./docker-compose.yml",
-      "envPath": "./.env.production",
+      "envPath": "./.env.production.example",
       "domain": "guideitsol.com",
       "port": 3001,
       "healthcheck": {
