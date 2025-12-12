@@ -88,7 +88,7 @@ const RefundCancellationPolicy = () => {
               </p>
               <ul className="list-disc pl-6 text-foreground/90 mb-6 space-y-2">
                 <li>Logging into your account and navigating to the subscription settings</li>
-                <li>Contacting our customer support team at support@guidesoft.com</li>
+                <li>Contacting our customer support team at support@guideitsol.com</li>
               </ul>
               <p className="text-foreground/90 mb-6">
                 Cancellation will be effective at the end of the current billing period. You will continue to have access to services until the end of your paid period.
@@ -143,7 +143,7 @@ const RefundCancellationPolicy = () => {
                 To request a refund, please:
               </p>
               <ol className="list-decimal pl-6 text-foreground/90 mb-6 space-y-2">
-                <li>Contact our support team at support@guidesoft.com</li>
+                <li>Contact our support team at support@guideitsol.com</li>
                 <li>Provide your account information and order details</li>
                 <li>Explain the reason for your refund request</li>
                 <li>Include any relevant documentation or evidence</li>
@@ -154,7 +154,7 @@ const RefundCancellationPolicy = () => {
               
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Dispute Resolution</h2>
               <p className="text-foreground/90 mb-6">
-                If you are not satisfied with our response to your refund request, you may contact our customer advocacy team at advocacy@guidesoft.com. We are committed to resolving disputes fairly and promptly.
+                If you are not satisfied with our response to your refund request, you may contact our customer advocacy team at advocacy@guideitsol.com. We are committed to resolving disputes fairly and promptly.
               </p>
               
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Contact Information</h2>
@@ -163,7 +163,7 @@ const RefundCancellationPolicy = () => {
               </p>
               <div className="bg-muted/30 p-6 rounded-lg mb-6">
                 <p className="text-foreground font-medium">Guidesoft Support Team</p>
-                <p className="text-foreground/90">Email: support@guidesoft.com</p>
+                <p className="text-foreground/90">Email: support@guideitsol.com</p>
                 <p className="text-foreground/90">Phone: +1 (555) 123-4567</p>
                 <p className="text-foreground/90 mt-2">123 Tech Avenue<br />San Francisco, CA 94103<br />United States</p>
               </div>

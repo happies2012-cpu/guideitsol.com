@@ -288,7 +288,7 @@ const Footer = () => {
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <Mail className="h-5 w-5 text-primary flex-shrink-0" />
-                <span className="text-muted-foreground text-sm">support@guidesoft.com</span>
+                <span className="text-muted-foreground text-sm">support@guideitsol.com</span>
               </motion.div>
               <motion.div 
                 className="flex items-center space-x-3"
@@ -296,7 +296,7 @@ const Footer = () => {
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <Mail className="h-5 w-5 text-primary flex-shrink-0" />
-                <span className="text-muted-foreground text-sm">contact@guidesoft.com</span>
+                <span className="text-muted-foreground text-sm">contact@guideitsol.com</span>
               </motion.div>
             </div>
             <Link to="/contact">

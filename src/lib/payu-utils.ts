@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 // PayU utility functions
 
 export const initializePayU = (amount: number, productInfo: string, firstName: string, email: string) => {
@@ -20,20 +22,22 @@ export const initializePayU = (amount: number, productInfo: string, firstName: s
   });
 };
 
-export const createPayUOrder = async (amount: number, productInfo: string, firstName: string, email: string, phone: string) => {
+export const createPayUOrder = async (amount: number, productInfo: string, firstName: string, email: string, phone: string, userId?: string) => {
   try {
-    // In a real implementation, you would call your backend to create a PayU order
-    // This is a simplified version for demonstration
-    const orderId = 'ORDER_' + Date.now();
+    const response = await axios.post('/api/payu-v2/create-order', {
+      amount,
+      productinfo: productInfo,
+      firstname: firstName,
+      email,
+      phone,
+      udf1: userId || ''
+    });
     
-    return {
-      orderId: orderId,
-      amount: amount,
-      productInfo: productInfo,
-      firstName: firstName,
-      email: email,
-      phone: phone
-    };
+    if (response.data.success) {
+      return response.data; // contains orderId, order
+    } else {
+      throw new Error(response.data.error || 'Failed to create order');
+    }
   } catch (error) {
     console.error('Error creating PayU order:', error);
     throw error;
@@ -41,33 +45,43 @@ export const createPayUOrder = async (amount: number, productInfo: string, first
 };
 
 export const generatePayUHash = async (data: any) => {
-  try {
-    // In a real implementation, this hash should be generated on your backend
-    // for security reasons. This is a placeholder implementation.
-    const response = await fetch('/api/payu/generate-hash', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    
-    const hashData = await response.json();
-    return hashData.hash;
-  } catch (error) {
-    console.error('Error generating PayU hash:', error);
-    throw error;
-  }
+  // In V2 flow, hash is generated during initiate-payment call
+  // Keeping this for backward compatibility if needed, but returning null
+  return null;
 };
 
-export const submitPayUPayment = (paymentData: any) => {
+export const initiatePayUPayment = async (orderId: string, amount: number, productInfo: string, firstName: string, email: string, phone: string) => {
+    try {
+        const response = await axios.post('/api/payu-v2/initiate-payment', {
+            orderId,
+            amount,
+            productinfo: productInfo,
+            firstname: firstName,
+            email,
+            phone
+        });
+
+        if (response.data.success) {
+            // Submit form
+            submitPayUPayment(response.data.paymentData, response.data.payuUrl);
+            return response.data;
+        } else {
+            throw new Error(response.data.error || 'Failed to initiate payment');
+        }
+    } catch (error) {
+        console.error('Error initiating PayU payment:', error);
+        throw error;
+    }
+}
+
+export const submitPayUPayment = (paymentData: any, actionUrl?: string) => {
   // Create a form and submit to PayU
   const isProduction = import.meta.env.PROD || process.env.NODE_ENV === 'production';
   const form = document.createElement('form');
   form.method = 'POST';
-  form.action = isProduction 
+  form.action = actionUrl || (isProduction 
     ? 'https://secure.payu.in/_payment' 
-    : 'https://test.payu.in/_payment';
+    : 'https://test.payu.in/_payment');
   
   // Add all payment data as hidden inputs
   Object.keys(paymentData).forEach(key => {
@@ -86,5 +100,6 @@ export default {
   initializePayU,
   createPayUOrder,
   generatePayUHash,
+  initiatePayUPayment,
   submitPayUPayment
 };

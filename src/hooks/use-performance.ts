@@ -139,8 +139,8 @@ export const useResourceHints = () => {
 
     // DNS prefetch for other domains
     const dnsDomains = [
-      'https://api.guidesoft.com',
-      'https://cdn.guidesoft.com'
+      'https://api.guideitsol.com',
+      'https://cdn.guideitsol.com'
     ];
 
     dnsDomains.forEach(domain => {

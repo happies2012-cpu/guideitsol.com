@@ -125,46 +125,25 @@ const PaymentComponent: React.FC<PaymentComponentProps> = ({
   const handlePayUPayment = async () => {
     try {
       // Create PayU order
-      const orderData = await payuUtils.createPayUOrder(
+      const orderResponse = await payuUtils.createPayUOrder(
+        amount,
+        toolName,
+        'Customer', // TODO: Get from auth context
+        'customer@example.com', // TODO: Get from auth context
+        '9999999999', // TODO: Get from auth context
+        enrollmentId
+      );
+
+      // Initiate payment (generates hash and submits form)
+      await payuUtils.initiatePayUPayment(
+        orderResponse.orderId,
         amount,
         toolName,
         'Customer',
         'customer@example.com',
         '9999999999'
       );
-
-      // Generate hash for security
-      const hashData = {
-        txnid: orderData.orderId,
-        amount: orderData.amount,
-        productinfo: orderData.productInfo,
-        firstname: orderData.firstName,
-        email: orderData.email
-      };
-
-      const hashResponse = await payuUtils.generatePayUHash(hashData);
-
-      // Prepare payment data
-      const paymentData = {
-        key: import.meta.env.VITE_PAYU_MERCHANT_KEY,
-        txnid: orderData.orderId,
-        amount: orderData.amount.toString(),
-        productinfo: orderData.productInfo,
-        firstname: orderData.firstName,
-        email: orderData.email,
-        phone: orderData.phone,
-        surl: `${window.location.origin}/api/payu/success`,
-        furl: `${window.location.origin}/api/payu/failure`,
-        hash: hashResponse,
-        udf1: enrollmentId || '',
-        udf2: '',
-        udf3: '',
-        udf4: '',
-        udf5: ''
-      };
-
-      // Submit payment
-      payuUtils.submitPayUPayment(paymentData);
+      
     } catch (error) {
       console.error('PayU payment error:', error);
       toast.error('Failed to initiate PayU payment. Please try again.');

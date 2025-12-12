@@ -77,7 +77,7 @@ const TermsConditions = () => {
             </CardHeader>
             <CardContent className="prose prose-invert max-w-none">
               <p className="text-foreground/90 mb-6">
-                These Terms and Conditions ("Terms") constitute a legally binding agreement between you ("User" or "you") and Guidesoft ("Company," "we," "us," or "our") governing your access to and use of guidesoft.com (the "Site") and our services.
+                These Terms and Conditions ("Terms") constitute a legally binding agreement between you ("User" or "you") and Guidesoft ("Company," "we," "us," or "our") governing your access to and use of guideitsol.com (the "Site") and our services.
               </p>
               
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Acceptance of Terms</h2>
@@ -161,7 +161,7 @@ const TermsConditions = () => {
               </p>
               <div className="bg-muted/30 p-6 rounded-lg mb-6">
                 <p className="text-foreground font-medium">Guidesoft Legal Team</p>
-                <p className="text-foreground/90">Email: legal@guidesoft.com</p>
+                <p className="text-foreground/90">Email: legal@guideitsol.com</p>
                 <p className="text-foreground/90">Phone: +1 (555) 123-4567</p>
                 <p className="text-foreground/90 mt-2">123 Tech Avenue<br />San Francisco, CA 94103<br />United States</p>
               </div>

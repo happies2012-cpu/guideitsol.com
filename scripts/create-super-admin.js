@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 async function createSuperAdmin() {
   try {
-    const email = process.env.GUIDESOFT_SUPERADMIN_EMAIL || 'admin@guidesoft.com';
+    const email = process.env.GUIDESOFT_SUPERADMIN_EMAIL || 'admin@guideitsol.com';
     const password = process.env.GUIDESOFT_SUPERADMIN_PASS || 'Guidesoft@123';
     const name = process.env.GUIDESOFT_SUPERADMIN_NAME || 'Guidesoft Admin';
 

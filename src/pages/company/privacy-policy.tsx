@@ -77,7 +77,7 @@ const PrivacyPolicy = () => {
             </CardHeader>
             <CardContent className="prose prose-invert max-w-none">
               <p className="text-foreground/90 mb-6">
-                Guidesoft ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website guidesoft.com (the "Site"), use our services, or otherwise interact with us.
+                Guidesoft ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website guideitsol.com (the "Site"), use our services, or otherwise interact with us.
               </p>
               
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Information We Collect</h2>
@@ -154,7 +154,7 @@ const PrivacyPolicy = () => {
               </p>
               <div className="bg-muted/30 p-6 rounded-lg mb-6">
                 <p className="text-foreground font-medium">Guidesoft Privacy Team</p>
-                <p className="text-foreground/90">Email: privacy@guidesoft.com</p>
+                <p className="text-foreground/90">Email: privacy@guideitsol.com</p>
                 <p className="text-foreground/90">Phone: +1 (555) 123-4567</p>
                 <p className="text-foreground/90 mt-2">123 Tech Avenue<br />San Francisco, CA 94103<br />United States</p>
               </div>

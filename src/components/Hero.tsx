@@ -75,7 +75,7 @@ const Hero = () => {
           >
             <h1
               className="text-balance text-4xl font-medium sm:text-5xl md:text-6xl">
-              Guidesoft Business Solutions
+              Guidesoft IT Solutions
               <br />
               <TypewriterEffect words={dynamicWords} />
             </h1>

@@ -49,23 +49,91 @@ const CallToActionSection = () => {
               Partner with Guidesoft IT Solutions to unlock innovation, drive growth, and achieve your strategic objectives with confidence. {/* Reverted to Guidesoft */}
             </p>
           </motion.div>
-          <motion.div variants={buttonVariants} className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="px-8 py-6 text-lg bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-lg"
-              onClick={() => setIsLightboxOpen(true)}
-            >
-              Get a Consultation
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="px-8 py-6 text-lg border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 backdrop-blur-sm"
-              onClick={() => setIsLightboxOpen(true)}
-            >
-              Explore Our Services
-            </Button>
+          <motion.div variants={buttonVariants} className="flex flex-col items-center gap-8">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                size="lg"
+                className="px-8 py-6 text-lg bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-lg"
+                onClick={() => setIsLightboxOpen(true)}
+              >
+                Get a Consultation
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="px-8 py-6 text-lg border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 backdrop-blur-sm"
+                onClick={() => setIsLightboxOpen(true)}
+              >
+                Explore Our Services
+              </Button>
+            </div>
+
+            {/* PayU Quick Action Buttons */}
+            <div className="flex flex-wrap gap-4 justify-center mt-4">
+              <a 
+                href="https://u.payu.in/QIDbkCgRM7hp" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{
+                  width: '135px',
+                  backgroundColor: '#1065B7',
+                  textAlign: 'center',
+                  fontWeight: 800,
+                  padding: '11px 0px',
+                  color: 'white',
+                  fontSize: '12px',
+                  display: 'inline-block',
+                  textDecoration: 'none',
+                  borderRadius: '3.229px'
+                }}
+                className="hover:opacity-90 transition-opacity shadow-md"
+              >
+                Donate Now
+              </a>
+              
+              <a 
+                href="https://u.payu.in/orK6schNY7Op" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{
+                  width: '135px',
+                  backgroundColor: '#E19100',
+                  textAlign: 'center',
+                  fontWeight: 800,
+                  padding: '11px 0px',
+                  color: 'white',
+                  fontSize: '12px',
+                  display: 'inline-block',
+                  textDecoration: 'none',
+                  borderRadius: '3.229px'
+                }}
+                className="hover:opacity-90 transition-opacity shadow-md"
+              >
+                Book Now
+              </a>
+              
+              <a 
+                href="https://u.payu.in/ZI6bGCyRy7gh" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{
+                  width: '135px',
+                  backgroundColor: '#0D1E29',
+                  textAlign: 'center',
+                  fontWeight: 800,
+                  padding: '11px 0px',
+                  color: 'white',
+                  fontSize: '12px',
+                  display: 'inline-block',
+                  textDecoration: 'none',
+                  borderRadius: '3.229px'
+                }}
+                className="hover:opacity-90 transition-opacity shadow-md"
+              >
+                Pay Now
+              </a>
+            </div>
           </motion.div>
         </div>
       </motion.section>

@@ -87,7 +87,7 @@ const AIEmployeesSection = () => {
     {
       id: 6,
       role: "Cybersecurity Specialist",
-      image: "/gsai/55fae7d4-ed9d-4916-8e89-e3b0ec4b82d4 (1).png",
+      image: "/gsai/55fae7d4-ed9d-4916-8e89-e3b0ec4b82d4_1.png",
       icon: Shield,
       tasks: [
         "Monitor systems for security breaches and threats",

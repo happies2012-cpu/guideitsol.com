@@ -15,6 +15,8 @@ import AIChatbot from '@/components/AIChatbot';
 import EnrollForm from '@/components/EnrollForm';
 import AIToolDetailLightbox from '@/components/AIToolDetailLightbox';
 import { SplashCursor } from '@/components/ui/splash-cursor';
+import InnovativeLearningPaths from '@/components/InnovativeLearningPaths';
+import LearnerSaySection from '@/components/LearnerSaySection';
 
 // Import unique hero image for AI Learning page
 import heroImage from '@/assets/12.png';
@@ -751,6 +753,12 @@ const AILearning = () => {
           </Tabs>
         </div>
       </section>
+
+      {/* Innovative Learning Paths */}
+      <InnovativeLearningPaths />
+
+      {/* Learner Say Section */}
+      <LearnerSaySection />
 
       {/* CTA Section */}
       <section className="py-16 bg-primary/5">

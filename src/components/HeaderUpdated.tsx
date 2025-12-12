@@ -17,7 +17,7 @@ const Header = () => {
           <div className="flex items-center space-x-4">
             <span className="flex items-center text-muted-foreground">
               <span className="text-primary mr-2">✉</span>
-              support@guidesoft.com
+              support@guideitsol.com
             </span>
             <span className="hidden md:block text-muted-foreground">Working: Monday - friday, 08am - 5pm</span>
             <Link to="/contact" className="hidden md:block text-muted-foreground hover:text-primary transition-colors ml-4">

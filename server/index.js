@@ -48,8 +48,6 @@ const limiter = rateLimit({
 // CORS Configuration - Allow all origins for development, specific for production
 const corsOptions = {
   origin: isProduction ? [
-    'https://guidesoft.com',
-    'https://www.guidesoft.com',
     'https://guideitsol.com',
     'https://www.guideitsol.com',
     'http://guideitsol.com',
@@ -70,7 +68,7 @@ app.use(helmet({
       fontSrc: ["'self'", "https://fonts.gstatic.com", "http://fonts.gstatic.com", "data:"],
       imgSrc: ["'self'", "data:", "https:", "http:", "blob:"],
       scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https:", "http:"],
-      connectSrc: ["'self'", "https://api.guidesoft.com", "https://*.google-analytics.com", "https://*.googletagmanager.com", "https://checkout.razorpay.com", "https://www.paypal.com", "http:", "https:"],
+      connectSrc: ["'self'", "https://api.guideitsol.com", "https://*.google-analytics.com", "https://*.googletagmanager.com", "https://checkout.razorpay.com", "https://www.paypal.com", "http:", "https:"],
       frameSrc: ["'self'", "https://*.google.com", "https://*.googleapis.com", "https://checkout.razorpay.com", "https://www.paypal.com", "http:", "https:"],
       objectSrc: ["'self'", "blob:", "data:", "https:", "http:"],
       mediaSrc: ["'self'", "https:", "http:"],

@@ -7,7 +7,12 @@ import rateLimit from 'express-rate-limit';
 import https from 'https';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import authRoutes from './routes/auth.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 import pagesRoutes from './routes/pages.js';
 import navigationRoutes from './routes/navigation.js';
 import aiToolsRoutes from './routes/ai-tools.js';
@@ -43,37 +48,33 @@ const limiter = rateLimit({
 // CORS Configuration - Allow all origins for development, specific for production
 const corsOptions = {
   origin: isProduction ? [
-    'https://guidesoft.com',
-    'https://www.guidesoft.com',
     'https://guideitsol.com',
     'https://www.guideitsol.com',
     'http://guideitsol.com',
     'http://www.guideitsol.com'
-  ] : true,
-  credentials: true,
+  ] : true,  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
   exposedHeaders: ['Content-Range', 'X-Content-Range'],
   maxAge: 86400 // 24 hours
 };
-
 // Middleware
 app.use(compression());
 app.use(helmet({
-  contentSecurityPolicy: {
+  contentSecurityPolicy: isProduction ? {
     directives: {
       defaultSrc: ["'self'", "blob:", "data:", "https:", "http:"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "http://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com", "http://fonts.gstatic.com", "data:"],
       imgSrc: ["'self'", "data:", "https:", "http:", "blob:"],
       scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https:", "http:"],
-      connectSrc: ["'self'", "https://api.guidesoft.com", "https://*.google-analytics.com", "https://*.googletagmanager.com", "https://checkout.razorpay.com", "https://www.paypal.com", "http:", "https:"],
+      connectSrc: ["'self'", "https://api.guideitsol.com", "https://*.google-analytics.com", "https://*.googletagmanager.com", "https://checkout.razorpay.com", "https://www.paypal.com", "http:", "https:"],
       frameSrc: ["'self'", "https://*.google.com", "https://*.googleapis.com", "https://checkout.razorpay.com", "https://www.paypal.com", "http:", "https:"],
       objectSrc: ["'self'", "blob:", "data:", "https:", "http:"],
       mediaSrc: ["'self'", "https:", "http:"],
       childSrc: ["'self'", "blob:", "https:", "http:"],
     },
-  },
+  } : false, // Disable CSP in development
   crossOriginEmbedderPolicy: false,
   crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
@@ -100,7 +101,20 @@ app.use((req, res, next) => {
 });
 
 // Serve static files from the React app
-app.use(express.static(path.join(process.cwd(), 'dist')));
+let staticPath = path.join(process.cwd(), 'dist', 'public');
+if (!fs.existsSync(staticPath)) {
+  // Check if we are in deployment (dist root)
+  const potentialPublic = path.join(process.cwd(), 'public');
+  if (fs.existsSync(potentialPublic) && fs.existsSync(path.join(potentialPublic, 'index.html'))) {
+    staticPath = potentialPublic;
+  } else {
+    // Fallback to standard dist (dev or legacy)
+    staticPath = path.join(process.cwd(), 'dist');
+  }
+}
+
+console.log(`Serving static files from: ${staticPath}`);
+app.use(express.static(staticPath));
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -124,6 +138,21 @@ app.use('/api/payu-v2', payuV2Routes);
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Backend server is running' });
+});
+
+// SPA Fallback - Serve index.html for any unknown routes
+app.get(/(.*)/, (req, res, next) => {
+  // Skip API routes
+  if (req.path.startsWith('/api')) {
+    return next();
+  }
+  
+  const indexPath = path.join(staticPath, 'index.html');
+  if (fs.existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    next();
+  }
 });
 
 // Error handling middleware

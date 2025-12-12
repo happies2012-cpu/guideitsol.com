@@ -12,7 +12,7 @@ async function main() {
   
   // Get the super admin user for blog posts
   const adminUser = await prisma.user.findUnique({
-    where: { email: 'admin@guidesoft.com' }
+    where: { email: 'admin@guideitsol.com' }
   });
   const adminUserId = adminUser ? adminUser.id : userId;
   
