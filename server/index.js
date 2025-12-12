@@ -51,7 +51,9 @@ const corsOptions = {
     'https://guideitsol.com',
     'https://www.guideitsol.com',
     'http://guideitsol.com',
-    'http://www.guideitsol.com'
+    'http://www.guideitsol.com',
+    'https://marketing.guideitsol.com',
+    'http://marketing.guideitsol.com'
   ] : true,  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],

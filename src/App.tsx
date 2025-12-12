@@ -188,11 +188,12 @@ const AppContent = () => {
   // Initialize security measures
   useSecurity();
   
-  // Update canonical tag based on current route
+  // Update canonical tag based on current route and environment/site URL
   useEffect(() => {
     const canonicalTag = document.querySelector('link[rel="canonical"]');
+    const siteUrl = (import.meta.env.VITE_SITE_URL as string) || window.location.origin;
     if (canonicalTag) {
-      canonicalTag.setAttribute('href', `https://www.guideitsol.com${location.pathname}`);
+      canonicalTag.setAttribute('href', `${siteUrl}${location.pathname}`);
     }
   }, [location]);
 
