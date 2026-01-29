@@ -242,7 +242,7 @@ router.post('/failure', async (req, res) => {
 
     // Update payment status in database
     if (txnid) {
-      await prisma.payments.update({
+      await prisma.payment.update({
         where: { orderId: txnid },
         data: {
           status: 'failed',
@@ -260,7 +260,7 @@ router.post('/failure', async (req, res) => {
 
     // Update payment status
     if (req.body.txnid) {
-      await prisma.payments.update({
+      await prisma.payment.update({
         where: { orderId: req.body.txnid },
         data: {
           status: 'error',
@@ -291,7 +291,7 @@ router.post('/webhook', async (req, res) => {
     switch (event) {
       case 'payment.success':
         // Handle successful payment
-        await prisma.payments.update({
+        await prisma.payment.update({
           where: { orderId: payload.payment.entity.txnid },
           data: {
             status: 'success',
@@ -303,7 +303,7 @@ router.post('/webhook', async (req, res) => {
 
       case 'payment.failed':
         // Handle failed payment
-        await prisma.payments.update({
+        await prisma.payment.update({
           where: { orderId: payload.payment.entity.txnid },
           data: {
             status: 'failed',
