@@ -8,73 +8,73 @@ import React from 'react';
 // Image data using project assets - duplicated to fill sphere better
 const BASE_IMAGES: Omit<ImageData, 'id'>[] = [
   {
-    src: "https://res.cloudinary.com/dctgknnt7/image/upload/v1758731403/1_d8uozd.jpg",
+    src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop",
     alt: "Image 1",
     title: "Mountain Landscape",
     description: "A beautiful landscape captured at golden hour with mountains in the background."
   },
   {
-    src: "https://res.cloudinary.com/dctgknnt7/image/upload/v1758731402/5_ionpyy.jpg",
+    src: "https://images.unsplash.com/photo-1573496359-7013119ac13e?w=400&h=400&fit=crop",
     alt: "Image 2",
     title: "Portrait Photography",
     description: "Stunning portrait photography showcasing natural lighting and composition."
   },
   {
-    src: "https://res.cloudinary.com/dctgknnt7/image/upload/v1758731402/4_zeoqje.jpg",
+    src: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop",
     alt: "Image 3",
     title: "Urban Architecture",
     description: "Modern architectural design featuring clean lines and geometric patterns."
   },
   {
-    src: "https://res.cloudinary.com/dctgknnt7/image/upload/v1758731402/2_hme6yu.jpg",
+    src: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop",
     alt: "Image 4",
     title: "Nature Scene",
     description: "Peaceful nature scene with vibrant colors and natural beauty."
   },
   {
-    src: "https://res.cloudinary.com/dctgknnt7/image/upload/v1758731402/3_nfdtim.jpg",
+    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
     alt: "Image 5",
     title: "Abstract Art",
     description: "Creative abstract composition with bold colors and unique patterns."
   },
   {
-    src: "https://res.cloudinary.com/dctgknnt7/image/upload/v1758823070/11_c9flg6.jpg",
+    src: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop",
     alt: "Image 6",
     title: "Mountain Landscape",
     description: "A beautiful landscape captured at golden hour with mountains in the background."
   },
   {
-    src: "https://res.cloudinary.com/dctgknnt7/image/upload/v1758823069/10_qujlpy.jpg",
+    src: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=400&fit=crop",
     alt: "Image 7",
     title: "Portrait Photography",
     description: "Stunning portrait photography showcasing natural lighting and composition."
   },
   {
-    src: "https://res.cloudinary.com/dctgknnt7/image/upload/v1758823070/8_hkn2jm.jpg",
+    src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop",
     alt: "Image 8",
     title: "Urban Architecture",
     description: "Modern architectural design featuring clean lines and geometric patterns."
   },
   {
-    src: "https://res.cloudinary.com/dctgknnt7/image/upload/v1758823069/6_li3ger.jpg",
+    src: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop",
     alt: "Image 9",
     title: "Nature Scene",
     description: "Peaceful nature scene with vibrant colors and natural beauty."
   },
   {
-    src: "https://res.cloudinary.com/dctgknnt7/image/upload/v1758823069/12_kitql2.jpg",
+    src: "https://images.unsplash.com/photo-1628157588553-5eeea00af15c?w=400&h=400&fit=crop",
     alt: "Image 10",
     title: "Abstract Art",
     description: "Creative abstract composition with bold colors and unique patterns."
   },
   {
-    src: "https://res.cloudinary.com/dctgknnt7/image/upload/v1758823069/7_ojrozd.jpg",
+    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop",
     alt: "Image 11",
     title: "Abstract Art",
     description: "Creative abstract composition with bold colors and unique patterns."
   },
   {
-    src: "https://res.cloudinary.com/dctgknnt7/image/upload/v1758823069/9_gkuidt.jpg",
+    src: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&h=400&fit=crop",
     alt: "Image 12",
     title: "Abstract Art",
     description: "Creative abstract composition with bold colors and unique patterns."

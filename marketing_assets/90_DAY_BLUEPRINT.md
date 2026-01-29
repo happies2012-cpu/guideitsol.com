@@ -8,9 +8,9 @@
   - [x] Implement "Lead Magnet Popup".
   - [x] Update Meta Tags for top 20 pages.
 - **Week 2**:
-  - [ ] Set up Google Search Console & Analytics.
-  - [ ] Submit new `sitemap.xml`.
-  - [ ] Speed optimization (Compress images).
+  - [x] Set up Google Search Console & Analytics.
+  - [x] Submit new `sitemap.xml`.
+  - [x] Speed optimization (Compress images).
 - **Week 3**:
   - [ ] Write 4 foundational Blog Posts (Pillar content).
   - [ ] Create LinkedIn Company Page & optimize profile.

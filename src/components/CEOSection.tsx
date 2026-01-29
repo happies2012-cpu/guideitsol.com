@@ -20,49 +20,49 @@ const BASE_IMAGES: Omit<ImageData, 'id'>[] = [
     description: "Driving sustainable growth with data-driven strategies and insights."
   },
   {
-    src: "https://res.cloudinary.com/dctgknnt7/image/upload/v1758731402/4_zeoqje.jpg",
+    src: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop",
     alt: "Business Transformation 3",
     title: "Technology Leadership",
     description: "Pioneering technology solutions that transform businesses and industries."
   },
   {
-    src: "https://res.cloudinary.com/dctgknnt7/image/upload/v1758731402/2_hme6yu.jpg",
+    src: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop",
     alt: "Business Transformation 4",
     title: "Operational Excellence",
     description: "Optimizing operations for maximum efficiency and competitive advantage."
   },
   {
-    src: "https://res.cloudinary.com/dctgknnt7/image/upload/v1758731402/3_nfdtim.jpg",
+    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
     alt: "Business Transformation 5",
     title: "Customer Experience",
     description: "Creating exceptional customer experiences through innovative design."
   },
   {
-    src: "https://res.cloudinary.com/dctgknnt7/image/upload/v1758823070/11_c9flg6.jpg",
+    src: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop",
     alt: "Business Transformation 6",
     title: "Cloud Solutions",
     description: "Scalable cloud infrastructure for modern enterprise requirements."
   },
   {
-    src: "https://res.cloudinary.com/dctgknnt7/image/upload/v1758823069/10_qujlpy.jpg",
+    src: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=400&fit=crop",
     alt: "Business Transformation 7",
     title: "AI Integration",
     description: "Harnessing artificial intelligence to drive business intelligence."
   },
   {
-    src: "https://res.cloudinary.com/dctgknnt7/image/upload/v1758823070/8_hkn2jm.jpg",
+    src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop",
     alt: "Business Transformation 8",
     title: "Cybersecurity",
     description: "Protecting digital assets with enterprise-grade security solutions."
   },
   {
-    src: "https://res.cloudinary.com/dctgknnt7/image/upload/v1758823069/6_li3ger.jpg",
+    src: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop",
     alt: "Business Transformation 9",
     title: "Data Analytics",
     description: "Transforming data into actionable insights for strategic decision-making."
   },
   {
-    src: "https://res.cloudinary.com/dctgknnt7/image/upload/v1758823069/12_kitql2.jpg",
+    src: "https://images.unsplash.com/photo-1628157588553-5eeea00af15c?w=400&h=400&fit=crop",
     alt: "Business Transformation 10",
     title: "DevOps Excellence",
     description: "Accelerating development cycles with modern DevOps practices."
@@ -129,7 +129,7 @@ const CEOSection = () => {
                 <span className="text-primary">Transformation with AI Intelligence</span>
               </h2>
             </div>
-            
+
             <blockquote className="text-lg text-muted-foreground mb-8 leading-relaxed">
               At Guidesoft, we redefine how businesses evolve — by combining human insight with AI-powered intelligence.
               We help organizations unlock new efficiencies, empower decision-making, and accelerate innovation through intelligent digital transformation.
