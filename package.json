@@ -35,7 +35,6 @@
     "verify:supabase": "node scripts/verify-supabase-setup.js",
     "setup:production": "node scripts/setup-production.js",
     "create:super-admin": "node scripts/create-super-admin.js",
-    "deploy:dokploy": "./scripts/deploy-dokploy.sh",
     "generate:sitemap": "node scripts/auto-generate-sitemap.js",
     "deploy:payments": "node scripts/deploy-payments.js",
     "check:payments": "node scripts/deploy-payments.js",

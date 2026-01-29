@@ -1,0 +1,68 @@
+{
+    "name": "GuideIT Solutions",
+    "short_name": "Guidesoft",
+    "description": "Professional IT consulting services with AI employee-level capabilities to help your business grow and succeed with digital transformation solutions",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0f172a",
+    "theme_color": "#8b5cf6",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/favicon.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/favicon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": [
+        "business",
+        "productivity",
+        "technology"
+    ],
+    "screenshots": [],
+    "shortcuts": [
+        {
+            "name": "AI Learning",
+            "short_name": "AI Learn",
+            "description": "Access AI Learning Platform",
+            "url": "/ai-learning",
+            "icons": [
+                {
+                    "src": "/favicon.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Services",
+            "short_name": "Services",
+            "description": "Browse Our Services",
+            "url": "/services",
+            "icons": [
+                {
+                    "src": "/favicon.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Contact",
+            "short_name": "Contact",
+            "description": "Get in Touch",
+            "url": "/contact",
+            "icons": [
+                {
+                    "src": "/favicon.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ]
+}
