@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { FollowerPointerCard } from '@/components/ui/following-pointer';
-import { aiToolsAPI } from '@/lib/api';
+import { aiToolsDB } from '@/lib/firebase-db';
 import { toast } from 'sonner';
 import { parseAIToolsCSV, AIToolData } from '@/lib/csvParser';
 import AIChatbot from '@/components/AIChatbot';
@@ -49,15 +49,15 @@ const AILearning = () => {
   const [loading, setLoading] = useState(true);
   const [showFeatured, setShowFeatured] = useState(false);
   const [pricingFilter, setPricingFilter] = useState<'all' | 'free' | 'paid'>('all');
-  
+
   // Lightbox state
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [selectedToolForLightbox, setSelectedToolForLightbox] = useState<AITool | null>(null);
-  
+
   // Enrollment state
   const [isEnrollOpen, setIsEnrollOpen] = useState(false);
   const [selectedTool, setSelectedTool] = useState<AITool | null>(null);
-  
+
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const toolsPerPage = 40; // Show 40 tools per page
@@ -104,23 +104,47 @@ const AILearning = () => {
   const fetchTools = async (page: number = currentPage) => {
     setLoading(true);
     try {
-      const params: any = {
-        page: page,
-        limit: toolsPerPage,
-        search: searchQuery || undefined,
-        category: selectedCategory !== 'all' ? selectedCategory : undefined,
-        featured: showFeatured ? 'true' : undefined
-      };
+      // Fetch all tools from Firebase (client-side filtering/pagination for now)
+      const allTools = await aiToolsDB.getAll();
 
-      const response = await aiToolsAPI.getAll(params);
-      
-      // Set tools from the paginated response
-      setTools(response.data.data || []);
-      
-      // Update pagination info from response
-      if (response.data.pagination) {
-        setPaginationInfo(response.data.pagination);
+      // Apply Client-side filtering
+      let filtered = allTools;
+
+      if (searchQuery) {
+        const lowerQ = searchQuery.toLowerCase();
+        filtered = filtered.filter((t: any) =>
+          t.name.toLowerCase().includes(lowerQ) ||
+          t.description.toLowerCase().includes(lowerQ) ||
+          t.tags?.toLowerCase().includes(lowerQ)
+        );
       }
+
+      if (selectedCategory !== 'all') {
+        filtered = filtered.filter((t: any) => t.category === selectedCategory);
+      }
+
+      if (showFeatured) {
+        filtered = filtered.filter((t: any) => t.featured);
+      }
+
+      // Calculate pagination
+      const totalCount = filtered.length;
+      const totalPages = Math.ceil(totalCount / toolsPerPage);
+      const startIdx = (page - 1) * toolsPerPage;
+      const endIdx = startIdx + toolsPerPage;
+      const paginatedTools = filtered.slice(startIdx, endIdx);
+
+      // Set tools
+      setTools(paginatedTools as AITool[]);
+
+      // Update pagination info
+      setPaginationInfo({
+        currentPage: page,
+        totalPages: totalPages || 1,
+        totalCount: totalCount,
+        hasNext: page < totalPages,
+        hasPrev: page > 1
+      });
     } catch (error) {
       toast.error('Failed to load AI tools');
       console.error('Error fetching tools:', error);
@@ -131,8 +155,10 @@ const AILearning = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await aiToolsAPI.getCategories();
-      setCategories(response.data);
+      // Extract unique categories from DB tools
+      const allTools = await aiToolsDB.getAll();
+      const uniqueCategories = Array.from(new Set(allTools.map((t: any) => t.category))).filter(Boolean) as string[];
+      setCategories(uniqueCategories);
     } catch (error) {
       console.error('Failed to load categories');
     }
@@ -198,13 +224,13 @@ const AILearning = () => {
 
     // Apply pricing filter
     let filteredTools = [...dbTools, ...csvToolsConverted];
-    
+
     if (pricingFilter === 'free') {
-      filteredTools = filteredTools.filter(tool => 
+      filteredTools = filteredTools.filter(tool =>
         !tool.isPaid || (tool.pricing && tool.pricing.toLowerCase().includes('free'))
       );
     } else if (pricingFilter === 'paid') {
-      filteredTools = filteredTools.filter(tool => 
+      filteredTools = filteredTools.filter(tool =>
         tool.isPaid || (tool.pricing && !tool.pricing.toLowerCase().includes('free'))
       );
     }
@@ -392,11 +418,11 @@ const AILearning = () => {
             >
               Previous
             </Button>
-            
+
             <span className="text-sm text-muted-foreground">
               Page {paginationInfo.currentPage} of {paginationInfo.totalPages}
             </span>
-            
+
             <Button
               onClick={() => setCurrentPage(prev => Math.min(prev + 1, paginationInfo.totalPages))}
               disabled={!paginationInfo.hasNext}
@@ -414,10 +440,10 @@ const AILearning = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5">
       {/* Splash Cursor Effect */}
       <SplashCursor />
-      
+
       {/* Enrollment Form Modal */}
       {selectedTool && (
-        <EnrollForm 
+        <EnrollForm
           toolId={selectedTool.id}
           toolName={selectedTool.name}
           isOpen={isEnrollOpen}
@@ -425,7 +451,7 @@ const AILearning = () => {
           onEnrollSuccess={handleEnrollSuccess}
         />
       )}
-      
+
       {/* AI Tool Detail Lightbox */}
       {selectedToolForLightbox && (
         <AIToolDetailLightbox
@@ -435,11 +461,11 @@ const AILearning = () => {
           onEnroll={handleEnrollClick}
         />
       )}
-      
+
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
         {/* Unique background for AI Learning page */}
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center opacity-20"
           style={{ backgroundImage: `url(${heroImage})` }}
         />
@@ -459,8 +485,8 @@ const AILearning = () => {
               Master AI Tools for Smarter Work
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Discover over 12,000 cutting-edge AI tools designed to boost productivity, 
-              automate tasks, and accelerate your learning journey. Find the perfect tools 
+              Discover over 12,000 cutting-edge AI tools designed to boost productivity,
+              automate tasks, and accelerate your learning journey. Find the perfect tools
               for your workflow today.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -510,7 +536,7 @@ const AILearning = () => {
               Explore the cutting-edge AI technologies transforming how we work and learn
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <Card className="border-primary/20 hover:border-primary/40 transition-all duration-300">
               <CardHeader>
@@ -519,7 +545,7 @@ const AILearning = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Create original content including text, images, audio, and video with advanced neural networks. 
+                  Create original content including text, images, audio, and video with advanced neural networks.
                   Transform your creative process with AI-powered generation capabilities.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -529,7 +555,7 @@ const AILearning = () => {
                 </div>
               </CardContent>
             </Card>
-            
+
             <Card className="border-primary/20 hover:border-primary/40 transition-all duration-300">
               <CardHeader>
                 <Bot className="w-12 h-12 text-primary mb-4" />
@@ -537,7 +563,7 @@ const AILearning = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Autonomous AI systems that can perceive, reason, and act in complex environments. 
+                  Autonomous AI systems that can perceive, reason, and act in complex environments.
                   These agents can complete multi-step tasks with minimal human intervention.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -547,7 +573,7 @@ const AILearning = () => {
                 </div>
               </CardContent>
             </Card>
-            
+
             <Card className="border-primary/20 hover:border-primary/40 transition-all duration-300">
               <CardHeader>
                 <Network className="w-12 h-12 text-primary mb-4" />
@@ -555,7 +581,7 @@ const AILearning = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Intelligent virtual assistants that can understand context, maintain conversations, 
+                  Intelligent virtual assistants that can understand context, maintain conversations,
                   and perform complex actions across multiple platforms and applications.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -578,7 +604,7 @@ const AILearning = () => {
               Discover tools tailored for specific AI technologies and applications
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             <Card className="border-primary/20 hover:border-primary/40 transition-all duration-300">
               <CardHeader>
@@ -596,7 +622,7 @@ const AILearning = () => {
                 </Button>
               </CardContent>
             </Card>
-            
+
             <Card className="border-primary/20 hover:border-primary/40 transition-all duration-300">
               <CardHeader>
                 <div className="flex items-center gap-3">
@@ -613,7 +639,7 @@ const AILearning = () => {
                 </Button>
               </CardContent>
             </Card>
-            
+
             <Card className="border-primary/20 hover:border-primary/40 transition-all duration-300">
               <CardHeader>
                 <div className="flex items-center gap-3">
@@ -630,7 +656,7 @@ const AILearning = () => {
                 </Button>
               </CardContent>
             </Card>
-            
+
             <Card className="border-primary/20 hover:border-primary/40 transition-all duration-300">
               <CardHeader>
                 <div className="flex items-center gap-3">
@@ -657,11 +683,11 @@ const AILearning = () => {
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="text-3xl font-bold mb-4">Find Your Perfect AI Tool</h2>
             <p className="text-muted-foreground">
-              Search through our extensive database to discover tools that match your 
+              Search through our extensive database to discover tools that match your
               specific requirements and workflow.
             </p>
           </div>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -723,7 +749,7 @@ const AILearning = () => {
               Page {paginationInfo.currentPage} of {paginationInfo.totalPages}
             </div>
           </div>
-          
+
           {/* Pricing Filter Tabs */}
           <Tabs defaultValue="all" value={pricingFilter} onValueChange={(value) => setPricingFilter(value as 'all' | 'free' | 'paid')} className="mb-8">
             <TabsList className="grid w-full max-w-md mx-auto grid-cols-3">
@@ -766,7 +792,7 @@ const AILearning = () => {
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Workflow?</h2>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join thousands of professionals who are already using AI tools to boost their 
+              Join thousands of professionals who are already using AI tools to boost their
               productivity and accelerate their learning.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

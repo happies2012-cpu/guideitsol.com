@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { 
-  LayoutDashboard, FileText, Navigation, Sparkles, Settings, 
-  Users, LogOut, Plus, Edit, Trash, Save 
+import {
+  LayoutDashboard, FileText, Navigation, Sparkles, Settings,
+  Users, LogOut, Plus, Edit, Trash, Save
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,7 +13,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
-import { pagesAPI, aiToolsAPI, navigationAPI } from '@/lib/api';
+import { navigationAPI } from '@/lib/api';
+import { pagesDB, aiToolsDB } from '@/lib/firebase-db';
 
 const Dashboard = () => {
   const { user, logout, isAdmin, isSuperAdmin } = useAuth();
@@ -33,15 +34,17 @@ const Dashboard = () => {
   const fetchData = async () => {
     try {
       if (isAdmin) {
-        const [pagesRes, toolsRes] = await Promise.all([
-          pagesAPI.getAll(),
-          aiToolsAPI.getAll()
+        // Use Firebase DB helpers
+        const [pagesData, toolsData] = await Promise.all([
+          pagesDB.getAll(),
+          aiToolsDB.getAll()
         ]);
-        setPages(pagesRes.data);
-        setAITools(toolsRes.data);
+        setPages(pagesData as any);
+        setAITools(toolsData as any);
       }
     } catch (error) {
-      toast.error('Failed to load data');
+      console.error('Fetch error:', error);
+      toast.error('Failed to load data from Firebase');
     } finally {
       setLoading(false);
     }
@@ -139,6 +142,34 @@ const Dashboard = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
+            <Card className="border-primary/20 backdrop-blur-lg bg-background/90 mb-6">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Settings className="w-5 h-5" />
+                  System Actions
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Button
+                  onClick={async () => {
+                    try {
+                      const { seedData } = await import('@/lib/seed-data');
+                      await seedData();
+                      toast.success('Database seeded successfully!');
+                      fetchData();
+                    } catch (e) {
+                      console.error(e);
+                      toast.error('Seed failed');
+                    }
+                  }}
+                  variant="outline"
+                >
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  Seed Database
+                </Button>
+              </CardContent>
+            </Card>
+
             <Card className="border-primary/20 backdrop-blur-lg bg-background/90">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
