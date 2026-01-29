@@ -178,16 +178,16 @@ const App = () => {
 
 const AppContent = () => {
   const location = useLocation();
-  
+
   // Hook to listen for modal events
   useModalEvents();
-  
+
   // Add resource hints for better performance
   useResourceHints();
-  
+
   // Initialize security measures
   useSecurity();
-  
+
   // Update canonical tag based on current route and environment/site URL
   useEffect(() => {
     const canonicalTag = document.querySelector('link[rel="canonical"]');
@@ -197,20 +197,20 @@ const AppContent = () => {
     }
   }, [location]);
 
-  
+
   return (
     <>
       <Toaster />
       <Sonner />
-      <LeadMagnetPopup />
-        {/* Removed FireworksOverlay */}
-        <div className="min-h-screen flex flex-col">
-          <Header />
-          <VerticalSocialDock />
-          <main className="flex-1">
-            <Suspense fallback={<LoadingScreen message="Loading content..." />}>
-              <AnimatedRoutes>
-                <Routes location={location}>
+      {/* <LeadMagnetPopup /> */}
+      {/* Removed FireworksOverlay */}
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <VerticalSocialDock />
+        <main className="flex-1">
+          <Suspense fallback={<LoadingScreen message="Loading content..." />}>
+            <AnimatedRoutes>
+              <Routes location={location}>
                 <Route path="/" element={<Home />} />
                 <Route path="/home-insurance" element={<HomeInsurance />} />
                 <Route path="/home-business" element={<HomeBusiness />} />
@@ -353,14 +353,14 @@ const AppContent = () => {
 
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
-                </Routes>
-              </AnimatedRoutes>
-            </Suspense>
-          </main>
-          <Footer />
-          <BackToTopButton />
-          <Chatbot />
-        </div>
+              </Routes>
+            </AnimatedRoutes>
+          </Suspense>
+        </main>
+        <Footer />
+        <BackToTopButton />
+        <Chatbot />
+      </div>
     </>
   );
 };

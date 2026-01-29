@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { LogIn, Mail, Lock, Eye, EyeOff, Chrome, Sparkles, Shield, Zap } from 'lucide-react';
+import { LogIn, Mail, Lock, Eye, EyeOff, Chrome, Shield, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import Logo from '@/components/ui/Logo';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from 'sonner';
 
@@ -65,12 +66,9 @@ const Login = () => {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.2, type: 'spring' }}
-            className="flex items-center gap-3 mb-8"
+            className="mb-8"
           >
-            <div className="w-12 h-12 bg-white/20 backdrop-blur-lg rounded-xl flex items-center justify-center">
-              <Sparkles className="w-7 h-7 text-white" />
-            </div>
-            <h1 className="text-3xl font-bold text-white">GUIDESOFT</h1>
+            <Logo size="lg" variant="white" />
           </motion.div>
 
           <motion.div
