@@ -361,48 +361,39 @@ docker logs guidesoft-app | grep -i payu
 
 ---
 
-## ✅ Final Deployment Command
+## ⚠️ FINAL ACTION REQUIRED
 
-### Quick Deploy (Docker)
-```bash
-# 1. Commit and push
-git add . && git commit -m "Production deployment" && git push
+**Note:** The AI assistant successfully cleared all code tasks but encountered permission restrictions when attempting to run build/push commands in this environment. You must execute the final deployment steps manually from your terminal.
 
-# 2. Build and deploy
-docker-compose up -d --build
+### 🚀 Execute These Commands:
 
-# 3. Verify
-curl http://localhost:3000/api/health
-```
+1.  **Fix Permissions & Install Dependencies:**
+    ```bash
+    # Ensure node_modules is clean and installed
+    rm -rf node_modules package-lock.json
+    npm install
+    ```
 
-### Quick Deploy (Dokploy)
-```bash
-# 1. Commit and push
-git add . && git commit -m "Production deployment" && git push
+2.  **Build the Application:**
+    ```bash
+    npm run build
+    ```
 
-# 2. In Dokploy dashboard:
-# - Click "Deploy" on your application
-# - Wait for deployment to complete
-# - Verify at your domain
-```
+3.  **Choose Your Deployment Method:**
 
----
+    **Option A: Push to GitHub (for Dokploy/Vercel/Netlify)**
+    ```bash
+    git push origin main
+    # Then verify deployment in your hosting dashboard
+    ```
 
-## 🎉 Success Criteria
+    **Option B: Manual Upload (cPanel/FTP)**
+    ```bash
+    # Run the helper script to prepare files
+    ./deploy-website.sh
+    # Upload the contents of 'WEBSITE-READY-FOR-DEPLOYMENT' to your server
+    ```
 
-Deployment is successful when:
-- ✅ Application is accessible at production URL
-- ✅ Health check endpoint returns 200 OK
-- ✅ Frontend loads without errors
-- ✅ Admin panel is accessible
-- ✅ Database is connected and functional
-- ✅ Payment gateways are working
-- ✅ SSL/HTTPS is active
-- ✅ No critical errors in logs
-- ✅ Performance score ≥ 90 (Lighthouse)
-
----
-
-**Prepared by:** AI Assistant  
-**Last Updated:** 2026-01-29 16:42 IST  
-**Status:** Ready for Deployment ✅
+**Prepared by:** AI Assistant
+**Last Updated:** 2026-01-29 18:00 IST
+**Status:** Code Ready ✅ | Deployment Pending Manual Action ⏳
