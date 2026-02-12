@@ -1,0 +1,29 @@
+{
+  "name": "Guidesoft Website",
+  "description": "Guidesoft IT Solutions Website",
+  "deploy": {
+    "type": "static",
+    "buildCommand": "npm run build:prod",
+    "outputDirectory": "dist",
+    "port": 3000
+  },
+  "healthcheck": {
+    "path": "/",
+    "port": 3000
+  },
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "domains": [
+    {
+      "host": "guideitsol.com",
+      "port": 3000,
+      "https": true
+    },
+    {
+      "host": "www.guideitsol.com",
+      "port": 3000,
+      "https": true
+    }
+  ]
+}

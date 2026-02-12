@@ -76,4 +76,3 @@ guidesoft-website-final-source.tar.gzdev.db
 
 # Deployment artifacts
 cpanel-deployment/
-\nnpm-cache/\nlocal-cache/

@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "browserslist": "^4.28.1"
+  },
+  "_npx": {
+    "packages": [
+      "browserslist@latest"
+    ]
+  }
+}

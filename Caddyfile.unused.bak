@@ -1,0 +1,31 @@
+{
+  email praveengupta@guideitsol.com
+}
+
+guideitsol.com, www.guideitsol.com {
+  # Proxy API requests to backend
+  reverse_proxy /api/* localhost:3001
+
+  root * /app/dist/public
+  file_server
+  encode gzip
+  
+  # SPA fallback for client-side routing
+  try_files {path} /index.html
+  
+  # Security headers
+  header {
+    X-Content-Type-Options nosniff
+    X-Frame-Options SAMEORIGIN
+    Referrer-Policy strict-origin-when-cross-origin
+    Permissions-Policy geolocation=(), microphone=(), camera=()
+  }
+  
+  # Cache static assets
+  @static {
+    path *.css *.js *.png *.jpg *.jpeg *.gif *.svg *.ico *.webp *.woff *.woff2 *.ttf *.eot
+  }
+  header @static {
+    Cache-Control "public, max-age=604800"
+  }
+}
