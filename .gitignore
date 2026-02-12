@@ -12,11 +12,31 @@ dist
 dist-ssr
 *.local
 
-# Environment files
+# Environment files - NEVER commit these
 .env
+.env.*
+!.env.example
 .env.local
 .env.production
 .env.development
+.env.docker
+.env.production.example
+.env.production.template
+.env.production.secure
+
+# Database files
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+data/
+prisma/data/
+
+# Build caches
+.cache
+npm-cache/
+temp-build-cache/
+temp-cache/
 
 # Lock files - keep only package-lock.json for npm
 pnpm-lock.yaml
@@ -44,7 +64,15 @@ yarn.lock
 
 # Large archives (prevent accidental commits)
 *.tar.gz
+*.zip
 guidesoft-website-final-source.tar.gzdev.db
-.env.production.secure
 .claude/
 .trae/
+
+# Vercel
+.vercel
+.vercel/*
+!.vercel/project.json
+
+# Deployment artifacts
+cpanel-deployment/
