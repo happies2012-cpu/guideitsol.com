@@ -54,7 +54,7 @@ const corsOptions = {
     'http://www.guideitsol.com',
     'https://marketing.guideitsol.com',
     'http://marketing.guideitsol.com'
-  ] : true,  credentials: true,
+  ] : true, credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
   exposedHeaders: ['Content-Range', 'X-Content-Range'],
@@ -84,10 +84,10 @@ app.use(limiter);
 app.use(cors(corsOptions));
 
 // Special route for Razorpay webhook (needs raw body)
-app.use('/api/ai-enrollments/razorpay-webhook', express.raw({type: 'application/json'}));
+app.use('/api/ai-enrollments/razorpay-webhook', express.raw({ type: 'application/json' }));
 
 // Special route for PayPal webhook (needs raw body)
-app.use('/api/paypal/webhook', express.raw({type: 'application/json'}));
+app.use('/api/paypal/webhook', express.raw({ type: 'application/json' }));
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
@@ -103,15 +103,18 @@ app.use((req, res, next) => {
 });
 
 // Serve static files from the React app
-let staticPath = path.join(process.cwd(), 'dist', 'public');
-if (!fs.existsSync(staticPath)) {
-  // Check if we are in deployment (dist root)
-  const potentialPublic = path.join(process.cwd(), 'public');
-  if (fs.existsSync(potentialPublic) && fs.existsSync(path.join(potentialPublic, 'index.html'))) {
-    staticPath = potentialPublic;
+let staticPath = path.join(process.cwd(), 'dist');
+if (!fs.existsSync(staticPath) || !fs.existsSync(path.join(staticPath, 'index.html'))) {
+  // Check if we are in a deployment where dist/public is used
+  const distPublic = path.join(process.cwd(), 'dist', 'public');
+  if (fs.existsSync(distPublic) && fs.existsSync(path.join(distPublic, 'index.html'))) {
+    staticPath = distPublic;
   } else {
-    // Fallback to standard dist (dev or legacy)
-    staticPath = path.join(process.cwd(), 'dist');
+    // Fallback to source public folder (only if dist is missing, usually dev mode)
+    const sourcePublic = path.join(process.cwd(), 'public');
+    if (fs.existsSync(sourcePublic)) {
+      staticPath = sourcePublic;
+    }
   }
 }
 
@@ -148,7 +151,7 @@ app.get(/(.*)/, (req, res, next) => {
   if (req.path.startsWith('/api')) {
     return next();
   }
-  
+
   const indexPath = path.join(staticPath, 'index.html');
   if (fs.existsSync(indexPath)) {
     res.sendFile(indexPath);
