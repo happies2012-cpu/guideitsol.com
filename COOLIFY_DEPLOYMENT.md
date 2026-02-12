@@ -1,67 +1,63 @@
 # Coolify Deployment Guide
 
-## Understanding the Issue
+## Understanding the Configuration
 
-The error logs you're seeing indicate that Coolify is deploying your application with Caddy instead of your configured Nginx server. This is causing deployment issues.
+This project is configured to run on **Port 3000** as a Node.js application.
 
-## Files Added for Proper Deployment
-
-We've added three files to ensure proper deployment on Coolify:
-
-### 1. Caddyfile
-A configuration file for Caddy web server that can be used as an alternative to Nginx.
-
-### 2. docker-compose.yml
-Explicitly defines how to build and run your application using your Dockerfile.
-
-### 3. coolify.json
-Provides deployment configuration specifically for Coolify platform.
+The error logs previously indicated that Coolify might have been deploying with Caddy improperly. We have renamed `Caddyfile` to `Caddyfile.unused` to force Coolify to use the standard Node.js/Docker deployment method configured in `coolify.json` and `Dockerfile`.
 
 ## Deployment Options
 
-### Option 1: Use Dockerfile (Recommended)
-1. In Coolify, select your repository
-2. Choose "Dockerfile" as deployment method
-3. Point to the existing `Dockerfile` in your project root
-4. Set port to 80
+### Option 1: Coolify Auto-Deployment (Recommended)
 
-### Option 2: Use Docker Compose
-1. In Coolify, select your repository
-2. Choose "Docker Compose" as deployment method
-3. Point to the `docker-compose.yml` file we created
-4. Set port to 80
+1.  **Push Changes**: Ensure you have pushed the latest changes (including `coolify.json` with port 3000) to GitHub.
+2.  **Coolify Dashboard**:
+    - Go to your application in Coolify.
+    - Go to **Settings**.
+    - Ensure **Build Pack** is set to **Nixpacks** or **Dockerfile**.
+    - If using **Dockerfile**, ensure the *Docker Compose Location* points to `docker-compose.yml` or *Dockerfile Location* points to `Dockerfile`.
+3.  **Port Configuration**:
+    - In **Settings** -> **General**, ensure **Port** is set to `3000`.
+    - If you see `80` anywhere, change it to `3000`.
+4.  **Deploy**: Click **Deploy**.
 
-### Option 3: Use the Coolify Configuration
-1. In Coolify, select your repository
-2. Choose "Deploy" and it will automatically use the `coolify.json` configuration
+### Option 2: Automatic Integration (Webhooks)
+
+To enable automatic deployment whenever you push to GitHub:
+
+1.  **Coolify Dashboard**:
+    - Go to your application.
+    - Navigate to **Webhooks**.
+    - Copy the **Github Webhook Secret** (or similar webhook URL provided by Coolify).
+2.  **GitHub Repository**:
+    - Go to your repository settings on GitHub.
+    - Go to **Webhooks** -> **Add webhook**.
+    - Paste the **Payload URL** from Coolify.
+    - Set **Content type** to `application/json`.
+    - Select **Just the push event**.
+    - Click **Add webhook**.
+
+Now, every time you push to the `main` branch, Coolify will automatically redeploy your application.
 
 ## Troubleshooting
 
-### If Caddy is Still Being Used
-1. Check Coolify's application settings
-2. Ensure you've selected the correct deployment method (Dockerfile or Docker Compose)
-3. Verify the port configuration is set to 80
+### "Bad Gateway" (502) or "Gateway Timeout" (504)
+- This usually means Coolify is pointing to the wrong port.
+- Check the **Logs** in Coolify to see what port the application started on (it should say `Backend server running on http://localhost:3000`).
+- Ensure the **Ports Exposes** setting in Coolify matches `3000`.
+
+### "Caddy" Errors
+- If you see errors related to Caddy in the build logs, ensure `Caddyfile` is renamed to `Caddyfile.unused` in your repository.
+- Force a rebuild without cache in Coolify if the problem persists.
 
 ### Health Check Issues
-1. Ensure your application responds correctly on port 80
-2. Check that the index.html file is accessible
-3. Verify that static assets are being served properly
+- Ensure the health check path is set to `/api/health` or `/` in Coolify settings.
+- The application responds to `/api/health` with `{"status": "ok", ...}`.
 
 ## Environment Variables
 
-Make sure these environment variables are set in Coolify:
+Ensure these are set in Coolify:
 - `NODE_ENV=production`
-
-## Common Issues and Solutions
-
-1. **Caddy instead of Nginx**: Explicitly specify Dockerfile deployment method
-2. **Port issues**: Ensure port 80 is configured correctly
-3. **Health check failures**: Verify the application responds to HTTP requests
-4. **Static asset issues**: Check that all assets are included in the build
-
-## After Deployment
-
-Once deployed successfully:
-1. Test the website loads correctly
-2. Verify all pages and assets are accessible
-3. Check that API endpoints work if applicable
+- `PORT=3000`
+- `DATABASE_URL` (if using a database)
+- `VITE_SITE_URL` (e.g., `https://guideitsol.com`)
