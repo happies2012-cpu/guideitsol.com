@@ -123,20 +123,20 @@ const CEOSection = () => {
           <motion.div variants={contentVariants}>
             <div className="mb-6">
               <Quote className="h-12 w-12 text-primary mb-4" />
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-                Leading Business
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                Pioneering the Future of
                 <br />
-                <span className="text-primary">Transformation with AI Intelligence</span>
+                <span className="text-primary">Autonomous Business Excellence</span>
               </h2>
             </div>
 
             <blockquote className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              At Guidesoft, we redefine how businesses evolve — by combining human insight with AI-powered intelligence.
-              We help organizations unlock new efficiencies, empower decision-making, and accelerate innovation through intelligent digital transformation.
+              At GS Intelligence, we redefine how enterprises evolve — by fusing deep human expertise with the precision of the GS Intelligence Core.
+              We empower organizations to command new efficiencies, master decision-making, and propel innovation through the GS Elite Workforce.
             </blockquote>
 
             <blockquote className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              From strategy to execution, our team integrates AI tools, automation frameworks, and data-driven workflows that transform traditional business models into agile, scalable, and future-ready ecosystems.
+              From foundational strategy to global execution, our agents integrate GS Autonomous Experts and data-driven frameworks that transform traditional business into agile, high-performance digital masters.
             </blockquote>
 
             {/* Our Approach Section */}
