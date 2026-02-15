@@ -11,7 +11,7 @@ const HomeInsurance = () => {
     },
     {
       icon: TrendingUp,
-      title: "Security & Save", 
+      title: "Security & Save",
       subtitle: "Learn Our Company Graph"
     }
   ];
@@ -24,7 +24,7 @@ const HomeInsurance = () => {
     },
     {
       icon: CheckCircle,
-      title: "FCA Regulated", 
+      title: "FCA Regulated",
       description: "Always Ready to support customer."
     },
     {
@@ -73,7 +73,7 @@ const HomeInsurance = () => {
                   just for you.
                 </h1>
                 <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                  Lorem Ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+                  Innovative insurance technology solutions designed to simplify policy management, enhance risk assessment, and provide a seamless experience for your customers.
                 </p>
                 <Button size="lg" className="px-8 py-6 text-lg bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity shadow-lg">
                   Get Started →
@@ -101,7 +101,7 @@ const HomeInsurance = () => {
                       </div>
                     </div>
                   ))}
-                  
+
                   {/* Success Rate */}
                   <div className="bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end rounded-lg p-6 text-white shadow-lg relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gradient-primary-start/20 to-gradient-primary-end/20 opacity-30 blur-xl" />
@@ -113,7 +113,7 @@ const HomeInsurance = () => {
                     </div>
                   </div>
                 </div>
-                
+
                 {/* Decorative elements */}
                 <div className="absolute -top-6 -left-6 w-24 h-24 bg-primary/10 rounded-full" />
                 <div className="absolute -bottom-6 -right-6 w-16 h-16 bg-primary/20 rounded-full" />
@@ -176,7 +176,7 @@ const HomeInsurance = () => {
                 </div>
               </div>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -187,14 +187,14 @@ const HomeInsurance = () => {
               <Button variant="outline" className="mb-8 px-8 py-6 text-lg border-primary/30 hover:bg-primary/10 backdrop-blur-sm">
                 Learn More
               </Button>
-              
+
               <div className="space-y-6">
                 <div className="p-6 bg-background/40 rounded-lg shadow-md backdrop-blur-xl border border-primary/20">
                   <h4 className="font-semibold text-foreground mb-2">Global Transaction Advisory</h4>
                   <p className="text-muted-foreground mb-4">We denounce righteous indignation and dislike.</p>
                   <Button variant="link" className="p-0 text-primary hover:text-primary/80">Learn More</Button>
                 </div>
-                
+
                 <div className="p-6 bg-background/40 rounded-lg shadow-md backdrop-blur-xl border border-primary/20">
                   <h4 className="font-semibold text-foreground mb-2">Insurance consulting for family life</h4>
                   <p className="text-muted-foreground mb-4">We denounce righteous indignation and dislike.</p>

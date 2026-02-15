@@ -1,12 +1,12 @@
 "use client";
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { 
-  Dialog, 
-  DialogContent, 
-  DialogHeader, 
-  DialogTitle, 
-  DialogDescription 
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,7 +17,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { X, Mail, Phone, Calendar, CreditCard, Check, Star, Wallet } from "lucide-react";
 import { motion } from "framer-motion";
 
-type ModalType = 
+type ModalType =
   | 'contact'
   | 'quote'
   | 'payment'
@@ -108,7 +108,7 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
 
   const getModalTitle = () => {
     if (modalData?.title) return modalData.title;
-    
+
     switch (modalType) {
       case 'contact': return 'Get in Touch';
       case 'quote': return 'Request a Quote';
@@ -124,7 +124,7 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
 
   const getModalDescription = () => {
     if (modalData?.description) return modalData.description;
-    
+
     switch (modalType) {
       case 'contact': return 'Let us know how we can help you achieve your goals.';
       case 'quote': return 'Get a personalized quote for your project requirements.';
@@ -183,7 +183,7 @@ const ContactForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) 
             id="name"
             required
             value={formData.name}
-            onChange={(e) => setFormData({...formData, name: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder="Your full name"
           />
         </div>
@@ -194,7 +194,7 @@ const ContactForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) 
             type="email"
             required
             value={formData.email}
-            onChange={(e) => setFormData({...formData, email: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             placeholder="your@email.com"
           />
         </div>
@@ -205,7 +205,7 @@ const ContactForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) 
           <Input
             id="phone"
             value={formData.phone}
-            onChange={(e) => setFormData({...formData, phone: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             placeholder="+1 (555) 123-4567"
           />
         </div>
@@ -214,7 +214,7 @@ const ContactForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) 
           <Input
             id="company"
             value={formData.company}
-            onChange={(e) => setFormData({...formData, company: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, company: e.target.value })}
             placeholder="Your company"
           />
         </div>
@@ -225,7 +225,7 @@ const ContactForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) 
           id="message"
           required
           value={formData.message}
-          onChange={(e) => setFormData({...formData, message: e.target.value})}
+          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
           placeholder="Tell us about your project..."
           rows={4}
         />
@@ -263,7 +263,7 @@ const QuoteForm: React.FC<{ onSubmit: (data: any) => void; service?: string }> =
             id="name"
             required
             value={formData.name}
-            onChange={(e) => setFormData({...formData, name: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
         </div>
         <div>
@@ -273,7 +273,7 @@ const QuoteForm: React.FC<{ onSubmit: (data: any) => void; service?: string }> =
             type="email"
             required
             value={formData.email}
-            onChange={(e) => setFormData({...formData, email: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           />
         </div>
       </div>
@@ -282,7 +282,7 @@ const QuoteForm: React.FC<{ onSubmit: (data: any) => void; service?: string }> =
         <Input
           id="company"
           value={formData.company}
-          onChange={(e) => setFormData({...formData, company: e.target.value})}
+          onChange={(e) => setFormData({ ...formData, company: e.target.value })}
         />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -291,7 +291,7 @@ const QuoteForm: React.FC<{ onSubmit: (data: any) => void; service?: string }> =
           <Input
             id="service"
             value={formData.service}
-            onChange={(e) => setFormData({...formData, service: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, service: e.target.value })}
             placeholder="Web Development, AI Solutions..."
           />
         </div>
@@ -300,7 +300,7 @@ const QuoteForm: React.FC<{ onSubmit: (data: any) => void; service?: string }> =
           <Input
             id="budget"
             value={formData.budget}
-            onChange={(e) => setFormData({...formData, budget: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
             placeholder="$10K - $50K"
           />
         </div>
@@ -310,7 +310,7 @@ const QuoteForm: React.FC<{ onSubmit: (data: any) => void; service?: string }> =
         <Input
           id="timeline"
           value={formData.timeline}
-          onChange={(e) => setFormData({...formData, timeline: e.target.value})}
+          onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
           placeholder="3-6 months"
         />
       </div>
@@ -320,7 +320,7 @@ const QuoteForm: React.FC<{ onSubmit: (data: any) => void; service?: string }> =
           id="description"
           required
           value={formData.description}
-          onChange={(e) => setFormData({...formData, description: e.target.value})}
+          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
           placeholder="Describe your project requirements..."
           rows={3}
         />
@@ -360,7 +360,7 @@ const PaymentForm: React.FC<{ onSubmit: (data: any) => void; amount?: number; pl
       alert('Failed to initiate PayU payment. Please try again.');
     }
   };
-  
+
   return (
     <div className="mt-4">
       <Card className="mb-4">
@@ -381,33 +381,46 @@ const PaymentForm: React.FC<{ onSubmit: (data: any) => void; amount?: number; pl
           </div>
         </CardContent>
       </Card>
-      
+
       <div className="space-y-4">
         <div className="bg-muted p-4 rounded-lg">
-          <h3 className="font-semibold mb-2">Pay with PayU</h3>
-          <p className="text-sm mb-4">Complete your payment using India's leading payment gateway.</p>
-          
-          <div className="flex justify-center my-4">
-            <div className="bg-white p-2 rounded">
-              <img src="https://payu.in/assets/images/payu-logo.svg" alt="PayU" className="h-8" />
-            </div>
+          <h3 className="font-semibold mb-2">Pay with UPI (Instant)</h3>
+          <p className="text-sm mb-4">Scan the QR code below to pay via any UPI app (PhonePe, Google Pay, Paytm).</p>
+
+          <div className="flex flex-col items-center justify-center my-4 bg-white p-4 rounded-xl border-2 border-primary/20">
+            <img
+              src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(`upi://pay?pa=8500647979@paytm&pn=GuidesoftIT&am=${amount || 99}&cu=INR&tn=Guidesoft%20Solution%20Payment`)}`}
+              alt="UPI QR Code"
+              className="w-48 h-48 mb-2"
+            />
+            <span className="text-xs font-mono font-bold text-primary">8500647979@paytm</span>
           </div>
-          
-          <p className="text-xs text-center text-muted-foreground mb-4">
-            India's leading payment gateway provider
+
+          <p className="text-xs text-center text-muted-foreground">
+            No transaction fees. Instant activation after verification.
           </p>
         </div>
-        
-        <Button 
+
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t border-primary/10" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-2 text-muted-foreground">Or pay with gateway</span>
+          </div>
+        </div>
+
+        <Button
           onClick={handlePayU}
-          className="w-full bg-gradient-to-r from-primary to-primary/80"
+          variant="outline"
+          className="w-full border-primary/30 text-primary hover:bg-primary/10"
         >
-          <Wallet className="w-4 h-4 mr-2" />
-          Proceed to PayU Payment
+          <CreditCard className="w-4 h-4 mr-2" />
+          Pay with Debit/Credit Card (PayU)
         </Button>
-        
+
         <p className="text-xs text-muted-foreground text-center">
-          Secure payment powered by PayU. Your information is encrypted and safe.
+          Secure payment powered by GS Intelligence Security Core.
         </p>
       </div>
     </div>
@@ -439,7 +452,7 @@ const ConsultationForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmi
             id="name"
             required
             value={formData.name}
-            onChange={(e) => setFormData({...formData, name: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
         </div>
         <div>
@@ -449,7 +462,7 @@ const ConsultationForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmi
             type="email"
             required
             value={formData.email}
-            onChange={(e) => setFormData({...formData, email: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           />
         </div>
       </div>
@@ -459,7 +472,7 @@ const ConsultationForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmi
           <Input
             id="phone"
             value={formData.phone}
-            onChange={(e) => setFormData({...formData, phone: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
           />
         </div>
         <div>
@@ -467,7 +480,7 @@ const ConsultationForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmi
           <Input
             id="company"
             value={formData.company}
-            onChange={(e) => setFormData({...formData, company: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, company: e.target.value })}
           />
         </div>
       </div>
@@ -478,7 +491,7 @@ const ConsultationForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmi
             id="preferredDate"
             type="date"
             value={formData.preferredDate}
-            onChange={(e) => setFormData({...formData, preferredDate: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
           />
         </div>
         <div>
@@ -487,7 +500,7 @@ const ConsultationForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmi
             id="preferredTime"
             type="time"
             value={formData.preferredTime}
-            onChange={(e) => setFormData({...formData, preferredTime: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
           />
         </div>
       </div>
@@ -496,7 +509,7 @@ const ConsultationForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmi
         <Textarea
           id="topic"
           value={formData.topic}
-          onChange={(e) => setFormData({...formData, topic: e.target.value})}
+          onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
           placeholder="What would you like to discuss?"
           rows={3}
         />
@@ -532,7 +545,7 @@ const DemoForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) => 
             id="name"
             required
             value={formData.name}
-            onChange={(e) => setFormData({...formData, name: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
         </div>
         <div>
@@ -542,7 +555,7 @@ const DemoForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) => 
             type="email"
             required
             value={formData.email}
-            onChange={(e) => setFormData({...formData, email: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           />
         </div>
       </div>
@@ -553,7 +566,7 @@ const DemoForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) => 
             id="company"
             required
             value={formData.company}
-            onChange={(e) => setFormData({...formData, company: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, company: e.target.value })}
           />
         </div>
         <div>
@@ -561,7 +574,7 @@ const DemoForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) => 
           <Input
             id="role"
             value={formData.role}
-            onChange={(e) => setFormData({...formData, role: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, role: e.target.value })}
             placeholder="CEO, CTO, Manager..."
           />
         </div>
@@ -571,7 +584,7 @@ const DemoForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) => 
         <Textarea
           id="interests"
           value={formData.interests}
-          onChange={(e) => setFormData({...formData, interests: e.target.value})}
+          onChange={(e) => setFormData({ ...formData, interests: e.target.value })}
           placeholder="Which features or solutions are you most interested in?"
           rows={3}
         />
@@ -603,7 +616,7 @@ const TrialForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) =>
           id="name"
           required
           value={formData.name}
-          onChange={(e) => setFormData({...formData, name: e.target.value})}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         />
       </div>
       <div>
@@ -613,7 +626,7 @@ const TrialForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) =>
           type="email"
           required
           value={formData.email}
-          onChange={(e) => setFormData({...formData, email: e.target.value})}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
       </div>
       <div>
@@ -621,7 +634,7 @@ const TrialForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) =>
         <Input
           id="company"
           value={formData.company}
-          onChange={(e) => setFormData({...formData, company: e.target.value})}
+          onChange={(e) => setFormData({ ...formData, company: e.target.value })}
         />
       </div>
       <Button type="button" className="w-full bg-gradient-to-r from-primary to-secondary" onClick={async () => {
@@ -682,7 +695,7 @@ const NewsletterForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit 
           type="email"
           required
           value={formData.email}
-          onChange={(e) => setFormData({...formData, email: e.target.value})}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           placeholder="your@email.com"
         />
       </div>
@@ -716,7 +729,7 @@ const ServicesForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit })
 
   const services = [
     'Web Development',
-    'Mobile App Development', 
+    'Mobile App Development',
     'AI Solutions',
     'Cloud Services',
     'Data Analytics',
@@ -747,7 +760,7 @@ const ServicesForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit })
           id="name"
           required
           value={formData.name}
-          onChange={(e) => setFormData({...formData, name: e.target.value})}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         />
       </div>
       <div>
@@ -757,15 +770,15 @@ const ServicesForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit })
           type="email"
           required
           value={formData.email}
-          onChange={(e) => setFormData({...formData, email: e.target.value})}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
       </div>
       <div className="space-y-3">
         <Label>Services of Interest</Label>
         <div className="grid grid-cols-2 gap-2">
           {services.map((service) => (
-            <Badge 
-              key={service} 
+            <Badge
+              key={service}
               variant={formData.services.includes(service) ? "default" : "outline"}
               className="cursor-pointer hover:bg-primary hover:text-primary-foreground"
               onClick={() => toggleService(service)}

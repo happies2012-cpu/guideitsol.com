@@ -25,18 +25,18 @@ import uxui from "@/assets/Studio/uxui.png";
 import workflows from "@/assets/Studio/workflows.png";
 
 const transitionVariants = {
-    item: {
-        hidden: {
-            opacity: 0,
-            filter: 'blur(12px)',
-            y: 12,
-        },
-        visible: {
-            opacity: 1,
-            filter: 'blur(0px)',
-            y: 0,
-        },
+  item: {
+    hidden: {
+      opacity: 0,
+      filter: 'blur(12px)',
+      y: 12,
     },
+    visible: {
+      opacity: 1,
+      filter: 'blur(0px)',
+      y: 0,
+    },
+  },
 }
 
 const Hero = () => {
@@ -58,7 +58,7 @@ const Hero = () => {
             vy={0.1}
           />
         </div>
-        
+
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <AnimatedGroup
             variants={{
@@ -74,19 +74,19 @@ const Hero = () => {
             }}
           >
             <h1
-              className="text-balance text-4xl font-medium sm:text-5xl md:text-6xl">
-              Guidesoft IT Solutions
+              className="text-balance text-4xl font-bold sm:text-5xl md:text-7xl tracking-tight">
+              GS <span className="text-primary italic">Intelligence</span>
               <br />
               <TypewriterEffect words={dynamicWords} />
             </h1>
 
-            <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg">
-              Professional IT consulting services with AI employee view capabilities to help your business grow and succeed with digital transformation solutions
+            <p className="mx-auto mt-6 max-w-2xl text-pretty text-xl text-muted-foreground leading-relaxed">
+              Empowering global enterprises with elite GS IT consulting and autonomous AI-driven workforce integration. We bridge the gap between traditional operations and futuristic digital excellence.
             </p>
 
             <div className="mt-12">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="px-8 py-6 text-lg"
                 onClick={() => setIsLightboxOpen(true)}
               >
@@ -115,7 +115,7 @@ const Hero = () => {
         </div>
       </section>
       <LogoCloud />
-      
+
       {/* Lightbox Form */}
       <LightboxForm
         isOpen={isLightboxOpen}
@@ -133,13 +133,13 @@ const AppComponent = () => {
       <div className="flex items-center gap-1.5 text-orange-400">
         <div className="size-6 text-primary flex items-center justify-center">
           <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            <path d="M13 10V3L4 14h7v7l9-11h-7z" />
           </svg>
         </div>
         <div className="text-sm font-medium">Guidesoft</div>
       </div>
       <div className="space-y-3">
-        <div className="text-foreground border-b border-white/10 pb-3 text-sm font-medium">This year, we're powering more businesses than ever.</div>
+        <div className="text-foreground border-b border-white/10 pb-3 text-sm font-semibold">GS Pulse: Catalyzing Digital Evolution at Scale.</div>
         <div className="space-y-3">
           <div className="space-y-1">
             <div className="space-x-1">

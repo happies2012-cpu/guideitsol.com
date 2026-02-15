@@ -279,10 +279,10 @@ const AIEmployeesSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-            AI Employees
+            The GS <span className="italic">Elite</span> Workforce
           </h2>
           <p className="text-xl text-foreground max-w-3xl mx-auto">
-            Meet our AI-powered workforce ready to assist with specialized tasks across various domains
+            Deploy high-performance, GS-certified autonomous AI agents to revolutionize your operational efficiency and scale your digital capabilities instantly.
           </p>
         </motion.div>
 
@@ -315,7 +315,7 @@ const AIEmployeesSection = () => {
                             {employee.role}
                           </h3>
                           <div className="inline-block px-3 py-1 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end text-white text-xs rounded-full mb-3">
-                            AI Employee
+                            GS Autonomous Expert
                           </div>
                           <Button className="w-full bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity">
                             View Details
@@ -334,7 +334,7 @@ const AIEmployeesSection = () => {
                         <div className="bg-muted/50 p-4 rounded-lg">
                           <p className="text-foreground">{employee.details}</p>
                         </div>
-                        
+
                         <div>
                           <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
                             <CheckCircle className="w-5 h-5 text-primary" />
@@ -349,9 +349,9 @@ const AIEmployeesSection = () => {
                             ))}
                           </ul>
                         </div>
-                        
+
                         <div className="pt-4">
-                          <Button 
+                          <Button
                             className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:opacity-90 transition-opacity text-white py-6 text-lg"
                             onClick={() => window.open('https://wa.me/918500647979', '_blank')}
                           >
@@ -367,7 +367,7 @@ const AIEmployeesSection = () => {
                   </Dialog>
                 </motion.div>
               ))}
-              
+
               {/* Duplicate for seamless scrolling */}
               {employeesData.map((employee, index) => (
                 <motion.div
@@ -394,7 +394,7 @@ const AIEmployeesSection = () => {
                             {employee.role}
                           </h3>
                           <div className="inline-block px-3 py-1 bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end text-white text-xs rounded-full mb-3">
-                            AI Employee
+                            GS Autonomous Expert
                           </div>
                           <Button className="w-full bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity">
                             View Details
@@ -413,7 +413,7 @@ const AIEmployeesSection = () => {
                         <div className="bg-muted/50 p-4 rounded-lg">
                           <p className="text-foreground">{employee.details}</p>
                         </div>
-                        
+
                         <div>
                           <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
                             <CheckCircle className="w-5 h-5 text-primary" />
@@ -428,9 +428,9 @@ const AIEmployeesSection = () => {
                             ))}
                           </ul>
                         </div>
-                        
+
                         <div className="pt-4">
-                          <Button 
+                          <Button
                             className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:opacity-90 transition-opacity text-white py-6 text-lg"
                             onClick={() => window.open('https://wa.me/918500647979', '_blank')}
                           >

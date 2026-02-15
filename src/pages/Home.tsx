@@ -15,6 +15,7 @@ import PricingSection from "@/components/PricingSection";
 import InvestorSection from "@/components/InvestorSection";
 import LearningPathsSection from "@/components/LearningPathsSection";
 import ReviewsSection from "@/components/ReviewsSection";
+import { BacklinksSection } from "@/components/BacklinksSection";
 import { useAnimations } from "@/hooks/useAnimations";
 import PageTransition from "@/components/ui/page-transition";
 
@@ -31,52 +32,56 @@ const Home = () => {
         <motion.div variants={staggerItem}>
           <Hero />
         </motion.div>
-        
+
         <motion.div variants={staggerItem}>
           <AIEmployeesSection />
         </motion.div>
-        
+
         {/* Existing Components with animations */}
         <motion.div variants={staggerItem}>
           <StatsAndCEOSection />
         </motion.div>
-        
+
         <motion.div variants={staggerItem}>
           <LearningPathsSection />
         </motion.div>
-        
+
         <motion.div variants={staggerItem}>
           <ReviewsSection />
         </motion.div>
-        
+
         <motion.div variants={staggerItem}>
           <Services />
         </motion.div>
-        
+
         <motion.div variants={staggerItem}>
           <StatsSection />
         </motion.div>
-        
+
         <motion.div variants={staggerItem}>
           <CEOSection />
         </motion.div>
-        
+
         <motion.div variants={staggerItem}>
           <TestimonialsSection />
         </motion.div>
-        
+
         <motion.div variants={staggerItem}>
           <PricingSection />
         </motion.div>
-        
+
         <motion.div variants={staggerItem}>
           <WhyChooseUsSection />
         </motion.div>
-        
+
         <motion.div variants={staggerItem}>
           <InvestorSection />
         </motion.div>
-        
+
+        <motion.div variants={staggerItem}>
+          <BacklinksSection />
+        </motion.div>
+
         <motion.div variants={staggerItem}>
           <CallToActionSection />
         </motion.div>

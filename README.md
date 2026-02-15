@@ -1,169 +1,78 @@
-# Guidesoft - AI-Powered Business Solutions
+# GS Intelligence Ecosystem
 
-Welcome to Guidesoft, an advanced AI-powered platform offering cutting-edge business solutions, educational tools, and development services.
+A premium, AI-driven enterprise solution platform designed for high-performance automation, business intelligence, and digital transformation. Built with cutting-edge technologies and GS Intelligence Core Security.
 
-## Table of Contents
+## 🚀 Key Features
 
-- [Overview](#overview)
-- [Features](#features)
-- [Payment Integration](#payment-integration)
-- [Getting Started](#getting-started)
-- [Project Structure](#project-structure)
-- [Deployment](#deployment)
-- [Contributing](#contributing)
-- [License](#license)
+- **GS Elite Workforce**: Autonomous AI experts for diverse business roles (Dev, Marketing, HR, Finance).
+- **GS Intelligence Core**: Advanced AI-driven decision-making and predictive analytics.
+- **Solution Marketplace**: Over 50+ specialized application models and enterprise solutions.
+- **GS Security Core**: Comprehensive client-side and server-side protection system.
+- **GS Wallet (UPI & PayU)**: Integrated payment solutions for seamless subscription management.
+- **GS Data Matrix**: Real-time content management with Firebase Firestore integration.
 
-## Overview
+## 🛠 Tech Stack
 
-Guidesoft is a comprehensive platform that combines artificial intelligence with modern web technologies to deliver innovative solutions for businesses and learners. Our platform offers:
+- **Frontend**: React 18, Vite, TypeScript, Tailwind CSS
+- **Animations**: Framer Motion, GSAP (Planned)
+- **State Management**: React Context API
+- **Backend/DB**: Firebase (Auth, Firestore, Hosting)
+- **Security**: GS Custom Security Layer
+- **Payments**: PayU India, UPI Integration
 
-- AI-powered tools and services
-- Educational content and courses
-- Development services and consulting
-- Secure payment processing
+## 📦 Project Structure
 
-## Features
+```text
+src/
+├── components/     # Reusable UI components
+├── contexts/       # Authentication and Theme contexts
+├── data/           # Application data and app models
+├── hooks/          # Custom React hooks
+├── lib/            # Utilities, Firebase config, API helpers
+├── pages/          # Main application pages
+├── services/       # Security and core services
+└── assets/         # Images, fonts, and static assets
+```
 
-- **AI Tools**: Advanced AI-powered applications for various business needs
-- **Educational Content**: Comprehensive learning paths and courses
-- **Responsive Design**: Mobile-first, responsive UI components
-- **Secure Payments**: Multiple payment options including Razorpay, PayPal, and PayU
-- **User Management**: Authentication and authorization system
-- **Admin Dashboard**: Comprehensive admin panel for managing content
+## 🛠 Installation & Local Development
 
-## Payment Integration
-
-### Current Payment Providers
-
-1. **Razorpay**: Primary payment gateway for card and wallet payments
-2. **PayPal**: International payment processing
-3. **UPI**: Direct UPI payments
-4. **PayU**: Comprehensive payment solution for Indian businesses
-
-### PayU Integration
-
-This project includes full integration with PayU, India's leading payment gateway provider.
-
-#### Features Implemented:
-- PayU payment processing
-- Mobile SDK downloads for Android and iOS
-- Production setup documentation
-- Security-compliant implementation
-
-#### PayU Setup:
-1. Configure environment variables in `.env`:
-   ```env
-   PAYU_MERCHANT_KEY="your-merchant-key"
-   PAYU_MERCHANT_SALT="your-merchant-salt"
-   ```
-
-2. For production deployment, follow the detailed guide in [PAYU_PRODUCTION_SETUP.md](PAYU_PRODUCTION_SETUP.md)
-
-3. Access SDK downloads at `/company/payu-mobile-sdk`
-
-#### Documentation:
-- [PayU Merchant Terms and Conditions](/company/merchant-terms-service-fee)
-- [PayU Protection Fund Claims Procedure](/company/merchant-customer-protection-fund)
-- [PayU Banned & Restricted Businesses](/company/banned-restricted-businesses)
-- [PayU List of Issuers](/company/list-issuers-payment-mechanisms)
-- [PayU Split Pay Terms](/company/terms-conditions-split-pay)
-- [PayU Merchant Terms (IHC)](/company/merchant-terms-internet-handling-charge)
-- [PayU UPI Technology Components](/company/components-optional-technology-services-upi)
-- [PayU Bundled Packages Terms](/company/terms-conditions-bundled-packages)
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v16 or higher)
-- npm or yarn
-- SQLite (for development)
-
-### Installation
-
-1. Clone the repository:
+1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/guideitsol.com.git
+   git clone https://github.com/pranu21m/guideitsol.com.git
    cd guideitsol.com
    ```
 
-2. Install dependencies:
+2. **Install dependencies**:
    ```bash
    npm install
    ```
 
-3. Set up environment variables:
+3. **Set up Environment Variables**:
+   Create a `.env` file based on `.env.example`.
+
+4. **Run Development Server**:
    ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
+   npm run dev
    ```
 
-4. Run database migrations:
-   ```bash
-   npm run prisma:migrate
-   ```
-
-5. Start the development server:
-   ```bash
-   npm run start:all
-   ```
-
-## Project Structure
-
-```
-guideitsol.com/
-├── server/              # Backend Express application
-│   ├── routes/          # API routes
-│   ├── middleware/      # Express middleware
-│   └── db/              # Database configuration
-├── src/                 # Frontend React application
-│   ├── components/      # React components
-│   ├── pages/           # Page components
-│   ├── lib/             # Utility functions
-│   └── hooks/           # Custom React hooks
-├── prisma/              # Database schema and migrations
-├── public/              # Static assets
-└── scripts/             # Utility scripts
-```
-
-## Deployment
-
-### Production Deployment
-
-1. Build the application:
+5. **Build for Production**:
    ```bash
    npm run build
    ```
 
-2. Set production environment variables in `.env.production`
+## 🔒 Security Measures
 
-3. Start the production server:
-   ```bash
-   NODE_ENV=production npm run server
-   ```
+The GS Intelligence platform includes multiple security layers:
+- Disables Right-Click & Content Scraping.
+- Prevents unauthorized Developer Tools access.
+- Role-based Access Control (RBAC) via Firebase.
+- Super Admin hardcoding for critical maintenance.
 
-### Deployment Options
+## 📬 Contact & Support
 
-- [Coolify Deployment](COOLIFY_DEPLOYMENT.md)
-- [GitHub Pages Setup](GITHUB_PAGES_SETUP.md)
-- [CPanel Deployment](cpanel-deployment/README.md)
+- **Website**: [guideitsol.com](https://guideitsol.com)
+- **Support**: support@guideitsol.com
+- **Phone**: +91 8500647979
 
-## Contributing
-
-We welcome contributions to Guidesoft! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a pull request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Support
-
-For support, please contact:
-- Email: support@guideitsol.com
-- Website: https://guideitsol.com
+---
+© 2024 GS Intelligence. All Rights Reserved.

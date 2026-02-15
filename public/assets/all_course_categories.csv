@@ -1,0 +1,151 @@
+id,name,icon,color,created_at
+1,Artificial Intelligence,Brain,#4CAF50,2025-10-12 11:02:53
+2,Machine Learning,Globe,#FF9800,2025-10-12 11:02:53
+3,Deep Learning,Code,#2196F3,2025-10-12 11:02:53
+4,Prompt Engineering,Video,#9C27B0,2025-10-12 11:02:53
+5,AI Ethics,BookOpen,#00BCD4,2025-10-12 11:02:53
+6,AI Tools Mastery,PenTool,#E91E63,2025-10-12 11:02:53
+7,ChatGPT for Work,Music,#795548,2025-10-12 11:02:53
+8,AI Video Generation,Heart,#03A9F4,2025-10-12 11:02:53
+9,AI Image Tools,DollarSign,#FFC107,2025-10-12 11:02:53
+10,AI Music & Sound,Cloud,#FF6B6B,2025-10-12 11:02:53
+11,Generative Art,Cpu,#4CAF50,2025-10-12 11:02:53
+12,AI for Business,TrendingUp,#FF9800,2025-10-12 11:02:53
+13,Automation with AI,User,#2196F3,2025-10-12 11:02:53
+14,AI for Marketing,Film,#9C27B0,2025-10-12 11:02:53
+15,AI for Coding,Camera,#00BCD4,2025-10-12 11:02:53
+16,AI in Education,Gamepad,#E91E63,2025-10-12 11:02:53
+17,AI for Healthcare,Mic,#795548,2025-10-12 11:02:53
+18,AI in Finance,Lightbulb,#03A9F4,2025-10-12 11:02:53
+19,Natural Language Processing,Briefcase,#FFC107,2025-10-12 11:02:53
+20,Computer Vision,Sparkles,#FF6B6B,2025-10-12 11:02:53
+21,Robotics,Brain,#4CAF50,2025-10-12 11:02:53
+22,Autonomous Systems,Globe,#FF9800,2025-10-12 11:02:53
+23,Web Development,Code,#2196F3,2025-10-12 11:02:53
+24,Frontend Development,Video,#9C27B0,2025-10-12 11:02:53
+25,Backend Development,BookOpen,#00BCD4,2025-10-12 11:02:53
+26,Full Stack Development,PenTool,#E91E63,2025-10-12 11:02:53
+27,Mobile App Development,Music,#795548,2025-10-12 11:02:53
+28,Game Development,Heart,#03A9F4,2025-10-12 11:02:53
+29,Cloud Computing,DollarSign,#FFC107,2025-10-12 11:02:53
+30,DevOps,Cloud,#FF6B6B,2025-10-12 11:02:53
+31,Cybersecurity,Cpu,#4CAF50,2025-10-12 11:02:53
+32,Networking,TrendingUp,#FF9800,2025-10-12 11:02:53
+33,Data Science,User,#2196F3,2025-10-12 11:02:53
+34,Data Engineering,Film,#9C27B0,2025-10-12 11:02:53
+35,Database Management,Camera,#00BCD4,2025-10-12 11:02:53
+36,Software Testing,Gamepad,#E91E63,2025-10-12 11:02:53
+37,Quality Assurance,Mic,#795548,2025-10-12 11:02:53
+38,Version Control (Git),Lightbulb,#03A9F4,2025-10-12 11:02:53
+39,Operating Systems,Briefcase,#FFC107,2025-10-12 11:02:53
+40,Embedded Systems,Sparkles,#FF6B6B,2025-10-12 11:02:53
+41,IoT (Internet of Things),Brain,#4CAF50,2025-10-12 11:02:53
+42,AR/VR Development,Globe,#FF9800,2025-10-12 11:02:53
+43,API Development,Code,#2196F3,2025-10-12 11:02:53
+44,Graphic Design,Video,#9C27B0,2025-10-12 11:02:53
+45,UI/UX Design,BookOpen,#00BCD4,2025-10-12 11:02:53
+46,3D Modeling,PenTool,#E91E63,2025-10-12 11:02:53
+47,Animation,Music,#795548,2025-10-12 11:02:53
+48,Motion Graphics,Heart,#03A9F4,2025-10-12 11:02:53
+49,Logo Design,DollarSign,#FFC107,2025-10-12 11:02:53
+50,Brand Identity,Cloud,#FF6B6B,2025-10-12 11:02:53
+51,Video Editing,Cpu,#4CAF50,2025-10-12 11:02:53
+52,Photography,TrendingUp,#FF9800,2025-10-12 11:02:53
+53,Film Production,User,#2196F3,2025-10-12 11:02:53
+54,Illustration,Film,#9C27B0,2025-10-12 11:02:53
+55,Canva Design,Camera,#00BCD4,2025-10-12 11:02:53
+56,Figma UI Design,Gamepad,#E91E63,2025-10-12 11:02:53
+57,Digital Art,Mic,#795548,2025-10-12 11:02:53
+58,Game Art,Lightbulb,#03A9F4,2025-10-12 11:02:53
+59,Typography,Briefcase,#FFC107,2025-10-12 11:02:53
+60,Product Design,Sparkles,#FF6B6B,2025-10-12 11:02:53
+61,Interior Design,Brain,#4CAF50,2025-10-12 11:02:53
+62,Architecture Basics,Globe,#FF9800,2025-10-12 11:02:53
+63,Entrepreneurship,Code,#2196F3,2025-10-12 11:02:53
+64,Startup Growth,Video,#9C27B0,2025-10-12 11:02:53
+65,Business Strategy,BookOpen,#00BCD4,2025-10-12 11:02:53
+66,Marketing Fundamentals,PenTool,#E91E63,2025-10-12 11:02:53
+67,Digital Marketing,Music,#795548,2025-10-12 11:02:53
+68,SEO & SEM,Heart,#03A9F4,2025-10-12 11:02:53
+69,Social Media Marketing,DollarSign,#FFC107,2025-10-12 11:02:53
+70,Affiliate Marketing,Cloud,#FF6B6B,2025-10-12 11:02:53
+71,Email Marketing,Cpu,#4CAF50,2025-10-12 11:02:53
+72,Sales Mastery,TrendingUp,#FF9800,2025-10-12 11:02:53
+73,Negotiation Skills,User,#2196F3,2025-10-12 11:02:53
+74,E-commerce,Film,#9C27B0,2025-10-12 11:02:53
+75,Dropshipping,Camera,#00BCD4,2025-10-12 11:02:53
+76,Freelancing,Gamepad,#E91E63,2025-10-12 11:02:53
+77,Influencer Marketing,Mic,#795548,2025-10-12 11:02:53
+78,Personal Branding,Lightbulb,#03A9F4,2025-10-12 11:02:53
+79,Leadership,Briefcase,#FFC107,2025-10-12 11:02:53
+80,Management,Sparkles,#FF6B6B,2025-10-12 11:02:53
+81,Business Analytics,Brain,#4CAF50,2025-10-12 11:02:53
+82,Finance for Non-Finance,Globe,#FF9800,2025-10-12 11:02:53
+83,Customer Experience (CX),Code,#2196F3,2025-10-12 11:02:53
+84,Business Automation,Video,#9C27B0,2025-10-12 11:02:53
+85,Stock Market,BookOpen,#00BCD4,2025-10-12 11:02:53
+86,Crypto Trading,PenTool,#E91E63,2025-10-12 11:02:53
+87,Real Estate Investing,Music,#795548,2025-10-12 11:02:53
+88,Personal Finance,Heart,#03A9F4,2025-10-12 11:02:53
+89,Wealth Management,DollarSign,#FFC107,2025-10-12 11:02:53
+90,Financial Literacy,Cloud,#FF6B6B,2025-10-12 11:02:53
+91,Passive Income,Cpu,#4CAF50,2025-10-12 11:02:53
+92,Online Earning,TrendingUp,#FF9800,2025-10-12 11:02:53
+93,Side Hustles,User,#2196F3,2025-10-12 11:02:53
+94,Learn & Earn,Film,#9C27B0,2025-10-12 11:02:53
+95,Crowdfunding,Camera,#00BCD4,2025-10-12 11:02:53
+96,Time Management,Gamepad,#E91E63,2025-10-12 11:02:53
+97,Communication Skills,Mic,#795548,2025-10-12 11:02:53
+98,Public Speaking,Lightbulb,#03A9F4,2025-10-12 11:02:53
+99,Emotional Intelligence,Briefcase,#FFC107,2025-10-12 11:02:53
+100,Critical Thinking,Sparkles,#FF6B6B,2025-10-12 11:02:53
+101,Negotiation & Persuasion,Brain,#4CAF50,2025-10-12 11:02:53
+102,Career Development,Globe,#FF9800,2025-10-12 11:02:53
+103,Interview Preparation,Code,#2196F3,2025-10-12 11:02:53
+104,Resume Building,Video,#9C27B0,2025-10-12 11:02:53
+105,Mindset & Motivation,BookOpen,#00BCD4,2025-10-12 11:02:53
+106,Teamwork,PenTool,#E91E63,2025-10-12 11:02:53
+107,Remote Work Skills,Music,#795548,2025-10-12 11:02:53
+108,Work-Life Balance,Heart,#03A9F4,2025-10-12 11:02:53
+109,Productivity Systems,DollarSign,#FFC107,2025-10-12 11:02:53
+110,Goal Setting,Cloud,#FF6B6B,2025-10-12 11:02:53
+111,Stress Management,Cpu,#4CAF50,2025-10-12 11:02:53
+112,Mathematics,TrendingUp,#FF9800,2025-10-12 11:02:53
+113,Physics,User,#2196F3,2025-10-12 11:02:53
+114,Chemistry,Film,#9C27B0,2025-10-12 11:02:53
+115,Biology,Camera,#00BCD4,2025-10-12 11:02:53
+116,Statistics,Gamepad,#E91E63,2025-10-12 11:02:53
+117,Economics,Mic,#795548,2025-10-12 11:02:53
+118,Accounting,Lightbulb,#03A9F4,2025-10-12 11:02:53
+119,Computer Science,Briefcase,#FFC107,2025-10-12 11:02:53
+120,Engineering Fundamentals,Sparkles,#FF6B6B,2025-10-12 11:02:53
+121,English Communication,Brain,#4CAF50,2025-10-12 11:02:53
+122,Creative Writing,Globe,#FF9800,2025-10-12 11:02:53
+123,Research Skills,Code,#2196F3,2025-10-12 11:02:53
+124,Public Policy,Video,#9C27B0,2025-10-12 11:02:53
+125,Yoga,BookOpen,#00BCD4,2025-10-12 11:02:53
+126,Meditation,PenTool,#E91E63,2025-10-12 11:02:53
+127,Fitness,Music,#795548,2025-10-12 11:02:53
+128,Nutrition,Heart,#03A9F4,2025-10-12 11:02:53
+129,Cooking,DollarSign,#FFC107,2025-10-12 11:02:53
+130,Self-Improvement,Cloud,#FF6B6B,2025-10-12 11:02:53
+131,Personal Growth,Cpu,#4CAF50,2025-10-12 11:02:53
+132,Parenting,TrendingUp,#FF9800,2025-10-12 11:02:53
+133,Travel & Culture,User,#2196F3,2025-10-12 11:02:53
+134,Language Learning,Film,#9C27B0,2025-10-12 11:02:53
+135,Mindfulness,Camera,#00BCD4,2025-10-12 11:02:53
+136,Psychology Basics,Gamepad,#E91E63,2025-10-12 11:02:53
+137,Happiness & Wellbeing,Mic,#795548,2025-10-12 11:02:53
+138,Music Production,Lightbulb,#03A9F4,2025-10-12 11:02:53
+139,Singing,Briefcase,#FFC107,2025-10-12 11:02:53
+140,Guitar,Sparkles,#FF6B6B,2025-10-12 11:02:53
+141,Piano,Brain,#4CAF50,2025-10-12 11:02:53
+142,DJ & Mixing,Globe,#FF9800,2025-10-12 11:02:53
+143,Creative Writing,Code,#2196F3,2025-10-12 11:02:53
+144,Acting,Video,#9C27B0,2025-10-12 11:02:53
+145,Voice Over,BookOpen,#00BCD4,2025-10-12 11:02:53
+146,Dance,PenTool,#E91E63,2025-10-12 11:02:53
+147,Art Therapy,Music,#795548,2025-10-12 11:02:53
+148,Painting,Heart,#03A9F4,2025-10-12 11:02:53
+149,Sculpting,DollarSign,#FFC107,2025-10-12 11:02:53
+150,Photography for Beginners,Cloud,#FF6B6B,2025-10-12 11:02:53

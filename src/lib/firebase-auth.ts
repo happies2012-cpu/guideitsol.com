@@ -189,7 +189,15 @@ export const getUserData = async (uid: string): Promise<AppUser> => {
             throw new Error('User data not found');
         }
 
-        return userDoc.data() as AppUser;
+        const data = userDoc.data() as AppUser;
+
+        // Hardcoded SUPER_ADMIN access for the specific user requested
+        if (data.email === 'pranu21m@gmail.com') {
+            data.role = 'SUPER_ADMIN';
+            data.permissions = getDefaultPermissions('SUPER_ADMIN');
+        }
+
+        return data;
     } catch (error: any) {
         console.error('Get user data error:', error);
         throw new Error(error.message || 'Failed to get user data');
