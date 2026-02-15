@@ -4,6 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Cpu, Brain, Zap, Shield, Users, Target, Rocket, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getHeroImage } from "@/lib/image-utils";
+import { Badge } from '@/components/ui/badge';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import { appModels } from '@/data/app-models';
+import AppModelCard from '@/components/solutions/AppModelCard';
 
 const EmergingTechSolutions = () => {
   const containerVariants = {
@@ -130,6 +135,56 @@ const EmergingTechSolutions = () => {
                 </Card>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* NEW: Featured App Models Section */}
+      <section className="py-20 relative overflow-hidden bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            <div className="max-w-2xl">
+              <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Featured Solution Templates</Badge>
+              <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
+                Emerging Tech Models
+              </h2>
+              <p className="text-xl text-muted-foreground mt-4">
+                Explore our specialized app models for E-Learning, HRMS, and more.
+              </p>
+            </div>
+            <Link to="/solutions">
+              <Button variant="outline" className="border-primary/30 hover:bg-primary/10 group">
+                Browse Marketplace
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {appModels
+              .filter(model => ["elearning-solution", "hrms-app-solution", "chatbot-app"].includes(model.category))
+              .slice(0, 3)
+              .map((model, idx) => (
+                <motion.div
+                  key={model.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                >
+                  <AppModelCard model={model} />
+                </motion.div>
+              ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link to="/solutions/elearning-solution">
+                <Button variant="secondary" size="sm">E-Learning Marketplace</Button>
+              </Link>
+              <Link to="/solutions/chatbot-app">
+                <Button variant="secondary" size="sm">Chatbot Solutions</Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

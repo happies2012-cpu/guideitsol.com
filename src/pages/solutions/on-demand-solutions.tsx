@@ -7,13 +7,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { motion, Easing } from "framer-motion";
-import { Truck, Zap, Users, Award, Calendar, ArrowRight, Lightbulb, Shield, TrendingUp, Target, Layout, Code, TestTube2, UploadCloud, Smartphone, Globe, CheckCircle } from "lucide-react";
+import { Truck, Zap, Users, Award, Calendar, ArrowRight, Lightbulb, Shield, TrendingUp, Target, Layout, Code, TestTube2, UploadCloud, Smartphone, Globe, CheckCircle, ShoppingCart } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import LightboxForm from "@/components/ui/LightboxForm";
+import { appModels } from '@/data/app-models';
+import AppModelCard from '@/components/solutions/AppModelCard';
 
 const OnDemandSolutions = () => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-  
+
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as Easing } },
@@ -78,8 +80,8 @@ const OnDemandSolutions = () => {
     <div className="relative min-h-screen">
       {/* Animated Background */}
       <div className="fixed inset-0 bg-gradient-to-br from-gradient-primary-start/5 via-gradient-primary-end/5 to-cyan-500/5 pointer-events-none" />
-      <div 
-        className="fixed inset-0 opacity-20 pointer-events-none" 
+      <div
+        className="fixed inset-0 opacity-20 pointer-events-none"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M36 18c3.314 0 6 2.686 6 6s-2.686 6-6 6-6-2.686-6-6 2.686-6 6-6z' stroke='hsl(var(--gradient-primary-start)/0.1)' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E")`,
           backgroundSize: '60px 60px'
@@ -287,6 +289,66 @@ const OnDemandSolutions = () => {
         </div>
       </motion.section>
 
+      {/* NEW: Featured App Models Section */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={containerVariants}
+        className="py-20 relative overflow-hidden"
+      >
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            <div className="max-w-2xl">
+              <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Ready-to-Launch</Badge>
+              <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
+                Featured App Models
+              </h2>
+              <p className="text-xl text-foreground mt-4">
+                Explore our premium, ready-made solutions that can be customized and launched in weeks, not months.
+              </p>
+            </div>
+            <Link to="/solutions">
+              <Button variant="outline" className="border-primary/30 hover:bg-primary/10 group">
+                View All Solutions
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {appModels
+              .filter(model => ["booking-app", "food-delivery-app", "video-streaming-app"].includes(model.category))
+              .slice(0, 3)
+              .map((model, idx) => (
+                <motion.div
+                  key={model.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                >
+                  <AppModelCard model={model} />
+                </motion.div>
+              ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <p className="text-muted-foreground mb-6">Want to see more on-demand models? Check out our specialized marketplaces.</p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link to="/solutions/booking-app">
+                <Button variant="secondary" size="sm">Booking Apps</Button>
+              </Link>
+              <Link to="/solutions/food-delivery-app">
+                <Button variant="secondary" size="sm">Food Delivery Apps</Button>
+              </Link>
+              <Link to="/solutions/video-streaming-app">
+                <Button variant="secondary" size="sm">Streaming Apps</Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </motion.section>
+
       {/* 6. Blogs Section */}
       <motion.section
         initial="hidden"
@@ -420,8 +482,8 @@ const OnDemandSolutions = () => {
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Launch Your On-Demand Platform?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">Let's create a powerful on-demand solution that connects service providers with customers in real-time.</p>
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
             className="px-8 bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-lg"
             onClick={() => setIsLightboxOpen(true)}
           >
@@ -430,7 +492,7 @@ const OnDemandSolutions = () => {
           </Button>
         </div>
       </motion.section>
-      
+
       {/* Lightbox Form */}
       <LightboxForm
         isOpen={isLightboxOpen}
