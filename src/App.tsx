@@ -98,6 +98,7 @@ const OffshoreDevelopment = lazy(() => import("./pages/solutions/offshore-develo
 const EmergingTechSolutions = lazy(() => import("./pages/solutions/emerging-tech-solutions"));
 const TrendingTechnology = lazy(() => import("./pages/solutions/trending-technology"));
 const TravelApp = lazy(() => import("./pages/solutions/travel-app"));
+const HRMSAppSolution = lazy(() => import("./pages/solutions/hrms-app-solution"));
 const SocialMediaApp = lazy(() => import("./pages/solutions/social-media-app"));
 const HealthApp = lazy(() => import("./pages/solutions/health-app"));
 const GamingApp = lazy(() => import("./pages/solutions/gaming-app"));
@@ -306,6 +307,7 @@ const AppContent = () => {
                 <Route path="/solutions/news-app" element={<NewsApp />} />
                 <Route path="/solutions/music-app" element={<MusicApp />} />
                 <Route path="/solutions/dating-app" element={<DatingApp />} />
+                <Route path="/solutions/hrms-app-solution" element={<HRMSAppSolution />} />
 
                 {/* Specific routes for hire-us (overrides dynamic) */}
                 <Route path="/hire-us/hire-android-app-developer" element={<HireAndroidAppDeveloper />} />

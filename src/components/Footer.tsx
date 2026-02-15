@@ -23,13 +23,13 @@ const Footer = () => {
   // Stagger animation for footer columns
   const columnVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { 
-        duration: 0.5, 
-        ease: "easeOut" as Easing 
-      } 
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut" as Easing
+      }
     },
   };
 
@@ -39,31 +39,31 @@ const Footer = () => {
   const travelCategory = mainNavigation.find(nav => nav.title === "Travel");
   const hireUsCategory = mainNavigation.find(nav => nav.title === "Hire Us");
   const companyCategory = mainNavigation.find(nav => nav.title === "Company");
-  
+
   // Get popular services (first category from each major service area)
   const servicesLinks = [
     ...(servicesCategory?.children?.[0]?.children?.slice(0, 4) || []),
     ...(servicesCategory?.children?.[1]?.children?.slice(0, 2) || []),
   ];
-  
+
   // Get popular solutions
   const solutionsLinks = [
     ...(solutionsCategory?.children?.[0]?.children?.slice(0, 3) || []),
     ...(solutionsCategory?.children?.[1]?.children?.slice(0, 3) || []),
   ];
-  
+
   // Get travel links
   const travelLinks = [
     ...(travelCategory?.children?.[0]?.children?.slice(0, 3) || []),
     ...(travelCategory?.children?.[1]?.children?.slice(0, 3) || []),
   ];
-  
+
   // Get hire us links
   const hireLinks = [
     ...(hireUsCategory?.children?.[0]?.children?.slice(0, 3) || []),
     ...(hireUsCategory?.children?.[1]?.children?.slice(0, 3) || []),
   ];
-  
+
   const quickLinks = [
     { title: 'Home', href: '/' },
     { title: 'About Us', href: '/pages' },
@@ -92,19 +92,19 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
           {/* Company Info */}
-          <ScrollAnimation 
+          <ScrollAnimation
             className="space-y-4 lg:col-span-2"
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             <div className="flex items-center space-x-3 mb-4">
-              <motion.img 
-                src={guideSoftLogo} 
+              <motion.img
+                src={guideSoftLogo}
                 alt="Guidesoft"
                 className="w-10 h-10 rounded-lg"
                 whileHover={{ scale: 1.1 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               />
-              <motion.span 
+              <motion.span
                 className="text-xl font-bold text-foreground"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -116,45 +116,45 @@ const Footer = () => {
               Guidesoft is a leading IT solutions provider delivering innovative technology services, software development, and digital transformation solutions for modern businesses.
             </p>
             <div className="flex space-x-4 mt-6">
-              <motion.a 
-                href="https://www.facebook.com/p/GuidesoftI-100089990527060/" 
+              <motion.a
+                href="https://www.facebook.com/p/GuidesoftI-100089990527060/"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover="hover" 
-                variants={socialIconVariants} 
+                whileHover="hover"
+                variants={socialIconVariants}
                 className="text-muted-foreground hover:text-primary transition-colors p-2 rounded-full hover:bg-primary/10"
                 aria-label="Facebook"
               >
                 <Facebook className="h-6 w-6" />
               </motion.a>
-              <motion.a 
-                href="https://x.com/GuidesoftIt" 
+              <motion.a
+                href="https://x.com/GuidesoftIt"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover="hover" 
-                variants={socialIconVariants} 
+                whileHover="hover"
+                variants={socialIconVariants}
                 className="text-muted-foreground hover:text-primary transition-colors p-2 rounded-full hover:bg-primary/10"
                 aria-label="Twitter"
               >
                 <Twitter className="h-6 w-6" />
               </motion.a>
-              <motion.a 
-                href="https://in.linkedin.com/company/guideitsol-it-solutions-trainings" 
+              <motion.a
+                href="https://in.linkedin.com/company/guideitsol-it-solutions-trainings"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover="hover" 
-                variants={socialIconVariants} 
+                whileHover="hover"
+                variants={socialIconVariants}
                 className="text-muted-foreground hover:text-primary transition-colors p-2 rounded-full hover:bg-primary/10"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="h-6 w-6" />
               </motion.a>
-              <motion.a 
-                href="https://www.instagram.com/gs_business_groups/" 
+              <motion.a
+                href="https://www.instagram.com/gs_business_groups/"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover="hover" 
-                variants={socialIconVariants} 
+                whileHover="hover"
+                variants={socialIconVariants}
                 className="text-muted-foreground hover:text-primary transition-colors p-2 rounded-full hover:bg-primary/10"
                 aria-label="Instagram"
               >
@@ -164,7 +164,7 @@ const Footer = () => {
           </ScrollAnimation>
 
           {/* Quick Links */}
-          <ScrollAnimation 
+          <ScrollAnimation
             className="space-y-4"
             transition={{ duration: 0.5, delay: 0.2 }}
           >
@@ -172,9 +172,9 @@ const Footer = () => {
             <ul className="space-y-2">
               {quickLinks.map((link, index) => (
                 <li key={link.title}>
-                  <motion.div 
-                    whileHover="hover" 
-                    variants={linkVariants} 
+                  <motion.div
+                    whileHover="hover"
+                    variants={linkVariants}
                     className="inline-block"
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -191,7 +191,7 @@ const Footer = () => {
           </ScrollAnimation>
 
           {/* Popular Services */}
-          <ScrollAnimation 
+          <ScrollAnimation
             className="space-y-4"
             transition={{ duration: 0.5, delay: 0.3 }}
           >
@@ -199,9 +199,9 @@ const Footer = () => {
             <ul className="space-y-2">
               {servicesLinks.map((service, index) => (
                 <li key={service.title}>
-                  <motion.div 
-                    whileHover="hover" 
-                    variants={linkVariants} 
+                  <motion.div
+                    whileHover="hover"
+                    variants={linkVariants}
                     className="inline-block"
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -218,7 +218,7 @@ const Footer = () => {
           </ScrollAnimation>
 
           {/* Solutions & Travel */}
-          <ScrollAnimation 
+          <ScrollAnimation
             className="space-y-4"
             transition={{ duration: 0.5, delay: 0.4 }}
           >
@@ -226,9 +226,9 @@ const Footer = () => {
             <ul className="space-y-2">
               {solutionsLinks.slice(0, 5).map((solution, index) => (
                 <li key={solution.title}>
-                  <motion.div 
-                    whileHover="hover" 
-                    variants={linkVariants} 
+                  <motion.div
+                    whileHover="hover"
+                    variants={linkVariants}
                     className="inline-block"
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -246,9 +246,9 @@ const Footer = () => {
             <ul className="space-y-2">
               {travelLinks.slice(0, 3).map((travel, index) => (
                 <li key={travel.title}>
-                  <motion.div 
-                    whileHover="hover" 
-                    variants={linkVariants} 
+                  <motion.div
+                    whileHover="hover"
+                    variants={linkVariants}
                     className="inline-block"
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -265,13 +265,13 @@ const Footer = () => {
           </ScrollAnimation>
 
           {/* Contact Info */}
-          <ScrollAnimation 
+          <ScrollAnimation
             className="space-y-4"
             transition={{ duration: 0.5, delay: 0.5 }}
           >
             <h3 className="font-semibold text-lg text-foreground">Contact Info</h3>
             <div className="space-y-3">
-              <motion.div 
+              <motion.div
                 className="flex items-start space-x-3"
                 whileHover={{ x: 5 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -282,7 +282,7 @@ const Footer = () => {
                   Hyderabad, Telangana, INDIA
                 </span>
               </motion.div>
-              <motion.div 
+              <motion.div
                 className="flex items-center space-x-3"
                 whileHover={{ x: 5 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -290,7 +290,7 @@ const Footer = () => {
                 <Phone className="h-5 w-5 text-primary flex-shrink-0" />
                 <span className="text-muted-foreground text-sm">+918500647979</span>
               </motion.div>
-              <motion.div 
+              <motion.div
                 className="flex items-center space-x-3"
                 whileHover={{ x: 5 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -298,7 +298,7 @@ const Footer = () => {
                 <Mail className="h-5 w-5 text-primary flex-shrink-0" />
                 <span className="text-muted-foreground text-sm">support@guideitsol.com</span>
               </motion.div>
-              <motion.div 
+              <motion.div
                 className="flex items-center space-x-3"
                 whileHover={{ x: 5 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -322,7 +322,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <ScrollAnimation 
+        <ScrollAnimation
           className="border-t border-primary/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left relative z-10"
           transition={{ duration: 0.5, delay: 0.6 }}
         >
@@ -342,10 +342,10 @@ const Footer = () => {
             </div>
           </div>
           <div className="flex space-x-6">
-            <Link to="#" className="text-muted-foreground hover:text-primary text-sm transition-colors">
+            <Link to="/company/privacy-policy" className="text-muted-foreground hover:text-primary text-sm transition-colors">
               Privacy Policy
             </Link>
-            <Link to="#" className="text-muted-foreground hover:text-primary text-sm transition-colors">
+            <Link to="/company/terms-conditions" className="text-muted-foreground hover:text-primary text-sm transition-colors">
               Terms of Service
             </Link>
           </div>

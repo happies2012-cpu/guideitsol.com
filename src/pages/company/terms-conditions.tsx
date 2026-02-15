@@ -25,8 +25,8 @@ const TermsConditions = () => {
     <div className="relative min-h-screen">
       {/* Animated Background */}
       <div className="fixed inset-0 bg-gradient-to-br from-gradient-primary-start/5 via-gradient-primary-end/5 to-cyan-500/5 pointer-events-none" />
-      <div 
-        className="fixed inset-0 opacity-20 pointer-events-none" 
+      <div
+        className="fixed inset-0 opacity-20 pointer-events-none"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M36 18c3.314 0 6 2.686 6 6s-2.686 6-6 6-6-2.686-6-6 2.686-6 6-6z' stroke='hsl(var(--gradient-primary-start)/0.1)' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E")`,
           backgroundSize: '60px 60px'
@@ -79,23 +79,23 @@ const TermsConditions = () => {
               <p className="text-foreground/90 mb-6">
                 These Terms and Conditions ("Terms") constitute a legally binding agreement between you ("User" or "you") and Guidesoft ("Company," "we," "us," or "our") governing your access to and use of guideitsol.com (the "Site") and our services.
               </p>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Acceptance of Terms</h2>
               <p className="text-foreground/90 mb-6">
                 By accessing or using our Site and services, you agree to be bound by these Terms and all applicable laws and regulations. If you do not agree with any part of these Terms, you must not use our Site or services.
               </p>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Changes to Terms</h2>
               <p className="text-foreground/90 mb-6">
                 We reserve the right to modify these Terms at any time. We will notify you of any changes by posting the new Terms on this page and updating the "Last Updated" date. Your continued use of the Site after such changes constitutes your acceptance of the new Terms.
               </p>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Use of Services</h2>
               <h3 className="text-xl font-medium mt-6 mb-3 text-foreground">Eligibility</h3>
               <p className="text-foreground/90 mb-4">
                 You must be at least 18 years old to use our services. By using our services, you represent and warrant that you meet this eligibility requirement.
               </p>
-              
+
               <h3 className="text-xl font-medium mt-6 mb-3 text-foreground">Account Registration</h3>
               <p className="text-foreground/90 mb-4">
                 To access certain features of our services, you may be required to create an account. You agree to:
@@ -106,7 +106,7 @@ const TermsConditions = () => {
                 <li>Keep your password confidential and secure</li>
                 <li>Notify us immediately of any unauthorized use of your account</li>
               </ul>
-              
+
               <h3 className="text-xl font-medium mt-6 mb-3 text-foreground">Prohibited Activities</h3>
               <p className="text-foreground/90 mb-4">
                 You agree not to:
@@ -118,52 +118,52 @@ const TermsConditions = () => {
                 <li>Transmit any viruses or malicious code</li>
                 <li>Use our services to transmit spam or unsolicited messages</li>
               </ul>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Intellectual Property</h2>
               <p className="text-foreground/90 mb-6">
                 All content, features, and functionality on our Site and services, including but not limited to text, graphics, logos, icons, images, audio clips, digital downloads, data compilations, and software, are the exclusive property of Guidesoft or its licensors and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.
               </p>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Services and Payments</h2>
               <h3 className="text-xl font-medium mt-6 mb-3 text-foreground">Service Descriptions</h3>
               <p className="text-foreground/90 mb-4">
                 We strive to describe our services accurately, but we do not warrant that service descriptions are complete, error-free, or current. We reserve the right to modify services at any time.
               </p>
-              
+
               <h3 className="text-xl font-medium mt-6 mb-3 text-foreground">Pricing and Payments</h3>
               <p className="text-foreground/90 mb-4">
                 All prices are subject to change without notice. We may offer subscription-based services with recurring payments. You authorize us to charge your payment method for applicable fees.
               </p>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Disclaimer of Warranties</h2>
               <p className="text-foreground/90 mb-6">
                 Our services are provided "as is" and "as available" without warranties of any kind, either express or implied. We do not warrant that our services will be uninterrupted, secure, or error-free.
               </p>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Limitation of Liability</h2>
               <p className="text-foreground/90 mb-6">
                 To the fullest extent permitted by law, Guidesoft shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses.
               </p>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Termination</h2>
               <p className="text-foreground/90 mb-6">
                 We may terminate or suspend your access to our services immediately, without prior notice, for any reason whatsoever, including without limitation if you breach these Terms.
               </p>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Governing Law</h2>
               <p className="text-foreground/90 mb-6">
-                These Terms shall be governed and construed in accordance with the laws of the State of California, without regard to its conflict of law provisions.
+                These Terms shall be governed and construed in accordance with the laws of India, without regard to its conflict of law provisions. Any disputes shall be subject to the exclusive jurisdiction of the courts in Hyderabad, Telangana.
               </p>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Contact Information</h2>
               <p className="text-foreground/90 mb-6">
                 If you have any questions about these Terms, please contact us at:
               </p>
               <div className="bg-muted/30 p-6 rounded-lg mb-6">
                 <p className="text-foreground font-medium">Guidesoft Legal Team</p>
-                <p className="text-foreground/90">Email: legal@guideitsol.com</p>
-                <p className="text-foreground/90">Phone: +1 (555) 123-4567</p>
-                <p className="text-foreground/90 mt-2">123 Tech Avenue<br />San Francisco, CA 94103<br />United States</p>
+                <p className="text-foreground/90">Email: support@guideitsol.com</p>
+                <p className="text-foreground/90">Phone: +91 8500647979</p>
+                <p className="text-foreground/90 mt-2">123 Tech Park, IT Hub<br />Hyderabad, Telangana<br />INDIA</p>
               </div>
             </CardContent>
           </Card>

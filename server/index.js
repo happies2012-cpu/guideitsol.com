@@ -33,7 +33,7 @@ import payuV2Routes from './routes/payu-v2.js';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 const isProduction = process.env.NODE_ENV === 'production';
 
 // Rate limiting
@@ -45,16 +45,25 @@ const limiter = rateLimit({
   legacyHeaders: false,
 });
 
-// CORS Configuration - Allow all origins for development, specific for production
-const corsOptions = {
-  origin: isProduction ? [
+// CORS Configuration
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(',')
+  : [
     'https://guideitsol.com',
     'https://www.guideitsol.com',
-    'http://guideitsol.com',
-    'http://www.guideitsol.com',
-    'https://marketing.guideitsol.com',
-    'http://marketing.guideitsol.com'
-  ] : true, credentials: true,
+    'http://localhost:3000',
+    'http://localhost:5173'
+  ];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1 || !isProduction) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
   exposedHeaders: ['Content-Range', 'X-Content-Range'],

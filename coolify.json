@@ -2,9 +2,8 @@
   "name": "Guidesoft Website",
   "description": "Guidesoft IT Solutions Website",
   "deploy": {
-    "type": "static",
-    "buildCommand": "npm run build:prod",
-    "outputDirectory": "dist",
+    "type": "docker",
+    "dockerfile": "Dockerfile",
     "port": 3000
   },
   "healthcheck": {

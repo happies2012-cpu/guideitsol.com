@@ -22,6 +22,12 @@ RUN npm install
 # Copy source code
 COPY . .
 
+# Database - ensure SQLite file is available
+ENV DATABASE_URL="file:./dev.db"
+
+# Copy potential local db if exists (optional, usually we run migrate in container)
+# COPY prisma/dev.db ./prisma/dev.db
+
 # Generate Prisma Client
 RUN npx prisma generate
 

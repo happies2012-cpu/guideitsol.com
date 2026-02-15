@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 // Use proxy in development, direct URL in production
-const API_URL = import.meta.env.VITE_API_URL || 
-  (import.meta.env.DEV ? '/api' : 'http://localhost:3001/api');
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 // Define types for paginated responses
 interface PaginationInfo {
@@ -130,7 +129,7 @@ export const aiToolsAPI = {
 export const aiEnrollmentsAPI = {
   create: (data: any) => api.post<AIEnrollment>('/ai-enrollments', data),
   verify: (id: string) => api.post<AIEnrollment>(`/ai-enrollments/${id}/verify`),
-  updatePayment: (id: string, transactionId?: string) => 
+  updatePayment: (id: string, transactionId?: string) =>
     api.post<AIEnrollment>(`/ai-enrollments/${id}/payment`, { transactionId }),
   getByUser: (userId: string) => api.get<AIEnrollment[]>(`/ai-enrollments/user/${userId}`),
   getById: (id: string) => api.get<AIEnrollment>(`/ai-enrollments/${id}`)

@@ -25,8 +25,8 @@ const RefundCancellationPolicy = () => {
     <div className="relative min-h-screen">
       {/* Animated Background */}
       <div className="fixed inset-0 bg-gradient-to-br from-gradient-primary-start/5 via-gradient-primary-end/5 to-cyan-500/5 pointer-events-none" />
-      <div 
-        className="fixed inset-0 opacity-20 pointer-events-none" 
+      <div
+        className="fixed inset-0 opacity-20 pointer-events-none"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M36 18c3.314 0 6 2.686 6 6s-2.686 6-6 6-6-2.686-6-6 2.686-6 6-6z' stroke='hsl(var(--gradient-primary-start)/0.1)' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E")`,
           backgroundSize: '60px 60px'
@@ -79,9 +79,9 @@ const RefundCancellationPolicy = () => {
               <p className="text-foreground/90 mb-6">
                 Guidesoft ("we," "us," or "our") is committed to providing high-quality services. This Refund and Cancellation Policy outlines the terms under which you may cancel services or request refunds.
               </p>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Subscription Services</h2>
-              
+
               <h3 className="text-xl font-medium mt-6 mb-3 text-foreground">Cancellation</h3>
               <p className="text-foreground/90 mb-4">
                 You may cancel your subscription at any time by:
@@ -93,7 +93,7 @@ const RefundCancellationPolicy = () => {
               <p className="text-foreground/90 mb-6">
                 Cancellation will be effective at the end of the current billing period. You will continue to have access to services until the end of your paid period.
               </p>
-              
+
               <h3 className="text-xl font-medium mt-6 mb-3 text-foreground">Refunds for Subscriptions</h3>
               <p className="text-foreground/90 mb-6">
                 We offer a 14-day money-back guarantee for new subscription customers. If you are not satisfied with our services within the first 14 days of your subscription, you may request a full refund.
@@ -101,9 +101,9 @@ const RefundCancellationPolicy = () => {
               <p className="text-foreground/90 mb-6">
                 After the 14-day period, refunds for subscriptions are not typically provided, except in cases of service interruptions or other extenuating circumstances at our discretion.
               </p>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">One-Time Services</h2>
-              
+
               <h3 className="text-xl font-medium mt-6 mb-3 text-foreground">Project Cancellation</h3>
               <p className="text-foreground/90 mb-6">
                 For one-time services such as custom development projects:
@@ -114,7 +114,7 @@ const RefundCancellationPolicy = () => {
                 <li>Cancellations after work has commenced will be refunded based on work completed</li>
                 <li>A cancellation fee may apply for projects that have progressed significantly</li>
               </ul>
-              
+
               <h3 className="text-xl font-medium mt-6 mb-3 text-foreground">Refunds for One-Time Services</h3>
               <p className="text-foreground/90 mb-6">
                 Refunds for one-time services are evaluated on a case-by-case basis. Factors considered include:
@@ -125,7 +125,7 @@ const RefundCancellationPolicy = () => {
                 <li>Quality of deliverables provided</li>
                 <li>Compliance with project terms and timelines</li>
               </ul>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Non-Refundable Items</h2>
               <p className="text-foreground/90 mb-6">
                 The following are generally not eligible for refunds:
@@ -137,7 +137,7 @@ const RefundCancellationPolicy = () => {
                 <li>Consulting time or resources already utilized</li>
                 <li>Setup or onboarding fees</li>
               </ul>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">How to Request a Refund</h2>
               <p className="text-foreground/90 mb-4">
                 To request a refund, please:
@@ -151,12 +151,12 @@ const RefundCancellationPolicy = () => {
               <p className="text-foreground/90 mb-6">
                 Refund requests are typically processed within 5-10 business days. We will notify you of the decision via email.
               </p>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Dispute Resolution</h2>
               <p className="text-foreground/90 mb-6">
                 If you are not satisfied with our response to your refund request, you may contact our customer advocacy team at advocacy@guideitsol.com. We are committed to resolving disputes fairly and promptly.
               </p>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Contact Information</h2>
               <p className="text-foreground/90 mb-6">
                 For questions about this policy or to request a refund or cancellation, please contact us at:
@@ -164,8 +164,8 @@ const RefundCancellationPolicy = () => {
               <div className="bg-muted/30 p-6 rounded-lg mb-6">
                 <p className="text-foreground font-medium">Guidesoft Support Team</p>
                 <p className="text-foreground/90">Email: support@guideitsol.com</p>
-                <p className="text-foreground/90">Phone: +1 (555) 123-4567</p>
-                <p className="text-foreground/90 mt-2">123 Tech Avenue<br />San Francisco, CA 94103<br />United States</p>
+                <p className="text-foreground/90">Phone: +91 8500647979</p>
+                <p className="text-foreground/90 mt-2">123 Tech Park, IT Hub<br />Hyderabad, Telangana<br />INDIA</p>
               </div>
             </CardContent>
           </Card>

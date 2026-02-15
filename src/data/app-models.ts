@@ -248,6 +248,83 @@ export const appModels: AppModel[] = [
         previewUrl: "#",
         features: ["Payroll", "Attendance", "Leave Management"],
         likes: 167
+    },
+    {
+        id: "qa-1",
+        name: "AskExpert QA Platform",
+        category: "question-answer-app",
+        description: "Quora-like platform for community knowledge sharing and expert answers.",
+        image: "/assets/uxui.png",
+        price: 399,
+        previewUrl: "#",
+        features: ["Upvote System", "Expert Verification", "Topic Following"],
+        likes: 89
+    },
+    {
+        id: "sched-1",
+        name: "Appointly Scheduling",
+        category: "scheduling-app",
+        description: "Professional appointment scheduling system for consultants and service businesses.",
+        image: "/assets/robot.png",
+        price: 249,
+        previewUrl: "#",
+        features: ["Google Calendar Sync", "Automated Reminders", "Flexible Time Slots"],
+        likes: 112
+    },
+    {
+        id: "event-1",
+        name: "EventPro Manager",
+        category: "event-management-app",
+        description: "Comprehensive event planning and ticketing solution for conferences and gatherings.",
+        image: "/assets/1.png",
+        price: 599,
+        previewUrl: "#",
+        features: ["QR Ticketing", "Attendee Management", "Speaker Profiles"],
+        likes: 204
+    },
+    {
+        id: "flight-1",
+        name: "SkyBound Flight Engine",
+        category: "flight-booking-app",
+        description: "Powerful flight search and booking engine with GDS integration capabilities.",
+        image: "/assets/12.png",
+        price: 899,
+        previewUrl: "#",
+        features: ["Multi-city Search", "Seat Selection", "Real-time Pricing"],
+        likes: 342
+    },
+    {
+        id: "game-1",
+        name: "PlaySphere Gaming Hub",
+        category: "gaming-app",
+        description: "Social gaming platform and tournament management app.",
+        image: "/assets/3.png",
+        price: 699,
+        previewUrl: "#",
+        features: ["Leaderboards", "Tournament Brackets", "Social Feed"],
+        likes: 567
+    },
+    {
+        id: "music-1",
+        name: "SonicStream Music",
+        category: "music-app",
+        description: "Music streaming and discovery app with playlist management.",
+        image: "/assets/4.png",
+        price: 799,
+        previewUrl: "#",
+        features: ["Audio Streaming", "Offline Listening", "Playlist Collab"],
+        likes: 423
+    },
+    {
+        id: "weather-1",
+        name: "SkyCast Weather Pro",
+        category: "weather-app",
+        description: "Accurate local and global weather forecasting app with alerts.",
+        image: "/assets/news.png",
+        price: 149,
+        previewUrl: "#",
+        features: ["Hyperlocal Forecast", "Severe Weather Alerts", "Satellite Maps"],
+        likes: 78
     }
 ];
 

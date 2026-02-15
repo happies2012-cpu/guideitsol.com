@@ -25,8 +25,8 @@ const PrivacyPolicy = () => {
     <div className="relative min-h-screen">
       {/* Animated Background */}
       <div className="fixed inset-0 bg-gradient-to-br from-gradient-primary-start/5 via-gradient-primary-end/5 to-cyan-500/5 pointer-events-none" />
-      <div 
-        className="fixed inset-0 opacity-20 pointer-events-none" 
+      <div
+        className="fixed inset-0 opacity-20 pointer-events-none"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M36 18c3.314 0 6 2.686 6 6s-2.686 6-6 6-6-2.686-6-6 2.686-6 6-6z' stroke='hsl(var(--gradient-primary-start)/0.1)' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E")`,
           backgroundSize: '60px 60px'
@@ -79,9 +79,9 @@ const PrivacyPolicy = () => {
               <p className="text-foreground/90 mb-6">
                 Guidesoft ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website guideitsol.com (the "Site"), use our services, or otherwise interact with us.
               </p>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Information We Collect</h2>
-              
+
               <h3 className="text-xl font-medium mt-6 mb-3 text-foreground">Personal Information</h3>
               <p className="text-foreground/90 mb-4">
                 We may collect personally identifiable information that you voluntarily provide to us when you:
@@ -93,7 +93,7 @@ const PrivacyPolicy = () => {
                 <li>Contact us for support</li>
                 <li>Subscribe to our newsletter</li>
               </ul>
-              
+
               <h3 className="text-xl font-medium mt-6 mb-3 text-foreground">Usage Information</h3>
               <p className="text-foreground/90 mb-4">
                 We automatically collect certain information when you visit, use, or navigate the Site:
@@ -104,7 +104,7 @@ const PrivacyPolicy = () => {
                 <li>Pages visited and time spent on the Site</li>
                 <li>Referring website and exit pages</li>
               </ul>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">How We Use Your Information</h2>
               <p className="text-foreground/90 mb-4">
                 We use your information for various business purposes, including:
@@ -117,7 +117,7 @@ const PrivacyPolicy = () => {
                 <li>To protect against fraudulent or illegal activity</li>
                 <li>To comply with legal obligations</li>
               </ul>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Information Sharing</h2>
               <p className="text-foreground/90 mb-4">
                 We may share your information in the following situations:
@@ -129,12 +129,12 @@ const PrivacyPolicy = () => {
                 <li>In connection with a business transfer or merger</li>
                 <li>With your consent or at your direction</li>
               </ul>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Data Security</h2>
               <p className="text-foreground/90 mb-6">
                 We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.
               </p>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Your Privacy Rights</h2>
               <p className="text-foreground/90 mb-4">
                 Depending on your location, you may have the following rights:
@@ -147,16 +147,16 @@ const PrivacyPolicy = () => {
                 <li>The right to data portability</li>
                 <li>The right to withdraw consent</li>
               </ul>
-              
+
               <h2 className="text-2xl font-semibold mt-8 mb-4 text-foreground">Contact Us</h2>
               <p className="text-foreground/90 mb-6">
                 If you have questions or comments about this Privacy Policy, please contact us at:
               </p>
               <div className="bg-muted/30 p-6 rounded-lg mb-6">
                 <p className="text-foreground font-medium">Guidesoft Privacy Team</p>
-                <p className="text-foreground/90">Email: privacy@guideitsol.com</p>
-                <p className="text-foreground/90">Phone: +1 (555) 123-4567</p>
-                <p className="text-foreground/90 mt-2">123 Tech Avenue<br />San Francisco, CA 94103<br />United States</p>
+                <p className="text-foreground/90">Email: support@guideitsol.com</p>
+                <p className="text-foreground/90">Phone: +91 8500647979</p>
+                <p className="text-foreground/90 mt-2">123 Tech Park, IT Hub<br />Hyderabad, Telangana<br />INDIA</p>
               </div>
             </CardContent>
           </Card>
