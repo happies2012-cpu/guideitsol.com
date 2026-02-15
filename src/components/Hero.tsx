@@ -8,21 +8,21 @@ import { useState } from "react";
 import LightboxForm from "@/components/ui/LightboxForm";
 import { Particles } from "@/components/ui/particles";
 import Parallax from "@/components/ui/parallax";
-// Studio image imports
-import studio10 from "@/assets/Studio/10.png";
-import studio11 from "@/assets/Studio/11.png";
-import studio12 from "@/assets/Studio/12.png";
-import audio from "@/assets/Studio/audio.png";
-import brandPromotions from "@/assets/Studio/Brand Promotions.png";
-import designing from "@/assets/Studio/designing.png";
-import dev from "@/assets/Studio/dev.png";
-import digitalMarketing from "@/assets/Studio/Digital Marketing.png";
-import entertainment from "@/assets/Studio/Entertainment.png";
-import news from "@/assets/Studio/news.png";
-import products from "@/assets/Studio/products.png";
-import promoting from "@/assets/Studio/promoting.png";
-import uxui from "@/assets/Studio/uxui.png";
-import workflows from "@/assets/Studio/workflows.png";
+// Studio image paths - using absolute paths from public folder to avoid import issues
+const studio10 = "/assets/Studio/10.png";
+const studio11 = "/assets/Studio/11.png";
+const studio12 = "/assets/Studio/12.png";
+const audio = "/assets/Studio/audio.png";
+const brandPromotions = "/assets/Studio/Brand Promotions.png";
+const designing = "/assets/Studio/designing.png";
+const dev = "/assets/Studio/dev.png";
+const digitalMarketing = "/assets/Studio/Digital Marketing.png";
+const entertainment = "/assets/Studio/Entertainment.png";
+const news = "/assets/Studio/news.png";
+const products = "/assets/Studio/products.png";
+const promoting = "/assets/Studio/promoting.png";
+const uxui = "/assets/Studio/uxui.png";
+const workflows = "/assets/Studio/workflows.png";
 
 const transitionVariants = {
   item: {
