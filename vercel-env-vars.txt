@@ -1,0 +1,31 @@
+# Vercel Environment Variables Configuration
+# Copy these to: https://vercel.com/happies2012s-projects/guideitsol-com/settings/environment-variables
+
+# Firebase Configuration (Production)
+VITE_FIREBASE_API_KEY=AIzaSyDBjxGNNBNiBDuxFyUfdAODqbraBgKg02E
+VITE_FIREBASE_AUTH_DOMAIN=guidesoftapps.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=guidesoftapps
+VITE_FIREBASE_STORAGE_BUCKET=guidesoftapps.firebasestorage.app
+VITE_FIREBASE_MESSAGING_SENDER_ID=43088220146
+VITE_FIREBASE_APP_ID=1:43088220146:web:0f98e23f1fc1c2dbf9e56b
+VITE_FIREBASE_MEASUREMENT_ID=G-XWE6VYC73S
+
+# Site Configuration
+VITE_SITE_URL=https://guideitsol.com
+VITE_APP_NAME=GS Intelligence
+VITE_APP_URL=https://guideitsol.com
+VITE_SUPPORT_EMAIL=support@guideitsol.com
+
+# Marketing & Plugins
+VITE_GOOGLE_ANALYTICS_ID=G-TBC0NTT9TT
+VITE_WHATSAPP_NUMBER=918500647979
+
+# Payment Gateway (Add your actual keys)
+VITE_PAYU_MERCHANT_KEY=your_payu_merchant_key
+VITE_PAYU_MERCHANT_SALT=your_payu_salt
+VITE_PAYU_MODE=production
+
+# Server Configuration (for API routes if needed)
+JWT_SECRET=your-super-secret-jwt-token-with-at-least-32-characters-long
+ALLOWED_ORIGINS=https://guideitsol.com,https://www.guideitsol.com,https://guideitsol-com.vercel.app
+NODE_ENV=production
