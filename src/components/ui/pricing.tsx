@@ -10,7 +10,7 @@ import { Check, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useRef } from "react";
 import confetti from "canvas-confetti";
-import NumberFlow from "@number-flow/react";
+
 
 interface PricingPlan {
   name: string;
@@ -103,11 +103,11 @@ export function Pricing({
             whileInView={
               isDesktop
                 ? {
-                    y: plan.isPopular ? -20 : 0,
-                    opacity: 1,
-                    x: index === 2 ? -30 : index === 0 ? 30 : 0,
-                    scale: index === 0 || index === 2 ? 0.94 : 1.0,
-                  }
+                  y: plan.isPopular ? -20 : 0,
+                  opacity: 1,
+                  x: index === 2 ? -30 : index === 0 ? 30 : 0,
+                  scale: index === 0 || index === 2 ? 0.94 : 1.0,
+                }
                 : {}
             }
             viewport={{ once: true }}
@@ -145,24 +145,9 @@ export function Pricing({
               </p>
               <div className="mt-6 flex items-center justify-center gap-x-2">
                 <span className="text-5xl font-bold tracking-tight text-foreground">
-                  <NumberFlow
-                    value={
-                      isMonthly ? Number(plan.price) : Number(plan.yearlyPrice)
-                    }
-                    format={{
-                      style: "currency",
-                      currency: "USD",
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 0,
-                    }}
-                    formatter={(value) => `$${value}`}
-                    transformTiming={{
-                      duration: 500,
-                      easing: "ease-out",
-                    }}
-                    willChange
-                    className="font-variant-numeric: tabular-nums"
-                  />
+                  <span className="font-variant-numeric: tabular-nums">
+                    ${isMonthly ? plan.price : plan.yearlyPrice}
+                  </span>
                 </span>
                 {plan.period !== "Next 3 months" && (
                   <span className="text-sm font-semibold leading-6 tracking-wide text-muted-foreground">
@@ -190,17 +175,17 @@ export function Pricing({
                 onClick={() => {
                   const planName = plan.name;
                   const amount = isMonthly ? Number(plan.price) : Number(plan.yearlyPrice);
-                  
-                  window.dispatchEvent(new CustomEvent('openModal', { 
-                    detail: { 
-                      type: 'payment', 
-                      data: { 
-                        plan: planName, 
+
+                  window.dispatchEvent(new CustomEvent('openModal', {
+                    detail: {
+                      type: 'payment',
+                      data: {
+                        plan: planName,
                         amount: amount,
                         title: `Subscribe to ${planName}`,
                         description: `Complete your payment to start your ${planName} plan.`
-                      } 
-                    } 
+                      }
+                    }
                   }));
                 }}
                 className={cn(
