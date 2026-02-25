@@ -44,8 +44,6 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-<<<<<<< HEAD
-=======
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -64,7 +62,6 @@ const config: Config = {
         lg: "0.5rem",
         md: "calc(0.5rem - 2px)",
         sm: "calc(0.5rem - 4px)",
->>>>>>> d6564cd (fix: remove duplicate GenericSubPage exports, fix tailwind config, replace placeholder images)
       },
       animation: {
         blob: "blob 7s infinite",
@@ -87,10 +84,6 @@ const config: Config = {
       },
     },
   },
-<<<<<<< HEAD
-  plugins: [],
-=======
   plugins: [require("tailwindcss-animate")],
->>>>>>> d6564cd (fix: remove duplicate GenericSubPage exports, fix tailwind config, replace placeholder images)
 };
 export default config;
