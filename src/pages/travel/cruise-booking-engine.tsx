@@ -1,16 +1,5 @@
 "use client";
 
-import React from "react";
-import GenericSubPage from "@/components/ui/GenericSubPage";
-
-const CruiseBookingEngine: React.FC = () => {
-  return <GenericSubPage />;
-};
-
-export default CruiseBookingEngine;
-
-"use client";
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   LayoutDashboard, FileText, Navigation, Sparkles, Settings,
-  Users, LogOut, Plus, Edit, Trash, Save
+  Users, LogOut, Plus, Edit, Trash, Save, MessageSquare
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -17,10 +17,11 @@ import { navigationAPI } from '@/lib/api';
 import { pagesDB, aiToolsDB } from '@/lib/firebase-db';
 
 const Dashboard = () => {
-  const { user, logout, isAdmin, isSuperAdmin } = useAuth();
+  const { user, firebaseUser, logout, isAdmin, isSuperAdmin } = useAuth();
   const navigate = useNavigate();
   const [pages, setPages] = useState([]);
   const [aiTools, setAITools] = useState([]);
+  const [submissions, setSubmissions] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -41,6 +42,22 @@ const Dashboard = () => {
         ]);
         setPages(pagesData as any);
         setAITools(toolsData as any);
+
+        if (firebaseUser) {
+          try {
+            const token = await firebaseUser.getIdToken();
+            const apiUrl = import.meta.env.VITE_API_URL || '';
+            const res = await fetch(`${apiUrl}/api/forms`, {
+              headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (res.ok) {
+              const data = await res.json();
+              setSubmissions(data);
+            }
+          } catch (err) {
+            console.error("Failed to fetch submissions", err);
+          }
+        }
       }
     } catch (error) {
       console.error('Fetch error:', error);
@@ -185,6 +202,7 @@ const Dashboard = () => {
                   <TabsList className="grid w-full grid-cols-3">
                     <TabsTrigger value="pages">Pages</TabsTrigger>
                     <TabsTrigger value="aitools">AI Tools</TabsTrigger>
+                    <TabsTrigger value="submissions">Submissions</TabsTrigger>
                     <TabsTrigger value="navigation">Navigation</TabsTrigger>
                   </TabsList>
 
@@ -256,6 +274,70 @@ const Dashboard = () => {
                             </div>
                           </div>
                         ))}
+                      </div>
+                    </div>
+                  </TabsContent>
+
+                  <TabsContent value="submissions" className="mt-6">
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center">
+                        <h3 className="text-lg font-semibold">Inquiries & Submissions</h3>
+                        <Button variant="outline" size="sm" onClick={fetchData}>
+                          Refresh
+                        </Button>
+                      </div>
+                      <div className="space-y-4">
+                        {submissions.length === 0 ? (
+                          <p className="text-muted-foreground text-center py-8">No submissions found.</p>
+                        ) : (
+                          submissions.map((sub: any) => (
+                            <Card key={sub.id} className="overflow-hidden border-l-4 border-l-primary">
+                              <CardHeader className="bg-muted/30 py-3">
+                                <div className="flex justify-between items-start">
+                                  <div>
+                                    <CardTitle className="text-base font-semibold">{sub.subject}</CardTitle>
+                                    <CardDescription className="text-xs">
+                                      From: {sub.name} ({sub.email}) • {new Date(sub.createdAt).toLocaleString()}
+                                    </CardDescription>
+                                  </div>
+                                  <div className="text-xs font-medium px-2 py-1 bg-primary/10 text-primary rounded-full uppercase tracking-wider">
+                                    {sub.department}
+                                  </div>
+                                </div>
+                              </CardHeader>
+                              <CardContent className="py-4">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
+                                  {sub.company && (
+                                    <div className="text-sm">
+                                      <span className="font-semibold">Company:</span> {sub.company}
+                                    </div>
+                                  )}
+                                  {sub.phone && (
+                                    <div className="text-sm">
+                                      <span className="font-semibold">Phone:</span> {sub.phone}
+                                    </div>
+                                  )}
+                                  <div className="text-sm">
+                                    <span className="font-semibold">Service:</span> {sub.service}
+                                  </div>
+                                </div>
+                                <div className="mt-2 text-sm bg-muted/20 p-3 rounded-md">
+                                  <span className="font-semibold block mb-1">Message:</span>
+                                  {sub.message}
+                                </div>
+                                <div className="mt-4 flex gap-2">
+                                  <Button size="sm" variant="outline" onClick={() => window.location.href = `mailto:${sub.email}`}>
+                                    Reply via Email
+                                  </Button>
+                                  <Button size="sm" variant="ghost" className="text-destructive hover:text-destructive hover:bg-destructive/10">
+                                    <Trash className="w-4 h-4 mr-2" />
+                                    Delete
+                                  </Button>
+                                </div>
+                              </CardContent>
+                            </Card>
+                          ))
+                        )}
                       </div>
                     </div>
                   </TabsContent>

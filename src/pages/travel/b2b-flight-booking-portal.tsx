@@ -1,16 +1,5 @@
 "use client";
 
-import React from "react";
-import GenericSubPage from "@/components/ui/GenericSubPage";
-
-const B2BFlightBookingPortal: React.FC = () => {
-  return <GenericSubPage />;
-};
-
-export default B2BFlightBookingPortal;
-
-"use client";
-
 import React from 'react';
 import { motion, Easing } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -92,7 +81,7 @@ const B2BFlightBookingPortal = () => {
             </motion.div>
             <motion.div variants={containerVariants} className="relative">
               <img
-                src="/placeholder.svg" // Replace with actual B2B flight booking portal mockup image
+                src="https://images.unsplash.com/photo-1544015759-137fdf556bc1?auto=format&fit=crop&q=80"
                 alt="B2B Flight Booking Portal"
                 className="w-full h-96 object-cover rounded-2xl shadow-2xl"
               />

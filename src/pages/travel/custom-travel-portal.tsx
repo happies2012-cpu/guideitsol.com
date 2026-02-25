@@ -81,7 +81,7 @@ const CustomTravelPortal = () => {
             </motion.div>
             <motion.div variants={containerVariants} className="relative">
               <img
-                src="/placeholder.svg" // Replace with actual custom travel portal mockup image
+                src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80"
                 alt="Custom Travel Portal"
                 className="w-full h-96 object-cover rounded-2xl shadow-2xl"
               />

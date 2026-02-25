@@ -1,16 +1,5 @@
 "use client";
 
-import React from "react";
-import GenericSubPage from "@/components/ui/GenericSubPage";
-
-const HotelExtranet: React.FC = () => {
-  return <GenericSubPage />;
-};
-
-export default HotelExtranet;
-
-"use client";
-
 import React from 'react';
 import { motion, Easing } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -92,7 +81,7 @@ const HotelExtranet = () => {
             </motion.div>
             <motion.div variants={containerVariants} className="relative">
               <img
-                src="/placeholder.svg" // Replace with actual hotel extranet mockup image
+                src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80"
                 alt="Hotel Extranet"
                 className="w-full h-96 object-cover rounded-2xl shadow-2xl"
               />

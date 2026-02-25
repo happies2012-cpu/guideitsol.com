@@ -1,16 +1,5 @@
 "use client";
 
-import React from "react";
-import GenericSubPage from "@/components/ui/GenericSubPage";
-
-const ActivitiesBookingSolution: React.FC = () => {
-  return <GenericSubPage />;
-};
-
-export default ActivitiesBookingSolution;
-
-"use client";
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";

@@ -1,16 +1,5 @@
 "use client";
 
-import React from "react";
-import GenericSubPage from "@/components/ui/GenericSubPage";
-
-const AirTicketBookingPortal: React.FC = () => {
-  return <GenericSubPage />;
-};
-
-export default AirTicketBookingPortal;
-
-"use client";
-
 import React from 'react';
 import { motion, Easing } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -92,7 +81,7 @@ const AirTicketBookingPortal = () => {
             </motion.div>
             <motion.div variants={containerVariants} className="relative">
               <img
-                src="/placeholder.svg" // Replace with actual air ticket booking portal mockup image
+                src="https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?auto=format&fit=crop&q=80"
                 alt="Air Ticket Booking Portal"
                 className="w-full h-96 object-cover rounded-2xl shadow-2xl"
               />

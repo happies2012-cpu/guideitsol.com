@@ -1,20 +1,9 @@
 "use client";
 
-import React from "react";
-import GenericSubPage from "@/components/ui/GenericSubPage";
-
-const B2CTravelPortal: React.FC = () => {
-  return <GenericSubPage />;
-};
-
-export default B2CTravelPortal;
-
-"use client";
-
 import React from 'react';
 import { motion, Easing } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { User, Code, Shield, Zap, Users, Target } from 'lucide-react';
+import { Globe, Code, Shield, Zap, Users, Target } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const B2CTravelPortal = () => {
@@ -36,7 +25,7 @@ const B2CTravelPortal = () => {
       description: "AI-driven recommendations, wishlists, and personalized itineraries based on user preferences and behavior.",
     },
     {
-      icon: User,
+      icon: Globe,
       title: "User-Friendly Interface",
       description: "Intuitive design with easy search, comparison tools, and one-click booking for seamless user experience.",
     },
@@ -92,7 +81,7 @@ const B2CTravelPortal = () => {
             </motion.div>
             <motion.div variants={containerVariants} className="relative">
               <img
-                src="/placeholder.svg" // Replace with actual B2C travel portal mockup image
+                src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80"
                 alt="B2C Travel Portal"
                 className="w-full h-96 object-cover rounded-2xl shadow-2xl"
               />

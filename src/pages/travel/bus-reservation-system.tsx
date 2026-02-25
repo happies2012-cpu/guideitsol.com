@@ -1,16 +1,5 @@
 "use client";
 
-import React from "react";
-import GenericSubPage from "@/components/ui/GenericSubPage";
-
-const BusReservationSystem: React.FC = () => {
-  return <GenericSubPage />;
-};
-
-export default BusReservationSystem;
-
-"use client";
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
