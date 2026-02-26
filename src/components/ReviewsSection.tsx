@@ -1,94 +1,78 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Star, ThumbsUp, User } from 'lucide-react';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Skeleton from "@/components/ui/skeleton";
+import { Star, ThumbsUp, User, Quote } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
-interface Review {
-  id: string;
-  rating: number;
-  title: string;
-  content: string;
-  helpfulCount: number;
-  createdAt: string;
-  updatedAt: string;
-  user: {
-    id: string;
-    name: string;
-    avatar: string | null;
-  };
-  tool: {
-    id: string;
-    name: string;
-    icon: string | null;
-  } | null;
-  course: {
-    id: string;
-    title: string;
-    thumbnailUrl: string | null;
-  } | null;
-}
+const reviews = [
+  {
+    id: '1',
+    rating: 5,
+    title: 'Exceptional Development Team',
+    content: 'Guidesoft delivered our travel booking platform with outstanding quality. The attention to detail in UI/UX and the seamless API integrations were impressive.',
+    helpfulCount: 24,
+    user: { name: 'Sarah K.', initials: 'SK' },
+    tool: { name: 'Travel Portal Solutions' },
+  },
+  {
+    id: '2',
+    rating: 5,
+    title: 'AI Integration Was Seamless',
+    content: 'The AI-powered workflows they built for our business transformed how we operate. Our productivity increased by 40% within the first quarter.',
+    helpfulCount: 18,
+    user: { name: 'Michael R.', initials: 'MR' },
+    tool: { name: 'AI Workflow Automation' },
+  },
+  {
+    id: '3',
+    rating: 4,
+    title: 'Reliable & Professional',
+    content: 'Great communication throughout the project. They delivered our hotel management system on time and handled all our custom requirements professionally.',
+    helpfulCount: 15,
+    user: { name: 'Priya D.', initials: 'PD' },
+    tool: { name: 'Hotel Extranet System' },
+  },
+  {
+    id: '4',
+    rating: 5,
+    title: 'Outstanding Support',
+    content: 'Not only did they build a fantastic product, but their post-launch support has been incredible. Issues are resolved within hours, not days.',
+    helpfulCount: 21,
+    user: { name: 'James W.', initials: 'JW' },
+    tool: { name: 'Custom Software Development' },
+  },
+  {
+    id: '5',
+    rating: 5,
+    title: 'Best IT Partner We\'ve Had',
+    content: 'We\'ve worked with many agencies before, but Guidesoft stands out for their technical depth and proactive communication. Highly recommend!',
+    helpfulCount: 32,
+    user: { name: 'Ananya S.', initials: 'AS' },
+    tool: { name: 'Enterprise Solutions' },
+  },
+  {
+    id: '6',
+    rating: 4,
+    title: 'Great Value for Investment',
+    content: 'The B2B flight booking portal they delivered exceeded our expectations. Clean code, great documentation, and competitive pricing.',
+    helpfulCount: 12,
+    user: { name: 'David L.', initials: 'DL' },
+    tool: { name: 'B2B Flight Portal' },
+  },
+];
+
+const renderStars = (rating: number) => (
+  <div className="flex gap-0.5">
+    {[...Array(5)].map((_, i) => (
+      <Star
+        key={i}
+        className={`w-4 h-4 ${i < rating ? 'fill-amber-400 text-amber-400' : 'text-muted-foreground/30'}`}
+      />
+    ))}
+  </div>
+);
 
 const ReviewsSection = () => {
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch('/api/reviews?limit=6');
-        const data = await response.json();
-        setReviews(data.data);
-      } catch (err) {
-        setError('Failed to fetch reviews');
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchReviews();
-  }, []);
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
-  };
-
-  const renderStars = (rating: number) => {
-    return (
-      <div className="flex">
-        {[...Array(5)].map((_, i) => (
-          <Star
-            key={i}
-            className={`w-4 h-4 ${i < rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`}
-          />
-        ))}
-      </div>
-    );
-  };
-
-  if (error) {
-    return (
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Learners Say</h2>
-            <p className="text-muted-foreground">Error loading reviews: {error}</p>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   return (
     <motion.section
       initial={{ opacity: 0, y: 20 }}
@@ -99,97 +83,61 @@ const ReviewsSection = () => {
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-gradient-primary-start via-gradient-primary-end to-cyan-500 bg-clip-text text-transparent">
-            What Our Learners Say
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 mb-6">
+            <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
+            <span className="text-sm font-medium text-amber-400">Client Reviews</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+            What Our Clients Say
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Hear from our community of learners and professionals
+            Hear from businesses we've helped transform with technology
           </p>
         </div>
 
-        {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[...Array(3)].map((_, index) => (
-              <Card key={index}>
-                <CardHeader>
-                  <div className="flex items-center space-x-4">
-                    <Skeleton className="h-10 w-10 rounded-full" />
-                    <div>
-                      <Skeleton className="h-4 w-24 mb-2" />
-                      <Skeleton className="h-3 w-16" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {reviews.map((review, index) => (
+            <motion.div
+              key={review.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.08 }}
+              whileHover={{ y: -4 }}
+            >
+              <Card className="h-full bg-background/60 backdrop-blur-sm border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                      <Avatar className="w-10 h-10 border-2 border-primary/20">
+                        <AvatarFallback className="bg-primary/10 text-primary font-semibold text-sm">
+                          {review.user.initials}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <CardTitle className="text-base font-semibold">{review.user.name}</CardTitle>
+                        <p className="text-xs text-muted-foreground">{review.tool.name}</p>
+                      </div>
                     </div>
+                    {renderStars(review.rating)}
                   </div>
                 </CardHeader>
-                <CardContent>
-                  <Skeleton className="h-4 w-3/4 mb-2" />
-                  <Skeleton className="h-3 w-full mb-1" />
-                  <Skeleton className="h-3 w-5/6" />
+                <CardContent className="pt-0">
+                  <div className="relative">
+                    <Quote className="w-6 h-6 text-primary/20 absolute -top-1 -left-1" />
+                    <h3 className="font-semibold mb-2 pl-6">{review.title}</h3>
+                  </div>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{review.content}</p>
+                  <div className="mt-4 pt-3 border-t border-border/30">
+                    <button className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors">
+                      <ThumbsUp className="w-3.5 h-3.5" />
+                      Helpful ({review.helpfulCount})
+                    </button>
+                  </div>
                 </CardContent>
               </Card>
-            ))}
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {reviews.map((review) => (
-              <motion.div
-                key={review.id}
-                whileHover={{ y: -5 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Card>
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4">
-                        <Avatar>
-                          <AvatarImage src={review.user.avatar || undefined} />
-                          <AvatarFallback>
-                            <User className="w-4 h-4" />
-                          </AvatarFallback>
-                        </Avatar>
-                        <div>
-                          <CardTitle className="text-lg">{review.user.name}</CardTitle>
-                          <CardDescription>{formatDate(review.createdAt)}</CardDescription>
-                        </div>
-                      </div>
-                      {renderStars(review.rating)}
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <h3 className="font-semibold mb-2">{review.title}</h3>
-                    <p className="text-muted-foreground text-sm">{review.content}</p>
-                    {review.tool && (
-                      <div className="mt-4 flex items-center text-sm">
-                        <span className="font-medium">For tool:</span>
-                        <span className="ml-2">{review.tool.name}</span>
-                      </div>
-                    )}
-                    {review.course && (
-                      <div className="mt-2 flex items-center text-sm">
-                        <span className="font-medium">For course:</span>
-                        <span className="ml-2">{review.course.title}</span>
-                      </div>
-                    )}
-                  </CardContent>
-                  <div className="px-6 pb-6">
-                    <Button variant="ghost" size="sm" className="text-muted-foreground">
-                      <ThumbsUp className="w-4 h-4 mr-2" />
-                      Helpful ({review.helpfulCount})
-                    </Button>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        )}
-
-        {!loading && reviews.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">No reviews available at the moment.</p>
-          </div>
-        )}
-
-        <div className="text-center mt-12">
-          <Button size="lg">View All Reviews</Button>
+            </motion.div>
+          ))}
         </div>
       </div>
     </motion.section>

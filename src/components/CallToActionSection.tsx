@@ -8,7 +8,7 @@ import LightboxForm from '@/components/ui/LightboxForm';
 
 const CallToActionSection = () => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-  
+
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as Easing } },
@@ -59,9 +59,9 @@ const CallToActionSection = () => {
                 Get a Consultation
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
+              <Button
+                variant="outline"
+                size="lg"
                 className="px-8 py-6 text-lg border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 backdrop-blur-sm"
                 onClick={() => setIsLightboxOpen(true)}
               >
@@ -71,44 +71,20 @@ const CallToActionSection = () => {
 
             {/* PayU Quick Action Buttons */}
             <div className="flex flex-wrap gap-4 justify-center mt-4">
-              <a 
-                href="https://u.payu.in/orK6schNY7Op" 
-                target="_blank" 
+              <a
+                href="https://u.payu.in/orK6schNY7Op"
+                target="_blank"
                 rel="noopener noreferrer"
-                style={{
-                  width: '135px',
-                  backgroundColor: '#E19100',
-                  textAlign: 'center',
-                  fontWeight: 800,
-                  padding: '11px 0px',
-                  color: 'white',
-                  fontSize: '12px',
-                  display: 'inline-block',
-                  textDecoration: 'none',
-                  borderRadius: '3.229px'
-                }}
-                className="hover:opacity-90 transition-opacity shadow-md"
+                className="inline-flex items-center justify-center px-6 py-2.5 rounded-lg bg-primary-foreground/20 border border-primary-foreground/30 text-primary-foreground font-semibold text-sm hover:bg-primary-foreground/30 transition-all duration-200 backdrop-blur-sm shadow-md min-w-[135px]"
               >
                 Book Now
               </a>
-              
-              <a 
-                href="https://u.payu.in/ZI6bGCyRy7gh" 
-                target="_blank" 
+
+              <a
+                href="https://u.payu.in/ZI6bGCyRy7gh"
+                target="_blank"
                 rel="noopener noreferrer"
-                style={{
-                  width: '135px',
-                  backgroundColor: '#0D1E29',
-                  textAlign: 'center',
-                  fontWeight: 800,
-                  padding: '11px 0px',
-                  color: 'white',
-                  fontSize: '12px',
-                  display: 'inline-block',
-                  textDecoration: 'none',
-                  borderRadius: '3.229px'
-                }}
-                className="hover:opacity-90 transition-opacity shadow-md"
+                className="inline-flex items-center justify-center px-6 py-2.5 rounded-lg bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground font-semibold text-sm hover:bg-primary-foreground/20 transition-all duration-200 backdrop-blur-sm shadow-md min-w-[135px]"
               >
                 Pay Now
               </a>
@@ -116,7 +92,7 @@ const CallToActionSection = () => {
           </motion.div>
         </div>
       </motion.section>
-      
+
       {/* Lightbox Form */}
       <LightboxForm
         isOpen={isLightboxOpen}
