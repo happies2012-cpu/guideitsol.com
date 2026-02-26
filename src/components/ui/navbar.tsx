@@ -156,22 +156,26 @@ export default function Navbar({
     <section className="py-4 bg-background/80 backdrop-blur-xl border-b border-primary/20 sticky top-0 z-50 shadow-lg">
       <div className="container">
         {/* Desktop Navbar */}
-        <nav className="hidden justify-between lg:flex">
-          <div className="flex items-center gap-6">
+        <nav className="hidden lg:flex items-center justify-between">
+          {/* Left: Logo */}
+          <div className="flex items-center flex-shrink-0">
             <Link to={logo.url} className="flex items-center gap-2">
               <img src={logo.src} className="w-8 h-8 rounded-lg" alt={logo.alt} />
               <span className="text-xl font-bold text-foreground">{logo.title}.</span>
             </Link>
-            <div className="flex items-center">
-              <NavigationMenu className="[&_[data-radix-navigation-menu-viewport]]:rounded-2xl [&_[data-radix-navigation-menu-viewport]]:border-white/10 [&_[data-radix-navigation-menu-viewport]]:bg-black">
-                <NavigationMenuList className="rounded-2xl bg-background/50 backdrop-blur-sm border border-primary/10">
-                  {navigationMenu.map((item) => renderMenuItem(item))}
-                </NavigationMenuList>
-              </NavigationMenu>
-            </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          {/* Center: Navigation Menu */}
+          <div className="flex items-center justify-center flex-1">
+            <NavigationMenu className="[&_[data-radix-navigation-menu-viewport]]:rounded-2xl [&_[data-radix-navigation-menu-viewport]]:border-white/10 [&_[data-radix-navigation-menu-viewport]]:bg-black">
+              <NavigationMenuList className="rounded-2xl bg-background/50 backdrop-blur-sm border border-primary/10">
+                {navigationMenu.map((item) => renderMenuItem(item))}
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
+
+          {/* Right: Actions */}
+          <div className="flex items-center gap-2 flex-shrink-0">
             {/* Search Button */}
             <Button
               variant="ghost"
@@ -347,8 +351,8 @@ const renderMenuItem = (item: MenuItem) => {
           <div className="w-[800px] p-6">
             <div className="grid grid-cols-2 gap-6">
               {item.items.map((subItem) => (
-                <motion.div 
-                  key={subItem.title} 
+                <motion.div
+                  key={subItem.title}
                   className="space-y-3"
                   whileHover={{ y: -5 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -358,7 +362,7 @@ const renderMenuItem = (item: MenuItem) => {
                     to={subItem.url || "#"}
                     className="flex items-center gap-3 rounded-xl p-3 hover:bg-primary/10 group/main transition-colors"
                   >
-                    <motion.div 
+                    <motion.div
                       className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary group-hover/main:bg-primary group-hover/main:text-primary-foreground transition-all"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -376,7 +380,7 @@ const renderMenuItem = (item: MenuItem) => {
                       )}
                     </div>
                   </Link>
-                  
+
                   {/* Nested submenu items */}
                   {subItem.items && subItem.items.length > 0 && (
                     <div className="ml-3 pl-3 border-l-2 border-primary/20 space-y-1">
@@ -433,8 +437,8 @@ const renderMobileMenuItem = (item: MenuItem) => {
         <AccordionContent className="mt-2">
           <Accordion type="single" collapsible className="w-full space-y-2">
             {item.items.map((subItem) => (
-              <motion.div 
-                key={subItem.title} 
+              <motion.div
+                key={subItem.title}
                 className="space-y-2"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -444,7 +448,7 @@ const renderMobileMenuItem = (item: MenuItem) => {
                   <AccordionItem value={subItem.title} className="border-b border-primary/10">
                     <AccordionTrigger className="py-2 text-sm font-semibold hover:no-underline text-foreground hover:text-primary">
                       <div className="flex items-center gap-3">
-                        <motion.div 
+                        <motion.div
                           className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary"
                           whileHover={{ scale: 1.1 }}
                           transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -489,7 +493,7 @@ const renderMobileMenuItem = (item: MenuItem) => {
                     to={subItem.url || "#"}
                     className="flex select-none gap-3 rounded-xl p-3 leading-none outline-none transition-colors hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary"
                   >
-                    <motion.div 
+                    <motion.div
                       className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary"
                       whileHover={{ scale: 1.1 }}
                       transition={{ type: "spring", stiffness: 400, damping: 10 }}
