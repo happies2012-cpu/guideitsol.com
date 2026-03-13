@@ -49,6 +49,7 @@
     "db:push": "drizzle-kit push"
   },
   "dependencies": {
+    "@firebase/auth": "^1.12.1",
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
@@ -134,6 +135,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
+    "@playwright/test": "^1.58.2",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^22.16.5",
     "@types/react": "^18.3.23",
@@ -153,6 +155,6 @@
     "tailwindcss": "^3.4.17",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.38.0",
-    "vite": "^7.2.6"
+    "vite": "^6.2.0"
   }
 }

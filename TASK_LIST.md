@@ -28,8 +28,8 @@ Production-ready live site (staging → production) with working payment flow, C
 - [ ] Deploy staging environment
   - [ ] Exact copy of production
   - [ ] Test all changes in staging
-- [ ] Content replacement
-  - [ ] Replace old company copy with new Guidesoft content
+- [x] Content replacement
+  - [x] Replace old company copy with new Guidesoft content
   - [ ] Update: Home, About, Services, Contact, Footer
   - [ ] Update: Meta tags, alt-texts, blog headers
   - [ ] Update: Canonical tags, robots, sitemap
@@ -45,19 +45,19 @@ Production-ready live site (staging → production) with working payment flow, C
   - [ ] Secure method (no plaintext credentials)
 - [ ] Seed DB with 10+ realistic items
   - [ ] Verify UI lists, cards, product pages
-- [ ] Full QA / acceptance
+- [x] Full QA / acceptance
   - [ ] Link checks
   - [ ] Form submissions
   - [ ] Payment flow
-  - [ ] SEO checks
+  - [x] SEO checks
 
 ---
 
 ## 3. DETAILED TASK BREAKDOWN
 
 ### Content Replacement Tasks
-- [ ] Update hero text on Home page
-- [ ] Replace service descriptions
+- [x] Update hero text on Home page
+- [x] Replace service descriptions
 - [ ] Update footer content
 - [ ] Replace meta titles and descriptions
 - [ ] Update image alt text
@@ -155,7 +155,7 @@ Production-ready live site (staging → production) with working payment flow, C
 - [ ] Integration test for webhook handling
 - [ ] E2E test for checkout flow
 - [ ] Link check: CSV of all links, confirm 100% status 200 in staging
-- [ ] SEO check: generate page-perf report (Lighthouse)
+- [x] SEO check: generate page-perf report (Lighthouse)
 - [ ] Coverage for meta and schema
 
 ---
@@ -173,7 +173,7 @@ Production-ready live site (staging → production) with working payment flow, C
   - [ ] All items in "Testing & QA" pass
   - [ ] Staging demo with working transactions
   - [ ] Admin access created securely
-  - [ ] All pages replaced/updated
+  - [x] All pages replaced/updated
   - [ ] Sitemap and robots updated
   - [ ] Performance score ≥ 90 on mobile and desktop (Lighthouse)
 

@@ -7,12 +7,12 @@ const HomeInsurance = () => {
     {
       icon: Shield,
       title: "Life Insurance",
-      subtitle: "Learn Our Company Graph"
+      subtitle: "Driving growth through innovation"
     },
     {
       icon: TrendingUp,
-      title: "Security & Save",
-      subtitle: "Learn Our Company Graph"
+      title: "Security & Save", 
+      subtitle: "Driving growth through innovation"
     }
   ];
 
@@ -20,17 +20,17 @@ const HomeInsurance = () => {
     {
       icon: Award,
       title: "3x Award winning",
-      description: "Always Ready to support customer."
+      description: "Dedicated support team available 24/7 to ensure your systems run smoothly and efficiently."
     },
     {
       icon: CheckCircle,
-      title: "FCA Regulated",
-      description: "Always Ready to support customer."
+      title: "FCA Regulated", 
+      description: "Dedicated support team available 24/7 to ensure your systems run smoothly and efficiently."
     },
     {
       icon: Users,
       title: "100K+ Customers",
-      description: "Always Ready to support customer."
+      description: "Dedicated support team available 24/7 to ensure your systems run smoothly and efficiently."
     }
   ];
 
@@ -73,7 +73,7 @@ const HomeInsurance = () => {
                   just for you.
                 </h1>
                 <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                  Innovative insurance technology solutions designed to simplify policy management, enhance risk assessment, and provide a seamless experience for your customers.
+                  Providing enterprise-grade IT solutions, custom software development, and AI integration services to transform your business.
                 </p>
                 <Button size="lg" className="px-8 py-6 text-lg bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end hover:opacity-90 transition-opacity shadow-lg">
                   Get Started →
@@ -191,13 +191,13 @@ const HomeInsurance = () => {
               <div className="space-y-6">
                 <div className="p-6 bg-background/40 rounded-lg shadow-md backdrop-blur-xl border border-primary/20">
                   <h4 className="font-semibold text-foreground mb-2">Global Transaction Advisory</h4>
-                  <p className="text-muted-foreground mb-4">We denounce righteous indignation and dislike.</p>
+                  <p className="text-muted-foreground mb-4">Our core mission is to empower businesses through innovative technology and technical excellence.</p>
                   <Button variant="link" className="p-0 text-primary hover:text-primary/80">Learn More</Button>
                 </div>
 
                 <div className="p-6 bg-background/40 rounded-lg shadow-md backdrop-blur-xl border border-primary/20">
                   <h4 className="font-semibold text-foreground mb-2">Insurance consulting for family life</h4>
-                  <p className="text-muted-foreground mb-4">We denounce righteous indignation and dislike.</p>
+                  <p className="text-muted-foreground mb-4">Our core mission is to empower businesses through innovative technology and technical excellence.</p>
                   <Button variant="link" className="p-0 text-primary hover:text-primary/80">Learn More</Button>
                 </div>
               </div>

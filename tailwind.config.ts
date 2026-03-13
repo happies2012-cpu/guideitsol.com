@@ -1,13 +1,20 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: ["class"],
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
-  darkMode: "class",
+  prefix: "",
+  safelist: [
+    { pattern: /bg-(blue|indigo|purple|sky|cyan|emerald|rose|amber)-(100|500|600|700|800)/ },
+    { pattern: /text-(blue|indigo|purple|sky|cyan|emerald|rose|amber)-(100|500|600|700|800)/ },
+    { pattern: /from-(blue|indigo|purple|sky|cyan|emerald|rose|amber)-(500|600)/ },
+    { pattern: /to-(blue|indigo|purple|sky|cyan|emerald|rose|amber)-(500|600)/ },
+  ],
   theme: {
     extend: {
       colors: {
@@ -86,4 +93,5 @@ const config: Config = {
   },
   plugins: [require("tailwindcss-animate")],
 };
+
 export default config;

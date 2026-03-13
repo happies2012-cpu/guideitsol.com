@@ -11,6 +11,15 @@ node_modules
 dist
 dist-ssr
 *.local
+.npm-cache-local
+.playwright-browsers
+.playwright-tmp
+playwright-report
+test-results
+audit_results.txt
+audit_codebase.sh
+final_cleanup.sh
+complete_project.sh
 
 # Environment files - NEVER commit these
 .env
