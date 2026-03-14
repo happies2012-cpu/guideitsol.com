@@ -6,7 +6,7 @@
     "devCommand": "npm run dev",
     "installCommand": "npm install",
     "framework": "vite",
-    "regions": ["in-bom1", "sfo1"],
+    "regions": ["bom1", "sfo1"],
     "builds": [
         {
             "src": "package.json",
