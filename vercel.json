@@ -1,7 +1,7 @@
 {
     "version": 2,
     "name": "guideitsol",
-    "buildCommand": "npx prisma generate && npx prisma db push && node scripts/seed_dummy_data.js && npm run build",
+    "buildCommand": "mkdir -p ./data && export DATABASE_URL=\"file:./data/dev.db\" && npx prisma generate && npx prisma db push && node scripts/seed_dummy_data.js && npm run build",
     "outputDirectory": "dist",
     "devCommand": "npm run dev",
     "installCommand": "npm install",
