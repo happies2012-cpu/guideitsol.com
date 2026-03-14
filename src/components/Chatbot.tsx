@@ -142,22 +142,42 @@ const Chatbot: React.FC = () => {
     return DEFAULT_RESPONSE;
   };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (inputValue.trim() === '') return;
 
-    const newUserMessage: Message = { id: Date.now(), text: inputValue, sender: 'user', isHtml: false };
+    const userText = inputValue;
+    const newUserMessage: Message = { id: Date.now(), text: userText, sender: 'user', isHtml: false };
     setMessages((prev) => [...prev, newUserMessage]);
     setInputValue('');
     setIsTyping(true);
 
-    const botResponse = getBotResponse(inputValue);
-    
-    // Simulate smart thinking/RAG searching time
-    setTimeout(() => {
-      const newBotMessage: Message = { id: Date.now() + 1, text: botResponse, sender: 'bot', isHtml: true };
+    try {
+      const res = await fetch('/api/chatbot/ask', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: userText }),
+      });
+      
+      if (!res.ok) throw new Error('API Error');
+      
+      const data = await res.json();
+      const newBotMessage: Message = { id: Date.now() + 1, text: data.response, sender: 'bot', isHtml: true };
       setMessages((prev) => [...prev, newBotMessage]);
-      setIsTyping(false);
-    }, 1000 + Math.random() * 800);
+    } catch (err) {
+      // Fallback to purely frontend logic if server is unreachable
+      console.warn("API unreachable, falling back to local fallback rules.", err);
+      const botResponse = getBotResponse(userText);
+      setTimeout(() => {
+        const newBotMessage: Message = { id: Date.now() + 1, text: botResponse, sender: 'bot', isHtml: true };
+        setMessages((prev) => [...prev, newBotMessage]);
+        setIsTyping(false);
+      }, 600);
+      return; // prevent setting isTyping to false twice
+    }
+    
+    setIsTyping(false);
   };
 
   const handleQuickAction = (action: string) => {

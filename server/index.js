@@ -9,10 +9,6 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import authRoutes from './routes/auth.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 import pagesRoutes from './routes/pages.js';
 import navigationRoutes from './routes/navigation.js';
 import aiToolsRoutes from './routes/ai-tools.js';
@@ -29,6 +25,7 @@ import userDashboardRoutes from './routes/user-dashboard.js';
 import paypalRoutes from './routes/paypal.js';
 import payuRoutes from './routes/payu.js';
 import payuV2Routes from './routes/payu-v2.js';
+import chatbotRoutes from './routes/chatbot.js';
 
 dotenv.config();
 
@@ -148,6 +145,7 @@ app.use('/api/dashboard', userDashboardRoutes);
 app.use('/api/paypal', paypalRoutes);
 app.use('/api/payu', payuRoutes);
 app.use('/api/payu-v2', payuV2Routes);
+app.use('/api/chatbot', chatbotRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
