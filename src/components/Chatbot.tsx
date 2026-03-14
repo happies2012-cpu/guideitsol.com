@@ -112,7 +112,12 @@ const Chatbot: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
@@ -301,13 +306,13 @@ const Chatbot: React.FC = () => {
                               : "bg-muted/80 text-foreground rounded-tl-sm border border-border shadow-sm"
                           )}
                         >
-                          {message.isHtml ? (
+                          {message.isHtml && isMounted ? (
                             <div 
-                              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(message.text, { ADD_ATTR: ['target'] }) }} 
-                              className="prose prose-sm dark:prose-invert prose-p:leading-relaxed prose-a:text-primary max-w-none"
+                              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(message.text || '', { ADD_ATTR: ['target'] }) }} 
+                              className="prose prose-sm dark:prose-invert prose-p:leading-relaxed prose-a:text-primary max-w-none chatbot-html-content"
                             />
                           ) : (
-                            message.text
+                            <div className="whitespace-pre-wrap">{message.text}</div>
                           )}
                         </div>
                       </motion.div>
