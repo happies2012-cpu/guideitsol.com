@@ -4,12 +4,22 @@ export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
-  reporter: 'html',
+  retries: 1,
+  workers: 4,
+  timeout: 60000,
+  expect: { timeout: 15000 },
+  reporter: [
+    ['html', { outputFolder: 'test-results/html-report', open: 'never' }],
+    ['json', { outputFile: 'test-results/results.json' }],
+    ['list'],
+  ],
   use: {
     baseURL: 'http://127.0.0.1:5173',
     trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+    actionTimeout: 15000,
+    navigationTimeout: 30000,
   },
   projects: [
     {
@@ -20,7 +30,7 @@ export default defineConfig({
   webServer: {
     command: 'npm run dev -- --host 127.0.0.1 --port 5173',
     url: 'http://127.0.0.1:5173',
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: true,
     timeout: 180000,
   },
 });
