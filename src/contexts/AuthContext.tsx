@@ -1,14 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
-import { auth } from '@/lib/firebase';
 import {
   AppUser,
   UserRole,
   loginWithEmail,
   loginWithGoogle,
   registerWithEmail,
-  logout as firebaseLogout,
+  logout as localLogout,
   getUserData,
+  checkAuthStatus,
   resetPassword,
   updateUserProfile,
   updateUserEmail,
@@ -20,19 +19,16 @@ import {
 
 interface AuthContextType {
   user: AppUser | null;
-  firebaseUser: FirebaseUser | null;
+  firebaseUser: any | null; // Kept for legacy compatibility
   loading: boolean;
-  // Authentication methods
   login: (email: string, password: string) => Promise<void>;
   loginWithGoogle: () => Promise<void>;
   register: (email: string, password: string, name: string, role?: UserRole) => Promise<void>;
   logout: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
-  // Profile management
   updateProfile: (data: Partial<AppUser>) => Promise<void>;
   updateEmail: (newEmail: string, currentPassword: string) => Promise<void>;
   updatePassword: (currentPassword: string, newPassword: string) => Promise<void>;
-  // Authorization
   isAuthenticated: boolean;
   isAdmin: boolean;
   isSuperAdmin: boolean;
@@ -40,7 +36,6 @@ interface AuthContextType {
   isViewer: boolean;
   hasPermission: (permission: string) => boolean;
   hasRole: (roles: UserRole | UserRole[]) => boolean;
-  // Admin functions
   updateUserRole: (uid: string, role: UserRole) => Promise<void>;
 }
 
@@ -56,36 +51,22 @@ export const useAuth = () => {
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<AppUser | null>(null);
-  const [firebaseUser, setFirebaseUser] = useState<FirebaseUser | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Listen to Firebase auth state changes
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+    const initAuth = async () => {
       try {
-        if (firebaseUser) {
-          // User is signed in
-          setFirebaseUser(firebaseUser);
-
-          // Get user data from Firestore
-          const userData = await getUserData(firebaseUser.uid);
+        const userData = await checkAuthStatus();
+        if (userData) {
           setUser(userData);
-        } else {
-          // User is signed out
-          setFirebaseUser(null);
-          setUser(null);
         }
       } catch (error) {
-        console.error('Auth state change error:', error);
-        setFirebaseUser(null);
-        setUser(null);
+        console.error('Auth initialization error:', error);
       } finally {
         setLoading(false);
       }
-    });
-
-    // Cleanup subscription
-    return () => unsubscribe();
+    };
+    initAuth();
   }, []);
 
   const login = async (email: string, password: string) => {
@@ -114,12 +95,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const register = async (
-    email: string,
-    password: string,
-    name: string,
-    role: UserRole = 'USER'
-  ) => {
+  const register = async (email: string, password: string, name: string, role: UserRole = 'USER') => {
     try {
       setLoading(true);
       const userData = await registerWithEmail(email, password, name, role);
@@ -134,9 +110,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const handleLogout = async () => {
     try {
-      await firebaseLogout();
+      await localLogout();
       setUser(null);
-      setFirebaseUser(null);
     } catch (error: any) {
       console.error('Logout error:', error);
       throw new Error(error.message || 'Logout failed');
@@ -156,8 +131,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       if (!user) throw new Error('No user logged in');
       await updateUserProfile(user.uid, data);
-
-      // Update local state
       setUser({ ...user, ...data });
     } catch (error: any) {
       console.error('Update profile error:', error);
@@ -168,8 +141,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const handleUpdateEmail = async (newEmail: string, currentPassword: string) => {
     try {
       await updateUserEmail(newEmail, currentPassword);
-
-      // Update local state
       if (user) {
         setUser({ ...user, email: newEmail });
       }
@@ -208,27 +179,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const value: AuthContextType = {
     user,
-    firebaseUser,
+    firebaseUser: user ? { uid: user.uid, getIdToken: async () => localStorage.getItem('auth_token') } : null,
     loading,
-    // Authentication methods
     login,
     loginWithGoogle: handleGoogleLogin,
     register,
     logout: handleLogout,
     resetPassword: handleResetPassword,
-    // Profile management
     updateProfile: handleUpdateProfile,
     updateEmail: handleUpdateEmail,
     updatePassword: handleUpdatePassword,
-    // Authorization
-    isAuthenticated: !!user && !!firebaseUser,
+    isAuthenticated: !!user,
     isAdmin: user?.role === 'ADMIN' || user?.role === 'SUPER_ADMIN',
     isSuperAdmin: user?.role === 'SUPER_ADMIN',
     isEditor: user?.role === 'EDITOR',
     isViewer: user?.role === 'VIEWER',
     hasPermission: checkPermission,
     hasRole: checkRole,
-    // Admin functions
     updateUserRole: handleUpdateUserRole
   };
 
