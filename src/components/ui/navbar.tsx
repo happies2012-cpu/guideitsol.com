@@ -153,8 +153,8 @@ export default function Navbar({
   }));
 
   return (
-    <section className="py-4 bg-background/80 backdrop-blur-xl border-b border-primary/20 sticky top-0 z-50 shadow-lg">
-      <div className="container">
+    <section className="py-4 bg-background/80 backdrop-blur-xl border-b border-primary/20 sticky top-0 z-50 shadow-lg" style={{ zIndex: 9999 }}>
+      <div className="container mx-auto px-4">
         {/* Desktop Navbar */}
         <nav className="hidden lg:flex items-center justify-between">
           {/* Left: Logo */}
