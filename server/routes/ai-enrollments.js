@@ -2,6 +2,7 @@ import express from 'express';
 import prisma from '../db/prisma.js';
 import { authenticate } from '../middleware/auth.js';
 import crypto from 'crypto';
+import { sendEmail, sendWhatsAppNotification, logToGoogleSheets } from '../services/notificationService.js';
 
 const router = express.Router();
 
@@ -62,6 +63,49 @@ router.post('/', async (req, res) => {
         message: message || null,
         userId: req.user?.id || null
       }
+    });
+
+    // Notifications
+    const emailContent = `
+      <h3>New AI Learning Enrollment</h3>
+      <p><strong>Course:</strong> ${tool.name} (${toolId})</p>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>LinkedIn:</strong> ${linkedin || 'N/A'}</p>
+      <p><strong>Aadhar:</strong> ${aadhar}</p>
+      <p><strong>PAN:</strong> ${pan}</p>
+      <p><strong>Message:</strong> ${message || 'N/A'}</p>
+    `;
+    
+    await sendEmail({
+      to: 'info@guideitsol.com',
+      subject: `New AI Course Enrollment - ${name}`,
+      html: emailContent
+    });
+
+    let waMessage = `🎓 *New STUDENT Enrollment*\n\n`;
+    waMessage += `📚 *Course:* ${tool.name}\n`;
+    waMessage += `👤 *Name:* ${name}\n`;
+    waMessage += `📧 *Email:* ${email}\n`;
+    waMessage += `📱 *Phone:* ${phone}\n`;
+    waMessage += `🔗 *LinkedIn:* ${linkedin || 'N/A'}\n`;
+    waMessage += `🆔 *Aadhar:* ${aadhar}\n`;
+    waMessage += `🆔 *PAN:* ${pan}\n`;
+    
+    if (message) {
+      waMessage += `\n📝 *Notes:* ${message}`;
+    }
+    
+    waMessage += `\n\n✅ Registered at: ${new Date().toLocaleString()}`;
+
+    await sendWhatsAppNotification(waMessage);
+
+    await logToGoogleSheets({ 
+      formType: 'AI_Enrollment', 
+      course: tool.name,
+      toolId, name, email, phone, aadhar, pan, 
+      submittedAt: new Date().toISOString() 
     });
 
     res.status(201).json(enrollment);

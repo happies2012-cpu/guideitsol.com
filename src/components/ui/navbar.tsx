@@ -211,6 +211,18 @@ export default function Navbar({
             <Button asChild size="sm" className="bg-gradient-to-r from-primary to-secondary text-primary-foreground hover:opacity-90">
               <Link to={auth.signup.url}>{auth.signup.text}</Link>
             </Button>
+            
+            {/* Book Call Quick Button */}
+            <Button 
+              size="sm" 
+              className="hidden xl:flex items-center gap-2 bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-md"
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent('openModal', { detail: { type: 'consultation' } }));
+              }}
+            >
+              <FontAwesomeIcon icon={faCogs} className="size-4" />
+              Book Call
+            </Button>
           </div>
         </nav>
 
@@ -293,6 +305,15 @@ export default function Navbar({
                       </Button>
                       <Button asChild className="bg-gradient-to-r from-primary to-secondary text-primary-foreground hover:opacity-90">
                         <Link to={auth.signup.url}>{auth.signup.text}</Link>
+                      </Button>
+                      <Button 
+                        className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90"
+                        onClick={() => {
+                          window.dispatchEvent(new CustomEvent('openModal', { detail: { type: 'consultation' } }));
+                        }}
+                      >
+                        <FontAwesomeIcon icon={faCogs} className="size-4 mr-2" />
+                        Book Call
                       </Button>
                     </div>
                   </div>

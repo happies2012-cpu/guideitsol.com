@@ -4,10 +4,12 @@ import React from 'react';
 // SmartImage available for future use in case icons/images get added here
 // import SmartImage from '@/components/ui/SmartImage'
 import { motion } from 'framer-motion';
-import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Facebook, Twitter, Linkedin, Instagram, Phone, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const socialLinks = [
+  { icon: Phone, href: "tel:+918500647979", label: "Call Us" },
+  { icon: MessageCircle, href: "https://wa.me/918500647979", label: "WhatsApp" },
   { icon: Facebook, href: "https://www.facebook.com/p/GuidesoftI-100089990527060/", label: "Facebook" },
   { icon: Twitter, href: "https://x.com/GuidesoftIt", label: "Twitter" },
   { icon: Linkedin, href: "https://in.linkedin.com/company/guideitsol-it-solutions-trainings", label: "LinkedIn" },

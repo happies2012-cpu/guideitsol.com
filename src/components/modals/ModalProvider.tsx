@@ -74,11 +74,34 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
     setModalData(null);
   };
 
-  const handleSubmit = (formData: any) => {
-    console.log('Form submitted:', { type: modalType, data: formData });
-    // Here you would typically send the data to your backend
-    alert('Thank you! We will get back to you soon.');
-    closeModal();
+  const handleSubmit = async (formData: Record<string, unknown>) => {
+    try {
+      console.log('Submitting form:', { type: modalType, data: formData });
+      
+      const response = await fetch('/api/forms/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          formType: modalType,
+          data: formData
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit form');
+      }
+
+      const result = (await response.json()) as { success: boolean };
+      console.log('Form submission result:', result);
+      
+      alert('Thank you! Your request has been received. We will get back to you soon.');
+      closeModal();
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('There was an error submitting your request. Please try again later or contact us directly at info@guideitsol.com.');
+    }
   };
 
   const renderModalContent = () => {
@@ -160,7 +183,7 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
 };
 
 // Individual Form Components
-const ContactForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) => {
+const ContactForm: React.FC<{ onSubmit: (data: Record<string, unknown>) => void }> = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -238,7 +261,7 @@ const ContactForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) 
   );
 };
 
-const QuoteForm: React.FC<{ onSubmit: (data: any) => void; service?: string }> = ({ onSubmit, service }) => {
+const QuoteForm: React.FC<{ onSubmit: (data: Record<string, unknown>) => void; service?: string }> = ({ onSubmit, service }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -332,7 +355,7 @@ const QuoteForm: React.FC<{ onSubmit: (data: any) => void; service?: string }> =
   );
 };
 
-const PaymentForm: React.FC<{ onSubmit: (data: any) => void; amount?: number; plan?: string }> = ({ onSubmit, amount, plan }) => {
+const PaymentForm: React.FC<{ onSubmit: (data: Record<string, unknown>) => void; amount?: number; plan?: string }> = ({ onSubmit, amount, plan }) => {
   const handlePayU = async () => {
     try {
       const productInfo = plan || 'Subscription';
@@ -427,7 +450,7 @@ const PaymentForm: React.FC<{ onSubmit: (data: any) => void; amount?: number; pl
   );
 };
 
-const ConsultationForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) => {
+const ConsultationForm: React.FC<{ onSubmit: (data: Record<string, unknown>) => void }> = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -522,7 +545,7 @@ const ConsultationForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmi
   );
 };
 
-const DemoForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) => {
+const DemoForm: React.FC<{ onSubmit: (data: Record<string, unknown>) => void }> = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -596,7 +619,7 @@ const DemoForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) => 
   );
 };
 
-const TrialForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) => {
+const TrialForm: React.FC<{ onSubmit: (data: Record<string, unknown>) => void }> = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -675,7 +698,7 @@ const TrialForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) =>
   );
 };
 
-const NewsletterForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) => {
+const NewsletterForm: React.FC<{ onSubmit: (data: Record<string, unknown>) => void }> = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     email: '',
     interests: []
@@ -720,7 +743,7 @@ const NewsletterForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit 
   );
 };
 
-const ServicesForm: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) => {
+const ServicesForm: React.FC<{ onSubmit: (data: Record<string, unknown>) => void }> = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',

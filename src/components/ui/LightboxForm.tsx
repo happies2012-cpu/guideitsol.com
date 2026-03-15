@@ -59,30 +59,53 @@ const LightboxForm: React.FC<LightboxFormProps> = ({ isOpen, onClose, title, ser
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!validateForm()) {
       return;
     }
     
-    // In a real implementation, you would send this data to your backend
-    // For now, we'll just show a success message
-    toast.success("Message Received!", {
-      description: `Thank you for your interest in ${title}. Our team will review your inquiry and respond within 2 hours.`,
-    });
-    
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      company: "",
-      phone: "",
-      message: ""
-    });
-    
-    // Close the lightbox
-    onClose();
+    try {
+      const response = await fetch('/api/forms/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          formType: 'consultation_request',
+          data: {
+            ...formData,
+            serviceType
+          }
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit form');
+      }
+
+      toast.success("Message Received!", {
+        description: `Thank you for your interest in ${title}. Our team will review your inquiry and respond within 2 hours.`,
+      });
+      
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        phone: "",
+        message: ""
+      });
+      
+      // Close the lightbox
+      onClose();
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast.error("Submission Failed", {
+        description: "There was an error sending your message. Please try again later.",
+      });
+    }
   };
 
   return (

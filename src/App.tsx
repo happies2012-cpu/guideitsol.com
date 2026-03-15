@@ -21,6 +21,7 @@ import Footer from "./components/Footer";
 import Chatbot from "./components/Chatbot";
 import BackToTopButton from "./components/BackToTopButton";
 import AnimatedRoutes from "./components/AnimatedRoutes";
+import FloatingActions from "./components/FloatingActions";
 import LoadingScreen from "@/components/ui/loading-screen";
 import { LeadMagnetPopup } from "@/components/LeadMagnetPopup";
 // Removed FireworksOverlay import
@@ -362,6 +363,7 @@ const AppContent = () => {
         <Footer />
         <BackToTopButton />
         <Chatbot />
+        <FloatingActions />
       </div>
     </>
   );

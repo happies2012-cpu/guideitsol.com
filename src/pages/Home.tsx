@@ -19,6 +19,8 @@ import { BacklinksSection } from "@/components/BacklinksSection";
 import { useAnimations } from "@/hooks/useAnimations";
 import PageTransition from "@/components/ui/page-transition";
 
+import SocialGroups from "@/components/SocialGroups";
+
 const Home = () => {
   const { staggerContainer, staggerItem } = useAnimations();
 
@@ -80,6 +82,10 @@ const Home = () => {
 
         <motion.div variants={staggerItem}>
           <BacklinksSection />
+        </motion.div>
+
+        <motion.div variants={staggerItem}>
+          <SocialGroups />
         </motion.div>
 
         <motion.div variants={staggerItem}>
