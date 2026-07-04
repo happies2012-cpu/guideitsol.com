@@ -49,6 +49,14 @@ model User {
   userStats               UserStats?
   userVerification        UserVerification?
   affiliateReferrals      AffiliateReferral[]      @relation("user_referrals_relation")
+  // AI SaaS Relations
+  conversations           Conversation[]
+  promptTemplates         PromptTemplate[]
+  fileUploads             FileUpload[]
+  apiKeys                 ApiKey[]
+  auditLogs               AuditLog[]
+  subscription            Subscription?
+  usageMetrics            UsageMetric[]
 
   @@map("users")
 }
@@ -736,6 +744,159 @@ model CaseStudy {
   updatedAt   DateTime @updatedAt
 
   @@index([title])
+}
+
+// AI SaaS Models
+model Conversation {
+  id              String    @id @default(uuid())
+  title           String
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages        Message[]
+  model           String    @default("gpt-4")
+  temperature     Float     @default(0.7)
+  systemPrompt    String?
+  isArchived      Boolean   @default(false)
+  isPinned        Boolean   @default(false)
+  folder          String?
+  tags            String[]
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([createdAt])
+  @@map("conversations")
+}
+
+model Message {
+  id             String       @id @default(uuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  role           MessageRole
+  content        String       @db.Text
+  metadata       String?      @db.Text
+  tokens         Int?
+  createdAt      DateTime     @default(now())
+
+  @@index([conversationId])
+  @@index([createdAt])
+  @@map("messages")
+}
+
+model PromptTemplate {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  content     String   @db.Text
+  category    String
+  tags        String[]
+  isPublic    Boolean  @default(false)
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  usageCount  Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+  @@index([userId])
+  @@map("prompt_templates")
+}
+
+model FileUpload {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fileName  String
+  fileSize  Int
+  fileType  String
+  storageUrl String
+  metadata  String?  @db.Text
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@map("file_uploads")
+}
+
+model ApiKey {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name      String
+  key       String   @unique @db.VarChar(255)
+  lastUsed  DateTime?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@map("api_keys")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action    String
+  resource  String
+  details   String?  @db.Text
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([action])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+model Subscription {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan      PlanType
+  status    SubStatus
+  stripeId  String?
+  startDate DateTime
+  endDate   DateTime?
+  cancelledAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("subscriptions")
+}
+
+model UsageMetric {
+  id            String   @id @default(uuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  metricType    String
+  value         Int
+  period        String   // daily, monthly, yearly
+  date          DateTime
+  createdAt     DateTime @default(now())
+
+  @@index([userId])
+  @@index([date])
+  @@map("usage_metrics")
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+  SYSTEM
+}
+
+enum PlanType {
+  FREE
+  STARTER
+  PROFESSIONAL
+  ENTERPRISE
+}
+
+enum SubStatus {
+  ACTIVE
+  CANCELLED
+  EXPIRED
+  SUSPENDED
 }
 
 enum Role {

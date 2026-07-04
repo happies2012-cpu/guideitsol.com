@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { HeroSection } from "@/components/hero/HeroSection";
+import { BackgroundSliderCarousel } from "@/components/sliders/BackgroundSliderCarousel";
 import HeroNew from "@/components/HeroNew";
 import AIToolsSection from "@/components/AIToolsSection";
 import SkillsSection from "@/components/SkillsSection";
@@ -30,6 +32,12 @@ const Home = () => {
         initial="hidden"
         animate="visible"
       >
+        {/* Premium AI SaaS Hero */}
+        <HeroSection />
+
+        {/* 8 Animated Background Sliders */}
+        <BackgroundSliderCarousel />
+
         {/* New Modern Hero */}
         <motion.div variants={staggerItem}>
           <HeroNew />
