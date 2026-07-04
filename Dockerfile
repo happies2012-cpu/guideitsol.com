@@ -72,10 +72,6 @@ COPY public ./public
 # Copy environment template
 COPY .env.production.example ./.env.example
 
-# Copy startup script
-COPY docker-entrypoint.sh ./docker-entrypoint.sh
-RUN chmod +x ./docker-entrypoint.sh
-
 # Create data directory for SQLite database
 RUN mkdir -p /app/data && \
   chown -R nodejs:nodejs /app
@@ -88,15 +84,17 @@ EXPOSE 3000
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:3000/api/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
+  CMD node -e "require('http').get('http://localhost:3000/api/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})" || exit 1
 
 # Set environment variables
 ENV NODE_ENV=production \
   PORT=3000 \
-  DATABASE_URL=file:/app/data/database.db
+  DATABASE_URL=file:/app/data/database.db \
+  CORS_ORIGIN=* \
+  LOG_LEVEL=info
 
 # Use dumb-init to handle signals properly
 ENTRYPOINT ["dumb-init", "--"]
 
-# Start the application using the startup script
-CMD ["sh", "./docker-entrypoint.sh"]
+# Start the application
+CMD ["node", "server/index.js"]
