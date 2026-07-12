@@ -1,35 +1,65 @@
 {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Guidesoft",
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "ai": "https://ai.schema.org/",
+    "gx": "https://schema.org/"
+  },
+  "@type": "gx:WebPage",
+  "name": "GuideIT Solutions - AI Training & Digital Transformation",
+  "description": "Premium AI training programs, consulting services, and digital transformation solutions. Expert-led courses in Machine Learning, LLMs, MLOps, and AI integration for enterprises.",
   "url": "https://guideitsol.com",
-  "description": "Leading IT solutions provider delivering innovative technology services, software development, and digital transformation solutions for modern businesses.",
+  "inLanguage": "en-US",
+  "isPartOf": {
+    "@type": "gx:WebSite",
+    "name": "GuideIT Solutions",
+    "url": "https://guideitsol.com"
+  },
+  "about": {
+    "@type": "gx:Thing",
+    "name": "AI Training and Education Services",
+    "description": "Professional AI and machine learning training programs, consulting, and implementation services"
+  },
+  "hasPart": [
+    {
+      "@type": "gx:WebPage",
+      "name": "AI Training Programs",
+      "description": "Professional AI training courses including LLM & Prompt Engineering, Machine Learning, and MLOps",
+      "url": "https://guideitsol.com/ai-training"
+    },
+    {
+      "@type": "gx:WebPage",
+      "name": "AI Tools Marketplace",
+      "description": "Curated collection of production-ready AI models, frameworks, and infrastructure tools",
+      "url": "https://guideitsol.com/ai-tools"
+    },
+    {
+      "@type": "gx:WebPage",
+      "name": "Open Source CMS Marketplace",
+      "description": "Self-hostable open-source content management systems and backend platforms",
+      "url": "https://guideitsol.com/open-source"
+    }
+  ],
   "keywords": [
-    "IT solutions",
-    "software development",
+    "AI training",
+    "machine learning course",
+    "LLM training",
+    "prompt engineering",
+    "MLOps",
+    "deep learning",
+    "AI consulting",
+    "enterprise AI",
     "digital transformation",
-    "web development",
-    "mobile app development",
-    "AI solutions",
-    "cloud services",
-    "data analytics",
-    "cybersecurity",
-    "DevOps",
-    "UI/UX design",
-    "IT consulting",
-    "maintenance support",
-    "enterprise solutions",
-    "business growth",
-    "technology innovation"
+    "artificial intelligence education",
+    "AI courses",
+    "AI certification",
+    "Open Source CMS",
+    "Headless CMS",
+    "Backend as a Service",
+    "content management"
   ],
   "provider": {
-    "@type": "Organization",
-    "name": "Guidesoft",
-    "url": "https://guideitsol.com",
-    "sameAs": [
-      "https://www.linkedin.com/company/guidesoft",
-      "https://twitter.com/guidesoft",
-      "https://facebook.com/guidesoft"
-    ]
+    "@type": "gx:Organization",
+    "name": "GuideIT Solutions",
+    "url": "https://guideitsol.com"
   }
 }

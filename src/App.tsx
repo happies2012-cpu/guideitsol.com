@@ -38,6 +38,12 @@ const BlogPost = lazy(() => import("./pages/BlogPost"));
 const Pages = lazy(() => import("./pages/Pages"));
 const Contact = lazy(() => import("./pages/Contact"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+
+// AI Tools & Training pages
+const AIToolsMarketplace = lazy(() => import("./pages/ai-tools/AIToolsMarketplace"));
+const OSSMarketplace = lazy(() => import("./pages/ai-tools/OSSMarketplace"));
+const OSSOverview = lazy(() => import("./pages/open-source/OSSOverview"));
+const AITrainingOverview = lazy(() => import("./pages/ai-training/AITrainingOverview"));
 // Lazy load service pages
 const WebDevelopment = lazy(() => import("./pages/services/web-development"));
 const SoftwareDevelopment = lazy(() => import("./pages/services/software-development"));
@@ -47,7 +53,6 @@ const FullStackDevelopment = lazy(() => import("./pages/services/full-stack-deve
 const CrossPlatformDevelopment = lazy(() => import("./pages/services/cross-platform-development"));
 const DataEngineering = lazy(() => import("./pages/services/data-engineering"));
 const AppDevelopment = lazy(() => import("./pages/services/app-development"));
-const TravelTechSolutions = lazy(() => import("./pages/services/travel-tech-solutions"));
 const HireElectronJsDevelopers = lazy(() => import("./pages/services/hire-electron-js-developers"));
 const HireReactJsDevelopers = lazy(() => import("./pages/services/hire-reactjs-developers"));
 const HireNextJsDevelopers = lazy(() => import("./pages/services/hire-nextjs-developers"));
@@ -85,7 +90,6 @@ const PayuMobileSdk = lazy(() => import("./pages/company/payu-mobile-sdk"));
 const OnDemandSolutions = lazy(() => import("./pages/solutions/on-demand-solutions"));
 const SchedulingApp = lazy(() => import("./pages/solutions/scheduling-app"));
 const EventManagementApp = lazy(() => import("./pages/solutions/event-management-app"));
-const FlightBookingApp = lazy(() => import("./pages/solutions/flight-booking-app"));
 const VideoConferencing = lazy(() => import("./pages/solutions/video-conferencing"));
 const ELearningSolution = lazy(() => import("./pages/solutions/elearning-solution"));
 const DataAnalytics = lazy(() => import("./pages/solutions/data-analytics"));
@@ -98,7 +102,6 @@ const ITOutsourcingServices = lazy(() => import("./pages/solutions/it-outsourcin
 const OffshoreDevelopment = lazy(() => import("./pages/solutions/offshore-development"));
 const EmergingTechSolutions = lazy(() => import("./pages/solutions/emerging-tech-solutions"));
 const TrendingTechnology = lazy(() => import("./pages/solutions/trending-technology"));
-const TravelApp = lazy(() => import("./pages/solutions/travel-app"));
 const HRMSAppSolution = lazy(() => import("./pages/solutions/hrms-app-solution"));
 const SocialMediaApp = lazy(() => import("./pages/solutions/social-media-app"));
 const HealthApp = lazy(() => import("./pages/solutions/health-app"));
@@ -122,7 +125,6 @@ const DatingApp = lazy(() => import("./pages/solutions/dating-app"));
 const SolutionsOverview = lazy(() => import("./pages/solutions/index"));
 
 // Lazy load other pages
-const TravelOverview = lazy(() => import("./pages/travel/index"));
 const HireUsOverview = lazy(() => import("./pages/hire-us/index"));
 const HireAndroidAppDeveloper = lazy(() => import("./pages/hire-us/hire-android-app-developer"));
 const HireReactNativeDevelopers = lazy(() => import("./pages/hire-us/hire-react-native-developers"));
@@ -224,6 +226,13 @@ const AppContent = () => {
                 <Route path="/pages" element={<Pages />} />
                 <Route path="/contact" element={<Contact />} />
 
+                {/* AI Tools, Training & Open Source Routes */}
+                <Route path="/ai-tools" element={<AIToolsMarketplace />} />
+                <Route path="/ai-tools/:category" element={<AIToolsMarketplace />} />
+                <Route path="/open-source" element={<OSSOverview />} />
+                <Route path="/open-source/cms" element={<OSSMarketplace />} />
+                <Route path="/ai-training" element={<AITrainingOverview />} />
+
                 {/* Auth Routes */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
@@ -240,7 +249,6 @@ const AppContent = () => {
 
                 {/* New overview pages */}
                 <Route path="/solutions" element={<SolutionsOverview />} />
-                <Route path="/travel" element={<TravelOverview />} />
                 <Route path="/hire-us" element={<HireUsOverview />} />
 
                 {/* Specific routes for services (overrides dynamic) */}
@@ -252,7 +260,6 @@ const AppContent = () => {
                 <Route path="/services/cross-platform-development" element={<CrossPlatformDevelopment />} />
                 <Route path="/services/data-engineering" element={<DataEngineering />} />
                 <Route path="/services/app-development" element={<AppDevelopment />} />
-                <Route path="/services/travel-tech-solutions" element={<TravelTechSolutions />} />
                 <Route path="/services/hire-electron-js-developers" element={<HireElectronJsDevelopers />} />
                 <Route path="/services/hire-reactjs-developers" element={<HireReactJsDevelopers />} />
                 <Route path="/services/hire-nextjs-developers" element={<HireNextJsDevelopers />} />
@@ -350,7 +357,6 @@ const AppContent = () => {
                 {/* Dynamic routes for all sub-pages (after specific routes) */}
                 <Route path="/services/*" element={<DynamicContentPage />} />
                 <Route path="/solutions/*" element={<DynamicContentPage />} />
-                <Route path="/travel/*" element={<DynamicContentPage />} />
                 <Route path="/hire-us/*" element={<DynamicContentPage />} />
                 <Route path="/company/*" element={<DynamicContentPage />} />
 

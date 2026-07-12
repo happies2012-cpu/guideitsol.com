@@ -1,0 +1,98 @@
+{
+  "name": "guideitsol",
+  "version": "1.0.0",
+  "description": "GuideIT Solutions - AI Training & Tools Platform",
+  "documentation": "https://docs.guideitsol.com",
+  "github": {
+    "repository": "guideitsol/guideitsol.com",
+    "branch": "main"
+  },
+  "build": {
+    "dockerfilePath": "./Dockerfile",
+    "context": "./",
+    "args": {
+      "NODE_ENV": "production"
+    }
+  },
+  "server": {
+    "name": "guideitsol-api",
+    "port": 3000,
+    "healthCheck": {
+      "path": "/api/health",
+      "interval": 30,
+      "timeout": 10,
+      "retries": 3
+    },
+    "presets": {
+      "nodejs": {
+        "runtime": "nodejs20",
+        "memory": 512,
+        "cpu": 1
+      }
+    }
+  },
+  "domains": [
+    {
+      "name": "guideitsol.com",
+      "ssl": {
+        "enabled": true,
+        "provider": "letsencrypt"
+      }
+    },
+    {
+      "name": "www.guideitsol.com",
+      "redirect": "guideitsol.com"
+    }
+  ],
+  "database": {
+    "type": "sqlite",
+    "connectionUrl": "file:/app/data/database.db",
+    "backup": {
+      "enabled": true,
+      "schedule": "0 2 * * *",
+      "retention": 7
+    }
+  },
+  "environment": {
+    "required": [
+      "DATABASE_URL",
+      "JWT_SECRET",
+      "PAYU_KEY",
+      "PAYU_SALT"
+    ],
+    "optional": [
+      "FIREBASE_API_KEY",
+      "FIREBASE_AUTH_DOMAIN",
+      "SUPABASE_URL",
+      "SUPABASE_KEY",
+      "OPENAI_API_KEY"
+    ]
+  },
+  "deployment": {
+    "replicas": 1,
+    "autoDeploy": true,
+    "pullRequestDeployments": true,
+    "notification": {
+      "email": true,
+      "slack": false
+    }
+  },
+  "volumes": [
+    {
+      "name": "app-data",
+      "path": "/app/data",
+      "size": "1Gi"
+    }
+  ],
+  "resources": {
+    "memory": "512Mi",
+    "cpu": "1",
+    "memoryLimit": "1Gi",
+    "cpuLimit": "2"
+  },
+  "logging": {
+    "driver": "json-file",
+    "maxSize": "10m",
+    "maxFile": 3
+  }
+}

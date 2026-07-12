@@ -1,25 +1,30 @@
-# Logs
-logs
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+.next/
+out/
+dist/
+dist-ssr/
+build/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Testing
+coverage/
+
+# Production logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
-.npm-cache-local
-.playwright-browsers
-.playwright-tmp
-playwright-report
-test-results
-audit_results.txt
-audit_codebase.sh
-final_cleanup.sh
-complete_project.sh
+logs/
 
 # Environment files - NEVER commit these
 .env
@@ -29,59 +34,88 @@ complete_project.sh
 .env.production
 .env.development
 .env.docker
-.env.production.example
-.env.production.template
-.env.production.secure
 
 # Database files
 *.db
 *.db-journal
 *.db-shm
 *.db-wal
+*.sqlite
+*.sqlite3
 data/
 prisma/data/
 
 # Build caches
 .cache
+.npm-cache/
+.npm-cache-local/
 npm-cache/
 temp-build-cache/
 temp-cache/
+.local-cache/
+.turbo/
 
-# Lock files - keep only package-lock.json for npm
+# Lock files
 pnpm-lock.yaml
 bun.lockb
 yarn.lock
 
-# Editor directories and files
+# IDE
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-.clinerules/byterover-rules.md
-.kilocode/rules/byterover-rules.md
-.roo/rules/byterover-rules.md
-.windsurf/rules/byterover-rules.md
-.cursor/rules/byterover-rules.mdc
-.kiro/steering/byterover-rules.md
-.qoder/rules/byterover-rules.md
-.augment/rules/byterover-rules.md
+.idea/
+*.swp
+*.swo
+*~
 
-# Large archives (prevent accidental commits)
+# OS
+.DS_Store
+Thumbs.db
+
+# Playwright
+.playwright-browsers
+.playwright-tmp
+playwright-report
+test-results
+
+# Temporary files
+audit_results.txt
+audit_codebase.sh
+final_cleanup.sh
+complete_project.sh
+tmp/
+temp/
+
+# Large archives
 *.tar.gz
 *.zip
-guidesoft-website-final-source.tar.gzdev.db
+
+# Editor AI rules
+.clinerules/
+.kilocode/
+.roo/
+.windsurf/
+.cursor/
+.kiro/
+.qoder/
+.augment/
 .claude/
 .trae/
 
 # Vercel
-.vercel
+.vercel/
 .vercel/*
 !.vercel/project.json
 
+# Certificates
+*.pem
+*.key
+
+# Coolify backups
+coolify.json.bak
+*.bak
+BACKUP*
+
 # Deployment artifacts
 cpanel-deployment/
+guidesoft-website-final-source.tar.gzdev.db
