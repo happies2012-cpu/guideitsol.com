@@ -42,8 +42,9 @@ logs/
 *.db-wal
 *.sqlite
 *.sqlite3
-data/
-prisma/data/
+/prisma/data/
+/data/
+!src/data/
 
 # Build caches
 .cache
