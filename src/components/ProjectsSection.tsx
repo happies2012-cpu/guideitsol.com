@@ -93,7 +93,6 @@ const ProjectsSection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="card-elevated overflow-hidden group col-span-1 lg:col-span-1"
                   className={index === 0 ? "lg:row-span-2 card-elevated overflow-hidden group" : "card-elevated overflow-hidden group"}
                 >
                   <div className="relative p-6 h-full flex flex-col">

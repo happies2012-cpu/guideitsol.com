@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 import { HeroSection } from "@/components/hero/HeroSection";
 import { BackgroundSliderCarousel } from "@/components/sliders/BackgroundSliderCarousel";
 import HeroNew from "@/components/HeroNew";
