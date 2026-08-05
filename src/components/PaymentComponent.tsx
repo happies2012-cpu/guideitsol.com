@@ -26,7 +26,7 @@ const PaymentComponent: React.FC<PaymentComponentProps> = ({
   onPaymentSuccess 
 }) => {
   const [paymentVerified, setPaymentVerified] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<'razorpay' | 'upi' | 'paypal' | 'payu'>('payu');
+  const [paymentMethod, setPaymentMethod] = useState<'razorpay' | 'stripe' | 'upi' | 'paypal' | 'payu'>('payu');
   const [upiId] = useState(import.meta.env.VITE_UPI_ID || '8884162999@ybl'); // Get from env or use default
   const [maskedUpiId, setMaskedUpiId] = useState('');
 
@@ -105,6 +105,34 @@ const PaymentComponent: React.FC<PaymentComponentProps> = ({
     }
   };
 
+  const handleStripePayment = async () => {
+    try {
+      const response = await fetch('/api/stripe/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          mode: 'payment',
+          amount,
+          currency: 'inr',
+          productName: toolName,
+          customerEmail: '',
+          metadata: { source: 'guideitsol.com', toolName, enrollmentId },
+          paymentMethodTypes: ['card', 'upi'],
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok || !data?.url) {
+        throw new Error(data?.error || 'Unable to start checkout');
+      }
+
+      window.location.href = data.url;
+    } catch (error) {
+      console.error('Stripe payment error:', error);
+      toast.error('Failed to initiate Stripe checkout. Please try again.');
+    }
+  };
+
   const handleUPIPayment = () => {
     // Create UPI payment link
     const upiLink = generateUpiLink(upiId, amount, toolName, `Enrollment for ${toolName}`);
@@ -169,6 +197,14 @@ const PaymentComponent: React.FC<PaymentComponentProps> = ({
                 Razorpay
               </Button>
               <Button 
+                variant={paymentMethod === 'stripe' ? 'default' : 'outline'} 
+                onClick={() => setPaymentMethod('stripe')}
+                className="flex-1"
+              >
+                <CreditCard className="h-4 w-4 mr-2" />
+                Stripe
+              </Button>
+              <Button 
                 variant={paymentMethod === 'upi' ? 'default' : 'outline'} 
                 onClick={() => setPaymentMethod('upi')}
                 className="flex-1"
@@ -204,6 +240,20 @@ const PaymentComponent: React.FC<PaymentComponentProps> = ({
                 
                 <div className="text-center text-sm text-muted-foreground">
                   <p>Secure payment powered by Razorpay</p>
+                </div>
+              </div>
+            )}
+            
+            {/* Stripe Payment */}
+            {paymentMethod === 'stripe' && (
+              <div className="space-y-4">
+                <Button onClick={handleStripePayment} className="w-full">
+                  <CreditCard className="h-4 w-4 mr-2" />
+                  Pay with Stripe (Card + UPI)
+                </Button>
+                
+                <div className="text-center text-sm text-muted-foreground">
+                  <p>Secure payment powered by Stripe</p>
                 </div>
               </div>
             )}

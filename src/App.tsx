@@ -142,6 +142,7 @@ const Login = lazy(() => import("./pages/auth/Login"));
 const Register = lazy(() => import("./pages/auth/Register"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const AILearning = lazy(() => import("./pages/AILearning"));
+const TrainingPrograms = lazy(() => import("./pages/TrainingPrograms"));
 const SplashCursorDemo = lazy(() => import("./pages/SplashCursorDemo"));
 const APITest = lazy(() => import("./pages/APITest"));
 const RobotCursorDemo = lazy(() => import("./pages/RobotCursorDemo"));
@@ -231,6 +232,7 @@ const AppContent = () => {
 
                 {/* AI Learning */}
                 <Route path="/ai-learning" element={<AILearning />} />
+                <Route path="/training-programs" element={<TrainingPrograms />} />
                 <Route path="/splash-cursor-demo" element={<SplashCursorDemo />} />
                 <Route path="/api-test" element={<APITest />} />
                 <Route path="/robot-cursor-demo" element={<RobotCursorDemo />} />

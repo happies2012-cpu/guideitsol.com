@@ -90,10 +90,10 @@ const Register = () => {
             transition={{ delay: 0.4 }}
           >
             <h2 className="text-4xl font-bold text-white mb-4">
-              Start Your Journey with Us
+              Start Your AI & IT Journey
             </h2>
             <p className="text-white/90 text-lg leading-relaxed">
-              Join thousands of professionals who trust GUIDESOFT for their IT solutions and digital transformation.
+              Join learners and teams using GUIDESOFT for AI tools, training, and intelligent digital transformation.
             </p>
           </motion.div>
         </div>
@@ -106,9 +106,9 @@ const Register = () => {
           className="relative z-10 space-y-6"
         >
           {[
-            { icon: Users, title: 'Join 10,000+ Users', desc: 'Be part of our growing community' },
-            { icon: Award, title: 'Premium Features', desc: 'Access to all professional tools' },
-            { icon: TrendingUp, title: 'Grow Your Business', desc: 'Scale with confidence' }
+            { icon: Users, title: 'Join 10,000+ Learners', desc: 'Be part of a growing AI and tech community' },
+            { icon: Award, title: 'Premium Training Access', desc: 'Unlock curated programs and professional resources' },
+            { icon: TrendingUp, title: 'Grow Your Career', desc: 'Build practical skills that matter in the market' }
           ].map((benefit, index) => (
             <motion.div
               key={index}

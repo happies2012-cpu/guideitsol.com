@@ -47,12 +47,11 @@ const KNOWLEDGE_BASE = [
     response: `
       We provide a wide range of services:
       <ul class="list-disc ml-4 mt-2 space-y-1">
-        <li>AI Chatbot Development & Machine Learning</li>
-        <li>Web & Software Development (Next.js, Node.js)</li>
-        <li>Cloud Solutions & DevOps engineering</li>
-        <li>Mobile App Development (iOS/Android/Flutter)</li>
-        <li>Digital Marketing & UI/UX Design</li>
-        <li>Travel Tech & E-commerce platforms</li>
+        <li>AI Chatbots, assistants, and automation</li>
+        <li>Web, software, and mobile app development</li>
+        <li>Cloud solutions, DevOps, and IT consulting</li>
+        <li>IT & AI training programs for teams and individuals</li>
+        <li>Digital marketing support and UI/UX design</li>
       </ul>
       <br/>
       Need something specific? <a href="https://wa.me/918884162999" target="_blank" class="text-green-400 font-semibold hover:underline">Chat with us on WhatsApp</a>.
@@ -96,9 +95,9 @@ const DEFAULT_RESPONSE = `
   <br/><br/>
   We provide:
   <ul class="list-disc ml-4 mb-2">
-    <li>AI chatbot development</li>
-    <li>Web & software development</li>
-    <li>Cloud solutions</li>
+    <li>AI chatbot and assistant development</li>
+    <li>Training programs in coding, AI, cloud, and design</li>
+    <li>Software, web, and mobile solutions</li>
   </ul>
   
   Please let me know how I can help, or reach out directly:<br/><br/>

@@ -26,6 +26,7 @@ import paypalRoutes from './routes/paypal.js';
 import payuRoutes from './routes/payu.js';
 import payuV2Routes from './routes/payu-v2.js';
 import chatbotRoutes from './routes/chatbot.js';
+import stripeRoutes from './routes/stripe.js';
 
 dotenv.config();
 
@@ -146,6 +147,7 @@ app.use('/api/paypal', paypalRoutes);
 app.use('/api/payu', payuRoutes);
 app.use('/api/payu-v2', payuV2Routes);
 app.use('/api/chatbot', chatbotRoutes);
+app.use('/api/stripe', stripeRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

@@ -27,34 +27,61 @@ export const mainNavigation: NavItem[] = [
   },
   {
     title: "AI Tools",
-    href: "/ai-tools",
+    href: "/ai-learning",
   },
   {
-    title: "Skills",
-    href: "/skills",
-  },
-  {
-    title: "Trainings",
-    href: "/trainings",
+    title: "IT & AI Training",
+    href: "/training-programs",
     children: [
-      { title: "AI & Machine Learning", href: generatePath("trainings", "ai-ml") },
-      { title: "Web Development", href: generatePath("trainings", "web-dev") },
-      { title: "Mobile Development", href: generatePath("trainings", "mobile") },
-      { title: "Cloud & DevOps", href: generatePath("trainings", "cloud") },
-      { title: "Data Science", href: generatePath("trainings", "data") },
-      { title: "UI/UX Design", href: generatePath("trainings", "design") },
+      { title: "Coding & Development", href: "/training-programs" },
+      { title: "Design & UI/UX", href: "/training-programs" },
+      { title: "AI & Generative AI", href: "/training-programs" },
+      { title: "AI/ML & Data Science", href: "/training-programs" },
+      { title: "IoT & Embedded Systems", href: "/training-programs" },
+      { title: "Cloud & DevOps", href: "/training-programs" },
+    ],
+  },
+  {
+    title: "Services",
+    href: "/services",
+    children: [
+      {
+        title: "AI & Automation",
+        href: "/services",
+        children: [
+          { title: "Chatbot & NLP", href: "/services" },
+          { title: "Machine Learning", href: "/services" },
+          { title: "AI Assistants", href: "/services" },
+        ],
+      },
+      {
+        title: "Software & Web",
+        href: "/services",
+        children: [
+          { title: "Web Development", href: "/services/web-development" },
+          { title: "UI/UX Design", href: "/services/ui-ux-design-development" },
+          { title: "Mobile App Development", href: "/services/app-development" },
+        ],
+      },
+      {
+        title: "Cloud & Infrastructure",
+        href: "/services",
+        children: [
+          { title: "Cloud Solutions", href: "/services" },
+          { title: "DevOps", href: "/services" },
+          { title: "IT Consulting", href: "/services/it-consulting-services" },
+        ],
+      },
     ],
   },
   {
     title: "Projects",
-    href: "/projects",
+    href: "/portfolio",
     children: [
-      { title: "Web Applications", href: generatePath("projects", "web") },
-      { title: "Mobile Apps", href: generatePath("projects", "mobile") },
-      { title: "AI & ML", href: generatePath("projects", "ai") },
-      { title: "Enterprise", href: generatePath("projects", "enterprise") },
-      { title: "E-Commerce", href: generatePath("projects", "ecommerce") },
-      { title: "SaaS Products", href: generatePath("projects", "saas") },
+      { title: "AI Solutions", href: "/portfolio" },
+      { title: "Web Products", href: "/portfolio" },
+      { title: "Mobile Apps", href: "/portfolio" },
+      { title: "Enterprise Systems", href: "/portfolio" },
     ],
   },
   {
@@ -64,39 +91,6 @@ export const mainNavigation: NavItem[] = [
   {
     title: "Dashboard",
     href: "/dashboard",
-  },
-  {
-    title: "Services",
-    children: [
-      {
-        title: "Web Development",
-        href: generatePath("services", "web-development"),
-        children: [
-          { title: "Software Development", href: generatePath("services", "software-development") },
-          { title: "UI/UX Design & Development", href: generatePath("services", "ui-ux-design-development") },
-          { title: "eCommerce Development", href: generatePath("services", "ecommerce-development") },
-          { title: "Full Stack Development", href: generatePath("services", "full-stack-development") },
-        ],
-      },
-      {
-        title: "App Development",
-        href: generatePath("services", "app-development"),
-        children: [
-          { title: "Android App Development", href: generatePath("services", "android-app-development") },
-          { title: "iOS App Development", href: generatePath("services", "ios-app-development") },
-          { title: "Flutter App Development", href: generatePath("services", "flutter-app-development") },
-        ],
-      },
-      {
-        title: "AI Development",
-        href: generatePath("services", "ai-development"),
-        children: [
-          { title: "Machine Learning Solutions", href: generatePath("services", "ml-solutions") },
-          { title: "NLP & Chatbots", href: generatePath("services", "nlp-chatbots") },
-          { title: "Computer Vision", href: generatePath("services", "computer-vision") },
-        ],
-      },
-    ],
   },
   {
     title: "Company",

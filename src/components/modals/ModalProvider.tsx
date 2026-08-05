@@ -14,8 +14,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { X, Mail, Phone, Calendar, CreditCard, Check, Star, Wallet } from "lucide-react";
+import { X, Mail, Phone, Calendar, CreditCard, Check, Star, Wallet, Smartphone, QrCode } from "lucide-react";
 import { motion } from "framer-motion";
+import { generateUpiLink, copyToClipboard, isValidUpiId } from '@/lib/upi-utils';
 
 type ModalType =
   | 'contact'
@@ -356,6 +357,40 @@ const QuoteForm: React.FC<{ onSubmit: (data: Record<string, unknown>) => void; s
 };
 
 const PaymentForm: React.FC<{ onSubmit: (data: Record<string, unknown>) => void; amount?: number; plan?: string }> = ({ onSubmit, amount, plan }) => {
+  const [upiId, setUpiId] = React.useState<string>(import.meta.env.VITE_UPI_ID || '8884162999@ybl');
+  const [isCheckingOut, setIsCheckingOut] = React.useState(false);
+  const [paymentMode, setPaymentMode] = React.useState<'stripe' | 'upi' | 'payu'>('stripe');
+
+  const handleStripeCheckout = async () => {
+    try {
+      setIsCheckingOut(true);
+      const response = await fetch('/api/stripe/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          mode: 'payment',
+          amount: Number(amount || 0),
+          currency: 'inr',
+          customerEmail: '',
+          productName: plan || 'Guidesoft Service',
+          metadata: { source: 'guideitsol.com', plan: plan || 'Professional' },
+          paymentMethodTypes: ['card', 'upi'],
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok || !data?.url) {
+        throw new Error(data?.error || 'Unable to start checkout');
+      }
+
+      window.location.href = data.url;
+    } catch (e) {
+      console.error(e);
+      alert('Failed to initiate Stripe checkout. Please try again.');
+      setIsCheckingOut(false);
+    }
+  };
+
   const handlePayU = async () => {
     try {
       const productInfo = plan || 'Subscription';
@@ -384,6 +419,20 @@ const PaymentForm: React.FC<{ onSubmit: (data: Record<string, unknown>) => void;
     }
   };
 
+  const handleUpiPay = async () => {
+    if (!isValidUpiId(upiId)) {
+      alert('Please enter a valid UPI ID');
+      return;
+    }
+
+    const link = generateUpiLink(upiId, Number(amount || 99), plan || 'Guidesoft Service', `Payment for ${plan || 'Guidesoft Service'}`);
+    window.open(link, '_blank', 'noopener,noreferrer');
+    const copied = await copyToClipboard(upiId);
+    if (copied) {
+      alert('UPI link opened. Your UPI ID was copied to the clipboard.');
+    }
+  };
+
   return (
     <div className="mt-4">
       <Card className="mb-4">
@@ -406,44 +455,54 @@ const PaymentForm: React.FC<{ onSubmit: (data: Record<string, unknown>) => void;
       </Card>
 
       <div className="space-y-4">
-        <div className="bg-muted p-4 rounded-lg">
-          <h3 className="font-semibold mb-2">Pay with UPI (Instant)</h3>
-          <p className="text-sm mb-4">Scan the QR code below to pay via any UPI app (PhonePe, Google Pay, Paytm).</p>
+        <div className="flex gap-2">
+          <Button variant={paymentMode === 'stripe' ? 'default' : 'outline'} className="flex-1" onClick={() => setPaymentMode('stripe')}>
+            <CreditCard className="w-4 h-4 mr-2" /> Card/UPI
+          </Button>
+          <Button variant={paymentMode === 'upi' ? 'default' : 'outline'} className="flex-1" onClick={() => setPaymentMode('upi')}>
+            <QrCode className="w-4 h-4 mr-2" /> UPI/GPay
+          </Button>
+          <Button variant={paymentMode === 'payu' ? 'default' : 'outline'} className="flex-1" onClick={() => setPaymentMode('payu')}>
+            <Wallet className="w-4 h-4 mr-2" /> PayU
+          </Button>
+        </div>
 
-          <div className="flex flex-col items-center justify-center my-4 bg-white p-4 rounded-xl border-2 border-primary/20">
-            <img
-              src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(`upi://pay?pa=8500647979@paytm&pn=GuidesoftIT&am=${amount || 99}&cu=INR&tn=Guidesoft%20Solution%20Payment`)}`}
-              alt="UPI QR Code"
-              className="w-48 h-48 mb-2"
+        {paymentMode === 'stripe' && (
+          <Button onClick={handleStripeCheckout} disabled={isCheckingOut} className="w-full">
+            <CreditCard className="w-4 h-4 mr-2" />
+            {isCheckingOut ? 'Preparing checkout...' : 'Pay with Stripe (Cards + UPI)'}
+          </Button>
+        )}
+
+        {paymentMode === 'upi' && (
+          <div className="bg-muted p-4 rounded-lg space-y-3">
+            <div className="flex items-center gap-2 text-sm font-semibold">
+              <Smartphone className="w-4 h-4" /> Pay via any UPI app including GPay
+            </div>
+            <input
+              value={upiId}
+              onChange={(e) => setUpiId(e.target.value)}
+              placeholder="Enter UPI ID"
+              className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
             />
-            <span className="text-xs font-mono font-bold text-primary">8500647979@paytm</span>
+            <Button onClick={handleUpiPay} className="w-full">
+              <QrCode className="w-4 h-4 mr-2" /> Open UPI/GPay payment
+            </Button>
+            <p className="text-xs text-center text-muted-foreground">
+              We will also copy your UPI ID to the clipboard for quick pasting.
+            </p>
           </div>
+        )}
 
-          <p className="text-xs text-center text-muted-foreground">
-            No transaction fees. Instant activation after verification.
-          </p>
-        </div>
-
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t border-primary/10" />
-          </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">Or pay with gateway</span>
-          </div>
-        </div>
-
-        <Button
-          onClick={handlePayU}
-          variant="outline"
-          className="w-full border-primary/30 text-primary hover:bg-primary/10"
-        >
-          <CreditCard className="w-4 h-4 mr-2" />
-          Pay with Debit/Credit Card (PayU)
-        </Button>
+        {paymentMode === 'payu' && (
+          <Button onClick={handlePayU} variant="outline" className="w-full border-primary/30 text-primary hover:bg-primary/10">
+            <CreditCard className="w-4 h-4 mr-2" />
+            Pay with Debit/Credit Card (PayU)
+          </Button>
+        )}
 
         <p className="text-xs text-muted-foreground text-center">
-          Secure payment powered by GS Intelligence Security Core.
+          Secure payment powered by Stripe, UPI, and PayU.
         </p>
       </div>
     </div>

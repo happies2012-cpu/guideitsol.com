@@ -1,51 +1,31 @@
 {
-    "version": 2,
-    "name": "guideitsol",
-    "buildCommand": "mkdir -p ./data && export DATABASE_URL=\"file:./data/dev.db\" && npx prisma generate && npx prisma db push && node scripts/seed_dummy_data.js && npm run build",
-    "outputDirectory": "dist",
-    "devCommand": "npm run dev",
-    "installCommand": "npm install",
-    "framework": "vite",
-    "regions": ["bom1", "sfo1"],
-    "builds": [
-        {
-            "src": "package.json",
-            "use": "@vercel/static-build",
-            "config": {
-                "distDir": "dist"
-            }
-        },
-        {
-            "src": "server/index.js",
-            "use": "@vercel/node"
-        }
-    ],
-    "rewrites": [
-        {
-            "source": "/api/(.*)",
-            "destination": "/server/index.js"
-        },
-        {
-            "source": "/(.*)",
-            "destination": "/index.html"
-        }
-    ],
-    "redirects": [
-        {
-            "source": "/admin",
-            "destination": "/admin/dashboard",
-            "permanent": false
-        }
-    ],
-    "headers": [
-        {
-            "source": "/(.*)",
-            "headers": [
-                { "key": "X-Content-Type-Options", "value": "nosniff" },
-                { "key": "X-Frame-Options", "value": "DENY" },
-                { "key": "X-XSS-Protection", "value": "1; mode=block" },
-                { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
-            ]
-        }
-    ]
+  "version": 2,
+  "name": "guideitsol",
+  "buildCommand": "mkdir -p ./data && npm run build",
+  "outputDirectory": "dist",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "vite",
+  "regions": ["bom1", "sfo1"],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
 }

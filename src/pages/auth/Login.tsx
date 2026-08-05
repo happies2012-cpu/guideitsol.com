@@ -77,10 +77,10 @@ const Login = () => {
             transition={{ delay: 0.4 }}
           >
             <h2 className="text-4xl font-bold text-white mb-4">
-              Welcome to the Future of IT Solutions
+              Welcome to the Future of AI & IT Training
             </h2>
             <p className="text-white/90 text-lg leading-relaxed">
-              Access powerful tools, manage your projects, and collaborate with your team seamlessly.
+              Sign in to explore AI tools, training programs, and practical digital solutions for your career or business.
             </p>
           </motion.div>
         </div>
@@ -93,9 +93,9 @@ const Login = () => {
           className="relative z-10 space-y-6"
         >
           {[
-            { icon: Shield, title: 'Secure & Reliable', desc: 'Enterprise-grade security for your data' },
-            { icon: Zap, title: 'Lightning Fast', desc: 'Optimized performance for productivity' },
-            { icon: Sparkles, title: 'Modern Interface', desc: 'Beautiful, intuitive design' }
+            { icon: Shield, title: 'Secure Learning Hub', desc: 'Protect your data and learning progress' },
+            { icon: Zap, title: 'Fast AI Access', desc: 'Jump into tools, courses, and live support instantly' },
+            { icon: Sparkles, title: 'Modern Learning Experience', desc: 'A polished workspace for training and growth' }
           ].map((feature, index) => (
             <motion.div
               key={index}

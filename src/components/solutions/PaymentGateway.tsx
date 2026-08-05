@@ -6,6 +6,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Input } from '@/components/ui/input';
 import { AppModel } from '@/data/app-models';
 import { useToast } from '@/hooks/use-toast';
+import { generateUpiLink, copyToClipboard, isValidUpiId } from '@/lib/upi-utils';
 
 interface PaymentGatewayProps {
     model: AppModel;
@@ -15,18 +16,37 @@ interface PaymentGatewayProps {
 
 const PaymentGateway: React.FC<PaymentGatewayProps> = ({ model, isOpen, onClose }) => {
     const [step, setStep] = useState<'selection' | 'upi' | 'gpay' | 'processing' | 'success'>('selection');
-    const [upiId, setUpiId] = useState('');
+    const [upiId, setUpiId] = useState(import.meta.env.VITE_UPI_ID || '8884162999@ybl');
     const { toast } = useToast();
 
-    const handlePayment = () => {
+    const handlePayment = async () => {
         setStep('processing');
-        setTimeout(() => {
-            setStep('success');
+        try {
+            if (step === 'gpay' || step === 'upi') {
+                if (!isValidUpiId(upiId)) {
+                    throw new Error('Please enter a valid UPI ID');
+                }
+
+                const paymentLink = generateUpiLink(upiId, Number(model.price || 0), model.name, `Purchase for ${model.name}`);
+                window.open(paymentLink, '_blank', 'noopener,noreferrer');
+                await copyToClipboard(upiId);
+            }
+
+            setTimeout(() => {
+                setStep('success');
+                toast({
+                    title: "Payment Requested",
+                    description: `A payment request for ${model.name} has been opened. Complete it in your app and we will confirm it shortly.`,
+                });
+            }, 1200);
+        } catch (error) {
+            setStep('selection');
             toast({
-                title: "Payment Successful!",
-                description: `Deployment link for ${model.name} sent to your email.`,
+                title: 'Payment setup failed',
+                description: error instanceof Error ? error.message : 'Please try again.',
+                variant: 'destructive',
             });
-        }, 3000);
+        }
     };
 
     if (!isOpen) return null;
@@ -129,7 +149,7 @@ const PaymentGateway: React.FC<PaymentGatewayProps> = ({ model, isOpen, onClose 
                                         value={upiId}
                                         onChange={(e) => setUpiId(e.target.value)}
                                     />
-                                    <Button className="w-full" onClick={handlePayment} disabled={!upiId}>Verify & Pay</Button>
+                                    <Button className="w-full" onClick={() => handlePayment()} disabled={!upiId}>Open UPI App</Button>
                                 </motion.div>
                             )}
 
@@ -149,7 +169,7 @@ const PaymentGateway: React.FC<PaymentGatewayProps> = ({ model, isOpen, onClose 
                                         <Smartphone className="h-16 w-16 text-primary mx-auto animate-bounce" />
                                         <p className="text-muted-foreground">Open Google Pay on your mobile device to complete the payment request.</p>
                                     </div>
-                                    <Button className="w-full" onClick={handlePayment}>Paid successfully on GPay</Button>
+                                    <Button className="w-full" onClick={() => handlePayment()}>Open Google Pay</Button>
                                 </motion.div>
                             )}
 
